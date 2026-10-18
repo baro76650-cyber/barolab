@@ -1,6 +1,6 @@
 {
   "schema": "naver-kin-pilot-v1",
-  "checkedAt": "2026-10-18T08:06:49.754532+00:00",
+  "checkedAt": "2026-10-18T08:10:02.939398+00:00",
   "accounts": [
     "adinfo0905",
     "stone0747"
@@ -248,7 +248,7 @@
   },
   "schedule": {
     "schema": "naver-kin-automation-state-v1",
-    "checkedAt": "2026-10-18T08:05:02.658549+00:00",
+    "checkedAt": "2026-10-18T08:10:02.626093+00:00",
     "startDate": "2026-10-15",
     "endDate": "2026-10-21",
     "enabled": true,
@@ -262,77 +262,32 @@
     "pollMinutes": 5,
     "globalDailyCap": 20,
     "accountDailyCap": 10,
-    "runs": [
-      {
-        "runId": "2026-10-18_64984c1724a6_stone0747_1705",
-        "account": "stone0747",
-        "state": "blocked",
-        "reason": "operation_RuntimeError",
-        "discovered": 0
-      }
-    ],
-    "state": "completed_cycle",
-    "measurementStatus": "collected",
+    "runs": [],
+    "state": "running",
+    "measurementStatus": "not_attempted",
     "dryRun": false,
-    "runId": "2026-10-18_64984c1724a6_stone0747_1705",
+    "runId": "2026-10-18_eeb0654e2129_stone0747_1710",
     "account": "stone0747",
     "lastRunAt": "2026-10-18T15:55:02.502261+09:00",
     "lastAccount": "adinfo0905",
-    "nextEligibleAt": "2026-10-18T16:13:02.502261+09:00",
+    "nextEligibleAt": null,
     "nextAccount": "stone0747",
-    "activeRunId": null,
-    "activeAccount": null,
-    "activeStartedAt": null,
-    "cadenceState": "waiting",
+    "activeRunId": "2026-10-18_eeb0654e2129_stone0747_1710",
+    "activeAccount": "stone0747",
+    "activeStartedAt": "2026-10-18T17:10:02.557716+09:00",
+    "cadenceState": "running",
     "operationCounts": {
       "adinfo0905": 1,
-      "stone0747": 2
+      "stone0747": 3
     },
     "submissionCounts": {
       "adinfo0905": 1,
       "stone0747": 2
     },
-    "globalRemainingRuns": 17,
+    "globalRemainingRuns": 16,
     "byAccountRemainingRuns": {
       "adinfo0905": 9,
-      "stone0747": 8
-    },
-    "measurementComplete": true,
-    "registeredTasks": {
-      "status": "observed",
-      "checkedAt": "2026-10-18T08:06:49.527352+00:00",
-      "tasks": [
-        {
-          "taskName": "BaroLab-Kin-Seven-Day-Pilot",
-          "registered": true,
-          "enabled": true,
-          "state": "Running",
-          "nextRunAt": "2026-10-18T17:10:00.0000000+09:00",
-          "lastRunAt": "2026-10-18T17:05:01.0000000+09:00",
-          "lastResult": 267009,
-          "actions": [
-            {
-              "Execute": "C:\\Users\\baro7\\AppData\\Local\\Programs\\Python\\Python314\\pythonw.exe",
-              "Arguments": "-u -B -X utf8 \"\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_kin\\scheduler.py\" --tick --scheduled"
-            }
-          ]
-        },
-        {
-          "taskName": "BaroLab-Kin-Seven-Day-Pilot-Measurement",
-          "registered": true,
-          "enabled": true,
-          "state": "Ready",
-          "nextRunAt": "2026-10-18T20:30:00.0000000+09:00",
-          "lastRunAt": "2026-10-17T20:30:01.0000000+09:00",
-          "lastResult": 0,
-          "actions": [
-            {
-              "Execute": "C:\\Users\\baro7\\AppData\\Local\\Programs\\Python\\Python314\\pythonw.exe",
-              "Arguments": "-u -B -X utf8 \"\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_kin\\scheduler.py\" --measure --scheduled"
-            }
-          ]
-        }
-      ]
+      "stone0747": 7
     }
   },
   "retention": {
@@ -372,7 +327,7 @@
     "scheduleDescription": "작업 종료 후 18~22분 지터(평균 20분) 계정 교대 · 개별 계정 40~45분 안전 텀 · 하루 20건(계정당 10건)",
     "lastRun": {
       "schema": "naver-kin-automation-state-v1",
-      "checkedAt": "2026-10-18T08:05:02.658549+00:00",
+      "checkedAt": "2026-10-18T08:10:02.626093+00:00",
       "startDate": "2026-10-15",
       "endDate": "2026-10-21",
       "enabled": true,
@@ -386,106 +341,61 @@
       "pollMinutes": 5,
       "globalDailyCap": 20,
       "accountDailyCap": 10,
-      "runs": [
-        {
-          "runId": "2026-10-18_64984c1724a6_stone0747_1705",
-          "account": "stone0747",
-          "state": "blocked",
-          "reason": "operation_RuntimeError",
-          "discovered": 0
-        }
-      ],
-      "state": "completed_cycle",
-      "measurementStatus": "collected",
+      "runs": [],
+      "state": "running",
+      "measurementStatus": "not_attempted",
       "dryRun": false,
-      "runId": "2026-10-18_64984c1724a6_stone0747_1705",
+      "runId": "2026-10-18_eeb0654e2129_stone0747_1710",
       "account": "stone0747",
       "lastRunAt": "2026-10-18T15:55:02.502261+09:00",
       "lastAccount": "adinfo0905",
-      "nextEligibleAt": "2026-10-18T16:13:02.502261+09:00",
+      "nextEligibleAt": null,
       "nextAccount": "stone0747",
-      "activeRunId": null,
-      "activeAccount": null,
-      "activeStartedAt": null,
-      "cadenceState": "waiting",
+      "activeRunId": "2026-10-18_eeb0654e2129_stone0747_1710",
+      "activeAccount": "stone0747",
+      "activeStartedAt": "2026-10-18T17:10:02.557716+09:00",
+      "cadenceState": "running",
       "operationCounts": {
         "adinfo0905": 1,
-        "stone0747": 2
+        "stone0747": 3
       },
       "submissionCounts": {
         "adinfo0905": 1,
         "stone0747": 2
       },
-      "globalRemainingRuns": 17,
+      "globalRemainingRuns": 16,
       "byAccountRemainingRuns": {
         "adinfo0905": 9,
-        "stone0747": 8
-      },
-      "measurementComplete": true,
-      "registeredTasks": {
-        "status": "observed",
-        "checkedAt": "2026-10-18T08:06:49.527352+00:00",
-        "tasks": [
-          {
-            "taskName": "BaroLab-Kin-Seven-Day-Pilot",
-            "registered": true,
-            "enabled": true,
-            "state": "Running",
-            "nextRunAt": "2026-10-18T17:10:00.0000000+09:00",
-            "lastRunAt": "2026-10-18T17:05:01.0000000+09:00",
-            "lastResult": 267009,
-            "actions": [
-              {
-                "Execute": "C:\\Users\\baro7\\AppData\\Local\\Programs\\Python\\Python314\\pythonw.exe",
-                "Arguments": "-u -B -X utf8 \"\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_kin\\scheduler.py\" --tick --scheduled"
-              }
-            ]
-          },
-          {
-            "taskName": "BaroLab-Kin-Seven-Day-Pilot-Measurement",
-            "registered": true,
-            "enabled": true,
-            "state": "Ready",
-            "nextRunAt": "2026-10-18T20:30:00.0000000+09:00",
-            "lastRunAt": "2026-10-17T20:30:01.0000000+09:00",
-            "lastResult": 0,
-            "actions": [
-              {
-                "Execute": "C:\\Users\\baro7\\AppData\\Local\\Programs\\Python\\Python314\\pythonw.exe",
-                "Arguments": "-u -B -X utf8 \"\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_kin\\scheduler.py\" --measure --scheduled"
-              }
-            ]
-          }
-        ]
+        "stone0747": 7
       }
     },
     "lastRunAt": "2026-10-18T15:55:02.502261+09:00",
-    "nextEligibleAt": "2026-10-18T16:13:02.502261+09:00",
+    "nextEligibleAt": null,
     "nextAccount": "stone0747",
-    "activeRunId": null,
-    "activeAccount": null,
-    "activeStartedAt": null,
-    "cadenceState": "waiting",
-    "globalRemainingRuns": 17,
+    "activeRunId": "2026-10-18_eeb0654e2129_stone0747_1710",
+    "activeAccount": "stone0747",
+    "activeStartedAt": "2026-10-18T17:10:02.557716+09:00",
+    "cadenceState": "running",
+    "globalRemainingRuns": 16,
     "byAccountRemainingRuns": {
       "adinfo0905": 9,
-      "stone0747": 8
+      "stone0747": 7
     },
     "operationCounts": {
       "adinfo0905": 1,
-      "stone0747": 2
+      "stone0747": 3
     },
     "submissionCounts": {
       "adinfo0905": 1,
       "stone0747": 2
     },
-    "checkedAt": "2026-10-18T08:05:02.658549+00:00",
-    "state": "completed_cycle",
+    "checkedAt": "2026-10-18T08:10:02.626093+00:00",
+    "state": "running",
     "lastOperation": {
       "account": "stone0747",
-      "state": "blocked",
-      "reason": "operation_RuntimeError",
-      "updatedAt": "2026-10-18T08:06:44.795435+00:00",
+      "state": "started",
+      "reason": null,
+      "updatedAt": "2026-10-18T08:10:02.763093+00:00",
       "questionId": null,
       "questionState": null,
       "submissionAttempted": false,

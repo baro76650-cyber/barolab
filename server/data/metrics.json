@@ -1,6 +1,6 @@
 {
   "schema": "dashboard-metrics-v1",
-  "checkedAt": "2026-10-18T08:08:24.258815+00:00",
+  "checkedAt": "2026-10-18T08:09:55.578211+00:00",
   "sites": {
     "baronote.kr": {
       "site": {
@@ -9664,7 +9664,7 @@
         "url": "https://www.joynote.kr/",
         "platform": "cf"
       },
-      "checkedAt": "2026-10-18T07:43:14.791652+00:00",
+      "checkedAt": "2026-10-18T08:08:24.478194+00:00",
       "indexingRequest": {
         "requestedAt": "2026-10-17T04:08:08.951604+00:00",
         "urls": [
@@ -10022,7 +10022,7 @@
         "total": 111,
         "complete": true,
         "source": "https://www.joynote.kr/api/posts",
-        "checkedAt": "2026-10-18T07:43:18.868139+00:00"
+        "checkedAt": "2026-10-18T08:08:28.571148+00:00"
       },
       "sitemap": {
         "status": "available",
@@ -10143,23 +10143,22 @@
           "https://www.joynote.kr/2026년-취미-추천-주말마다-새로운-나를-만드는-5가지-방법",
           "https://www.joynote.kr/2026년-요즘-뜨는-드라마-4가지-안-보면-후회각"
         ],
-        "checkedAt": "2026-10-18T07:43:21.121486+00:00",
+        "checkedAt": "2026-10-18T08:08:30.407753+00:00",
         "source": "https://www.joynote.kr/sitemap.xml"
       },
       "google": {
-        "status": "partial",
+        "status": "collected",
         "source": "Google URL Inspection (API / owner UI)",
         "property": "https://www.joynote.kr/",
-        "indexed": 43,
-        "inspected": 110,
+        "indexed": 44,
+        "inspected": 111,
         "inventoryTotal": 111,
-        "complete": false,
-        "checkedAt": "2026-10-18T07:43:21.122913+00:00",
-        "reason": "ReadTimeout: 원천 연결 실패 (비밀정보 생략)",
+        "complete": true,
+        "checkedAt": "2026-10-18T08:08:52.333409+00:00",
+        "reason": null,
         "propertyScopeVerified": true,
-        "apiBudgetExhausted": true,
-        "apiAttemptedCount": 0,
-        "apiAttemptStatus": "deferred_budget",
+        "apiBudgetExhausted": false,
+        "apiAttemptedCount": 3,
         "urls": [
           {
             "url": "https://www.joynote.kr/dog-howling-alone-separation-anxiety",
@@ -10933,19 +10932,17 @@
           },
           {
             "url": "https://www.joynote.kr/여수-오동도-동백-가을-명소-2027-최신-정보-총정리",
-            "checkedAt": "2026-10-17T07:10:52.119268+00:00",
-            "attemptAt": "2026-10-18T07:12:38.779415+00:00",
-            "attemptStatus": "failed",
-            "lastSuccessAt": "2026-10-17T07:10:52.119268+00:00",
+            "checkedAt": "2026-10-18T08:08:52.333390+00:00",
+            "attemptAt": "2026-10-18T08:08:52.333390+00:00",
+            "attemptStatus": "verified",
+            "lastSuccessAt": "2026-10-18T08:08:52.333390+00:00",
             "lastIndexed": true,
             "source": "Google Search Console URL Inspection",
             "verdict": "PASS",
-            "indexed": null,
+            "indexed": true,
             "coverageState": "Submitted and indexed",
             "lastCrawlTime": "2026-09-08T03:38:04Z",
-            "googleCanonical": "https://www.joynote.kr/여수-오동도-동백-가을-명소-2027-최신-정보-총정리",
-            "reason": "ReadTimeout: 원천 연결 실패 (비밀정보 생략)",
-            "retryAt": "2026-10-18T07:42:38.779415+00:00"
+            "googleCanonical": "https://www.joynote.kr/여수-오동도-동백-가을-명소-2027-최신-정보-총정리"
           },
           {
             "url": "https://www.joynote.kr/오동도-동백-명소-가을-코스-2026년-놓치면-후회할-7가지",
@@ -11257,10 +11254,10 @@
           },
           {
             "url": "https://www.joynote.kr/air-conditioner-fan-smell-removal",
-            "checkedAt": "2026-10-17T08:08:20.444653+00:00",
-            "attemptAt": "2026-10-17T08:08:20.444653+00:00",
+            "checkedAt": "2026-10-18T08:08:37.884098+00:00",
+            "attemptAt": "2026-10-18T08:08:37.884098+00:00",
             "attemptStatus": "verified",
-            "lastSuccessAt": "2026-10-17T08:08:20.444653+00:00",
+            "lastSuccessAt": "2026-10-18T08:08:37.884098+00:00",
             "lastIndexed": true,
             "source": "Google Search Console URL Inspection",
             "verdict": "PASS",
@@ -11495,10 +11492,10 @@
           },
           {
             "url": "https://www.joynote.kr/index-rescue-joynote-kr-20260611-batch-06",
-            "checkedAt": "2026-10-17T08:08:27.734592+00:00",
-            "attemptAt": "2026-10-17T08:08:27.734592+00:00",
+            "checkedAt": "2026-10-18T08:08:44.931467+00:00",
+            "attemptAt": "2026-10-18T08:08:44.931467+00:00",
             "attemptStatus": "verified",
-            "lastSuccessAt": "2026-10-17T08:08:27.734592+00:00",
+            "lastSuccessAt": "2026-10-18T08:08:44.931467+00:00",
             "lastIndexed": true,
             "source": "Google Search Console URL Inspection",
             "verdict": "PASS",
@@ -11720,14 +11717,14 @@
         ],
         "collection": {
           "total": 111,
-          "currentInspected": 110,
+          "currentInspected": 111,
           "everInspected": 111,
           "staleInspected": 0,
-          "failed": 1,
-          "unresolvedInspected": 1,
+          "failed": 0,
+          "unresolvedInspected": 0,
           "neverAttempted": 0,
           "neverInspected": 0,
-          "lastAttemptAt": "2026-10-18T07:12:53.417941+00:00"
+          "lastAttemptAt": "2026-10-18T08:08:52.333390+00:00"
         }
       },
       "traffic": {
@@ -11787,7 +11784,7 @@
             "users": 0
           }
         ],
-        "checkedAt": "2026-10-18T07:43:23.258270+00:00",
+        "checkedAt": "2026-10-18T08:08:54.407376+00:00",
         "sourceRef": "https://analyticsdata.googleapis.com/v1beta/properties/556127526:runReport"
       }
     },
@@ -11797,7 +11794,7 @@
         "url": "https://www.justinfo.co.kr/",
         "platform": "cf"
       },
-      "checkedAt": "2026-10-18T07:37:26.200807+00:00",
+      "checkedAt": "2026-10-18T08:08:54.729061+00:00",
       "indexingRequest": {
         "requestedAt": "2026-10-18T02:42:55.768346+00:00",
         "urls": [
@@ -12728,7 +12725,7 @@
         "total": 302,
         "complete": true,
         "source": "https://www.justinfo.co.kr/api/posts",
-        "checkedAt": "2026-10-18T07:37:33.563500+00:00"
+        "checkedAt": "2026-10-18T08:09:02.588035+00:00"
       },
       "sitemap": {
         "status": "available",
@@ -13040,18 +13037,18 @@
           "https://www.justinfo.co.kr/p53991",
           "https://www.justinfo.co.kr/2026년-청년-적금-추천-가이드-연-6대-금리-놓치지-않는-법"
         ],
-        "checkedAt": "2026-10-18T07:37:35.982162+00:00",
+        "checkedAt": "2026-10-18T08:09:04.463928+00:00",
         "source": "https://www.justinfo.co.kr/sitemap.xml"
       },
       "google": {
         "status": "partial",
         "source": "Google URL Inspection (API / owner UI)",
         "property": "https://www.justinfo.co.kr/",
-        "indexed": 37,
+        "indexed": 38,
         "inspected": 122,
         "inventoryTotal": 302,
         "complete": false,
-        "checkedAt": "2026-10-18T07:37:52.058885+00:00",
+        "checkedAt": "2026-10-18T08:09:26.471566+00:00",
         "reason": "ReadTimeout: 원천 연결 실패 (비밀정보 생략)",
         "propertyScopeVerified": true,
         "apiBudgetExhausted": false,
@@ -14113,10 +14110,10 @@
           },
           {
             "url": "https://www.justinfo.co.kr/bts-공연-인천공항-입국-bts-입국-2026년-인천공항-마중-꿀",
-            "checkedAt": "2026-10-15T07:44:03.469586+00:00",
-            "attemptAt": "2026-10-15T07:44:03.469586+00:00",
+            "checkedAt": "2026-10-18T08:09:11.956590+00:00",
+            "attemptAt": "2026-10-18T08:09:11.956590+00:00",
             "attemptStatus": "verified",
-            "lastSuccessAt": "2026-10-15T07:44:03.469586+00:00",
+            "lastSuccessAt": "2026-10-18T08:09:11.956590+00:00",
             "lastIndexed": true,
             "source": "Google Search Console URL Inspection",
             "verdict": "PASS",
@@ -14127,10 +14124,10 @@
           },
           {
             "url": "https://www.justinfo.co.kr/준강제추행-혐의-7가지-대응-전략-2026년",
-            "checkedAt": "2026-10-15T07:44:10.681484+00:00",
-            "attemptAt": "2026-10-15T07:44:10.681484+00:00",
+            "checkedAt": "2026-10-18T08:09:19.199423+00:00",
+            "attemptAt": "2026-10-18T08:09:19.199423+00:00",
             "attemptStatus": "verified",
-            "lastSuccessAt": "2026-10-15T07:44:10.681484+00:00",
+            "lastSuccessAt": "2026-10-18T08:09:19.199423+00:00",
             "lastIndexed": false,
             "source": "Google Search Console URL Inspection",
             "verdict": "NEUTRAL",
@@ -14141,10 +14138,10 @@
           },
           {
             "url": "https://www.justinfo.co.kr/카타르-장기계약-3가지-핵심-동향-및-2026년-에너지-시장",
-            "checkedAt": "2026-10-15T08:37:58.476330+00:00",
-            "attemptAt": "2026-10-15T08:37:58.476330+00:00",
+            "checkedAt": "2026-10-18T08:09:26.471545+00:00",
+            "attemptAt": "2026-10-18T08:09:26.471545+00:00",
             "attemptStatus": "verified",
-            "lastSuccessAt": "2026-10-15T08:37:58.476330+00:00",
+            "lastSuccessAt": "2026-10-18T08:09:26.471545+00:00",
             "lastIndexed": false,
             "source": "Google Search Console URL Inspection",
             "verdict": "NEUTRAL",
@@ -17299,7 +17296,7 @@
           "unresolvedInspected": 1,
           "neverAttempted": 0,
           "neverInspected": 0,
-          "lastAttemptAt": "2026-10-18T07:37:52.058858+00:00"
+          "lastAttemptAt": "2026-10-18T08:09:26.471545+00:00"
         }
       },
       "traffic": {
@@ -17359,7 +17356,7 @@
             "users": 3
           }
         ],
-        "checkedAt": "2026-10-18T07:37:53.981601+00:00",
+        "checkedAt": "2026-10-18T08:09:27.887315+00:00",
         "sourceRef": "https://analyticsdata.googleapis.com/v1beta/properties/556127526:runReport"
       }
     },
@@ -17369,7 +17366,7 @@
         "url": "https://www.maxnote.kr/",
         "platform": "cf"
       },
-      "checkedAt": "2026-10-18T07:37:54.363943+00:00",
+      "checkedAt": "2026-10-18T08:09:28.225756+00:00",
       "indexingRequest": {
         "requestedAt": "2026-10-18T07:13:39.806834+00:00",
         "urls": [
@@ -17688,7 +17685,7 @@
         "total": 98,
         "complete": true,
         "source": "https://www.maxnote.kr/api/posts",
-        "checkedAt": "2026-10-18T07:37:56.572509+00:00"
+        "checkedAt": "2026-10-18T08:09:30.373754+00:00"
       },
       "sitemap": {
         "status": "available",
@@ -17796,7 +17793,7 @@
           "https://www.maxnote.kr/자기계발-습관-만들기-30일-만에-인생-바꾸는-비법-2026",
           "https://www.maxnote.kr/성공-마인드셋-키우기-2026년-당신을-바꿀-5가지-방법"
         ],
-        "checkedAt": "2026-10-18T07:37:58.694732+00:00",
+        "checkedAt": "2026-10-18T08:09:32.353937+00:00",
         "source": "https://www.maxnote.kr/sitemap.xml"
       },
       "google": {
@@ -17807,7 +17804,7 @@
         "inspected": 97,
         "inventoryTotal": 98,
         "complete": false,
-        "checkedAt": "2026-10-18T07:38:18.218346+00:00",
+        "checkedAt": "2026-10-18T08:09:54.209926+00:00",
         "reason": "ReadTimeout: 원천 연결 실패 (비밀정보 생략)",
         "propertyScopeVerified": true,
         "apiBudgetExhausted": false,
@@ -18545,10 +18542,10 @@
           },
           {
             "url": "https://www.maxnote.kr/PDF-파일-깔끔하게-정리하는-5가지-방법-PDF-정리-안내-기준",
-            "checkedAt": "2026-10-17T07:12:24.269112+00:00",
-            "attemptAt": "2026-10-17T07:12:24.269112+00:00",
+            "checkedAt": "2026-10-18T08:09:39.689312+00:00",
+            "attemptAt": "2026-10-18T08:09:39.689312+00:00",
             "attemptStatus": "verified",
-            "lastSuccessAt": "2026-10-17T07:12:24.269112+00:00",
+            "lastSuccessAt": "2026-10-18T08:09:39.689312+00:00",
             "lastIndexed": false,
             "source": "Google Search Console URL Inspection",
             "verdict": "NEUTRAL",
@@ -18559,10 +18556,10 @@
           },
           {
             "url": "https://www.maxnote.kr/엑셀-업무-효율-극대화-필수-체크리스트-완벽-가이드-2",
-            "checkedAt": "2026-10-17T08:09:24.001201+00:00",
-            "attemptAt": "2026-10-17T08:09:24.001201+00:00",
+            "checkedAt": "2026-10-18T08:09:46.941805+00:00",
+            "attemptAt": "2026-10-18T08:09:46.941805+00:00",
             "attemptStatus": "verified",
-            "lastSuccessAt": "2026-10-17T08:09:24.001201+00:00",
+            "lastSuccessAt": "2026-10-18T08:09:46.941805+00:00",
             "lastIndexed": false,
             "source": "Google Search Console URL Inspection",
             "verdict": "NEUTRAL",
@@ -18629,10 +18626,10 @@
           },
           {
             "url": "https://www.maxnote.kr/excel-shortcut-guide",
-            "checkedAt": "2026-10-17T08:09:31.033856+00:00",
-            "attemptAt": "2026-10-17T08:09:31.033856+00:00",
+            "checkedAt": "2026-10-18T08:09:54.209909+00:00",
+            "attemptAt": "2026-10-18T08:09:54.209909+00:00",
             "attemptStatus": "verified",
-            "lastSuccessAt": "2026-10-17T08:09:31.033856+00:00",
+            "lastSuccessAt": "2026-10-18T08:09:54.209909+00:00",
             "lastIndexed": false,
             "source": "Google Search Console URL Inspection",
             "verdict": "NEUTRAL",
@@ -19197,7 +19194,7 @@
           "unresolvedInspected": 1,
           "neverAttempted": 0,
           "neverInspected": 0,
-          "lastAttemptAt": "2026-10-18T07:38:18.218326+00:00"
+          "lastAttemptAt": "2026-10-18T08:09:54.209909+00:00"
         }
       },
       "traffic": {
@@ -19257,7 +19254,7 @@
             "users": 4
           }
         ],
-        "checkedAt": "2026-10-18T07:38:20.152525+00:00",
+        "checkedAt": "2026-10-18T08:09:55.475058+00:00",
         "sourceRef": "https://analyticsdata.googleapis.com/v1beta/properties/556127526:runReport"
       }
     },
@@ -38133,10 +38130,13 @@
       "budgetSeconds": 330,
       "perSiteLimit": 3,
       "status": "running",
-      "nextDomain": "joynote.kr",
+      "nextDomain": "meganote.kr",
       "visitedDomains": [
         "daynote.kr",
-        "healthcox.com"
+        "healthcox.com",
+        "joynote.kr",
+        "justinfo.co.kr",
+        "maxnote.kr"
       ],
       "deferredDomains": []
     },
