@@ -1,10 +1,9 @@
 {
-  "checkedAt": "2026-10-18T16:09:42.860047+09:00",
-  "eligibleCount": 1,
-  "processedCount": 4,
-  "publishedCount": 2,
-  "activeJob": {
-    "date": "2026-10-18",
-    "domain": "tripmarvel.com"
-  }
+  "checkedAt": "2026-10-18T18:11:42.427757+09:00",
+  "eligibleCount": 0,
+  "processedCount": 0,
+  "publishedCount": 0,
+  "activeJob": null,
+  "finishedAt": "2026-10-18T18:11:42.501634+09:00",
+  "heldJobs": []
 }
