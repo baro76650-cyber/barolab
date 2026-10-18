@@ -1,0 +1,80 @@
+Observed at 2026-10-14T19:10:33.316713+09:00
+Google Play Console 로드 중
+notifications_unread
+읽지 않은 알림
+말로 장보기 - 음성 장보기 메모
+keyboard_backspace
+모든 앱
+dashboard
+대시보드
+bar_chart
+통계
+overview
+게시 개요
+shield
+Google Play로 보호됨
+rocket_launch
+테스트 및 출시
+최신 버전 및 번들
+프로덕션
+테스트
+expand_less
+공개 테스트
+비공개 테스트
+내부 테스트
+사전 출시 보고서
+expand_more
+내부 앱 공유
+사전 등록
+앱 무결성
+고급 설정
+vital_signs
+모니터링 및 개선
+finance_mode
+사용자 늘리기
+sell
+Play를 통한 수익 창출
+내부 테스트
+phonelink
+휴대전화, 태블릿, Desktop (Googlebook OS, ChromeOS), Android XR
+arrow_drop_down
+새 버전 만들기
+내부 테스트 버전을 생성 및 관리하여 앱을 최대 100명의 내부 테스터에게 공개하세요. 자세히 알아보기
+info
+앱의 임시 이름: 'com.barolab.voicebasket (unreviewed)'
+앱 설정이 완료되고 앱 검토가 끝날 때까지 내부 테스터가 앱을 다운로드할 때 앱의 임시 이름이 표시됩니다.
+자세히 알아보기
+닫기
+휴대전화, 태블릿, Desktop, Android XR 트랙 요약
+트랙 일시중지
+활성최신 출시 버전: 0.2.0-internal-preview (목록·선택 재사용)앱의 임시 이름: 'com.barolab.voicebasket (unreviewed)'   
+help
+출시
+테스터
+출시
+0.2.0-internal-preview (목록·선택 재사용)
+출시 관리
+버전 승급
+arrow_drop_down
+
+check_circle
+내부 테스터에게 제공됨
+brightness_1
+버전 코드 1개
+brightness_1
+게시일: 10월 14일 오후 7:10
+brightness_1
+검토되지 않음
+
+요약 표시
+expand_more
+출시 내역
+표시
+expand_more
+제품 업데이트
+상태 대시보드
+도움말
+© 2026 Google
+개인 정보 보호
+개발자 배포 계약
+서비스 약관

@@ -1,0 +1,12 @@
+{
+  "downloadedAt": "2026-10-14T09:17:55.083235+00:00",
+  "repository": "https://github.com/cvzi/magnifyingglass",
+  "releaseApi": "https://api.github.com/repos/cvzi/magnifyingglass/releases/latest",
+  "tag": "v1.1",
+  "releaseUrl": "https://github.com/cvzi/magnifyingglass/releases/tag/v1.1",
+  "publishedAt": "2026-04-07T22:45:31Z",
+  "assetUrl": "https://github.com/cvzi/magnifyingglass/releases/download/v1.1/mag2.apk",
+  "bytes": 1399194,
+  "sha256": "eb24b40953d2e393f89acbee49d00253a93292b9fdc6e356d4e746d8d07df9ba",
+  "scope": "Official author release, downloaded for static analysis only; not installed or executed; no third party code copied."
+}

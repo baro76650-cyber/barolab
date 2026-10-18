@@ -1,0 +1,67 @@
+{
+  "recordedAt": "2026-10-14T07:48:40.910191+00:00",
+  "artifact": {
+    "path": "\\\\otns\\yoonlab\\10_Project\\BaroLab\\bible_app\\app\\build\\outputs\\bundle\\internal\\app-internal.aab",
+    "sha256": "41ed8fc90c2a0b41d6582f0272cc687c9f8933ee24b7b53921a0b65e1a32c3e9",
+    "bytes": 5559240,
+    "versionCode": 2,
+    "versionName": "0.2.0-internal-preview",
+    "package": "com.barolab.harubible",
+    "signing": "jarsigner verified; expected self-signed upload certificate warnings",
+    "testAdManifestVerified": true,
+    "contentAssetMatchesCanonical": true
+  },
+  "mainSourceSha256": "f771a619d947d9350b7689fed86467c9afa0feec45b31cd7f022483f47bca310",
+  "build": "build.ps1 -Mode internal: BUILD SUCCESSFUL",
+  "unitTests": {
+    "DailyReadingTest": 6,
+    "OfflineVoicePolicyTest": 6,
+    "failures": 0,
+    "errors": 0
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 1,
+    "warningId": "AndroidGradlePluginVersion"
+  },
+  "runtime": {
+    "device": "Dedicated Android36 Google APIs x86_64 emulator-5556; no physical Samsung device",
+    "upgrade": "Actual v1 to v2 APK install -r; Isaiah41:10 favorite and42sp preference preserved",
+    "ttsOffline": "READY; Wi-Fi and mobile disabled; active CONTENT_TYPE_SPEECH AudioTrack; stop and replay pass",
+    "ttsNoEngine": "Disabled only test AVD Google engine: NO_ENGINE, setup guidance and system settings open; engine reenabled afterward",
+    "ttsFirstSetupReturn": "After bounded voice-list retries, first return from settings after engine reenable reaches READY in same app process",
+    "ttsServiceStopped": "Force-stopped test engine: safe voice-preparation guidance and settings reachable; settings return recovers READY. This did not exercise a real UtteranceProgressListener error callback",
+    "smallViewport": "1920x1080 at420dpi, system font1.3 and42sp; compact scroll area444px; scrolled to footer; stop remains accessible; advertisement separate",
+    "portrait130": "1080x1920 actual PNG verified;42sp and1.3 system font",
+    "share": "Actual device share sheet with PNG; no recipient selected",
+    "navigation": "Selected tabs and selected font visible; saved verse accessible"
+  },
+  "evidence": {
+    "buildLog": "qa/v2-build-internal.log",
+    "audio": "qa/v2-tts-offline-audio-proof.txt",
+    "compactInitial": "qa/screenshots/v2-08-fixed-landscape-font130.png",
+    "compactBottomStop": "qa/screenshots/v2-09-landscape-bottom-stop.png",
+    "portrait130": "qa/screenshots/v2-13-true-portrait-font130.png",
+    "firstSetupReturn": "qa/screenshots/v2-11-first-resume-engine-ready.png",
+    "shareSheet": "qa/screenshots/v2-14-device-share-sheet.png",
+    "representativeScreenshots": [
+      "store-assets\\screenshots\\v2-01-today-1080x1920.png",
+      "store-assets\\screenshots\\v2-02-favorites-1080x1920.png",
+      "store-assets\\screenshots\\v2-03-settings-1080x1920.png"
+    ]
+  },
+  "supersededEvidence": {
+    "qa/screenshots/v2-07-landscape-viewport-font130.png": "Earlier failing build with zero body; fixed by final compact layout",
+    "qa/screenshots/v2-10-portrait-font130.png": "Actually1920x1080 due configuration transition; not portrait evidence; usev2-13",
+    "qa/screenshots/v2-12-engine-service-error.png": "Shows voice-preparation guidance after forced service stop, not proof of ENGINE_ERROR enum"
+  },
+  "buildWrapper": "SDK path unchanged under LOCALAPPDATA/BaroLabAndroid/sdk; wrapper Gradle8.13 distribution first downloaded into existing gradle-home wrapper/dists (previous build used installed Gradle). Native stderr scoped Continue/restored; successful warnings do not abort; actual lint nonzero still threw as intended",
+  "limitations": [
+    "Samsung physical-device TTS and local engine/voice installation still require user verification",
+    "No human audio-quality listening in headless emulator",
+    "Actual missing Korean voice-pack download/install and initialization-tap race not independently rerun for v2",
+    "No real UtteranceProgressListener error callback or15second timeout forced",
+    "No v2 timed notification delivery test; reminder math unit tests pass",
+    "No production ads/UMP message/fill/revenue verification; no public production release claim"
+  ]
+}

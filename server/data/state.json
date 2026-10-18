@@ -1,0 +1,29 @@
+{
+  "strategy_rotation": {
+    "current_index": 0,
+    "current_strategy": "스마트블록 역추적",
+    "next_strategy": "자동완성·질문 롱테일",
+    "last_rotated_at": "2026-10-08T19:30:00+09:00"
+  },
+  "metrics": {
+    "total_pv": 14820,
+    "cf_sessions": 8120,
+    "naver_visitors": 6700,
+    "bridge_clicks": 424,
+    "bridge_landings": 408,
+    "indexing": {
+      "google_indexed": 248,
+      "google_total": 262,
+      "naver_indexed": 5,
+      "naver_total": 5
+    },
+    "revenue": {
+      "adsense_usd": 48.60,
+      "naver_adpost_krw": 12400,
+      "coupang_krw": 14800,
+      "toss_krw": 8450,
+      "total_krw": 84250,
+      "monthly_krw": 2418000
+    }
+  }
+}

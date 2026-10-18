@@ -1,0 +1,6 @@
+fastapi==0.142.2
+uvicorn==0.54.0
+requests==2.34.2
+beautifulsoup4>=4.15,<5
+cryptography==50.0.1
+google-auth>=2.40,<3

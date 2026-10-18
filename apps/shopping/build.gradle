@@ -1,0 +1,4 @@
+plugins { id 'com.android.application' }
+apply from: rootProject.file('gradle/app-conventions.gradle')
+
+dependencies { implementation 'androidx.activity:activity:1.13.0' }

@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-15T08:06:02.589399+00:00",
+  "method": "read-only HTTP HTML + authenticated GA4 host report; JavaScript not executed; no synthetic pageview",
+  "startDate": "2026-10-08",
+  "endDate": "2026-10-14",
+  "streamBindingStatus": "unverified_admin_403",
+  "sites": [
+    {
+      "host": "www.must-good.com",
+      "property": "556127526",
+      "existingSessions": 26,
+      "tag": "G-QHHS9W3H61",
+      "articleUrl": "https://www.must-good.com/national-museum-korea-reservation-backpack-photo-guide",
+      "utmHTTPStatus": 200,
+      "queryPreserved": true,
+      "redirectCount": 0
+    },
+    {
+      "host": "www.must-pick.com",
+      "property": "545137532",
+      "existingSessions": 37,
+      "tag": "G-4ZJC2D7R2W",
+      "articleUrl": "https://www.must-pick.com/robot-vacuum-consumables-replacement-compatibility",
+      "utmHTTPStatus": 200,
+      "queryPreserved": true,
+      "redirectCount": 0
+    }
+  ]
+}

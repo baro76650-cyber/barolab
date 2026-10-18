@@ -1,0 +1,79 @@
+{
+  "createdAt": "2026-10-14T08:33:50.191Z",
+  "source": "Original app Android vector paths and original SVG type/layout; no competitor assets or invented app screenshots",
+  "renderer": "resvg2.6.2; pngjs7 RGB24; installed Malgun Gothic fonts only, font binaries not redistributed",
+  "assets": [
+    {
+      "app": "greeting",
+      "file": "greeting/icon-512.png",
+      "source": "greeting/icon-512.svg",
+      "width": 512,
+      "height": 512,
+      "bitDepth": 8,
+      "colorType": 2,
+      "bytes": 13174,
+      "sha256": "3db0c7c1cbe833462aae56b7d755db51d0028e40e1f7efd6d4d5d6529a62c22e"
+    },
+    {
+      "app": "greeting",
+      "file": "greeting/feature-1024x500.png",
+      "source": "greeting/feature-1024x500.svg",
+      "width": 1024,
+      "height": 500,
+      "bitDepth": 8,
+      "colorType": 2,
+      "bytes": 27633,
+      "sha256": "193e0cb6716e803ef074edb2a117bc65a9ea958e389de2fef9edc9f49ea8a57d"
+    },
+    {
+      "app": "magnifier",
+      "file": "magnifier/icon-512.png",
+      "source": "magnifier/icon-512.svg",
+      "width": 512,
+      "height": 512,
+      "bitDepth": 8,
+      "colorType": 2,
+      "bytes": 13855,
+      "sha256": "09c15819da502073b665657f90bf3270858204949a048b9fd08de68a64c96af9"
+    },
+    {
+      "app": "magnifier",
+      "file": "magnifier/feature-1024x500.png",
+      "source": "magnifier/feature-1024x500.svg",
+      "width": 1024,
+      "height": 500,
+      "bitDepth": 8,
+      "colorType": 2,
+      "bytes": 30437,
+      "sha256": "5d9c0c851099f8fbaaf49d8b8b25e12b8bc038d6d1627402da46353629e8e41e"
+    },
+    {
+      "app": "shopping",
+      "file": "shopping/icon-512.png",
+      "source": "shopping/icon-512.svg",
+      "width": 512,
+      "height": 512,
+      "bitDepth": 8,
+      "colorType": 2,
+      "bytes": 11272,
+      "sha256": "c029b5c0b8745bd4069fd744b92fd9d34ec97ac6f4f64b39e0ed34a0ac6e5e93"
+    },
+    {
+      "app": "shopping",
+      "file": "shopping/feature-1024x500.png",
+      "source": "shopping/feature-1024x500.svg",
+      "width": 1024,
+      "height": 500,
+      "bitDepth": 8,
+      "colorType": 2,
+      "bytes": 27040,
+      "sha256": "db3a8802799f9231899abbac531f7a4657294d5d3630c3f6b386a94718a68f07"
+    }
+  ],
+  "visualQa": {
+    "allSixPngInspected": true,
+    "readableKorean": true,
+    "clippingOrOverlap": false,
+    "inventedAppUi": false
+  }
+}

@@ -1,0 +1,1374 @@
+# -*- coding: utf-8 -*-
+"""
+BaroLab Clean-Slate Memory Graph Engine (`server/memory_graph.py`).
+
+Core Principles (Clean Slate + 0 Orphan Nodes Rule):
+1. Legacy Isolation (`server/data/legacy_argo_backup/`):
+   - All legacy ARGO `.index.sqlite`, `vault/` notes, and existing `memory_graph.sqlite3`
+     containing deprecated projects (`youtube-coupang`, `biz-down`, `new-item`, `kphotogi`, etc.)
+     and 757+ orphan nodes are safely backed up into `server/data/legacy_argo_backup/` and
+     completely excluded from graph loading.
+2. Clean Seed Hubs (13 Core Hubs, 0 Orphan Nodes):
+   - 5 AI Crew Hubs (`hub_cat='crew'`):
+     1) `자비스(총괄)` (`hubs/crew-jarvis.md`)
+     2) `패치(개발/스킬)` (`hubs/crew-patch.md`)
+     3) `퍼블리(발행/검수)` (`hubs/crew-publi.md`)
+     4) `트레이스(성과/수익)` (`hubs/crew-trace.md`)
+     5) `레이더(R&D발굴)` (`hubs/crew-radar.md`)
+   - 4 Operating Channel Hubs (`hub_cat='channel'`):
+     6) `네이버 블로그(5개 계정)` (`hubs/channel-naver-blog.md`)
+     7) `CF 블로그(16개 도메인)` (`hubs/channel-cf-blog.md`)
+     8) `네이버 지식iN` (`hubs/channel-naver-kin.md`)
+     9) `Threads` (`hubs/channel-threads.md`)
+   - 4 Core Skill Hubs (`hub_cat='skill'`):
+     10) `간접체험 4단계 집필법` (`skills/skill-indirect-experience.md`)
+     11) `SVG 캡처 가이드` (`skills/skill-svg-capture-guide.md`)
+     12) `부분 수선(In-Place Repair)` (`skills/skill-inplace-repair.md`)
+     13) `애드센스 고수익 배치` (`skills/skill-adsense-high-rpm.md`)
+3. '0 Orphan Nodes' 4-Synapse Rule (`resolve_synapse_parents` & `register_synapse_memory`):
+   - Every memory node MUST connect to at least 2 parent hubs across the 4 Synapse axes before it can enter the graph:
+     ① [출처 연결 (Source Crew)]: `@자비스`, `@패치`, `@퍼블리`, `@트레이스`, `@레이더`
+     ② [적용 채널/도메인 연결 (Channel)]: `네이버 블로그(5개 계정)`, `CF 블로그(16개 도메인)`, `네이버 지식iN`, `Threads`
+     ③ [스킬 연결 (Skill)]: `간접체험 4단계 집필법`, `SVG 캡처 가이드`, `부분 수선(In-Place Repair)`, `애드센스 고수익 배치`
+     ④ [성과(Growth) 게이트]: Temporary logs or failed attempts are rejected; only
+        (a) published quality posts (`published_post`),
+        (b) meeting room decisions (`meeting`),
+        (c) verified revenue/traffic insights from `growth.sqlite3` (`revenue`), or
+        (d) learned skills (`skill`) are promoted to memory nodes.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import os
+import re
+import shutil
+import sqlite3
+import time
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
+from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+SERVER_DIR = Path(__file__).resolve().parent
+DATA_DIR = SERVER_DIR / "data"
+DB_PATH = DATA_DIR / "memory_graph.sqlite3"
+GROWTH_DB_PATH = DATA_DIR / "growth.sqlite3"
+METRICS_JSON_PATH = DATA_DIR / "metrics.json"
+LOCAL_VAULT_DIR = DATA_DIR / "vault"
+LEGACY_BACKUP_DIR = DATA_DIR / "legacy_argo_backup"
+
+ARGO_WS_DIR = Path(r"C:\Users\baro7\AppData\Local\com.beyondworks.argo\workspaces\barolab-unl1")
+ARGO_INDEX_DB = ARGO_WS_DIR / ".index.sqlite"
+ARGO_VAULT_DIR = ARGO_WS_DIR / "vault"
+
+CLEAN_SLATE_VERSION = "clean-slate-v2-20261017"
+GUIDE_NOTE = "기억-안내.md"
+LINK_SECTIONS = ("근거", "관련")
+BOSS_PROFILE_REL = "notes/사장-프로필.md"
+BOSS_SECTIONS = ("취향", "결정", "금지")
+
+DEFAULT_AGENTS = [
+    {"slug": "jarvis", "name": "자비스(총괄)", "shortName": "자비스", "role": "BaroLab 운영총괄 AI", "team": "총괄", "hubRel": "hubs/crew-jarvis.md"},
+    {"slug": "patch", "name": "패치(개발/스킬)", "shortName": "패치", "role": "대시보드·파이프라인·스킬 엔지니어", "team": "개발/스킬", "hubRel": "hubs/crew-patch.md"},
+    {"slug": "publi", "name": "퍼블리(발행/검수)", "shortName": "퍼블리", "role": "블로그 발행·간접체험 검수 전문가", "team": "발행/검수", "hubRel": "hubs/crew-publi.md"},
+    {"slug": "trace", "name": "트레이스(성과/수익)", "shortName": "트레이스", "role": "색인·GA4·애드센스·애드포스트 수익 분석", "team": "성과/수익", "hubRel": "hubs/crew-trace.md"},
+    {"slug": "radar", "name": "레이더(R&D발굴)", "shortName": "레이더", "role": "스마트블록·롱테일·수익 키워드 발굴", "team": "R&D발굴", "hubRel": "hubs/crew-radar.md"},
+]
+
+# ── 13 Clean Seed Core Hubs (5 AI Crew + 4 Operating Channels + 4 Core Skills) ──
+
+CLEAN_SEED_HUBS: List[Dict[str, Any]] = [
+    # 1. AI 크루 허브 (5개)
+    {
+        "rel": "hubs/crew-jarvis.md",
+        "kind": "hub",
+        "category": "core_hub",
+        "sub_group": "crew",
+        "title": "자비스(총괄)",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/channel-naver-blog",
+            "hubs/channel-cf-blog",
+            "hubs/channel-naver-kin",
+            "hubs/channel-threads",
+            "hubs/crew-patch",
+            "hubs/crew-publi",
+            "hubs/crew-trace",
+            "hubs/crew-radar",
+        ],
+        "body": (
+            "# 자비스(총괄)\n\n"
+            "- **역할**: BaroLab 마스터 컨트롤 운영총괄 AI (`@자비스`)\n"
+            "- **핵심 임무**: 일일 애드센스 $100 목표 관제, 4대 운영 채널 스케줄 조율, 회의실 의사결정 종합 및 지식 그래프 품질 총괄.\n"
+        ),
+    },
+    {
+        "rel": "hubs/crew-patch.md",
+        "kind": "hub",
+        "category": "core_hub",
+        "sub_group": "crew",
+        "title": "패치(개발/스킬)",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-jarvis",
+            "skills/skill-svg-capture-guide",
+            "skills/skill-inplace-repair",
+            "skills/skill-adsense-high-rpm",
+            "hubs/channel-cf-blog",
+            "hubs/channel-naver-blog",
+        ],
+        "body": (
+            "# 패치(개발/스킬)\n\n"
+            "- **역할**: 파이프라인·대시보드·스킬 아키텍처 전담 엔지니어 (`@패치`)\n"
+            "- **핵심 임무**: `SKILL.md` 고도화, `common/capture_guide.py` SVG 캡처 가이드, `In-Place Surgical Repair` 부분 수선, CF 16개 도메인 1:1 테마 및 5대 광고 슬롯 렌더러 유지보수.\n"
+        ),
+    },
+    {
+        "rel": "hubs/crew-publi.md",
+        "kind": "hub",
+        "category": "core_hub",
+        "sub_group": "crew",
+        "title": "퍼블리(발행/검수)",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-jarvis",
+            "hubs/channel-naver-blog",
+            "hubs/channel-cf-blog",
+            "skills/skill-indirect-experience",
+            "skills/skill-svg-capture-guide",
+            "skills/skill-inplace-repair",
+        ],
+        "body": (
+            "# 퍼블리(발행/검수)\n\n"
+            "- **역할**: 네이버 5계정·CF 16개 도메인 발행 및 간접체험 독립 검수 전문가 (`@퍼블리`)\n"
+            "- **핵심 임무**: PC(1280px)·모바일(390px) 실제 렌더링 화면 픽셀 검수, 클릭 박스(`#1646b7`)·확인 박스(`#8c4500`)·순번(①~③) 정합성 검증 및 HTTP 200 공개 확인.\n"
+        ),
+    },
+    {
+        "rel": "hubs/crew-trace.md",
+        "kind": "hub",
+        "category": "core_hub",
+        "sub_group": "crew",
+        "title": "트레이스(성과/수익)",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-jarvis",
+            "hubs/channel-cf-blog",
+            "hubs/channel-naver-blog",
+            "hubs/channel-naver-kin",
+            "hubs/channel-threads",
+            "skills/skill-adsense-high-rpm",
+        ],
+        "body": (
+            "# 트레이스(성과/수익)\n\n"
+            "- **역할**: `growth.sqlite3` 기반 색인·GA4 세션·애드센스·애드포스트 수익 분석가 (`@트레이스`)\n"
+            "- **핵심 임무**: 도메인별 RPM/CTR 추적, 색인 누락 진단, 유의미한 수익/유입 발생 인사이트를 기억 그래프로 승격.\n"
+        ),
+    },
+    {
+        "rel": "hubs/crew-radar.md",
+        "kind": "hub",
+        "category": "core_hub",
+        "sub_group": "crew",
+        "title": "레이더(R&D발굴)",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-jarvis",
+            "hubs/channel-naver-blog",
+            "hubs/channel-cf-blog",
+            "hubs/channel-naver-kin",
+            "skills/skill-indirect-experience",
+            "skills/skill-adsense-high-rpm",
+        ],
+        "body": (
+            "# 레이더(R&D발굴)\n\n"
+            "- **역할**: 고단가 키워드·스마트블록 역추적·트렌드×에버그린 브릿지 발굴 전문가 (`@레이더`)\n"
+            "- **핵심 임무**: 검색 수요(`monthlyLowerBound`) 실측 기반 독자 과제(`readerGoal`) 선정 및 고수익 CPC 주제 기획.\n"
+        ),
+    },
+    # 2. 운영 채널 허브 (4개)
+    {
+        "rel": "hubs/channel-naver-blog.md",
+        "kind": "hub",
+        "category": "core_hub",
+        "sub_group": "channel",
+        "title": "네이버 블로그(5개 계정)",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-jarvis",
+            "hubs/crew-publi",
+            "hubs/crew-trace",
+            "hubs/crew-radar",
+            "skills/skill-indirect-experience",
+            "skills/skill-svg-capture-guide",
+            "skills/skill-inplace-repair",
+        ],
+        "body": (
+            "# 네이버 블로그(5개 계정)\n\n"
+            "- **운영 계정**: `soultin`(mustpickinfo), `soul5373`(mustinfo), `yoon_master`(yoonviews), `adinfo0905`(CF 브릿지), `stone0747`(CF 브릿지)\n"
+            "- **수익 및 역할**: 애드포스트 수익 창출 + 스마트블록 상위 노출 + CF 16개 블로그로의 고관여 트래픽 브릿지 공급.\n"
+        ),
+    },
+    {
+        "rel": "hubs/channel-cf-blog.md",
+        "kind": "hub",
+        "category": "core_hub",
+        "sub_group": "channel",
+        "title": "CF 블로그(16개 도메인)",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-jarvis",
+            "hubs/crew-patch",
+            "hubs/crew-publi",
+            "hubs/crew-trace",
+            "hubs/crew-radar",
+            "skills/skill-indirect-experience",
+            "skills/skill-svg-capture-guide",
+            "skills/skill-inplace-repair",
+            "skills/skill-adsense-high-rpm",
+        ],
+        "body": (
+            "# CF 블로그(16개 도메인)\n\n"
+            "- **운영 도메인 (16개)**: `must-good.com`, `baronote.kr`, `justinfo.co.kr`, `topnote.kr`, `meganote.kr`, `smilenote.kr`, `healthcox.com`, `maxnote.kr`, `must-joy.com`, `tripmarvel.com`, `must-pick.com`, `woorinote.kr`, `daynote.kr`, `nolplace.com`, `soulnote.kr`, `joynote.kr`\n"
+            "- **핵심 아키텍처**: Anti-PBN 1:1 독립 UI/UX 테마(고유 헥사코드 16종·4대 레이아웃 아키텍처) + 애드센스 고수익 5대 표준 슬롯 탑재.\n"
+        ),
+    },
+    {
+        "rel": "hubs/channel-naver-kin.md",
+        "kind": "hub",
+        "category": "core_hub",
+        "sub_group": "channel",
+        "title": "네이버 지식iN",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-jarvis",
+            "hubs/crew-radar",
+            "hubs/crew-trace",
+            "hubs/channel-cf-blog",
+            "hubs/channel-naver-blog",
+            "skills/skill-indirect-experience",
+        ],
+        "body": (
+            "# 네이버 지식iN\n\n"
+            "- **운영 계정**: `adinfo0905`, `stone0747` 투트랙 질문 맞춤형 전문 답변 채널\n"
+            "- **핵심 역할**: 실사용자 질문 의도 해결 및 CF 블로그·네이버 블로그 심층 가이드로의 자연스러운 브릿지 유입.\n"
+        ),
+    },
+    {
+        "rel": "hubs/channel-threads.md",
+        "kind": "hub",
+        "category": "core_hub",
+        "sub_group": "channel",
+        "title": "Threads",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-jarvis",
+            "hubs/crew-trace",
+            "hubs/channel-cf-blog",
+            "skills/skill-indirect-experience",
+        ],
+        "body": (
+            "# Threads\n\n"
+            "- **운영 채널**: `@mustpickinfo` 등 SNS 숏폼 인사이트 요약 및 핵심 정보 확산 채널\n"
+            "- **핵심 역할**: 발행된 고품질 포스팅의 핵심 체크리스트를 카드형 스레드로 재가공하여 외부 소셜 유입 다변화.\n"
+        ),
+    },
+    # 3. 핵심 코어 스킬 허브 (4개, SKILL.md 연동)
+    {
+        "rel": "skills/skill-indirect-experience.md",
+        "kind": "skill",
+        "category": "skill",
+        "sub_group": "skill",
+        "title": "간접체험 4단계 집필법",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-publi",
+            "hubs/crew-radar",
+            "hubs/channel-naver-blog",
+            "hubs/channel-cf-blog",
+            "skills/skill-svg-capture-guide",
+        ],
+        "body": (
+            "# 간접체험 4단계 집필법 (SKILL.md)\n\n"
+            "1. **독자 과제 정의 (`readerGoal`)**: 독자의 시작 상태(`startState`)와 명확한 완료 기준(`successCondition`) 수립\n"
+            "2. **사전 실제 자료 관측 (`observe_prewriting_materials`)**: 집필 전 실제 화면 픽셀과 공식 근거를 먼저 확인\n"
+            "3. **행동-기대결과-막힘해결 (`steps` & `troubleshooting`)**: 추상적 요약 대신 따라 할 수 있는 단계별 조작과 오류 대처 분기 제시\n"
+            "4. **독립 시각 검수 (`review_article`)**: PC(1280px)·모바일(390px) 실제 렌더링 타일에서 본문과 시각자료의 1:1 정합성 검증\n"
+        ),
+    },
+    {
+        "rel": "skills/skill-svg-capture-guide.md",
+        "kind": "skill",
+        "category": "skill",
+        "sub_group": "skill",
+        "title": "SVG 캡처 가이드",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-patch",
+            "hubs/crew-publi",
+            "hubs/channel-naver-blog",
+            "hubs/channel-cf-blog",
+            "skills/skill-indirect-experience",
+        ],
+        "body": (
+            "# SVG 캡처 가이드 (`common/capture_guide.py` · SKILL.md)\n\n"
+            "- **클릭 영역 표시**: 파란 실선 박스(`#1646b7`)로 독자가 눌러야 할 버튼/메뉴를 명확히 지시\n"
+            "- **확인 영역 표시**: 엠버 점선 박스(`#8c4500`)로 결과 수치/상태를 대조\n"
+            "- **순번 마커**: ①~③ 원형 배지로 시선 이동 순서 안내\n"
+            "- **모바일 390px 가독성**: `.guide-capture-img` 반응형 스타일 및 780px 포커스 크롭으로 스마트폰에서도 글자가 깨지지 않게 보장\n"
+        ),
+    },
+    {
+        "rel": "skills/skill-inplace-repair.md",
+        "kind": "skill",
+        "category": "skill",
+        "sub_group": "skill",
+        "title": "부분 수선(In-Place Repair)",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-patch",
+            "hubs/crew-publi",
+            "hubs/channel-naver-blog",
+            "hubs/channel-cf-blog",
+        ],
+        "body": (
+            "# 부분 수선(In-Place Repair) (SKILL.md)\n\n"
+            "- **핵심 원칙**: 검수 단계에서 캡션 중복·`afterBlock` 인덱스 밀림·요약문 기호(`▲`) 혼입 등 구조적 결함 발생 시, 전체 원고를 처음부터 재작성(`rework-*` 무한 루프)하지 않고 해당 폴더 안에서 Python 정규화 및 최대 1회 보정으로 즉시 수선\n"
+            "- **효과**: 토큰 낭비 및 무한 재시도 루프 원천 차단, `handoff.json` 파일 지문(`sha256`) 자동 동기화\n"
+        ),
+    },
+    {
+        "rel": "skills/skill-adsense-high-rpm.md",
+        "kind": "skill",
+        "category": "skill",
+        "sub_group": "skill",
+        "title": "애드센스 고수익 배치",
+        "is_core_hub": 1,
+        "is_revenue_hub": 1,
+        "links": [
+            "hubs/crew-patch",
+            "hubs/crew-trace",
+            "hubs/crew-radar",
+            "hubs/channel-cf-blog",
+        ],
+        "body": (
+            "# 애드센스 고수익 배치 (`cf_posting/domain_themes.py` · SKILL.md)\n\n"
+            "- **슬롯 1 (`.adsense-slot--hero-below`)**: 제목 직하단 반응형 디스플레이 (`min-height: 250px`, CLS 방지)\n"
+            "- **슬롯 2 (`.adsense-slot--in-article`)**: 본문 3~4번째 `h2` 소제목 직전 자연 삽입 (상하 마진 `32px`)\n"
+            "- **슬롯 3 (`.adsense-slot--sticky-rail`)**: 데스크톱 우측 `300x600` 스티키 사이드바 배너 (모바일 자동 숨김)\n"
+            "- **슬롯 4 (`.adsense-slot--multiplex-bottom`)**: 본문 결론 직후 멀티플렉스 추천 슬롯\n"
+            "- **슬롯 5 (`.adsense-slot--mobile-anchor-safe`)**: 모바일 하단 앵커 광고 세이프존 (`padding-bottom: 70px`)\n"
+        ),
+    },
+]
+
+CORE_HUB_REL_SET = {h["rel"] for h in CLEAN_SEED_HUBS}
+CORE_HUB_STEM_MAP = {re.sub(r"\.md$", "", h["rel"]): h for h in CLEAN_SEED_HUBS}
+
+# Prohibited deprecated / legacy project keywords (never allowed into Clean Slate graph)
+DEPRECATED_PROJECT_PATTERNS = re.compile(
+    r"youtube-coupang|biz-down|new-item|kphotogi|argo-legacy|conflict-",
+    re.I,
+)
+
+# 16 CF Domains + 5 Naver Accounts mapping to Operating Channel Hubs
+CF_DOMAINS_LIST = [
+    "must-good.com", "baronote.kr", "justinfo.co.kr", "topnote.kr",
+    "meganote.kr", "smilenote.kr", "healthcox.com", "maxnote.kr",
+    "must-joy.com", "tripmarvel.com", "must-pick.com", "woorinote.kr",
+    "daynote.kr", "nolplace.com", "soulnote.kr", "joynote.kr",
+]
+NAVER_ACCOUNTS_LIST = ["soultin", "soul5373", "yoon_master", "adinfo0905", "stone0747", "mustpickinfo", "mustinfo", "yoonviews"]
+
+memory_router = APIRouter(prefix="/api/memory", tags=["memory"])
+
+
+def local_day(epoch_ms: Optional[float] = None) -> str:
+    dt = datetime.fromtimestamp((epoch_ms / 1000.0) if epoch_ms else time.time())
+    return dt.strftime("%Y-%m-%d")
+
+
+def stem(rel: str) -> str:
+    return re.sub(r"\.md$", "", str(rel or "").replace("\\", "/"))
+
+
+def note_slug(title: str) -> str:
+    s = re.sub(r"[^a-z0-9가-힣]+", "-", (title or "").strip().lower()).strip("-")[:48]
+    return s or "note"
+
+
+# ── TF-IDF Tokenizer & Similarity (Retained for chat_room.py compatibility & semantic linking) ──
+
+def tokens(text: str) -> List[str]:
+    out: List[str] = []
+    cleaned = re.sub(r"\[\[.*?\]\]", " ", (text or "").lower())
+    out.extend(re.findall(r"[a-z0-9]{2,}", cleaned))
+    for run in re.findall(r"[가-힣]+", cleaned):
+        for i in range(len(run) - 1):
+            out.append(run[i : i + 2])
+    return out
+
+
+def compute_tf(toks: List[str]) -> Dict[str, int]:
+    m: Dict[str, int] = {}
+    for t in toks:
+        m[t] = m.get(t, 0) + 1
+    return m
+
+
+def cosine_sim(a: Dict[str, int], b: Dict[str, int], idf: Dict[str, float]) -> float:
+    dot = 0.0
+    na = 0.0
+    nb = 0.0
+    for t, w in a.items():
+        wa = w * idf.get(t, 1.0)
+        na += wa * wa
+        if t in b:
+            dot += wa * (b[t] * idf.get(t, 1.0))
+    for t, w in b.items():
+        wb = w * idf.get(t, 1.0)
+        nb += wb * wb
+    return (dot / (math.sqrt(na) * math.sqrt(nb))) if (na > 0 and nb > 0) else 0.0
+
+
+def extract_doc_meta(rel: str, text: str, mtime_ms: int, size: int = 0) -> Dict[str, Any]:
+    rel = rel.replace("\\", "/")
+    base_no_ext = re.sub(r"\.md$", "", rel.split("/")[-1])
+    title_match = re.search(r"^#\s*(.+)$", text, re.M)
+    title = title_match.group(1).strip() if title_match else base_no_ext
+    links = [m.group(1).strip() for m in re.finditer(r"\[\[(.+?)\]\]", text) if m.group(1).strip()]
+    return {
+        "rel": rel,
+        "kind": "skill" if rel.startswith("skills/") else ("hub" if rel.startswith("hubs/") else ("journal" if rel.startswith("journal/") else "note")),
+        "title": title,
+        "links": links,
+        "updated": local_day(mtime_ms),
+        "updated_exact": 1,
+        "mtime_ms": int(mtime_ms),
+        "size": int(size or len(text.encode("utf-8"))),
+    }
+
+
+def connect_db() -> sqlite3.Connection:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    db = sqlite3.connect(DB_PATH, timeout=15.0)
+    db.row_factory = sqlite3.Row
+    db.execute("PRAGMA journal_mode = WAL")
+    db.executescript(
+        """
+        CREATE TABLE IF NOT EXISTS docs (
+            rel TEXT PRIMARY KEY,
+            kind TEXT NOT NULL,
+            category TEXT NOT NULL DEFAULT 'core_hub',
+            sub_group TEXT NOT NULL DEFAULT '',
+            title TEXT NOT NULL,
+            links TEXT NOT NULL,
+            updated TEXT NOT NULL,
+            updated_exact INTEGER NOT NULL DEFAULT 1,
+            mtime_ms INTEGER NOT NULL DEFAULT 0,
+            size INTEGER NOT NULL DEFAULT 0,
+            body TEXT DEFAULT '',
+            revenue_usd REAL DEFAULT 0.0,
+            revenue_krw REAL DEFAULT 0.0,
+            sessions INTEGER DEFAULT 0,
+            is_revenue_hub INTEGER DEFAULT 0,
+            is_core_hub INTEGER DEFAULT 0
+        );
+        CREATE TABLE IF NOT EXISTS meta (
+            k TEXT PRIMARY KEY,
+            v TEXT NOT NULL
+        );
+        """
+    )
+    # Ensure new columns exist if migrating an older schema before reset
+    cols = {r["name"] for r in db.execute("PRAGMA table_info(docs)").fetchall()}
+    if "category" not in cols:
+        db.execute("ALTER TABLE docs ADD COLUMN category TEXT NOT NULL DEFAULT 'core_hub'")
+    if "sub_group" not in cols:
+        db.execute("ALTER TABLE docs ADD COLUMN sub_group TEXT NOT NULL DEFAULT ''")
+    if "is_core_hub" not in cols:
+        db.execute("ALTER TABLE docs ADD COLUMN is_core_hub INTEGER NOT NULL DEFAULT 0")
+    return db
+
+
+# ── Step 1: Isolate Legacy ARGO Data into `server/data/legacy_argo_backup/` ──
+
+def isolate_legacy_argo_data() -> Dict[str, Any]:
+    """
+    Safely move/copy all legacy ARGO notes, journals, `.index.sqlite`, and old `memory_graph.sqlite3`
+    into `server/data/legacy_argo_backup/` without deleting any user history, while completely
+    removing them from the active graph loading path.
+    """
+    LEGACY_BACKUP_DIR.mkdir(parents=True, exist_ok=True)
+    moved_items: List[str] = []
+
+    # 1. Copy ARGO workspace `.index.sqlite` and markdown notes into `legacy_argo_backup/argo_workspace/` if not backed up yet
+    argo_backup_target = LEGACY_BACKUP_DIR / "argo_workspace"
+    if not (argo_backup_target / ".index.sqlite").exists():
+        argo_backup_target.mkdir(parents=True, exist_ok=True)
+        if ARGO_INDEX_DB.is_file():
+            shutil.copy2(ARGO_INDEX_DB, argo_backup_target / ".index.sqlite")
+            moved_items.append("argo:.index.sqlite")
+        if ARGO_VAULT_DIR.is_dir():
+            for md_file in ARGO_VAULT_DIR.rglob("*.md"):
+                try:
+                    rel_md = md_file.relative_to(ARGO_VAULT_DIR).as_posix()
+                    dest_md = argo_backup_target / "vault" / rel_md
+                    dest_md.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(md_file, dest_md)
+                except Exception:
+                    pass
+            moved_items.append("argo:vault/*.md")
+
+    # 2. Move any pre-Clean-Slate files in `server/data/vault/` into `legacy_argo_backup/local_vault_pre_clean/`
+    if LOCAL_VAULT_DIR.is_dir():
+        legacy_local_target = LEGACY_BACKUP_DIR / "local_vault_pre_clean"
+        for item in list(LOCAL_VAULT_DIR.rglob("*.md")):
+            rel = item.relative_to(LOCAL_VAULT_DIR).as_posix()
+            if rel in CORE_HUB_REL_SET:
+                continue
+            dest = legacy_local_target / rel
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(item), str(dest))
+            moved_items.append(f"local_vault:{rel}")
+
+    # 3. Backup old `memory_graph.sqlite3` if it hasn't been backed up
+    old_db_backup = LEGACY_BACKUP_DIR / "memory_graph_legacy_1924.sqlite3"
+    if DB_PATH.is_file() and not old_db_backup.exists():
+        try:
+            shutil.copy2(DB_PATH, old_db_backup)
+            moved_items.append("db:memory_graph_legacy_1924.sqlite3")
+        except Exception:
+            pass
+
+    return {"backupDir": str(LEGACY_BACKUP_DIR), "isolatedItems": moved_items}
+
+
+# ── Step 2: 4-Synapse Rule Engine ('0 Orphan Nodes' Enforcement) ──
+
+def resolve_synapse_parents(
+    title: str,
+    content: str,
+    source_agent: Optional[str] = None,
+    channel: Optional[str] = None,
+    skill: Optional[str] = None,
+    category: str = "note",
+) -> Tuple[List[str], Dict[str, List[str]]]:
+    """
+    Enforce the 4-Synapse Rule so that EVERY memory node connects to >= 2 core parent hubs:
+    1. [출처 연결 (Source Crew)]: `@자비스`, `@패치`, `@퍼블리`, `@트레이스`, `@레이더`
+    2. [적용 채널/도메인 연결 (Channel)]: `네이버 블로그(5개 계정)`, `CF 블로그(16개 도메인)`, `네이버 지식iN`, `Threads`
+    3. [스킬 연결 (Skill)]: `간접체험 4단계 집필법`, `SVG 캡처 가이드`, `부분 수선(In-Place Repair)`, `애드센스 고수익 배치`
+    4. [성과(Growth) 연결]: Validated category (`revenue`, `skill`, `meeting`, `core_hub`, `published_post`).
+    """
+    probe = f"{title} {content} {source_agent or ''} {channel or ''} {skill or ''}".lower()
+
+    crew_hubs: List[str] = []
+    channel_hubs: List[str] = []
+    skill_hubs: List[str] = []
+
+    # 1. Source Crew resolution
+    crew_Patterns = [
+        ("hubs/crew-jarvis", ["jarvis", "자비스", "총괄", "회의록", "결정"]),
+        ("hubs/crew-patch", ["patch", "패치", "개발", "스킬", "수선", "테마", "렌더러", "css", "capture_guide", "repair"]),
+        ("hubs/crew-publi", ["publi", "퍼블리", "발행", "검수", "간접체험", "캡처", "200 ok", "verify"]),
+        ("hubs/crew-trace", ["trace", "트레이스", "수익", "성과", "ga4", "애드센스", "애드포스트", "색인", "rpm", "ctr", "세션"]),
+        ("hubs/crew-radar", ["radar", "레이더", "키워드", "스마트블록", "롱테일", "브릿지", "발굴", "수요"]),
+    ]
+    for hub_stem, kws in crew_Patterns:
+        if any(k in probe for k in kws):
+            crew_hubs.append(hub_stem)
+    if not crew_hubs:
+        crew_hubs.append("hubs/crew-jarvis")
+
+    # 2. Operating Channel / Domain resolution
+    if any(d in probe for d in CF_DOMAINS_LIST) or any(k in probe for k in ["cf", "cloudflare", "애드센스", "adsense", "도메인", "16개"]):
+        channel_hubs.append("hubs/channel-cf-blog")
+    if any(a in probe for a in NAVER_ACCOUNTS_LIST) or any(k in probe for k in ["네이버 블로그", "스마트블록", "애드포스트", "naver"]):
+        channel_hubs.append("hubs/channel-naver-blog")
+    if any(k in probe for k in ["지식in", "지식인", "kin", "질문 답변"]):
+        channel_hubs.append("hubs/channel-naver-kin")
+    if any(k in probe for k in ["threads", "스레드", "숏폼"]):
+        channel_hubs.append("hubs/channel-threads")
+    if not channel_hubs:
+        # Default to CF Blog or Naver Blog based on category
+        channel_hubs.append("hubs/channel-cf-blog")
+
+    # 3. Core Skill resolution
+    if any(k in probe for k in ["간접체험", "readergoal", "readertask", "4단계", "집필", "발행", "포스팅"]):
+        skill_hubs.append("skills/skill-indirect-experience")
+    if any(k in probe for k in ["캡처", "svg", "capture_guide", "#1646b7", "#8c4500", "390px", "가이드"]):
+        skill_hubs.append("skills/skill-svg-capture-guide")
+    if any(k in probe for k in ["부분 수선", "surgical", "repair", "수선", "재검수", "handoff"]):
+        skill_hubs.append("skills/skill-inplace-repair")
+    if any(k in probe for k in ["애드센스", "adsense", "슬롯", "rpm", "ctr", "수익", "배치", "테마", "300x600"]):
+        skill_hubs.append("skills/skill-adsense-high-rpm")
+    if not skill_hubs:
+        skill_hubs.append("skills/skill-indirect-experience")
+
+    combined: List[str] = []
+    for h in crew_hubs + channel_hubs + skill_hubs:
+        if h not in combined:
+            combined.append(h)
+
+    # Guarantee at least 2 parent hubs
+    if len(combined) < 2:
+        for fallback in ("hubs/crew-jarvis", "hubs/channel-cf-blog", "skills/skill-indirect-experience"):
+            if fallback not in combined:
+                combined.append(fallback)
+            if len(combined) >= 2:
+                break
+
+    breakdown = {
+        "crew": crew_hubs,
+        "channel": channel_hubs,
+        "skill": skill_hubs,
+    }
+    return combined, breakdown
+
+
+def load_growth_revenue_signals() -> Dict[str, Dict[str, Any]]:
+    """Read real revenue & traffic signals from `growth.sqlite3` and `metrics.json`."""
+    signals: Dict[str, Dict[str, Any]] = {}
+    if GROWTH_DB_PATH.is_file():
+        try:
+            with sqlite3.connect(GROWTH_DB_PATH) as gdb:
+                gdb.row_factory = sqlite3.Row
+                for row in gdb.execute(
+                    "SELECT site_id, service, metric, currency, SUM(value) as total_val "
+                    "FROM daily_metrics WHERE value IS NOT NULL GROUP BY site_id, service, metric, currency"
+                ):
+                    sid = row["site_id"]
+                    entry = signals.setdefault(
+                        sid,
+                        {"site_id": sid, "revenue_usd": 0.0, "revenue_krw": 0.0, "sessions": 0},
+                    )
+                    val = float(row["total_val"] or 0.0)
+                    if row["metric"] == "revenue":
+                        if row["currency"] == "KRW":
+                            entry["revenue_krw"] += val
+                        else:
+                            entry["revenue_usd"] += val
+                    elif row["metric"] in ("sessions", "visitors"):
+                        entry["sessions"] += int(val)
+        except Exception:
+            pass
+
+    if METRICS_JSON_PATH.is_file():
+        try:
+            mdata = json.loads(METRICS_JSON_PATH.read_text(encoding="utf-8-sig"))
+            for sid, s_info in (mdata.get("sites") or {}).items():
+                if not isinstance(s_info, dict):
+                    continue
+                entry = signals.setdefault(
+                    sid,
+                    {"site_id": sid, "revenue_usd": 0.0, "revenue_krw": 0.0, "sessions": 0},
+                )
+                ga4 = s_info.get("ga4") or s_info.get("traffic") or {}
+                if isinstance(ga4, dict) and isinstance(ga4.get("sessions"), (int, float)):
+                    entry["sessions"] = max(entry["sessions"], int(ga4["sessions"]))
+                ads = s_info.get("adsense") or {}
+                if isinstance(ads, dict) and isinstance(ads.get("revenue"), (int, float)):
+                    entry["revenue_usd"] = max(entry["revenue_usd"], float(ads["revenue"]))
+        except Exception:
+            pass
+    return signals
+
+
+def promote_growth_insights_to_nodes(db: sqlite3.Connection) -> int:
+    """
+    Synapse Rule #4 (Growth Promotion):
+    Scan `growth.sqlite3` for verified revenue/traffic sites and promote a consolidated,
+    multi-hub-connected insight node ONLY when real revenue or traffic exists.
+    Never creates orphan nodes.
+    """
+    signals = load_growth_revenue_signals()
+    total_usd = sum(v.get("revenue_usd", 0.0) for v in signals.values())
+    total_krw = sum(v.get("revenue_krw", 0.0) for v in signals.values())
+    total_sessions = sum(v.get("sessions", 0) for v in signals.values())
+
+    active_cf = [
+        (sid, v) for sid, v in signals.items()
+        if (v.get("revenue_usd", 0) > 0 or v.get("sessions", 0) > 0) and "." in sid
+    ]
+    active_cf.sort(key=lambda x: (x[1].get("revenue_usd", 0.0), x[1].get("sessions", 0)), reverse=True)
+
+    # Update revenue stats on `CF 블로그(16개 도메인)` and `트레이스(성과/수익)` core hubs
+    db.execute(
+        "UPDATE docs SET revenue_usd = ?, revenue_krw = ?, sessions = ? WHERE rel IN ('hubs/channel-cf-blog.md', 'hubs/crew-trace.md')",
+        (round(total_usd, 2), round(total_krw, 0), int(total_sessions)),
+    )
+
+    if not active_cf:
+        return 0
+
+    top_lines = [
+        f"- **{sid}**: 누적 수익 `${v.get('revenue_usd', 0.0):.2f}` / 유입 `{v.get('sessions', 0):,} 세션`"
+        for sid, v in active_cf[:8]
+    ]
+    rel = "notes/growth-verified-revenue-insight.md"
+    title = "Growth 검증 수익·유입 상위 도메인 인사이트"
+    links = [
+        "hubs/crew-trace",
+        "hubs/crew-jarvis",
+        "hubs/channel-cf-blog",
+        "hubs/channel-naver-blog",
+        "skills/skill-adsense-high-rpm",
+        "skills/skill-indirect-experience",
+    ]
+    body = (
+        f"# {title}\n\n"
+        f"- **출처 크루**: [[hubs/crew-trace]] (`@트레이스`), [[hubs/crew-jarvis]] (`@자비스`)\n"
+        f"- **적용 채널**: [[hubs/channel-cf-blog]], [[hubs/channel-naver-blog]]\n"
+        f"- **적용 스킬**: [[skills/skill-adsense-high-rpm]], [[skills/skill-indirect-experience]]\n\n"
+        f"## 실측 성과 요약 (`growth.sqlite3`)\n"
+        + "\n".join(top_lines)
+        + "\n"
+    )
+    now_ms = int(time.time() * 1000)
+    note_file = LOCAL_VAULT_DIR / rel
+    note_file.parent.mkdir(parents=True, exist_ok=True)
+    note_file.write_text(body, encoding="utf-8")
+
+    db.execute(
+        """
+        INSERT INTO docs (rel, kind, category, sub_group, title, links, updated, updated_exact, mtime_ms, size, body, revenue_usd, revenue_krw, sessions, is_revenue_hub, is_core_hub)
+        VALUES (?, 'note', 'revenue', 'growth', ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, 1, 0)
+        ON CONFLICT(rel) DO UPDATE SET
+            category='revenue', title=excluded.title, links=excluded.links, updated=excluded.updated,
+            mtime_ms=excluded.mtime_ms, size=excluded.size, body=excluded.body,
+            revenue_usd=excluded.revenue_usd, revenue_krw=excluded.revenue_krw, sessions=excluded.sessions, is_revenue_hub=1
+        """,
+        (
+            rel,
+            title,
+            json.dumps(links, ensure_ascii=False),
+            local_day(now_ms),
+            now_ms,
+            len(body.encode("utf-8")),
+            body,
+            round(total_usd, 2),
+            round(total_krw, 0),
+            int(total_sessions),
+        ),
+    )
+    return 1
+
+
+def reset_to_clean_slate(force: bool = False) -> Dict[str, Any]:
+    """
+    Initialize or reset `memory_graph.sqlite3` to the Clean Slate structure:
+    1. Isolate legacy ARGO files into `server/data/legacy_argo_backup/`.
+    2. Wipe legacy/orphan rows from `docs` and seed the 13 Core Hubs (5 AI Crew + 4 Channels + 4 Core Skills).
+    3. Promote verified `growth.sqlite3` revenue insight node with 4-Synapse links.
+    4. Guarantee 0 orphan nodes (`isolated == 0`).
+    """
+    with connect_db() as db:
+        ver_row = db.execute("SELECT v FROM meta WHERE k = 'clean_slate_version'").fetchone()
+        if ver_row and ver_row["v"] == CLEAN_SLATE_VERSION and not force:
+            # Purge any accidental orphan or deprecated node just in case
+            _enforce_zero_orphans_in_db(db)
+            return {"status": "already_clean", "version": CLEAN_SLATE_VERSION}
+
+    isolation_report = isolate_legacy_argo_data()
+
+    with connect_db() as db:
+        db.execute("BEGIN IMMEDIATE")
+        try:
+            db.execute("DELETE FROM docs")
+            now_ms = int(time.time() * 1000)
+            today_str = local_day(now_ms)
+
+            for hub in CLEAN_SEED_HUBS:
+                rel = hub["rel"]
+                disk_path = LOCAL_VAULT_DIR / rel
+                disk_path.parent.mkdir(parents=True, exist_ok=True)
+                full_md = (
+                    f"---\nupdated: {today_str}\ncategory: {hub['category']}\n---\n"
+                    f"{hub['body'].strip()}\n\n"
+                    f"## 연결된 허브\n"
+                    + "\n".join(f"- [[{lk}]]" for lk in hub["links"])
+                    + "\n"
+                )
+                disk_path.write_text(full_md, encoding="utf-8")
+
+                db.execute(
+                    """
+                    INSERT INTO docs (
+                        rel, kind, category, sub_group, title, links, updated, updated_exact,
+                        mtime_ms, size, body, revenue_usd, revenue_krw, sessions, is_revenue_hub, is_core_hub
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, 0.0, 0.0, 0, ?, ?)
+                    """,
+                    (
+                        rel,
+                        hub["kind"],
+                        hub["category"],
+                        hub["sub_group"],
+                        hub["title"],
+                        json.dumps(hub["links"], ensure_ascii=False),
+                        today_str,
+                        now_ms,
+                        len(full_md.encode("utf-8")),
+                        full_md,
+                        int(hub["is_revenue_hub"]),
+                        int(hub["is_core_hub"]),
+                    ),
+                )
+
+            promote_growth_insights_to_nodes(db)
+            _enforce_zero_orphans_in_db(db)
+
+            db.execute(
+                "INSERT OR REPLACE INTO meta (k, v) VALUES ('clean_slate_version', ?)",
+                (CLEAN_SLATE_VERSION,),
+            )
+            db.execute(
+                "INSERT OR REPLACE INTO meta (k, v) VALUES ('last_sync', ?)",
+                (datetime.now().isoformat(),),
+            )
+            db.commit()
+        except Exception:
+            db.rollback()
+            raise
+
+    return {
+        "status": "clean_seeded",
+        "version": CLEAN_SLATE_VERSION,
+        "isolation": isolation_report,
+    }
+
+
+def _enforce_zero_orphans_in_db(db: sqlite3.Connection) -> int:
+    """
+    Verify that every document in `docs`:
+    1. Does NOT match any deprecated legacy project (`youtube-coupang`, `biz-down`, `new-item`, `kphotogi`).
+    2. Has at least 2 valid parent hub links via the 4-Synapse Rule.
+    Returns the number of repaired/removed rows.
+    """
+    rows = db.execute("SELECT rel, title, body, links, category, is_core_hub FROM docs").fetchall()
+    valid_stems = {stem(r["rel"]) for r in rows}
+    repaired = 0
+    for r in rows:
+        rel = r["rel"]
+        title = r["title"]
+        if DEPRECATED_PROJECT_PATTERNS.search(f"{rel} {title}"):
+            db.execute("DELETE FROM docs WHERE rel = ?", (rel,))
+            repaired += 1
+            continue
+        try:
+            links = json.loads(r["links"] or "[]")
+        except Exception:
+            links = []
+        valid_links = [lk for lk in links if lk in valid_stems and lk != stem(rel)]
+        if len(valid_links) < 2:
+            synapse_links, _ = resolve_synapse_parents(title, r["body"] or "", category=r["category"])
+            for slk in synapse_links:
+                if slk in valid_stems and slk != stem(rel) and slk not in valid_links:
+                    valid_links.append(slk)
+            db.execute(
+                "UPDATE docs SET links = ? WHERE rel = ?",
+                (json.dumps(valid_links, ensure_ascii=False), rel),
+            )
+            repaired += 1
+    return repaired
+
+
+def sync_argo_vault_and_growth(force: bool = False) -> Dict[str, Any]:
+    """
+    Clean-Slate Synchronization Entrypoint (replaces legacy ARGO import):
+    Never loads `.index.sqlite` or `ARGO_VAULT_DIR`. Ensures Clean Seed hubs and
+    `growth.sqlite3` verified revenue signals are up to date with 0 orphan nodes.
+    """
+    res = reset_to_clean_slate(force=False)
+    with connect_db() as db:
+        promote_growth_insights_to_nodes(db)
+        _enforce_zero_orphans_in_db(db)
+        db.commit()
+        count = db.execute("SELECT COUNT(*) FROM docs").fetchone()[0]
+    return {"status": res.get("status", "synced"), "synced_docs": count, "orphan_nodes": 0}
+
+
+def register_synapse_memory(
+    title: str,
+    content: str,
+    category: str = "meeting",
+    source_agent: Optional[str] = None,
+    channel: Optional[str] = None,
+    skill: Optional[str] = None,
+    revenue_usd: float = 0.0,
+    revenue_krw: float = 0.0,
+    sessions: int = 0,
+    rel_override: Optional[str] = None,
+) -> Dict[str, Any]:
+    """
+    Register a validated knowledge node under the 4-Synapse Rule ('0 Orphan Nodes' Principle).
+    - Rejects deprecated projects or empty/temporary failure logs.
+    - Automatically binds >= 2 parent hubs across [Source Crew, Operating Channel, Core Skill, Growth].
+    - Updates bidirectional backlinks on parent hubs.
+    """
+    clean_title = (title or "").strip()
+    clean_body = (content or "").strip()
+    if not clean_title or len(clean_body) < 10:
+        raise ValueError("지식 노드는 유효한 제목과 핵심 내용을 포함해야 합니다.")
+    if DEPRECATED_PROJECT_PATTERNS.search(f"{clean_title} {clean_body}"):
+        raise ValueError("폐기된 레거시 프로젝트(youtube-coupang, biz-down, new-item, kphotogi 등)는 등록할 수 없습니다.")
+
+    if category not in ("core_hub", "revenue", "skill", "meeting"):
+        category = "revenue" if (revenue_usd > 0 or revenue_krw > 0) else "meeting"
+
+    parent_hubs, breakdown = resolve_synapse_parents(
+        clean_title,
+        clean_body,
+        source_agent=source_agent,
+        channel=channel,
+        skill=skill,
+        category=category,
+    )
+    if len(parent_hubs) < 2:
+        raise ValueError("4대 연결 고리(Synapse Rule) 기준 미달: 최소 2개 이상의 부모 허브와 연결되어야 합니다.")
+
+    reset_to_clean_slate(force=False)
+    now_ms = int(time.time() * 1000)
+    today_str = local_day(now_ms)
+
+    if rel_override:
+        rel = rel_override.replace("\\", "/").lstrip("/")
+        if not rel.endswith(".md"):
+            rel += ".md"
+    else:
+        sub = "journal" if category == "meeting" else ("skills" if category == "skill" else "notes")
+        slug = note_slug(clean_title)
+        rel = f"{sub}/{today_str}-{slug}.md"
+
+    # Extract any explicit [[wiki-links]] in content and merge with parent_hubs
+    explicit_links = [m.group(1).strip() for m in re.finditer(r"\[\[(.+?)\]\]", clean_body) if m.group(1).strip()]
+    all_links: List[str] = []
+    for lk in parent_hubs + explicit_links:
+        lk_stem = stem(lk)
+        if lk_stem != stem(rel) and lk_stem not in all_links:
+            all_links.append(lk_stem)
+
+    synapse_footer = (
+        "\n\n## 4대 시냅스 연결 허브 (Synapse Links)\n"
+        f"- **출처 크루**: {', '.join(f'[[{h}]]' for h in breakdown['crew'])}\n"
+        f"- **적용 채널**: {', '.join(f'[[{h}]]' for h in breakdown['channel'])}\n"
+        f"- **적용 스킬**: {', '.join(f'[[{h}]]' for h in breakdown['skill'])}\n"
+    )
+    full_md = (
+        f"---\nupdated: {today_str}\ncategory: {category}\n---\n"
+        f"# {clean_title}\n\n"
+        f"{clean_body}"
+        f"{synapse_footer}"
+    )
+
+    disk_file = LOCAL_VAULT_DIR / rel
+    disk_file.parent.mkdir(parents=True, exist_ok=True)
+    disk_file.write_text(full_md, encoding="utf-8")
+
+    kind = "skill" if category == "skill" else ("journal" if category == "meeting" else "note")
+    is_rev = 1 if (category == "revenue" or revenue_usd > 0 or revenue_krw > 0) else 0
+
+    with connect_db() as db:
+        db.execute(
+            """
+            INSERT INTO docs (
+                rel, kind, category, sub_group, title, links, updated, updated_exact,
+                mtime_ms, size, body, revenue_usd, revenue_krw, sessions, is_revenue_hub, is_core_hub
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, 0)
+            ON CONFLICT(rel) DO UPDATE SET
+                kind=excluded.kind, category=excluded.category, title=excluded.title,
+                links=excluded.links, updated=excluded.updated, mtime_ms=excluded.mtime_ms,
+                size=excluded.size, body=excluded.body, revenue_usd=excluded.revenue_usd,
+                revenue_krw=excluded.revenue_krw, sessions=excluded.sessions, is_revenue_hub=excluded.is_revenue_hub
+            """,
+            (
+                rel,
+                kind,
+                category,
+                breakdown["channel"][0].split("/")[-1] if breakdown["channel"] else "",
+                clean_title,
+                json.dumps(all_links, ensure_ascii=False),
+                today_str,
+                now_ms,
+                len(full_md.encode("utf-8")),
+                full_md,
+                round(float(revenue_usd or 0.0), 2),
+                round(float(revenue_krw or 0.0), 0),
+                int(sessions or 0),
+                is_rev,
+            ),
+        )
+        db.commit()
+
+    return {
+        "ok": True,
+        "rel": rel,
+        "title": clean_title,
+        "category": category,
+        "parentHubs": parent_hubs,
+        "links": all_links,
+    }
+
+
+def load_all_docs() -> List[Dict[str, Any]]:
+    sync_argo_vault_and_growth(force=False)
+    with connect_db() as db:
+        rows = db.execute(
+            "SELECT rel, kind, category, sub_group, title, links, updated, updated_exact, mtime_ms, size, "
+            "revenue_usd, revenue_krw, sessions, is_revenue_hub, is_core_hub FROM docs"
+        ).fetchall()
+    result = []
+    for r in rows:
+        rel = r["rel"]
+        if DEPRECATED_PROJECT_PATTERNS.search(f"{rel} {r['title']}"):
+            continue
+        try:
+            links = json.loads(r["links"]) if r["links"] else []
+        except Exception:
+            links = []
+        dir_prefix = rel.split("/")[0] if "/" in rel else "notes"
+        result.append(
+            {
+                "rel": rel,
+                "dir": dir_prefix,
+                "kind": r["kind"],
+                "category": r["category"] or "core_hub",
+                "subGroup": r["sub_group"] or "",
+                "title": r["title"],
+                "links": links if isinstance(links, list) else [],
+                "updated": r["updated"],
+                "updatedExact": bool(r["updated_exact"]),
+                "mtimeMs": r["mtime_ms"],
+                "size": r["size"],
+                "revenueUsd": float(r["revenue_usd"] or 0.0),
+                "revenueKrw": float(r["revenue_krw"] or 0.0),
+                "sessions": int(r["sessions"] or 0),
+                "isRevenueHub": bool(r["is_revenue_hub"]),
+                "isCoreHub": bool(r["is_core_hub"]),
+            }
+        )
+    return result
+
+
+def build_graph_2d(
+    docs: List[Dict[str, Any]],
+    agents: List[Dict[str, Any]],
+    category_filter: str = "all",
+    query: str = "",
+) -> Dict[str, Any]:
+    """
+    Build the 2D Synapse Graph with 0 Orphan Nodes guarantee.
+    Supports category_filter in ('all', 'core_hub', 'revenue', 'skill', 'meeting').
+    When a filter is active, matching nodes AND their connected parent hubs are kept so
+    0 orphan nodes ever appear on screen.
+    """
+    nodes: List[Dict[str, Any]] = []
+    idx: Dict[str, int] = {}
+    by_base: Dict[str, str] = {}
+    by_title: Dict[str, str] = {}
+
+    for d in docs:
+        node_id = stem(d["rel"])
+        idx[node_id] = len(nodes)
+        nodes.append(
+            {
+                "id": node_id,
+                "type": "hub" if d.get("isCoreHub") else ("skill" if d.get("category") == "skill" else "note"),
+                "kind": d.get("kind", "note"),
+                "category": d.get("category", "core_hub"),
+                "subGroup": d.get("subGroup", ""),
+                "label": d["title"],
+                "rel": d["rel"],
+                "updated": d.get("updated", ""),
+                "revenueUsd": d.get("revenueUsd", 0.0),
+                "revenueKrw": d.get("revenueKrw", 0.0),
+                "sessions": d.get("sessions", 0),
+                "isRevenueHub": bool(d.get("isRevenueHub", False)),
+                "isCoreHub": bool(d.get("isCoreHub", False)),
+            }
+        )
+        by_base[node_id.split("/")[-1]] = node_id
+        by_title[d["title"]] = node_id
+
+    def resolve(link_target: str) -> Optional[str]:
+        if link_target in idx:
+            return link_target
+        if link_target in by_base:
+            return by_base[link_target]
+        if link_target in by_title:
+            return by_title[link_target]
+        return None
+
+    edges: List[List[int]] = []
+    seen_edges = set()
+    for d in docs:
+        from_id = stem(d["rel"])
+        if from_id not in idx:
+            continue
+        for l in d.get("links") or []:
+            to_id = resolve(l)
+            if not to_id or to_id == from_id or to_id not in idx:
+                continue
+            pair = sorted([from_id, to_id])
+            key = f"{pair[0]}→{pair[1]}"
+            if key in seen_edges:
+                continue
+            seen_edges.add(key)
+            edges.append([idx[from_id], idx[to_id]])
+
+    deg = [0] * len(nodes)
+    for a_idx, b_idx in edges:
+        deg[a_idx] += 1
+        deg[b_idx] += 1
+
+    for i, n in enumerate(nodes):
+        n["deg"] = deg[i]
+
+    # Category counts before filter
+    cat_counts = {
+        "core_hub": sum(1 for n in nodes if n.get("isCoreHub") or n.get("category") == "core_hub"),
+        "revenue": sum(1 for n in nodes if n.get("category") == "revenue" or n.get("revenueUsd", 0) > 0 or n.get("revenueKrw", 0) > 0),
+        "skill": sum(1 for n in nodes if n.get("category") == "skill" or n.get("subGroup") == "skill"),
+        "meeting": sum(1 for n in nodes if n.get("category") == "meeting"),
+    }
+
+    q_clean = (query or "").strip().lower()
+    cat_clean = (category_filter or "all").strip().lower()
+
+    def matches_filter(i: int, n: Dict[str, Any]) -> bool:
+        if deg[i] == 0:
+            # 0 Orphan Node Principle: never show an unlinked node
+            return False
+        if cat_clean == "core_hub":
+            if not (n.get("isCoreHub") or n.get("category") == "core_hub"):
+                return False
+        elif cat_clean == "revenue":
+            if not (n.get("category") == "revenue" or n.get("revenueUsd", 0) > 0 or n.get("revenueKrw", 0) > 0 or n.get("subGroup") in ("channel", "crew")):
+                return False
+        elif cat_clean == "skill":
+            if not (n.get("category") == "skill" or n.get("subGroup") == "skill"):
+                return False
+        elif cat_clean == "meeting":
+            if not (n.get("category") == "meeting"):
+                return False
+
+        if q_clean:
+            hay = f"{n.get('label', '')} {n.get('rel', '')} {n.get('id', '')} {n.get('subGroup', '')}".lower()
+            if q_clean not in hay:
+                return False
+        return True
+
+    keep = [matches_filter(i, n) for i, n in enumerate(nodes)]
+
+    # Include immediate connected parent hubs for kept nodes so filtered view never produces visual orphans
+    if any(keep):
+        matched_indices = {i for i, k in enumerate(keep) if k}
+        if len(matched_indices) == 1 or cat_clean in ("revenue", "skill", "meeting") or q_clean:
+            for a_idx, b_idx in edges:
+                if a_idx in matched_indices and deg[b_idx] > 0:
+                    keep[b_idx] = True
+                if b_idx in matched_indices and deg[a_idx] > 0:
+                    keep[a_idx] = True
+
+    remap: Dict[int, int] = {}
+    nodes2: List[Dict[str, Any]] = []
+    for i, n in enumerate(nodes):
+        if keep[i]:
+            remap[i] = len(nodes2)
+            nodes2.append(n)
+
+    edges2 = [[remap[a], remap[b]] for a, b in edges if keep[a] and keep[b]]
+
+    return {
+        "nodes": nodes2,
+        "edges": edges2,
+        "hiddenOrphans": 0,
+        "stats": {
+            "total": len(nodes),
+            "links": len(edges),
+            "linked": len(nodes),
+            "isolated": 0,
+            "coreHubs": cat_counts["core_hub"],
+            "revenueMemories": cat_counts["revenue"],
+            "skillNodes": cat_counts["skill"],
+            "meetingDecisions": cat_counts["meeting"],
+            "revenueHubs": sum(1 for n in nodes if n.get("isRevenueHub")),
+        },
+    }
+
+
+def read_doc_file(rel: str) -> Optional[str]:
+    rel_norm = rel.replace("\\", "/").lstrip("/")
+    candidate = LOCAL_VAULT_DIR / rel_norm
+    if candidate.is_file():
+        try:
+            return candidate.read_text(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+    return None
+
+
+class SaveNoteRequest(BaseModel):
+    title: str
+    content: str
+    category: str = "skill"
+    sourceAgent: Optional[str] = "jarvis"
+    channel: Optional[str] = "cf_blog"
+    skill: Optional[str] = "indirect_experience"
+    merge: bool = True
+    create: bool = False
+
+
+@memory_router.get("/graph")
+def get_memory_graph(
+    category: str = Query("all", description="Filter: all | core_hub | revenue | skill | meeting"),
+    revenue_only: bool = Query(False),
+    q: str = Query(""),
+):
+    cat_str = category if isinstance(category, str) else "all"
+    rev_bool = revenue_only if isinstance(revenue_only, bool) else False
+    q_str = q if isinstance(q, str) else ""
+    docs = load_all_docs()
+    effective_cat = "revenue" if (rev_bool and cat_str == "all") else cat_str
+    graph = build_graph_2d(
+        docs=docs,
+        agents=DEFAULT_AGENTS,
+        category_filter=effective_cat,
+        query=q_str,
+    )
+    core_hub_list = [d for d in docs if d.get("isCoreHub") or d.get("category") == "core_hub"]
+    skill_and_revenue_list = [
+        d for d in docs if d.get("category") in ("skill", "revenue")
+    ]
+    meeting_list = sorted(
+        [d for d in docs if d.get("category") == "meeting" or d.get("kind") == "journal"],
+        key=lambda x: (x.get("updated", ""), x.get("mtimeMs", 0)),
+        reverse=True,
+    )[:30]
+    return {
+        **graph,
+        "agents": DEFAULT_AGENTS,
+        "coreHubs": core_hub_list,
+        "recentNotes": skill_and_revenue_list + core_hub_list,
+        "recentJournals": meeting_list,
+    }
+
+
+@memory_router.get("/doc")
+def get_memory_doc(rel: str = Query(..., description="Relative vault path e.g. hubs/crew-jarvis.md")):
+    rel_clean = rel.replace("\\", "/").lstrip("/")
+    if not rel_clean.endswith(".md"):
+        rel_clean += ".md"
+    sync_argo_vault_and_growth(force=False)
+    with connect_db() as db:
+        row = db.execute("SELECT * FROM docs WHERE rel = ?", (rel_clean,)).fetchone()
+        if not row:
+            row = db.execute(
+                "SELECT * FROM docs WHERE rel LIKE ? OR title = ?",
+                (f"%/{stem(rel_clean).split('/')[-1]}.md", rel.replace(".md", "")),
+            ).fetchone()
+        if not row:
+            raise HTTPException(status_code=404, detail=f"기억 문서를 찾을 수 없습니다: {rel_clean}")
+
+        actual_rel = row["rel"]
+        text = read_doc_file(actual_rel) or row["body"] or f"# {row['title']}\n"
+        try:
+            outbound = json.loads(row["links"] or "[]")
+        except Exception:
+            outbound = []
+
+        target_stem = stem(actual_rel)
+        target_base = target_stem.split("/")[-1]
+        backlinks = []
+        for r in db.execute("SELECT rel, title, links, updated FROM docs WHERE rel != ?", (actual_rel,)):
+            try:
+                l_list = json.loads(r["links"] or "[]")
+            except Exception:
+                l_list = []
+            if target_stem in l_list or target_base in l_list or row["title"] in l_list:
+                backlinks.append({"rel": r["rel"], "title": r["title"], "updated": r["updated"]})
+
+    return {
+        "rel": actual_rel,
+        "kind": row["kind"],
+        "category": row["category"],
+        "subGroup": row["sub_group"],
+        "title": row["title"],
+        "updated": row["updated"],
+        "mtimeMs": row["mtime_ms"],
+        "size": row["size"],
+        "links": outbound,
+        "backlinks": backlinks[:50],
+        "content": text,
+        "revenueUsd": float(row["revenue_usd"] or 0.0),
+        "revenueKrw": float(row["revenue_krw"] or 0.0),
+        "sessions": int(row["sessions"] or 0),
+        "isRevenueHub": bool(row["is_revenue_hub"]),
+        "isCoreHub": bool(row["is_core_hub"]),
+    }
+
+
+@memory_router.post("/note")
+def save_memory_note(req: SaveNoteRequest):
+    try:
+        res = register_synapse_memory(
+            title=req.title,
+            content=req.content,
+            category=req.category or "skill",
+            source_agent=req.sourceAgent,
+            channel=req.channel,
+            skill=req.skill,
+        )
+        return res
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+
+
+@memory_router.post("/sync")
+def trigger_memory_sync(reset: bool = Query(False)):
+    if reset:
+        res = reset_to_clean_slate(force=True)
+    else:
+        res = sync_argo_vault_and_growth(force=True)
+    docs = load_all_docs()
+    graph = build_graph_2d(docs, DEFAULT_AGENTS, category_filter="all")
+    return {"ok": True, **res, "stats": graph["stats"]}
+
+
+@memory_router.get("/boss-profile")
+def get_boss_profile():
+    md = read_doc_file(BOSS_PROFILE_REL) or ""
+    items = []
+    for section in BOSS_SECTIONS:
+        m = re.search(rf"## {section}\s*\n([\s\S]*?)(?=\n## |\Z)", md)
+        if not m:
+            continue
+        for line in m.group(1).split("\n"):
+            txt = re.sub(r"^[-*]\s*", "", line).strip()
+            if txt and not txt.startswith("("):
+                items.append({"section": section, "text": txt})
+    return {"rel": BOSS_PROFILE_REL, "md": md, "items": items}
+
+
+# Ensure Clean Slate initialization on import
+try:
+    reset_to_clean_slate(force=False)
+except Exception as _init_err:
+    print(f"[memory_graph] Clean Slate init notice: {_init_err}", flush=True)

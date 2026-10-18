@@ -1,0 +1,19 @@
+.app-project-card{padding:24px;border:1px solid #dce5ef;border-radius:14px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,.03)}
+.app-project-card h3{margin:0;font-size:20px;color:#0f172a}
+.app-project-head-badges{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.app-project-metrics{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+.app-project-metrics p{margin:0;padding:10px 14px;border-radius:9px;background:#f4f7fa;font-size:13px;font-weight:600;color:#334155;border:1px solid #e2e8f0}
+.app-project-milestones{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;list-style:none;padding:0;margin:18px 0}
+.app-project-milestones li{padding:12px 14px;border-left:4px solid #cbd5e1;border-radius:6px;background:#f8fafc}
+.app-project-milestones li.st-verified{border-left-color:#16a34a;background:#f0fdf4}
+.app-project-milestones li.st-in_progress{border-left-color:#2563eb;background:#eff6ff}
+.app-project-milestones li.st-blocked{border-left-color:#d97706;background:#fffbeb}
+.app-project-milestones strong,.app-project-milestones span,.app-project-milestones small{display:block}
+.app-project-milestones strong{font-size:13px;color:#0f172a}
+.app-project-milestones span,.app-project-milestones small{margin-top:5px;font-size:12px;line-height:1.55;color:#475569}
+.app-project-milestones small{color:#64748b;font-size:11px}
+.app-project-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid #f1f5f9}
+.app-filter-bar{display:flex;gap:6px;flex-wrap:wrap}
+.app-filter-btn{padding:6px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;color:#334155;font-size:12px;font-weight:700;cursor:pointer}
+.app-filter-btn.active{background:#0f172a;border-color:#0f172a;color:#fff}
+#app-project-list{display:grid;gap:18px}

@@ -1,0 +1,422 @@
+/* ==========================================================================
+   woorinote.kr (우리노트 법률·부동산칼럼) — 8-Architecture Independent DOM Skeleton
+   Architecture: arch2-albup | Variant: albup-deepblue-law
+   Primary: #1E3A8A | Secondary: #2563EB | Accent: #0284C7 | Bg: #F4F7FB
+   ========================================================================== */
+:root {
+  --pri: #1E3A8A !important;
+  --sec: #2563EB !important;
+  --acc: #0284C7 !important;
+  --bg: #F4F7FB !important;
+  --bg2: #EFF6FF !important;
+  --surface: #FFFFFF !important;
+  --txt: #0F172A !important;
+  --muted: #475569 !important;
+  --line: #BFDBFE !important;
+  --reading-max: 740px;
+  --card-radius: 10px;
+  --card-shadow: 0 4px 16px rgba(30, 58, 138, 0.07);
+}
+
+/* ==========================================================================
+   CLEAN PUBLIC VIEW: 100% HIDE LEGACY DUPLICATE HEADER & ADMIN BUTTONS
+   ========================================================================== */
+[data-admin],
+.admin-tools,
+.admin-only,
+.write-btn,
+.visit-strip,
+.gov-bar,
+.ov,
+.drawer,
+.mtoggle,
+.sidebar > .profile,
+.header .nav a[href="/admin"],
+header.hd .nav a[href="/admin"],
+#topActions,
+.wrap > .top,
+.wrap > .actions,
+.wrap > hr,
+main.page > .top,
+main.page > .actions,
+main.page > hr,
+#mobileOverlay,
+#mobileMenu,
+.mobile-overlay,
+.mobile-menu,
+.menu-toggle,
+.side-section,
+.side-search,
+#sideSearch,
+.sidebar .side-cat,
+.google-auto-placed,
+ins.adsbygoogle.adsbygoogle-noablate,
+ins.adsbygoogle[data-anchor-status],
+ins.adsbygoogle[data-anchor-shown],
+.google-anno-skip,
+.google-anno-sc,
+.google-aiuf,
+.goog-rentry,
+#postGrid .card ins.adsbygoogle {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+body {
+  background: var(--bg) !important;
+  color: var(--txt) !important;
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif !important;
+  line-height: 1.85 !important;
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0 !important;
+}
+
+
+/* === ARCH 2: ALBUP EXPERT COLUMN & Q&A ADVISORY (albup-deepblue-law) === */
+.albup-header-shell {
+  background: #FFFFFF;
+  border-bottom: 2px solid #1E3A8A;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+.albup-header-in {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.albup-checklist-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1E3A8A;
+  color: #FFFFFF !important;
+  font-size: 12.5px;
+  font-weight: 800;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+body[data-shell-family="arch2-albup"] .layout {
+  max-width: 980px !important;
+  margin: 24px auto 60px !important;
+  padding: 0 20px !important;
+  display: block !important;
+}
+.albup-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #475569;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  padding: 9px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+.albup-breadcrumb strong {
+  color: #1E3A8A;
+}
+.albup-profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #EFF6FF;
+  border: 1px solid #93C5FD;
+  border-left: 5px solid #1E3A8A;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 14px 0 16px;
+}
+.albup-profile-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.albup-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #1E3A8A;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.albup-stamp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFFFFF;
+  color: #1E3A8A;
+  border: 1.5px solid #1E3A8A;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.albup-summary-3line {
+  background: #F8FAFC;
+  border: 1px solid #BFDBFE;
+  border-top: 3px solid #1E3A8A;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 0 0 24px;
+}
+.albup-summary-3line h4 {
+  margin: 0 0 10px;
+  font-size: 14.5px;
+  font-weight: 900;
+  color: #1E3A8A;
+}
+.albup-summary-3line ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #0F172A;
+}
+.albup-point-badge {
+  display: inline-block;
+  background: #1E3A8A;
+  color: #FFFFFF;
+  font-family: 'Pretendard', monospace;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 3px 9px;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  letter-spacing: 0.04em;
+}
+.albup-faq-section {
+  margin: 36px 0 24px;
+  padding: 22px;
+  background: #F8FAFC;
+  border: 1px solid #BFDBFE;
+  border-radius: 12px;
+}
+.albup-faq-item {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.albup-faq-item summary {
+  padding: 14px 16px;
+  font-weight: 800;
+  font-size: 14.5px;
+  color: #0F172A;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.albup-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.albup-faq-ans {
+  padding: 0 16px 14px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #475569;
+  border-top: 1px dashed #E2E8F0;
+  padding-top: 12px;
+}
+.albup-more-columns {
+  margin: 24px 0;
+  padding: 18px 20px;
+  background: #FFFFFF;
+  border: 1px solid #BFDBFE;
+  border-radius: 10px;
+}
+
+
+/* Post Card Grid Defaults on Home */
+#postGrid.grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 20px !important;
+}
+#postGrid .card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: var(--surface) !important;
+  border: 1px solid #BFDBFE !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 16px rgba(30, 58, 138, 0.07) !important;
+  overflow: hidden !important;
+}
+#postGrid .card .thumb-empty {
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(135deg, var(--pri) 0%, var(--sec) 100%) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  padding: 18px 20px !important;
+  box-sizing: border-box !important;
+}
+
+/* Article Typography & Subheadings */
+.content, article.gs-article, article.content {
+  max-width: var(--reading-max);
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  line-height: 1.85;
+  color: var(--txt);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.main h1, article h1, main.page h1 {
+  font-family: 'Noto Serif KR', Georgia, serif !important;
+  color: var(--txt) !important;
+  letter-spacing: -0.025em;
+  line-height: 1.34 !important;
+}
+.content h2, article h2 {
+  font-family: 'Noto Serif KR', Georgia, serif;
+  color: var(--pri);
+  border-left: 4px solid #1E3A8A;
+  background: #EFF6FF;
+  padding: 12px 16px;
+  border-radius: 0 10px 10px 0;
+  margin: 34px 0 14px !important;
+  font-size: 1.32rem !important;
+  line-height: 1.45 !important;
+}
+.content h3, article h3 {
+  font-family: 'Noto Serif KR', Georgia, serif;
+  color: var(--txt);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 6px;
+  margin: 24px 0 10px !important;
+}
+
+/* AdSense 5 High-CPC Slots Integration */
+.adsense-slot {
+  position: relative;
+  width: 100%;
+  margin: 18px 0;
+  padding: 8px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-align: center;
+  overflow: hidden;
+  clear: both;
+}
+.adsense-slot--hero-below {
+  min-height: 0 !important;
+  max-height: 250px !important;
+  margin: 14px 0 22px !important;
+}
+.adsense-slot--in-article,
+.content .ad {
+  margin: 26px 0 !important;
+  min-height: 0 !important;
+  max-height: 250px !important;
+  padding: 10px !important;
+  border-top: 2px solid var(--sec) !important;
+  border-bottom: 1px solid var(--line) !important;
+  background: var(--bg) !important;
+}
+.adsense-slot--sticky-rail {
+  position: sticky !important;
+  top: 88px !important;
+  width: 100% !important;
+  max-width: 300px !important;
+  min-height: 250px !important;
+  max-height: 600px !important;
+  margin: 0 auto !important;
+  padding: 12px 10px !important;
+  background: var(--surface) !important;
+  border: 1px solid #BFDBFE !important;
+  border-top: 3px solid var(--pri) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--card-shadow) !important;
+}
+.adsense-slot--multiplex-bottom {
+  margin: 28px 0 18px !important;
+  min-height: 0 !important;
+  max-height: 260px !important;
+  padding: 12px !important;
+  border: 1px solid var(--line) !important;
+  border-top: 3px solid var(--acc) !important;
+  background: var(--surface) !important;
+}
+
+/* Indirect Experience Capture Images (`.guide-capture-img`) */
+figure.post-image {
+  margin: 26px 0 !important;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+}
+img.guide-capture-img,
+figure.post-image a[aria-label*="원본 화면 크게 보기"] img {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  border: 2px solid #1646b7 !important;
+  border-radius: 8px !important;
+}
+.brand-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 52px;
+  margin: 22px 0;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, var(--pri) 0%, var(--sec) 100%);
+  color: #ffffff !important;
+  font-family: 'Noto Serif KR', Georgia, serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  text-decoration: none !important;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 1060px) {
+  body[data-shell-family] .layout {
+    grid-template-columns: 1fr !important;
+  }
+  .wt-share-col, .wt-ranking-col, .toss-scrollspy-aside, .msdocs-tree-sidebar, .msdocs-minimap-aside, .med-clinical-sidebar {
+    display: none !important;
+  }
+  .lp-quick-info-grid, .dpg-scoreboard-box, .dpg-pros-cons-grid, .th-related-3col-grid {
+    grid-template-columns: 1fr !important;
+  }
+  body, footer {
+    padding-bottom: 70px !important;
+  }
+}

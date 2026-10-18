@@ -1,0 +1,49 @@
+{
+  "recordedAt": "2026-10-14T06:30:07.294986+00:00",
+  "artifact": {
+    "path": "bible_app\\app\\build\\outputs\\bundle\\internal\\app-internal.aab",
+    "sha256": "df627a8693816b7d483e4db6df1c3e16ec9a6ae70b38f8604bbc8a51e886fca3",
+    "bytes": 5554497,
+    "variant": "internal-preview",
+    "package": "com.barolab.harubible",
+    "versionCode": 1
+  },
+  "build": "assembleDebug testDebugUnitTest lintDebug bundleInternal assembleInternal: PASS",
+  "unitTests": {
+    "tests": 6,
+    "failures": 0,
+    "errors": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Warning": 1,
+    "Information": 0
+  },
+  "runtime": {
+    "device": "Android API36 x86_64 emulator; no physical phone",
+    "reading": "PASS including offline cold start",
+    "favorites": "PASS persistence after process restart",
+    "font": "PASS 24/30/36/42; large content scrollable",
+    "notification": "PASS denial leaves reading available; grant after landscape rotation restores pending choice; actual AlarmManager entry verified and disabled afterward",
+    "share": "PASS actual Android share sheet with verse PNG; no recipient selected",
+    "tts": "PASS installed offline Korean voice and active CONTENT_TYPE_SPEECH audio track with Wi-Fi/mobile disabled; headless audio quality not listened to",
+    "ads": "Google official Test Ad only; production IDs/UMP production message and earnings not runtime verified"
+  },
+  "screenshots": {
+    "directory": "store-assets/screenshots",
+    "dimensions": "1080x1920",
+    "method": "adb wm size followed by raw screencap PNG; no resizing/compositing",
+    "screens": [
+      "01-today-1080x1920.png",
+      "02-favorites-1080x1920.png",
+      "03-settings-1080x1920.png"
+    ]
+  },
+  "releaseGate": "verifyReleaseReadiness correctly BLOCKED with production review flags false",
+  "limitations": [
+    "No physical-device QA",
+    "No timed real notification delivery test",
+    "No production ad fill/revenue verification",
+    "No claim of public Play production release"
+  ]
+}

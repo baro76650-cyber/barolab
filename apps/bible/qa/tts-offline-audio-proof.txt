@@ -1,0 +1,2 @@
+  AudioPlaybackConfiguration piid:311 deviceIds:[2] type:android.media.AudioTrack u/pid:10150/2788 state:started attr:AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_SPEECH flags=0xA00 tags= bundle=null sessionId:393 mutedState:none  FormatInfo{isSpatialized=false, channelMask=0x1, sampleRate=24000}
+10-14 06:23:58:335 new player piid:311 uid/pid:10150/2788 package:com.google.android.tts type:android.media.AudioTrack attr:AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_SPEECH flags=0xA00 tags= bundle=null session:393

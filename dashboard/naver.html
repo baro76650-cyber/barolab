@@ -1,0 +1,2796 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>네이버 블로그 운영 대시보드 - BaroLab Master Hub</title>
+  <style>
+    :root {
+      --naver-green: #03c75a;
+      --naver-green-hover: #02b14f;
+      --naver-green-light: #e8f9ee;
+      --naver-green-border: #bbf0cb;
+      --blue: #0872ff;
+      --blue-hover: #005ce6;
+      --blue-light: #eff6ff;
+      --blue-border: #dbeafe;
+      --purple: #8b5cf6;
+      --purple-light: #f5f3ff;
+      --purple-border: #ddd6fe;
+      --orange: #f59e0b;
+      --orange-light: #fef3c7;
+      --orange-border: #fde68a;
+      --red: #ef4444;
+      --red-light: #fee2e2;
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --sidebar-bg: #0f172a;
+      --sidebar-nav-hover: #1e293b;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Layout */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: var(--sidebar-bg);
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      user-select: none;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+    }
+
+    .brand {
+      height: 64px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .brand-badge {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #0872ff, #00d2ff);
+      color: white;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 19px;
+      box-shadow: 0 2px 8px rgba(8, 114, 255, 0.4);
+    }
+    .brand-text strong {
+      font-size: 15px;
+      color: #fff;
+      display: block;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+    }
+    .brand-text span {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .nav {
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .nav-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #64748b;
+      padding: 10px 10px 4px;
+      letter-spacing: 0.5px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .nav-item:hover {
+      background: var(--sidebar-nav-hover);
+      color: #e2e8f0;
+    }
+    .nav-item.active {
+      background: var(--blue, #0872ff);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(8, 114, 255, 0.35);
+    }
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .nav-item small {
+      font-size: 10px;
+      color: inherit;
+      opacity: 0.8;
+      display: block;
+    }
+    .badge-count {
+      margin-left: auto;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.15);
+      font-weight: 700;
+    }
+
+    .sidebar-assistant {
+      margin: 10px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+    .assistant-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      color: #38bdf8;
+      font-weight: 700;
+    }
+    .assistant-quote {
+      color: #94a3b8;
+    }
+
+    .sidebar-footer {
+      padding: 12px 18px;
+      font-size: 11px;
+      color: #64748b;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Main Area */
+    .main-wrap {
+      margin-left: 240px;
+      width: calc(100% - 240px);
+      padding: 20px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--panel);
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .header-left h1 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-left p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .header-badge {
+      background: var(--naver-green-light);
+      color: #047857;
+      border: 1px solid var(--naver-green-border);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .date-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      text-align: right;
+    }
+    .date-box .clock {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0f172a;
+      font-variant-numeric: tabular-nums;
+    }
+    .date-box .tz {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .live-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--naver-green-light);
+      border: 1px solid var(--naver-green-border);
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #065f46;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--naver-green);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(3, 199, 90, 0.3);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .btn-action {
+      background: var(--naver-green);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+      box-shadow: 0 2px 6px rgba(3, 199, 90, 0.3);
+    }
+    .btn-action:hover { background: var(--naver-green-hover); }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+    .btn-secondary:hover { background: #e2e8f0; }
+
+    /* Top KPI Cards */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .summary-cards-row { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-bottom:18px; }
+    .summary-value { font-size:26px; font-weight:800; color:#2563eb; margin:10px 0; font-variant-numeric:tabular-nums; }
+    .summary-value small { font-size:14px; font-weight:400; color:#64748b; }
+    .summary-source { font-size:10px; color:#64748b; line-height:1.5; margin-top:6px; }
+    .summary-periods { display:grid; gap:7px; margin:10px 0; font-size:12px; color:#64748b; }
+    .summary-periods span { display:flex; justify-content:space-between; gap:8px; }
+    .summary-periods strong { color:#0f172a; font-variant-numeric:tabular-nums; }
+    @media (max-width:1200px) { .summary-cards-row { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:768px) {
+      .header { flex-wrap:wrap; gap:12px; }
+      .toolbar { flex-wrap:wrap; max-width:100%; }
+      .rotator-banner { flex-direction:column; align-items:flex-start; }
+      .rotator-steps { flex-wrap:wrap; max-width:100%; }
+    }
+    .kpi-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .kpi-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .kpi-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .kpi-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+    }
+    .icon-green { background: var(--naver-green-light); color: #047857; }
+    .icon-blue { background: var(--blue-light); color: var(--blue); }
+    .icon-purple { background: var(--purple-light); color: var(--purple); }
+    .icon-orange { background: var(--orange-light); color: #b45309; }
+
+    .kpi-val {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.1;
+      margin: 10px 0 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .kpi-tag {
+      font-weight: 700;
+    }
+    .tag-green { color: #059669; }
+    .tag-blue { color: var(--blue); }
+    .tag-purple { color: var(--purple); }
+
+    /* Strategy Rotator Alert Box */
+    .rotator-banner {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: var(--shadow);
+    }
+    .rotator-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .rotator-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(3, 199, 90, 0.2);
+      border: 1px solid rgba(3, 199, 90, 0.4);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+    }
+    .rotator-text h3 {
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rotator-text p {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+    .rotator-steps {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .step-chip {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #94a3b8;
+      transition: all 0.2s;
+    }
+    .step-chip.active {
+      background: var(--naver-green);
+      color: white;
+      border-color: var(--naver-green);
+      box-shadow: 0 2px 8px rgba(3, 199, 90, 0.4);
+    }
+    .step-arrow {
+      color: #64748b;
+      font-size: 12px;
+    }
+    .btn-rotate-next {
+      background: white;
+      color: #0f172a;
+      font-size: 11px;
+      font-weight: 700;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-rotate-next:hover {
+      background: #e2e8f0;
+    }
+
+    /* Simulation & Inspector Bar (CF Blog Style) */
+    .sim-bar {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+    .sim-bar-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #334155;
+    }
+    .sim-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-sim {
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: white;
+      color: #334155;
+      transition: all 0.15s;
+    }
+    .btn-sim:hover { background: #f1f5f9; }
+    .btn-sim.active {
+      background: var(--naver-green);
+      color: white;
+      border-color: var(--naver-green);
+    }
+
+    /* All-in-One Compact Table for 5 Naver Accounts (CF Blog Style) */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+    }
+    #wf-folder-path { min-width:0; flex:1; overflow-wrap:anywhere; }
+    #wf-folder-path code { white-space:normal; overflow-wrap:anywhere; }
+    #btn-wf-open-preview { flex-shrink:0; white-space:nowrap; }
+    .acc-table {
+      width: 100%;
+      min-width: 670px;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      text-align: left;
+      table-layout: fixed;
+    }
+    .acc-table th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 600;
+      padding: 7px 6px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+      font-size: 11px;
+    }
+    .acc-table td {
+      padding: 7px 6px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+      vertical-align: middle;
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .acc-table tr:last-child td { border-bottom: none; }
+    .acc-table tr:hover td { background-color: #f8fafc; }
+    .acc-table tr.selected-row td {
+      background-color: #f0fdf4 !important;
+    }
+    .acc-table tr.selected-row td:first-child {
+      border-left: 3px solid #16a34a;
+    }
+
+    .site-brand-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .site-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .site-brand-info strong {
+      font-size: 12px;
+      color: #0f172a;
+      display: block;
+      line-height: 1.2;
+    }
+    .site-brand-info small {
+      font-size: 10px;
+      color: #64748b;
+      display: block;
+    }
+
+    /* Pills (CF Blog Match) */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .pill-green { background: #dcfce7; color: #15803d; }
+    .pill-blue { background: #dbeafe; color: #1d4ed8; }
+    .pill-yellow { background: #fef3c7; color: #b45309; }
+    .pill-gray { background: #f1f5f9; color: #475569; }
+
+    .link-proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+    .link-proof:hover { opacity: 0.85; }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-box input {
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      outline: none;
+      width: 170px;
+    }
+    .search-box input:focus {
+      border-color: var(--naver-green);
+    }
+
+    /* Overall Summary Strip */
+    .quota-summary-strip {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+    .overall-progress-track {
+      width: 140px;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .overall-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #03c75a 0%, #00e060 50%, #0872ff 100%);
+      border-radius: 4px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    /* Account Detail Modal Styles */
+    .acc-modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .acc-modal-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .acc-modal-card h4 {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .acc-modal-card p, .acc-modal-card ul {
+      font-size: 11px;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .acc-modal-card ul {
+      padding-left: 16px;
+      margin: 0;
+    }
+
+    /* Main Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.85fr) minmax(320px, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+    .col-left, .col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    /* Panel Card */
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 8px;
+    }
+    .panel-head h2 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.3px;
+    }
+    .panel-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Filter Tabs */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #f1f5f9;
+      padding: 3px;
+      border-radius: 8px;
+    }
+    .btn-filter {
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-filter.active {
+      background: white;
+      color: #0f172a;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      font-weight: 700;
+    }
+
+    /* Account Cards Grid */
+    .accounts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .account-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+    .account-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: var(--shadow);
+    }
+    .account-card.real-name {
+      border-left: 4px solid var(--naver-green);
+    }
+    .account-card.non-real {
+      border-left: 4px solid var(--blue);
+    }
+    .acc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .acc-info-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .acc-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .avatar-real { background: var(--naver-green-light); color: #047857; }
+    .avatar-nonreal { background: var(--blue-light); color: var(--blue); }
+
+    .acc-titles strong {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .acc-titles span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .badge-pill {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .badge-real { background: #dcfce7; color: #15803d; }
+    .badge-cf-bridge { background: #dbeafe; color: #1e40af; }
+
+    .acc-body-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      background: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+    }
+    .acc-cell label {
+      display: block;
+      color: var(--text-muted);
+      font-size: 10px;
+      margin-bottom: 2px;
+    }
+    .acc-cell span {
+      font-weight: 700;
+      color: #1e293b;
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .acc-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 6px;
+      border-top: 1px dashed #f1f5f9;
+      font-size: 11px;
+    }
+    .acc-strat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .strat-airsearch { background: #fef3c7; color: #92400e; }
+    .strat-autocomplete { background: #e0e7ff; color: #3730a3; }
+    .strat-hijack { background: #fce7f3; color: #9d174d; }
+
+    .btn-cdp-run {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .btn-cdp-run:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    /* Strategy 3 Hub Cards */
+    .strategy-cards-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .strategy-hub-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      gap: 12px;
+      position: relative;
+    }
+    .strat-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .box-amber { background: #fef3c7; color: #b45309; }
+    .box-indigo { background: #e0e7ff; color: #4338ca; }
+    .box-rose { background: #ffe4e6; color: #e11d48; }
+
+    .strat-content {
+      flex: 1;
+    }
+    .strat-content h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .strat-content p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin: 4px 0 6px;
+      line-height: 1.4;
+    }
+    .strat-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 10px;
+      color: #64748b;
+    }
+    .strat-meta strong {
+      color: #1e293b;
+    }
+
+    /* Pipeline 5-Stage Stepper */
+    .pipeline-stepper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pipeline-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.15s;
+    }
+    .pipeline-step.completed {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #475569;
+      font-size: 11px;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+    .pipeline-step.completed .step-num {
+      background: var(--naver-green);
+      color: white;
+    }
+    .step-text {
+      flex: 1;
+    }
+    .step-text strong {
+      font-size: 12px;
+      color: #0f172a;
+      display: block;
+    }
+    .step-text span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .step-status {
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .status-ok { color: #16a34a; }
+
+    /* Live Pipeline Timeline Panel (CF Blog Style) */
+    .wf-meta-box {
+      background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 100%);
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .wf-thumb {
+      width: 58px;
+      height: 52px;
+      background: #dcfce7;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: #16a34a;
+      font-size: 20px;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid #bbf7d0;
+    }
+    .wf-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .wf-info-main { min-width: 0; flex: 1; }
+    .wf-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: #16a34a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .wf-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 2px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .wf-sub {
+      font-size: 11px;
+      color: #475569;
+    }
+
+    /* 5-Stage Live Timeline Pipeline */
+    .wf-stages {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .wf-row {
+      display: grid;
+      grid-template-columns: 46px 26px minmax(0, 1fr) 56px;
+      gap: 10px;
+      align-items: center;
+      padding: 7px 9px;
+      border-radius: 6px;
+      position: relative;
+      font-size: 11px;
+      background: #ffffff;
+      border: 1px solid #f1f5f9;
+      transition: all 0.2s;
+    }
+    .wf-row:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 69px;
+      top: 26px;
+      bottom: -10px;
+      width: 2px;
+      background: #e2e8f0;
+      z-index: 1;
+    }
+    .wf-row.st-done:not(:last-child)::after {
+      background: var(--naver-green);
+    }
+    .wf-row.st-active {
+      background: #f0fdf4;
+      border-color: #03c75a;
+      box-shadow: 0 0 0 1px #03c75a;
+      animation: pulse-active-green 2s infinite ease-in-out;
+    }
+    @keyframes pulse-active-green {
+      0%, 100% { border-color: #03c75a; background: #f0fdf4; }
+      50% { border-color: #00e060; background: #e8f9ee; }
+    }
+    .wf-row.st-wait {
+      background: #fafafa;
+      opacity: 0.88;
+    }
+    .wf-time {
+      font-size: 10px;
+      color: #64748b;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+    .wf-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #64748b;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      z-index: 2;
+    }
+    .wf-row.st-done .wf-dot {
+      background: var(--naver-green);
+      color: white;
+    }
+    .wf-row.st-active .wf-dot {
+      background: var(--naver-green);
+      color: white;
+      box-shadow: 0 0 0 4px rgba(3, 199, 90, 0.25);
+      animation: pulse-dot 1.5s infinite;
+    }
+    @keyframes pulse-dot {
+      0% { transform: scale(0.95); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(0.95); }
+    }
+    .wf-row.st-wait .wf-dot {
+      background: #f1f5f9;
+      color: #94a3b8;
+      border: 1px dashed #cbd5e1;
+    }
+    .wf-info strong {
+      font-size: 12px;
+      color: #1e293b;
+      display: block;
+      line-height: 1.2;
+    }
+    .wf-info span {
+      font-size: 10px;
+      color: #64748b;
+      display: block;
+    }
+    .wf-prog {
+      text-align: right;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .wf-row.st-done .wf-prog { color: var(--naver-green); }
+    .wf-row.st-active .wf-prog { color: #059669; }
+    .wf-row.st-wait .wf-prog { color: #94a3b8; }
+
+    .wf-callout {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 11px;
+      margin-top: 10px;
+    }
+    .wf-callout-header {
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .wf-callout-desc {
+      color: #475569;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+    .wf-callout-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 6px;
+      border-top: 1px solid #e2e8f0;
+      color: #64748b;
+      font-size: 10px;
+    }
+
+    /* CF External Bridge Panel */
+    .cf-bridge-card {
+      background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .bridge-rules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+    }
+    .rule-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #334155;
+    }
+    .rule-item span {
+      color: #059669;
+      font-weight: 800;
+    }
+
+    /* Modal / Slide-over */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+      place-items: center;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      display: grid;
+    }
+    .modal-box {
+      background: white;
+      width: 100%;
+      max-width: 780px;
+      max-height: 85vh;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .modal-head {
+      padding: 16px 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-head h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .modal-close {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: #64748b;
+      cursor: pointer;
+    }
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 1300px) {
+      .kpi-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .main-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main-wrap { margin-left: 0; width: 100%; padding: 12px; }
+      .kpi-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .acc-body-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+<link rel="stylesheet" href="traffic.css">
+<link rel="stylesheet" href="sidebar.css?v=20261017-unified-2">
+<link rel="stylesheet" href="signature_deck.css?v=20261018-stepper7-v2">
+<script src="signature_deck.js?v=20261018-stepper7-v2" defer></script>
+</head>
+<body class="control-room channel-page" data-summary-platform="naver">
+
+<div class="layout">
+  <!-- Sidebar -->
+  <aside id="barolab-sidebar" class="sidebar" aria-label="주요 메뉴"></aside>
+<script src="sidebar.js?v=20261018-no-rnd"></script>
+
+  <!-- Main Wrap -->
+  <main class="main-wrap">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1>
+          <span>네이버 블로그 운영 대시보드</span>
+          <span class="header-badge" id="naver-scheduler-badge">계정별 상태 확인 · 자동 실행 등록 여부 확인 중</span>
+        </h1>
+        <p>실명 3개(브랜드/체류) + 비실명 2개(CF 외부유입) 통합 관리 & 3대 상위노출 전략 로테이션</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="date-box">
+          <div class="clock" id="live-clock">--:--:--</div>
+          <div class="tz">KST (Asia/Seoul)</div>
+        </div>
+        <div class="live-status">
+          <span class="live-dot"></span>
+          <span id="naver-scheduler-status">자동 스케줄러 상태 확인 중</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="summary-cards-row" aria-label="네이버 운영 요약">
+      <div class="kpi-card">
+        <div class="kpi-head"><span class="kpi-title">운영 네이버 블로그</span><span>🟢</span></div>
+        <div class="summary-value">5 <small>개</small></div>
+        <div class="summary-source">주력 3개 · CF 외부유입 2개</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-head"><span class="kpi-title">오늘 공개 확인 / 목표</span><span>✓</span></div>
+        <div class="summary-value"><span id="top-kpi-quota-completed">0</span><small>편 / </small><span id="top-kpi-quota-pending" style="color:#d97706;">7</span><small>편</small></div>
+        <div class="summary-source" id="top-kpi-quota-detail">서버 공개 검증 기록 기준 · 미확인 포함</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-head"><span class="kpi-title">오늘 방문자 합계</span><span>👥</span></div>
+        <div class="summary-value" id="summary-visitors-value" style="color:#16a34a;">미수집</div>
+        <div class="summary-source" id="summary-visitors-coverage">오늘 통계 조회 중</div>
+        <div class="summary-source" id="summary-visitors-note">네이버 공개 카운터 · 블로그 간 중복 포함</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-head"><span class="kpi-title">방문 통계</span><span>📊</span></div>
+        <div class="summary-periods"><span>어제 <strong id="summary-stat-day">미수집</strong></span><span>최근 5일 누적 <strong id="summary-stat-recent">미수집</strong></span></div>
+        <div class="summary-source">최근 5일은 오늘 포함 · 일별 방문자 누적</div>
+        <div class="summary-source" id="summary-visitors-updated">원천 수집 대기</div>
+      </div>
+    </section>
+
+    <!-- 1. Strategy Rotator Black Banner (Restored & Enhanced) -->
+    <div class="rotator-banner">
+      <div class="rotator-info">
+        <div class="rotator-badge">🔄</div>
+        <div class="rotator-text">
+          <h3>
+            <span>4대 상위노출 키워드 공략 전략 로테이터 (순환 로테이션)</span>
+            <span class="header-badge" style="background: rgba(3,199,90,0.25); color: #00e060; border-color: rgba(3,199,90,0.4);">
+              현재 1순위: <span id="kpi-current-strategy">스마트블록 역추적</span>
+            </span>
+          </h3>
+          <p>포스팅 시마다 4개 전략을 1턴씩 순환 적용하여 C-Rank 지수 누적 및 네이버 AI(AiRSEARCH) 변화에 능동 대응합니다.</p>
+        </div>
+      </div>
+      <div class="rotator-steps">
+        <div class="step-chip active" id="chip-strat-1">1. 스마트블록 역추적</div>
+        <span class="step-arrow">➔</span>
+        <div class="step-chip" id="chip-strat-2">2. 자동완성·질문 롱테일</div>
+        <span class="step-arrow">➔</span>
+        <div class="step-chip" id="chip-strat-3">3. 트렌드×에버그린</div>
+        <span class="step-arrow">➔</span>
+        <div class="step-chip" id="chip-strat-4">4. D-1 타임래그 선점</div>
+        <button class="btn-rotate-next" onclick="runNextRotation()">전략 1턴 교대 ↻</button>
+      </div>
+    </div>
+
+    <!-- 2. Simulation & Account Inspector Bar (CF Blog Mechanism) -->
+    <div class="sim-bar">
+      <div class="sim-bar-title">
+        <span>🔍 네이버 계정별 워크플로우 검사기</span>
+        <span class="pill pill-green" id="sim-current-tag">선택 계정: 1호기 soultin · 상태 조회 중</span>
+      </div>
+      <div class="sim-controls">
+        <button class="btn-sim" id="btn-prev-acc" onclick="navigateAccount(-1)">◀ 이전 계정</button>
+        <button class="btn-sim active" id="btn-next-acc" onclick="navigateAccount(1)">▶ 다음 계정 선택</button>
+        <button class="btn-sim" id="btn-open-current-live" onclick="openCurrentPost()" style="background:#dcfff0; color:#047857; border-color:#86efac; font-weight:700;">
+          📄 선택 계정 글 (final.html) 열기 ↗
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Main Grid: Left=Schedule Table, Right=CF-Style Pipeline Timeline -->
+    <section class="main-grid">
+      <!-- Left Column: 5 Accounts Posting Schedule & Management Table -->
+      <div class="col-left">
+        <!-- Panel 1: 5 Accounts Schedule Overview -->
+        <section class="panel">
+          <div class="panel-head" style="align-items: flex-start;">
+            <div>
+              <h2 style="font-size: 15px; margin-bottom: 2px;">
+                <span id="naver-schedule-title">📅 오늘 공개분 · 예약 / 공개 확인</span>
+                <small style="display:block;font-weight:400">공개 날짜와 예약 작업 날짜를 분리합니다. 오전분 · 오후분은 각각 실제 예약 근거로 확인합니다.</small>
+              </h2>
+              <span class="panel-sub" id="table-panel-sub">오늘 공개분 서버 기록 조회 중</span>
+              <div id="naver-date-tabs" role="group" aria-label="공개 날짜 선택" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+                <button type="button" class="btn-filter active" id="naver-date-today" onclick="selectNaverPublicationDate(0)">오늘 공개분</button>
+                <button type="button" class="btn-filter" id="naver-date-tomorrow" onclick="selectNaverPublicationDate(1)">내일 공개 준비</button>
+              </div>
+              <small id="naver-date-rollover" style="display:block;color:#92400e"></small>
+            </div>
+            <div class="filter-bar">
+              <button class="btn-filter active" id="filter-all" onclick="filterAccountGroup('ALL')">전체 (5)</button>
+              <button class="btn-filter" id="filter-real" onclick="filterAccountGroup('REAL')">실명 (3)</button>
+              <button class="btn-filter" id="filter-nonreal" onclick="filterAccountGroup('NON_REAL')">CF 브릿지 (2)</button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="acc-table" id="account-schedule-table">
+              <thead>
+                <tr>
+                  <th style="width: 32px; text-align:center;">No</th>
+                  <th style="width: 130px;">계정 / 블로그</th>
+                  <th style="width: 115px;">공개 예정 (KST)</th>
+                  <th>공개분별 주제</th>
+                  <th style="width: 190px;">예약 / 공개 상태</th>
+                </tr>
+              </thead>
+              <tbody id="account-schedule-tbody">
+                <!-- Dynamically rendered via renderAccountTable() -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Panel 2: 3-Way Strategy Detail Hub -->
+        <section class="panel">
+          <div class="panel-head">
+            <h2>🎯 3대 상위노출 키워드 공략 상세 허브</h2>
+            <span class="panel-sub">1번씩 번갈아 가며 적용하는 실전 전략 매뉴얼</span>
+          </div>
+
+          <div class="strategy-cards-col">
+            <div class="strategy-hub-card">
+              <div class="strat-icon-box box-amber">1</div>
+              <div class="strat-content">
+                <h4>
+                  <span>스마트블록 타이틀 역추적 (AiRSEARCH 선점)</span>
+                  <span class="acc-strat-badge strat-airsearch">현재 턴 (1호기 적용)</span>
+                </h4>
+                <p>
+                  네이버 검색창에 핵심어를 쳤을 때 뜨는 스마트블록 제목(예: <code>[30대가 많이 본]</code>, <code>[실제 후기]</code>, <code>[주의점 및 비교]</code>)을 그대로 제목·소제목에 녹여냅니다.
+                </p>
+                <div class="strat-meta">
+                  <span>추천 타깃: <strong>soultin, stone0747</strong></span>
+                  <span>핵심 지표: <strong>스마트블록 1~3위 진입</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="strategy-hub-card">
+              <div class="strat-icon-box box-indigo">2</div>
+              <div class="strat-content">
+                <h4>
+                  <span>자모(ㄱ~ㅎ) 자동완성 스파이더 & 질문형 롱테일</span>
+                  <span class="acc-strat-badge strat-autocomplete">다음 턴 대기</span>
+                </h4>
+                <p>
+                  자동완성 API로 <code>키워드 + 실패이유</code>, <code>키워드 + 차이점</code> 등 지식iN/카페 질문형 어미를 조합하여 <strong>체류시간(Dwell time)</strong>을 극대화합니다.
+                </p>
+                <div class="strat-meta">
+                  <span>추천 타깃: <strong>yoon_master, adinfo0905</strong></span>
+                  <span>핵심 지표: <strong>평균 체류시간 2분 30초+</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="strategy-hub-card">
+              <div class="strat-icon-box box-rose">3</div>
+              <div class="strat-content">
+                <h4>
+                  <span>트렌드 하이재킹 × 에버그린 브릿지 (이슈+정보)</span>
+                  <span class="acc-strat-badge strat-hijack">순번 대기</span>
+                </h4>
+                <p>
+                  당일 화제 인물/방송 이슈에 패션/생활상식/건강 등 상시 정보를 브릿지하여 <strong>당일 폭발적 유입 + 영구적 롱테일 트래픽</strong>을 동시 달성합니다.
+                </p>
+                <div class="strat-meta">
+                  <span>추천 타깃: <strong>soul5373</strong></span>
+                  <span>핵심 지표: <strong>당일 급상승 + C-Rank 유지</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Column: Selected Account Live Workflow Timeline (CF Blog Mechanism) -->
+      <div class="col-right">
+        <!-- Live Workflow Timeline Panel -->
+        <section class="panel" id="naver-workflow-panel" style="border: 1px solid #bbf7d0;">
+          <div class="panel-head">
+            <h2>
+              <span>⚡ 선택 계정 실시간 6단계 워크플로우 타임라인</span>
+            </h2>
+            <span class="pill pill-green" id="wf-badge-status">예약 기록 확인 중</span>
+          </div>
+
+          <!-- Current Task Meta Box -->
+          <div class="wf-meta-box" id="wf-meta-box">
+            <div class="wf-thumb" id="wf-thumb-img">
+              🏛️
+            </div>
+            <div class="wf-info-main">
+              <span class="wf-tag" id="wf-domain-tag">1호기 SOULTIN · 5060 연금·복지 (기획 대기)</span>
+              <div class="wf-title" id="wf-meta-title">⚡ 1단계 실행 시 실시간 기획 발굴 (미정)</div>
+              <div class="wf-sub" id="wf-meta-sub">스마트블록 역추적 키워드 분석 및 실시간 AI 기획 대기</div>
+            </div>
+          </div>
+
+          <!-- 5-Stage Timeline Pipeline Container -->
+          <div class="wf-stages" id="wf-stages-container">
+            <!-- Dynamically Rendered via renderWorkflowTimeline() -->
+          </div>
+
+          <!-- Intelligence & Proof Callout Box -->
+          <div class="wf-callout">
+            <div class="wf-callout-header">
+              <span>🤖 실시간 에이전트 관제 & 산출물 검증</span>
+              <span id="wf-callout-status" style="color:#b45309; font-weight:700;">파이프라인 가동 대기 (0%)</span>
+            </div>
+            <div class="wf-callout-desc" id="wf-callout-desc">
+              1호기 soultin (시니어브리프)는 금일 신규 포스팅 워크플로우 <strong>1차 대기</strong> 상태입니다. 워크플로우를 실행하면 1단계에서 실시간으로 키워드 분석 및 포스팅 주제가 선정됩니다.
+            </div>
+            <div class="wf-callout-footer">
+              <span id="wf-folder-path">작업 폴더: <code>output/soultin/2026년-기초연금-수급자격/</code></span>
+              <a href="../naver_blog_posting/output/soultin/2026년-기초연금-수급자격/final.html" target="_blank" class="link-proof" id="btn-wf-open-preview" style="padding:4px 9px; font-size:11px; text-decoration:none; background:#ecfdf5; color:#047857; border:1px solid #86efac; font-weight:700;">
+                📄 최종 final.html 열기 ↗
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Panel 4: External CF Bridge Safety Rules -->
+        <section class="panel">
+          <div class="panel-head">
+            <h2>🔗 비실명 계정 전용 CF 외부유입 안전 가이드</h2>
+            <span class="panel-sub">어뷰징 필터 원천 차단</span>
+          </div>
+
+          <div class="cf-bridge-card">
+            <div style="font-size:12px; font-weight:700; color:#1e40af; display:flex; align-items:center; gap:6px;">
+              <span>🛡️</span>
+              <span>외부링크 삽입 3대 안전 수칙 (Must-Pick 타깃)</span>
+            </div>
+            <div class="bridge-rules-list">
+              <div class="rule-item">
+                <span>✓</span>
+                <div><strong>1. 상업성 링크 배제:</strong> 단순 광고 클릭 유도 금지, "상세 서식 및 원문 출처" 정보성 앵커로 처리</div>
+              </div>
+              <div class="rule-item">
+                <span>✓</span>
+                <div><strong>2. 링크 배치 시점:</strong> 글 도입부 절대 금지. 본문 80% 이상 읽은 뒤 추가 정보를 원하는 독자에게만 노출</div>
+              </div>
+              <div class="rule-item">
+                <span>✓</span>
+                <div><strong>3. 세션 및 IP 격리:</strong> adinfo0905는 프록시 IP(49.254.163.44) 및 CDP 9231 포트 준수</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Panel 5: Posting Checks -->
+        <section class="panel">
+          <div class="panel-head">
+            <h2>✅ 포스팅 자가 검수 조건 (v1)</h2>
+            <span class="panel-sub">guides/posting-checks.md</span>
+          </div>
+
+          <div style="font-size:11px; display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #f1f5f9;">
+              <span style="color:#64748b;">제목 최적화</span>
+              <span style="font-weight:700; color:#059669;">20~35자 / 주 키워드 전진 배치</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #f1f5f9;">
+              <span style="color:#64748b;">본문 행갈이 호흡</span>
+              <span style="font-weight:700; color:#059669;">중앙값 14자 내외 / 세로 시선</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #f1f5f9;">
+              <span style="color:#64748b;">사진 캡션 규격</span>
+              <span style="font-weight:700; color:#059669;">사진 설명｜원본 출처</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #f1f5f9;">
+              <span style="color:#64748b;">소제목 구분자</span>
+              <span style="font-weight:700; color:#059669;">의미 있는 ▼ 소제목 체계</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:4px 0;">
+              <span style="color:#64748b;">인계 경계 준수</span>
+              <span style="font-weight:700; color:#2563eb;">임시저장만 수행 (발행 미조작)</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Modal: Output Preview -->
+<div class="modal-overlay" id="preview-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modal-title">최종 조립 원고 미리보기</h3>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modal-content">
+      <div style="padding:10px; background:#eff6ff; border-radius:8px; margin-bottom:16px;">
+        <strong>📄 파일 위치:</strong> <code>naver_blog_posting/output/soultin-2026-pension-age/final.html</code><br>
+        <strong>🎯 대상 계정:</strong> 1호기 soultin (시니어브리프) · <strong>전략:</strong> 스마트블록 역추적 · <strong>서체:</strong> 나눔명조 19px
+      </div>
+      <iframe src="../naver_blog_posting/output/soultin-2026-pension-age/final.html" style="width:100%; height:520px; border:1px solid #e2e8f0; border-radius:8px;"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Guide Viewer -->
+<div class="modal-overlay" id="guide-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="guide-title">가이드 문서</h3>
+      <button class="modal-close" onclick="closeGuideModal()">×</button>
+    </div>
+    <div class="modal-body" id="guide-content"></div>
+  </div>
+</div>
+
+<!-- Modal: Account Detail Deep-Dive -->
+<div class="modal-overlay" id="acc-detail-modal">
+  <div class="modal-box" style="max-width: 680px;">
+    <div class="modal-head">
+      <h3 id="acc-modal-title">계정 상세 운영 명세서</h3>
+      <button class="modal-close" onclick="closeAccountDetail()">×</button>
+    </div>
+    <div class="modal-body" id="acc-modal-content">
+      <!-- Injected via JS openAccountDetail -->
+    </div>
+  </div>
+</div>
+
+<script src="naver_schedule.js?v=20261018-naver-7slots"></script>
+<script src="history_manager.js?v=20261017-live-sync"></script>
+<script>
+  function updateClock() {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const timeStr = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+    const el = document.getElementById('live-clock');
+    if (el) el.textContent = timeStr;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  // 4-Way Golden Keyword Strategy Rotation State
+  const strategies = [
+    { id: 1, name: "스마트블록 역추적", chipId: "chip-strat-1", desc: "네이버 AI 의도(스마트블록 타이틀) 선점형", target: "soultin, stone0747" },
+    { id: 2, name: "자동완성·질문 롱테일", chipId: "chip-strat-2", desc: "체류시간 극대화 & 질문형 어미(실패이유, 차이)", target: "yoon_master, adinfo0905" },
+    { id: 3, name: "트렌드×에버그린 브릿지", chipId: "chip-strat-3", desc: "실시간 화제 이슈 + 상시 정보(패션/법률/건강) 결합형", target: "soul5373" },
+    { id: 4, name: "D-1 타임래그 선점", chipId: "chip-strat-4", desc: "방송/정책 발표 전 사전 인덱싱 골든타임 대기형", target: "전 계정 (시의성)" }
+  ];
+  let currentStratIndex = 0;
+
+  function runNextRotation() {
+    currentStratIndex = (currentStratIndex + 1) % strategies.length;
+    const current = strategies[currentStratIndex];
+    const next = strategies[(currentStratIndex + 1) % strategies.length];
+
+    strategies.forEach((s, idx) => {
+      const chip = document.getElementById(s.chipId);
+      if (chip) {
+        if (idx === currentStratIndex) {
+          chip.classList.add('active');
+        } else {
+          chip.classList.remove('active');
+        }
+      }
+    });
+
+    const kpiCurr = document.getElementById('kpi-current-strategy');
+    const kpiNext = document.getElementById('kpi-next-strategy');
+    if (kpiCurr) kpiCurr.textContent = current.name;
+    if (kpiNext) kpiNext.textContent = `다음: ${next.name}`;
+
+    alert(`[전략 1턴 교대 완료]\n\n현재 1순위 적용 전략: [${current.name}]\n권장 타깃 계정: ${current.target}\n\n다음 턴 대기: [${next.name}]`);
+  }
+
+  // ==============================================================================
+  // Daily 7-Post Quota Management System (LocalStorage Persistence)
+  // ==============================================================================
+  const QUOTA_CONFIG = {
+    acc1: { name: "soultin", title: "시니어브리프", target: 1, type: "REAL", cooldownHours: 4 },
+    acc2: { name: "soul5373", title: "머스트팁스뷰", target: 1, type: "REAL", cooldownHours: 4 },
+    acc3: { name: "yoon_master", title: "윤뷰스", target: 1, type: "REAL", cooldownHours: 4 },
+    acc4: { name: "adinfo0905", title: "직장인루틴", target: 2, type: "BRIDGE", cooldownHours: 4 },
+    acc5: { name: "stone0747", title: "자금숲속보", target: 2, type: "BRIDGE", cooldownHours: 4 }
+  };
+
+  function getTodayKey() {
+    return `naver_quota_${getNaverDay()}`;
+  }
+
+  function getNaverDay() {
+    return new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10);
+  }
+
+  function naverStatusDate(status) {
+    const value = status.publicationDate || status.reserveTime || status.scheduleDate ||
+      (window.BaroLabHistory && window.BaroLabHistory.getNaverAccountingDate(status)) ||
+      status.date || status.scheduleDate || status.reserveTime || '';
+    return /^\d{4}-\d{2}-\d{2}/.test(value) ? value.slice(0, 10) : null;
+  }
+
+  let displayedNaverDay = getNaverDay();
+  function refreshNaverDay() {
+    const today = getNaverDay();
+    if (today === displayedNaverDay) return;
+    const previousDay = displayedNaverDay;
+    displayedNaverDay = today;
+    const notice = document.getElementById('naver-date-rollover');
+    if (notice) notice.textContent = `한국 날짜 변경 (${previousDay} → ${today}) · 선택한 오늘/내일 탭의 공개 날짜를 갱신했습니다.`;
+    updateQuotaUI();
+  }
+  setInterval(refreshNaverDay, 1000);
+  window.addEventListener('focus', refreshNaverDay);
+  window.addEventListener('pageshow', refreshNaverDay);
+  document.addEventListener('visibilitychange', refreshNaverDay);
+
+  function loadQuotaData() {
+    const key = getTodayKey();
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) { }
+    }
+    // 날짜가 바뀌면 오늘 할당량은 모두 0에서 새롭게 시작
+    return {
+      acc1: { count: 0, lastTime: null },
+      acc2: { count: 0, lastTime: null },
+      acc3: { count: 0, lastTime: null },
+      acc4: { count: 0, lastTime: null },
+      acc5: { count: 0, lastTime: null }
+    };
+  }
+
+  function saveQuotaData(data) {
+    localStorage.setItem(getTodayKey(), JSON.stringify(data));
+  }
+
+  function updateQuotaUI() {
+    syncNaverPreparation();
+    const today = getNaverDay();
+    const published = window.NaverSchedule.publications(naverScheduleSource, today);
+    const data = Object.fromEntries(NAVER_ACCOUNTS.map(acc => [acc.accId, {
+      count: published.filter(item => item.accId === acc.accId).length,
+      lastTime: null
+    }]));
+    let totalCompleted = 0;
+    let totalReserved = 0;
+    let realCompleted = 0;
+    let bridgeCompleted = 0;
+    let activeProcessingSlot = null;
+    const now = Date.now();
+
+    Object.keys(QUOTA_CONFIG).forEach(accId => {
+      const cfg = QUOTA_CONFIG[accId];
+      const accData = data[accId] || { count: 0, lastTime: null };
+      const count = accData.count;
+      const slotsToday = naverSlots({ accId }, today);
+      const reservedSlots = slotsToday.filter(s => s.state === 'reserved');
+      const processingSlot = slotsToday.find(s => s.state === 'processing');
+      if (processingSlot && !activeProcessingSlot) activeProcessingSlot = { accId, cfg, slot: processingSlot };
+      totalReserved += reservedSlots.length;
+      totalCompleted += count;
+      if (cfg.type === "REAL") realCompleted += count;
+      else bridgeCompleted += count;
+
+      // Update Card Elements
+      const countEl = document.getElementById(`count-${accId}`);
+      const barEl = document.getElementById(`bar-${accId}`);
+      const statusEl = document.getElementById(`status-${accId}`);
+      const timeEl = document.getElementById(`time-${accId}`);
+      const cardEl = document.getElementById(`card-quota-${accId}`);
+
+      if (countEl) countEl.textContent = count;
+      if (barEl) {
+        const effectiveCount = Math.max(count, reservedSlots.length);
+        const pct = processingSlot ? Math.max(15, Number(processingSlot.info?.progressPct || 15)) : Math.min(100, Math.round((effectiveCount / cfg.target) * 100));
+        barEl.style.width = `${pct}%`;
+      }
+
+      // Time & Status
+      if (count >= cfg.target) {
+        if (timeEl) timeEl.textContent='오늘 공개 검증 완료';
+        if (statusEl) { statusEl.textContent='공개 확인'; statusEl.className='acc-quota-status-pill pill-done'; }
+        if (cardEl) cardEl.classList.add('is-completed');
+      } else if (processingSlot) {
+        const pct = Number(processingSlot.info?.progressPct || 10);
+        const stName = processingSlot.info?.stageName || processingSlot.label || '실시간 작업 중';
+        if (timeEl) timeEl.textContent = `⚡ ${processingSlot.actualTime}분 · ${stName}`;
+        if (statusEl) {
+          statusEl.textContent = `⚡ 작업중 (${pct}%)`;
+          statusEl.className = "acc-quota-status-pill pill-cooldown";
+        }
+        if (cardEl) cardEl.classList.remove('is-completed');
+      } else if (reservedSlots.length > 0) {
+        const lastRes = reservedSlots[reservedSlots.length - 1];
+        if (timeEl) timeEl.textContent = `예약: 오늘 ${lastRes.actualTime} 공개 예정`;
+        if (statusEl) {
+          statusEl.textContent = `⏰ 예약완료 (${reservedSlots.length}/${cfg.target})`;
+          statusEl.className = "acc-quota-status-pill pill-done";
+        }
+        if (cardEl) cardEl.classList.remove('is-completed');
+      } else if (accData.lastTime) {
+        const lastDate = new Date(accData.lastTime);
+        const pad = n => String(n).padStart(2, '0');
+        const timeStr = `${pad(lastDate.getHours())}:${pad(lastDate.getMinutes())}`;
+        if (timeEl) timeEl.textContent = `마지막: 오늘 ${timeStr}`;
+
+        const diffMin = Math.floor((now - accData.lastTime) / (1000 * 60));
+        const cooldownMin = cfg.cooldownHours * 60;
+
+        if (count >= cfg.target) {
+          if (statusEl) {
+            statusEl.textContent = "🔒 당일 완료";
+            statusEl.className = "acc-quota-status-pill pill-done";
+          }
+          if (cardEl) cardEl.classList.add('is-completed');
+        } else if (diffMin < cooldownMin) {
+          const remainMin = cooldownMin - diffMin;
+          if (statusEl) {
+            statusEl.textContent = `⏳ 쿨다운 (${remainMin}분)`;
+            statusEl.className = "acc-quota-status-pill pill-cooldown";
+          }
+          if (cardEl) cardEl.classList.remove('is-completed');
+        } else {
+          if (statusEl) {
+            statusEl.textContent = `🟢 ${count + 1}차 발행가능`;
+            statusEl.className = "acc-quota-status-pill pill-ready";
+          }
+          if (cardEl) cardEl.classList.remove('is-completed');
+        }
+      } else {
+        if (timeEl) timeEl.textContent = "마지막: 미발행";
+        if (statusEl) {
+          statusEl.textContent = "🟢 1차 대기";
+          statusEl.className = "acc-quota-status-pill pill-ready";
+        }
+        if (cardEl) cardEl.classList.remove('is-completed');
+      }
+    });
+
+    // Update Overall Stats
+    const totalTarget = 7;
+    const totalPct = Math.min(100, Math.round((totalCompleted / totalTarget) * 100));
+
+    const totalCompletedEl = document.getElementById('quota-total-completed');
+    const totalPctEl = document.getElementById('quota-total-pct');
+    const fillEl = document.getElementById('overall-progress-fill');
+    const realStatEl = document.getElementById('quota-real-stat');
+    const bridgeStatEl = document.getElementById('quota-bridge-stat');
+    const summaryTextEl = document.getElementById('quota-summary-text');
+
+    if (totalCompletedEl) totalCompletedEl.textContent = totalCompleted;
+    if (totalPctEl) totalPctEl.textContent = `${totalPct}% 달성`;
+    if (fillEl) fillEl.style.width = `${totalPct}%`;
+    if (realStatEl) realStatEl.textContent = `${realCompleted} / 3 편`;
+    if (bridgeStatEl) bridgeStatEl.textContent = `${bridgeCompleted} / 4 편`;
+
+    if (summaryTextEl) {
+      const remain = totalTarget - totalCompleted;
+      const liveText = activeProcessingSlot ? ` · ⚡ ${activeProcessingSlot.cfg.name} (${activeProcessingSlot.slot.info?.stageName || '작업 중'} ${activeProcessingSlot.slot.info?.progressPct || 10}%)` : '';
+      const resText = totalReserved > 0 ? ` · 예약완료 ${totalReserved}편` : '';
+      if (remain > 0) {
+        summaryTextEl.textContent = `오늘 공개 검증 기록 없는 공개분 ${remain}편${resText}${liveText}`;
+      } else {
+        summaryTextEl.textContent = `오늘 7편 공개 검증 기록 확인`;
+      }
+    }
+
+    // Top Header & Sidebar & Top KPI Card Sync
+    const headerCountEl = document.getElementById('header-quota-count');
+    const headerPctEl = document.getElementById('header-quota-pct');
+    if (headerCountEl) headerCountEl.textContent = `${totalCompleted} / 7 편`;
+    if (headerPctEl) headerPctEl.textContent = activeProcessingSlot ? `⚡ ${activeProcessingSlot.cfg.name} 작업중` : (totalReserved > 0 ? `예약 ${totalReserved}편 · 공개 ${totalCompleted}편` : `${totalPct}% 달성`);
+
+    const topKpiCountEl = document.getElementById('top-kpi-quota-completed');
+    const topKpiPctEl = document.getElementById('top-kpi-quota-pct');
+    const topKpiDetailEl = document.getElementById('top-kpi-quota-detail');
+    if (topKpiCountEl) topKpiCountEl.textContent = totalCompleted;
+    const pendingKpi = document.getElementById('top-kpi-quota-pending');
+    if (pendingKpi) pendingKpi.textContent = totalTarget;
+    if (topKpiPctEl) topKpiPctEl.textContent = `${totalPct}% 달성`;
+    if (topKpiDetailEl) topKpiDetailEl.textContent = activeProcessingSlot ? `⚡ 실시간: ${activeProcessingSlot.cfg.name} (${activeProcessingSlot.slot.info?.stageName || '작업중'} ${activeProcessingSlot.slot.info?.progressPct || 10}%)` : (totalReserved > 0 ? `예약완료 ${totalReserved}편 · 서버 공개 검증 기준` : `서버 공개 검증 기록 기준 · 미확인 포함`);
+
+    const sideQuotaSumEl = document.getElementById('sidebar-quota-summary');
+    const sideQuotaBadgeEl = document.getElementById('sidebar-quota-badge');
+    if (sideQuotaSumEl) sideQuotaSumEl.textContent = `오늘 공개 확인 ${totalCompleted} / 7편`;
+    if (sideQuotaBadgeEl) sideQuotaBadgeEl.textContent = `${totalCompleted}/7`;
+
+    renderAccountTable();
+    renderWorkflowTimeline();
+  }
+
+  let selectedNaverDateOffset = 0;
+  const selectedNaverSlots = {};
+  function getNaverPublicationDate() { return NaverSchedule.viewDate(getNaverDay(), selectedNaverDateOffset); }
+  function selectNaverPublicationDate(offset) {
+    selectedNaverDateOffset = offset === 1 ? 1 : 0;
+    syncNaverPreparation();
+    renderAccountTable();
+    renderWorkflowTimeline();
+  }
+  function naverRelativeDate(date) {
+    const today = getNaverDay();
+    const yesterday = new Date(Date.parse(today+'T00:00:00Z')-86400000).toISOString().slice(0,10);
+    return (date === today ? '오늘 ' : date === NaverSchedule.nextDay(today) ? '내일 ' : date === yesterday ? '어제 ' : '')+shortNaverDate(date);
+  }
+  const naverKnownTopics = {};
+  let naverScheduleSource = null;
+  let naverJournalSource = null;
+  let naverMonitorSource = null;
+  let naverWorkflowSource = null;
+  let naverFollowedStart = null;
+  let naverScheduleError = '';
+  let naverScheduleLoaded = false;
+  function shortNaverDate(date) { return date.slice(5).replace('-', '/'); }
+  function naverSlotSummary(slot) {
+    if (slot.state === 'public') return slot.info.publicBodyMatched ? '익명 열람 · 저장된 실질 본문 일치' : '실제 공개 확인';
+    if (slot.state === 'reserved') return `${slot.actionDay ? naverRelativeDate(slot.actionDay) : '예약 작업일 미확인'} 예약 완료`;
+    return slot.label;
+  }
+  function naverSlots(acc, date = getNaverPublicationDate()) {
+    return NaverSchedule.resolve(naverScheduleSource, acc.accId, date, naverJournalSource, naverMonitorSource, Date.now(), undefined, naverWorkflowSource).map(slot => {
+      const key = `${date}:${acc.accId}:${slot.time}`;
+      if (slot.info.topic) naverKnownTopics[key] = slot.info.topic;
+      else if (naverKnownTopics[key]) slot.info = {...slot.info, topic:naverKnownTopics[key]};
+      if (!naverScheduleLoaded) slot.label = '서버 기록 조회 중';
+      else if (!naverScheduleSource && !naverJournalSource) slot.label = '서버 조회 불가 · 예약 미확인';
+      return slot;
+    });
+  }
+  function syncNaverPreparation() {
+    if (typeof NAVER_ACCOUNTS === 'undefined') return;
+    const publicationDate = getNaverPublicationDate();
+    NAVER_ACCOUNTS.forEach(acc => {
+      const list = naverSlots(acc, publicationDate);
+      const active = list.find(slot => slot.time === selectedNaverSlots[acc.accId]) || list.find(slot => slot.state === 'processing') || list.find(slot => slot.state === 'failed') || list.find(slot => slot.state === 'reserved') || list[0];
+      const info = active.info;
+      const done = ['reserved','public'].includes(active.state) && !active.revisionPending;
+      const processing = active.state === 'processing' || active.revisionActive;
+      acc.status = done ? 'done' : processing ? 'processing' : 'wait';
+      acc.statusDate = getNaverDay();
+      acc.selectedSlot = active.time;
+      acc.statusLabel = `${naverRelativeDate(publicationDate)} ${active.actualTime} 공개분 · ${active.period} ${active.label}`;
+      acc.reserveTime = `${publicationDate} ${active.actualTime}`;
+      acc.postTitle = info.topic || (active.state === 'wait' ? '주제 준비 전 · 예약 전' : '현재 작업 주제 미확인');
+      acc.postSub = `${naverRelativeDate(publicationDate)} ${active.actualTime} 공개분 · ${naverSlotSummary(active)}`;
+      const stoppedStage = !done && !processing && info.stageEvidence === true;
+      acc.currentStage = done ? 6 : processing || stoppedStage ? Number(info.currentStage || 0) : 0;
+      acc.currentStageName = info.stageName || active.label;
+      acc.progressPct = done ? 100 : processing ? Number(info.progressPct || 0) : 0;
+      acc.folderPath = info.folderPath || info.artifactFolder || '선택 공개분 작업 폴더 미확인';
+      acc.previewUrl = info.previewUrl || '';
+      acc.thumbImg = '';
+      acc.calloutText = escapeNaverText(acc.postSub + (info.failureReason ? ' · '+info.failureReason : '') + (naverScheduleError ? ' · '+naverScheduleError : ''));
+      acc.stages.forEach(stage => {
+        stage.status = done ? 'done' : acc.currentStage > stage.num ? 'done' : acc.currentStage === stage.num ? stoppedStage ? 'stopped' : 'active' : 'wait';
+        stage.time = stage.status === 'done' ? '완료 ✓' : '--:--';
+        stage.detail = stage.status === 'wait' ? '선택 공개분: 단계 실행 확인 전' : ['active','stopped'].includes(stage.status) ? escapeNaverText(info.failureReason || info.detailMessage || active.label) : '선택 공개분 작업 단계 기록';
+      });
+    });
+  }
+
+  // Cross-tab and window sync via storage event
+  window.addEventListener('storage', (e) => {
+    if (e.key === getTodayKey()) {
+      updateQuotaUI();
+    }
+  });
+
+  function recordPost(accId) {
+    const data = loadQuotaData();
+    if (!data[accId]) data[accId] = { count: 0, lastTime: null };
+    const cfg = QUOTA_CONFIG[accId];
+
+    if (!cfg || data[accId].count >= cfg.target) return;
+    if (data[accId].lastTime && Date.now() - data[accId].lastTime < cfg.cooldownHours * 3600000) return;
+    data[accId].count += 1;
+    data[accId].lastTime = Date.now();
+    saveQuotaData(data);
+    updateQuotaUI();
+
+    if (window.BaroLabHistory && window.BaroLabHistory.recordPosting) {
+      window.BaroLabHistory.recordPosting('naver', {
+        id: `${accId}_${data[accId].count}`,
+        accId: accId,
+        name: cfg ? cfg.name : accId,
+        siteTitle: cfg ? cfg.title : '',
+        category: cfg && cfg.type === 'REAL' ? '주력 정규' : '정보 브릿지',
+        schedule: `당일 ${data[accId].count}차 발행`,
+        time: new Date().toTimeString().slice(0, 5),
+        title: `${cfg ? cfg.title : accId} 당일 ${data[accId].count}차 자동 예약 발행 완료`,
+        status: '6단계 예약발행 완료'
+      });
+    }
+
+    const title = cfg ? cfg.title : accId;
+    alert(`✅ [${title}] 포스팅 1건 발행 기록 완료!\n\n현재 계정 완료수: ${data[accId].count} / ${cfg.target}편\n쿨다운 4시간 타이머가 활성화되었습니다.`);
+  }
+
+  function undoPost(accId) {
+    const data = loadQuotaData();
+    if (data[accId] && data[accId].count > 0) {
+      const removedIdx = data[accId].count;
+      data[accId].count -= 1;
+      if (data[accId].count === 0) data[accId].lastTime = null;
+      saveQuotaData(data);
+      updateQuotaUI();
+      if (window.BaroLabHistory && window.BaroLabHistory.removePosting) {
+        window.BaroLabHistory.removePosting('naver', `${accId}_${removedIdx}`);
+      }
+    }
+  }
+
+  // ==============================================================================
+  // NAVER ACCOUNTS MASTER DATA & WORKFLOW MECHANISM (CF Blog 1:1 Parity)
+  // ==============================================================================
+  const NAVER_ACCOUNTS = [
+    {
+      id: 1,
+      accId: "acc1",
+      name: "soultin",
+      siteTitle: "시니어브리프",
+      category: "국민·기초연금 · 시니어복지",
+      group: "REAL",
+      groupBadge: "실명 1일 1포",
+      icon: "🏛️",
+      color: "linear-gradient(135deg, #03c75a, #00b14f)",
+      schedule: "당일 오전 08:30 작성 ➔ 당일 19:30 공개",
+      cdpPort: "9334",
+      batPath: "C:\\99_포터블브라우저\\CentBrowserPotable_soultin\\soultin_start_cdp.bat",
+      targetUrl: "https://blog.naver.com/mustpickinfo",
+      postTitle: "⚡ 1단계 실행 시 실시간 기획 발굴 (미정)",
+      postSub: "스마트블록 역추적 키워드 분석 및 실시간 AI 기획 대기",
+      status: "wait",
+      statusLabel: "⏳ 1차 대기 (0/1)",
+      statusBadgeClass: "pill-yellow",
+      progressPct: 0,
+      currentStage: 0,
+      previewUrl: "../naver_blog_posting/output/soultin/2026년-기초연금-수급자격/final.html",
+      folderPath: "output/soultin/2026년-기초연금-수급자격/",
+      thumb: "🏛️",
+      thumbImg: "",
+      calloutText: "1호기 soultin (시니어브리프)는 금일 신규 포스팅 워크플로우 <strong>1차 대기</strong> 상태입니다. 워크플로우를 실행하면 1단계에서 실시간으로 키워드 분석 및 포스팅 주제가 선정됩니다.",
+      stages: [
+        { num: 1, name: "keyword-selector (키워드)", detail: "실시간 스마트블록 역추적 키워드 분석 및 제목 선정 대기", time: "--:--", status: "wait" },
+        { num: 2, name: "researcher (팩트 리서치)", detail: "공식 보도자료 및 연금/복지 팩트체크 데이터 추출 대기", time: "--:--", status: "wait" },
+        { num: 3, name: "writer (원고 작성)", detail: "나눔명조 호흡 & 스마트에디터 ONE 8대 블록 원고 집필 대기", time: "--:--", status: "wait" },
+        { num: 4, name: "image-maker (이미지 확보)", detail: "Google Flow(포트 9420) 실사 3컷 생성 및 워터마크 제거 대기", time: "--:--", status: "wait" },
+        { num: 5, name: "assembler (서식 조립)", detail: "스마트에디터 시각 프리뷰 (HTML & 마크다운) 조립 대기", time: "--:--", status: "wait" },
+        { num: 6, name: "reserved-publisher (예약발행)", detail: "포터블 브라우저(포트 9334) 예약발행 세팅 대기 · 공개시간은 예약 기록 참조", time: "--:--", status: "wait" }
+      ]
+    },
+    {
+      id: 2,
+      accId: "acc2",
+      name: "soul5373",
+      siteTitle: "머스트팁스뷰",
+      category: "5060 건기식 · 혈압혈당",
+      group: "REAL",
+      groupBadge: "실명 1일 1포",
+      icon: "🩺",
+      color: "linear-gradient(135deg, #0ea5e9, #0284c7)",
+      schedule: "당일 오전 09:00 작성 ➔ 당일 20:00 공개",
+      cdpPort: "9333",
+      batPath: "C:\\99_포터블브라우저\\CentBrowserPortable_soul5373\\soul5373_start_cdp.bat",
+      targetUrl: "https://blog.naver.com/mustinfo",
+      postTitle: "⚡ 1단계 실행 시 실시간 기획 발굴 (미정)",
+      postSub: "트렌드×에버그린 건강 키워드 분석 및 실시간 AI 기획 대기",
+      status: "wait",
+      statusLabel: "⏳ 1차 대기 (0/1)",
+      statusBadgeClass: "pill-yellow",
+      progressPct: 0,
+      currentStage: 0,
+      previewUrl: "../naver_blog_posting/output/soul5373/health-blood-sugar/final.html",
+      folderPath: "output/soul5373/health-blood-sugar/",
+      thumb: "🩺",
+      thumbImg: "",
+      calloutText: "2호기 soul5373 (머스트팁스뷰)는 금일 신규 포스팅 워크플로우 <strong>1차 대기</strong> 상태입니다. 워크플로우를 실행하면 1단계에서 실시간으로 키워드 분석 및 포스팅 주제가 선정됩니다.",
+      stages: [
+        { num: 1, name: "keyword-selector (키워드)", detail: "트렌드×에버그린 복합 키워드 추출 대기", time: "--:--", status: "wait" },
+        { num: 2, name: "researcher (팩트 리서치)", detail: "식약처 고시형 성분 함량 및 팩트 검증 대기", time: "--:--", status: "wait" },
+        { num: 3, name: "writer (원고 작성)", detail: "과대광고 원천배제 의학 정보 원고 작성 대기", time: "--:--", status: "wait" },
+        { num: 4, name: "image-maker (이미지 확보)", detail: "Google Flow(포트 9420) 실사 3컷 생성 및 워터마크 제거 대기", time: "--:--", status: "wait" },
+        { num: 5, name: "assembler (서식 조립)", detail: "스마트에디터 ONE 모바일 프리뷰 조립 대기", time: "--:--", status: "wait" },
+        { num: 6, name: "reserved-publisher (예약발행)", detail: "포터블 브라우저(포트 9333) 예약발행 인계 대기", time: "--:--", status: "wait" }
+      ]
+    },
+    {
+      id: 3,
+      accId: "acc3",
+      name: "yoon_master",
+      siteTitle: "윤뷰스",
+      category: "5060 데일리룩 · 리빙",
+      group: "REAL",
+      groupBadge: "실명 1일 1포",
+      icon: "✨",
+      color: "linear-gradient(135deg, #f59e0b, #d97706)",
+      schedule: "당일 오전 09:30 작성 ➔ 당일 20:30 공개",
+      cdpPort: "9335",
+      batPath: "C:\\99_포터블브라우저\\CentBrowserPotable_yoon_master\\yoon_master_start_cdp.bat",
+      targetUrl: "https://blog.naver.com/yoonviews",
+      postTitle: "⚡ 1단계 실행 시 실시간 기획 발굴 (미정)",
+      postSub: "자동완성 롱테일 라이프스타일 키워드 분석 대기",
+      status: "wait",
+      statusLabel: "⏳ 1차 대기 (0/1)",
+      statusBadgeClass: "pill-yellow",
+      progressPct: 0,
+      currentStage: 0,
+      previewUrl: "../naver_blog_posting/output/yoon_master/senior-fashion/final.html",
+      folderPath: "output/yoon_master/senior-fashion/",
+      thumb: "✨",
+      thumbImg: "",
+      calloutText: "3호기 yoon_master (윤뷰스)는 금일 신규 포스팅 워크플로우 <strong>1차 대기</strong> 상태입니다. 워크플로우를 실행하면 1단계에서 실시간으로 키워드 분석 및 포스팅 주제가 선정됩니다.",
+      stages: [
+        { num: 1, name: "keyword-selector (키워드)", detail: "시니어 패션·라이프스타일 롱테일 추출 대기", time: "--:--", status: "wait" },
+        { num: 2, name: "researcher (팩트 리서치)", detail: "시즌 트렌드 원단 및 스타일링 핏 분석 대기", time: "--:--", status: "wait" },
+        { num: 3, name: "writer (원고 작성)", detail: "1인칭 우아한 어조 & 14자 모바일 행갈이 원고 대기", time: "--:--", status: "wait" },
+        { num: 4, name: "image-maker (이미지 확보)", detail: "Google Flow(포트 9420) 실사 3컷 생성 및 워터마크 제거 대기", time: "--:--", status: "wait" },
+        { num: 5, name: "assembler (서식 조립)", detail: "스마트에디터 ONE 모바일 프리뷰 조립 대기", time: "--:--", status: "wait" },
+        { num: 6, name: "reserved-publisher (예약발행)", detail: "포터블 브라우저(포트 9335) 예약발행 인계 대기", time: "--:--", status: "wait" }
+      ]
+    },
+    {
+      id: 4,
+      accId: "acc4",
+      name: "adinfo0905",
+      siteTitle: "직장인루틴",
+      category: "업무 생산성 · 연말정산 절세",
+      group: "NON_REAL",
+      groupBadge: "비실명 1일 2포",
+      icon: "💼",
+      color: "linear-gradient(135deg, #6366f1, #4f46e5)",
+      schedule: "당일 오전 08:00·13:00 작성 ➔ 당일 11:00 / 19:00 공개",
+      cdpPort: "9231 (고정IP)",
+      batPath: "C:\\99_포터블브라우저\\CentBrowserPotable_adinfo0905\\adinfo0905_start_cdp.bat",
+      targetUrl: "https://blog.naver.com/adinfo0905",
+      postTitle: "⚡ 1단계 실행 시 실시간 기획 발굴 (미정)",
+      postSub: "직장인 서식/절세 롱테일 및 외부유입 브릿지 분석 대기",
+      status: "wait",
+      statusLabel: "⏳ 1차 대기 (0/2)",
+      statusBadgeClass: "pill-yellow",
+      progressPct: 0,
+      currentStage: 0,
+      previewUrl: "../naver_blog_posting/output/adinfo0905/year-end-tax/final.html",
+      folderPath: "output/adinfo0905/year-end-tax/",
+      thumb: "💼",
+      thumbImg: "",
+      calloutText: "4호기 adinfo0905 (직장인루틴)는 <strong>비실명 외부유입 브릿지 계정</strong>입니다. 워크플로우를 실행하면 1단계에서 실시간으로 키워드 분석 및 포스팅 주제가 선정됩니다.",
+      stages: [
+        { num: 1, name: "keyword-selector (키워드)", detail: "직장인 서식/절세 질문형 롱테일 추출 대기", time: "--:--", status: "wait" },
+        { num: 2, name: "researcher (팩트 리서치)", detail: "최신 세무·업무 규정 및 엑셀 수식 검증 대기", time: "--:--", status: "wait" },
+        { num: 3, name: "writer (원고 작성)", detail: "본문 85% 지점 Must-Pick 서식 앵커 브릿지 대기", time: "--:--", status: "wait" },
+        { num: 4, name: "image-maker (이미지 확보)", detail: "Google Flow(포트 9420) 실사 3컷 생성 및 워터마크 제거 대기", time: "--:--", status: "wait" },
+        { num: 5, name: "assembler (서식 조립)", detail: "스마트에디터 ONE 안전 서식 조립 대기", time: "--:--", status: "wait" },
+        { num: 6, name: "reserved-publisher (예약발행)", detail: "지정 CDP 9231 예약발행 인계 대기", time: "--:--", status: "wait" }
+      ]
+    },
+    {
+      id: 5,
+      accId: "acc5",
+      name: "stone0747",
+      siteTitle: "자금숲속보",
+      category: "소상공인 지원금 · 생활세무",
+      group: "NON_REAL",
+      groupBadge: "비실명 1일 2포",
+      icon: "📢",
+      color: "linear-gradient(135deg, #ec4899, #db2777)",
+      schedule: "당일 오전 08:15·13:30 작성 ➔ 당일 11:00 / 19:00 공개",
+      cdpPort: "9230",
+      batPath: "C:\\99_포터블브라우저\\CentBrowserPotable_stone0747\\stone0747_start_cdp.bat",
+      targetUrl: "https://blog.naver.com/stone0747",
+      postTitle: "⚡ 1단계 실행 시 실시간 기획 발굴 (미정)",
+      postSub: "D-1 타임래그 선점 지원금 키워드 분석 대기",
+      status: "wait",
+      statusLabel: "⏳ 1차 대기 (0/2)",
+      statusBadgeClass: "pill-yellow",
+      progressPct: 0,
+      currentStage: 0,
+      previewUrl: "../naver_blog_posting/output/stone0747/gov-subsidy/final.html",
+      folderPath: "output/stone0747/gov-subsidy/",
+      thumb: "📢",
+      thumbImg: "",
+      calloutText: "5호기 stone0747 (자금숲속보)는 <strong>소상공인 정책지원금 브릿지 계정</strong>입니다. 워크플로우를 실행하면 1단계에서 실시간으로 키워드 분석 및 포스팅 주제가 선정됩니다.",
+      stages: [
+        { num: 1, name: "keyword-selector (키워드)", detail: "지원금 마감 직전 급상승 검색어 추출 대기", time: "--:--", status: "wait" },
+        { num: 2, name: "researcher (팩트 리서치)", detail: "중기부·지자체 공고문 지원 대상·서류 검증 대기", time: "--:--", status: "wait" },
+        { num: 3, name: "writer (원고 작성)", detail: "핵심 3요소 표 요약 & 신청 링크 브릿지 대기", time: "--:--", status: "wait" },
+        { num: 4, name: "image-maker (이미지 확보)", detail: "Google Flow(포트 9420) 실사 3컷 생성 및 워터마크 제거 대기", time: "--:--", status: "wait" },
+        { num: 5, name: "assembler (서식 조립)", detail: "스마트에디터 ONE 안전 서식 조립 대기", time: "--:--", status: "wait" },
+        { num: 6, name: "reserved-publisher (예약발행)", detail: "지정 CDP 9230 예약발행 인계 대기", time: "--:--", status: "wait" }
+      ]
+    }
+  ];
+
+  let selectedAccountIndex = 0;
+  let currentGroupFilter = 'ALL';
+
+  function renderAccountTable() {
+    const tbody = document.getElementById('account-schedule-tbody');
+    if (!tbody) return;
+    const today = getNaverDay(), tomorrow = NaverSchedule.nextDay(today), publicationDate = getNaverPublicationDate();
+    const countFor = date => NAVER_ACCOUNTS.flatMap(acc => naverSlots(acc,date));
+    const counts = list => ({reserved:list.filter(slot => ['reserved','public'].includes(slot.state)).length, published:list.filter(slot => slot.state === 'public').length});
+    const todayCounts = counts(countFor(today)), tomorrowCounts = counts(countFor(tomorrow));
+    const selectedCounts = publicationDate === today ? todayCounts : tomorrowCounts;
+    const title = document.getElementById('naver-schedule-title');
+    if (title) title.textContent = `📅 ${naverRelativeDate(publicationDate)} 공개분 · 예약 / 공개 확인 (실명 3×1포 + 비실명 2×2포 = 총 7편)`;
+    for (const [id,date,value,offset] of [['naver-date-today',today,todayCounts,0],['naver-date-tomorrow',tomorrow,tomorrowCounts,1]]) {
+      const tab = document.getElementById(id);
+      if (tab) { tab.classList.toggle('active', selectedNaverDateOffset === offset); tab.setAttribute('aria-pressed',String(selectedNaverDateOffset === offset)); tab.textContent = `${offset === 0 ? '오늘' : '내일'} ${shortNaverDate(date)} ${offset === 0 ? '공개분' : '예약분'} · ${!naverScheduleLoaded ? '조회 중' : !naverScheduleSource && !naverJournalSource ? '집계 미확인' : '예약 '+value.reserved+'/7'}`; }
+    }
+    const html = [];
+    NAVER_ACCOUNTS.forEach((acc, idx) => {
+      const list = naverSlots(acc, publicationDate);
+      if (currentGroupFilter !== 'ALL' && acc.group !== currentGroupFilter) return;
+      list.forEach((slot, i) => {
+        const color = ['reserved','public'].includes(slot.state) ? '#15803d' : slot.state === 'failed' ? '#b91c1c' : slot.state === 'processing' ? '#1d4ed8' : '#92400e';
+        html.push(`<tr class="tbl-acc-row ${idx === selectedAccountIndex && slot.time === acc.selectedSlot ? 'selected-row' : ''}" data-account-index="${idx}" data-slot="${slot.time}" style="cursor:pointer">
+          ${i === 0 ? `<td rowspan="${list.length}" style="text-align:center">${acc.id}</td><td rowspan="${list.length}" style="white-space:normal"><strong>${escapeNaverText(({acc1:"mustpickinfo",acc2:"mustinfo",acc3:"yoonviews",acc4:"adinfo0905",acc5:"stone0747"})[acc.accId])}</strong><small style="display:block">${escapeNaverText(acc.siteTitle)}</small><small style="display:block;color:#64748b">${acc.group === 'REAL' ? '실명 · 일 1편' : 'CF 브릿지 · 일 2편'}</small></td>` : ''}
+          <td style="white-space:normal"><strong>${naverRelativeDate(publicationDate)}</strong><small style="display:block;font-size:11.5px;color:#0f172a;font-weight:700">${escapeNaverText(slot.scheduleTransition || (slot.actualTime+' 공개분'))}</small><small>${slot.period}${slot.actualTime !== slot.time ? ' (원래 '+slot.time+')' : ''}</small></td>
+          <td style="white-space:normal;overflow-wrap:anywhere;line-height:1.6">${escapeNaverText(slot.info.topic || (slot.state === 'wait' ? '주제 근거 미확인' : '현재 작업 주제 미확인'))}<small style="display:block;color:#64748b">${escapeNaverText(slot.track || acc.category)}</small></td>
+          <td style="white-space:normal;line-height:1.7"><strong style="color:${color}">${slot.period} ${escapeNaverText(slot.label)}</strong><small style="display:block">${escapeNaverText(naverSlotSummary(slot))}</small><small style="display:block;color:#64748b">${slot.state === 'reserved' ? '예약 근거 확인 · 공개 시각 도달 시 자동 🟢공개완료 승격' : slot.state === 'public' ? '실제 공개 근거 확인' : '선택 공개분의 서버 작업 기록 기준'}</small>${slot.state === 'public' && NaverSchedule.publicVerified(slot.info) ? `<a href="https://blog.naver.com/${NaverSchedule.publicKey(slot.info.publicUrl)}" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#0872ff" onclick="event.stopPropagation()">공개 글 보기 ↗</a>` : ''}</td>
+        </tr>`);
+      });
+    });
+    tbody.innerHTML = html.join('');
+    tbody.querySelectorAll('[data-account-index]').forEach(row => row.onclick = () => selectAccount(Number(row.dataset.accountIndex),row.dataset.slot));
+    const sub = document.getElementById('table-panel-sub');
+    if (sub) sub.textContent = `${publicationDate} (KST) 공개분 · ` + (!naverScheduleLoaded ? '서버 기록 조회 중' : !naverScheduleSource && !naverJournalSource ? '예약 / 공개 집계 미확인' : `예약 근거 확인 ${selectedCounts.reserved}/10편 · 실제 공개 확인 ${selectedCounts.published}/10편`) + (naverScheduleError ? ' · '+naverScheduleError : '');
+  }
+
+  function selectAccount(index, slot) {
+    selectedAccountIndex = index;
+    if (slot) selectedNaverSlots[NAVER_ACCOUNTS[index].accId] = slot;
+    syncNaverPreparation();
+    renderAccountTable();
+    renderWorkflowTimeline();
+  }
+
+  function navigateAccount(delta) {
+    selectedAccountIndex = (selectedAccountIndex + delta + NAVER_ACCOUNTS.length) % NAVER_ACCOUNTS.length;
+    syncNaverPreparation();
+    renderAccountTable();
+    renderWorkflowTimeline();
+  }
+
+  function followStartedNaverWorkflow() {
+    const candidate = NaverSchedule.activeWorkflow(naverWorkflowSource, naverJournalSource, naverMonitorSource);
+    const action = NaverSchedule.consumeStart(candidate, naverFollowedStart, getNaverDay());
+    if (!action) return false;
+    const index = NAVER_ACCOUNTS.findIndex(acc => acc.accId === action.accId);
+    if (index < 0) return false;
+    naverFollowedStart = action;
+    selectedAccountIndex = index;
+    selectedNaverDateOffset = action.dateOffset;
+    selectedNaverSlots[action.accId] = action.scheduledSlot;
+    currentGroupFilter = 'ALL';
+    ['all','real','nonreal'].forEach(group => document.getElementById('filter-'+group)?.classList.toggle('active',group === 'all'));
+    requestAnimationFrame(() => document.getElementById('naver-workflow-panel')?.scrollIntoView({behavior:'smooth',block:'nearest'}));
+    return true;
+  }
+
+  function renderWorkflowTimeline() {
+    const acc = NAVER_ACCOUNTS[selectedAccountIndex];
+    if (!acc) return;
+
+    // 1. Sim Bar tag
+    const simTag = document.getElementById('sim-current-tag');
+    if (simTag) {
+      if (acc.status === 'done') {
+        simTag.className = 'pill pill-green';
+        simTag.style.background = '#dcfce7';
+        simTag.style.color = '#15803d';
+        simTag.textContent = `선택 계정: ${acc.id}호기 ${acc.name} (${acc.siteTitle}) · ${acc.statusLabel || '예약 기록 있음 · 공개시간 미확인'}`;
+      } else if (acc.status === 'processing') {
+        simTag.className = 'pill pill-blue';
+        simTag.style.background = '#dbeafe';
+        simTag.style.color = '#1d4ed8';
+        simTag.textContent = `선택 계정: ${acc.name} · ${acc.statusLabel}`;
+      } else {
+        simTag.className = 'pill pill-yellow';
+        simTag.style.background = '#fef3c7';
+        simTag.style.color = '#b45309';
+        simTag.textContent = `선택 계정: ${acc.name} · ${acc.statusLabel}`;
+      }
+    }
+
+    // 2. Right Panel Header Badge
+    const badgeStatus = document.getElementById('wf-badge-status');
+    if (badgeStatus) {
+      if (acc.status === 'done') {
+        badgeStatus.className = 'pill pill-green';
+        badgeStatus.style.background = '#dcfce7';
+        badgeStatus.style.color = '#15803d';
+        badgeStatus.textContent = acc.statusLabel;
+      } else if (acc.status === 'processing') {
+        badgeStatus.className = 'pill pill-blue';
+        badgeStatus.style.background = '#dbeafe';
+        badgeStatus.style.color = '#1d4ed8';
+        badgeStatus.textContent = acc.statusLabel;
+      } else {
+        badgeStatus.className = 'pill pill-yellow';
+        badgeStatus.style.background = '#fef3c7';
+        badgeStatus.style.color = '#b45309';
+        badgeStatus.textContent = acc.statusLabel;
+      }
+    }
+
+    // 3. Meta Box
+    const thumbImg = document.getElementById('wf-thumb-img');
+    if (thumbImg) {
+      if (acc.thumbImg) {
+        thumbImg.innerHTML = `<img src="${acc.thumbImg}" alt="thumbnail" onerror="this.onerror=null; this.parentElement.textContent='${acc.thumb}'">`;
+      } else {
+        thumbImg.textContent = acc.thumb;
+      }
+    }
+
+    const domainTag = document.getElementById('wf-domain-tag');
+    if (domainTag) domainTag.textContent = `${acc.id}호기 ${acc.name.toUpperCase()} · ${acc.category}`;
+
+    const metaTitle = document.getElementById('wf-meta-title');
+    if (metaTitle) metaTitle.textContent = acc.postTitle;
+
+    const metaSub = document.getElementById('wf-meta-sub');
+    if (metaSub) metaSub.textContent = acc.postSub;
+
+    // 4. Stages Container
+    const stagesContainer = document.getElementById('wf-stages-container');
+    if (stagesContainer) {
+      stagesContainer.innerHTML = '';
+      acc.stages.forEach(st => {
+        const row = document.createElement('div');
+        if (st.status === 'done') {
+          row.className = 'wf-row st-done';
+          row.innerHTML = `
+            <span class="wf-time">${st.time}</span>
+            <div class="wf-dot" style="background:#03c75a; color:#fff;">✓</div>
+            <div class="wf-info">
+              <strong>${st.name}</strong>
+              <span>${st.detail}</span>
+            </div>
+            <span class="wf-prog" style="color:#03c75a; font-weight:700;">완료 ✓</span>
+          `;
+        } else if (st.status === 'active') {
+          row.className = 'wf-row st-active';
+          row.innerHTML = `
+            <span class="wf-time" style="color:#03c75a; font-weight:700;">실시간</span>
+            <div class="wf-dot">⚡</div>
+            <div class="wf-info">
+              <strong style="color:#047857;">${st.name} (실행 중)</strong>
+              <span style="color:#059669; font-weight:600;">${st.detail}</span>
+            </div>
+            <span class="wf-prog" style="color:#047857; font-weight:700;">진행중</span>
+          `;
+        } else if (st.status === 'stopped') {
+          row.className = 'wf-row st-wait';
+          row.innerHTML = `<span class="wf-time">중단</span><div class="wf-dot" style="color:#b45309;">!</div>
+            <div class="wf-info"><strong>${st.name}</strong><span>${st.detail}</span></div>
+            <span class="wf-prog" style="color:#b45309;">확인 필요</span>`;
+        } else {
+          row.className = 'wf-row st-wait';
+          row.innerHTML = `
+            <span class="wf-time">--:--</span>
+            <div class="wf-dot">${st.num}</div>
+            <div class="wf-info">
+              <strong>${st.name}</strong>
+              <span>${st.detail}</span>
+            </div>
+            <span class="wf-prog">대기</span>
+          `;
+        }
+        stagesContainer.appendChild(row);
+      });
+    }
+
+    // 5. Callout Box
+    const calloutStatus = document.getElementById('wf-callout-status');
+    if (calloutStatus) { calloutStatus.textContent = acc.statusLabel; calloutStatus.style.color = acc.status === 'done' ? '#15803d' : '#92400e'; }
+    const calloutDesc = document.getElementById('wf-callout-desc');
+    if (calloutDesc) {
+      if (acc.status === 'done') calloutDesc.textContent = acc.statusLabel;
+      else calloutDesc.innerHTML = acc.calloutText;
+    }
+
+    const folderPath = document.getElementById('wf-folder-path');
+    if (folderPath) folderPath.innerHTML = `작업 폴더: <code>${escapeNaverText(acc.folderPath)}</code>`;
+
+    const btnPreview = document.getElementById('btn-wf-open-preview');
+    if (btnPreview) {
+      const selected = naverSlots(acc).find(slot => slot.time === acc.selectedSlot);
+      if (selected?.state === 'public' && NaverSchedule.publicVerified(selected.info)) {
+        btnPreview.style.display = 'inline-flex';
+        btnPreview.onclick = null;
+        btnPreview.href = 'https://blog.naver.com/' + NaverSchedule.publicKey(selected.info.publicUrl);
+        btnPreview.target = '_blank';
+        btnPreview.rel = 'noopener noreferrer';
+        btnPreview.removeAttribute('aria-disabled');
+        btnPreview.textContent = '공개 글 보기 ↗';
+      } else {
+        btnPreview.style.display = 'inline-flex';
+        btnPreview.href = '#';
+        btnPreview.setAttribute('aria-disabled','true');
+        btnPreview.onclick = event => event.preventDefault();
+        btnPreview.textContent = '공개 글 확인 대기';
+      }
+    }
+  }
+
+  function openCurrentPost() {
+    const acc = NAVER_ACCOUNTS[selectedAccountIndex];
+    if (acc && acc.previewUrl) {
+      window.open(acc.previewUrl, '_blank');
+    } else if (acc) {
+      alert(`[${acc.name}]는 가동 대기 중입니다.\n파이프라인 실행 시 final.html이 생성됩니다.`);
+    }
+  }
+
+  function filterAccountGroup(group) {
+    currentGroupFilter = group;
+    document.querySelectorAll('.filter-bar .btn-filter').forEach(btn => btn.classList.remove('active'));
+    if (group === 'ALL') {
+      const el = document.getElementById('filter-all');
+      if (el) el.classList.add('active');
+    } else if (group === 'REAL') {
+      const el = document.getElementById('filter-real');
+      if (el) el.classList.add('active');
+    } else if (group === 'NON_REAL') {
+      const el = document.getElementById('filter-nonreal');
+      if (el) el.classList.add('active');
+    }
+    renderAccountTable();
+  }
+
+  // Initialize table, timeline, and quota on load
+  updateQuotaUI();
+  renderAccountTable();
+  renderWorkflowTimeline();
+
+  function escapeNaverText(value) {
+    return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
+  }
+
+  // Live Status Poller from dashboard/pipeline_status.js (CF Blog 1:1 Engine)
+
+  function renderNaverScheduler(scheduler, now = Date.now()) {
+    const badge = document.getElementById('naver-scheduler-badge');
+    const status = document.getElementById('naver-scheduler-status');
+    const checked = Date.parse(scheduler?.checkedAt || '');
+    const fresh = Number.isFinite(checked) && checked <= now + 60000 && now - checked <= 10 * 60 * 1000;
+    let label = '등록·활성 여부 미확인';
+    if (fresh && scheduler.registered === false) label = '자동 실행 미등록';
+    else if (fresh && scheduler.registered === true) {
+      label = scheduler.enabled === true ? '자동 실행 등록 · 활성' : scheduler.enabled === false ? '자동 실행 등록 · 비활성' : '자동 실행 등록 · 활성 여부 미확인';
+      if (scheduler.enabled === true && scheduler.state === 'Running') label += ' · 일일 작업 실행 중';
+      const next = Date.parse(scheduler.nextRunAt || '');
+      if (scheduler.enabled === true && Number.isFinite(next)) label += ` · 다음 ${new Date(next).toLocaleString('ko-KR', {timeZone:'Asia/Seoul',hour12:false})} 예정`;
+    } else if (scheduler && !fresh) label = '점검 기록 지연 · 현재 상태 미확인';
+    if (badge) badge.textContent = `계정별 상태 확인 · ${label}`;
+    if (status) {
+      status.textContent = label;
+      status.title = Number.isFinite(checked) ? `Windows 작업 등록 점검 ${new Date(checked).toLocaleString('ko-KR', {timeZone:'Asia/Seoul'})}` : 'Windows 작업 등록 점검 기록 없음';
+    }
+  }
+
+  function renderNaverAutomation(data, now = Date.now()) {
+    renderNaverScheduler(data.scheduler, now);
+    const labels = {verified:'예약 확인 완료', waiting:'예정 전', overdue:'예정 시각 경과 · 미시작',
+      blocked:'앞 계정 미완료 · 순서 대기', running:'실행 중 · 잠금 확인', failed:'실패 · 후속 중단', unknown:'결과 미확인 · 재실행 차단'};
+    const el = document.getElementById('naver-automation-status');
+    if (!el) return;
+    const stamp = Date.parse(data.checkedAt || '');
+    const stale = !Number.isFinite(stamp) || stamp > now || now - stamp > 10 * 60 * 1000 || data.date !== getNaverDay();
+    const work = data.workDate || data.date || '미확인';
+    const publication = data.publicationDate || '미확인';
+    const preparation = (data.accounts || []).map(a => {
+      const count = Array.isArray(a.slots) ? a.slots.filter(slot => slot.status === 'verified').length : null;
+      const target = Array.isArray(a.slots) ? a.slots.length : null;
+      return `${a.account || a.accId}: 준비 ${a.preparationTime || '미확인'}${count === null ? '' : ` · 예약 확인 ${count}/${target}건`}`;
+    }).join(' | ');
+    const prefix = stale ? '감시 기록 지연/날짜 불일치 · 현재 상태 미확인' : '자동기동 등록/활성 여부 미확인';
+    el.textContent = `작업일 ${work} → 공개일 ${publication} (KST) | ${preparation} | 오늘 공개분 실적과 별도 | ` + prefix + (data.error ? ' · 상태 파일 읽기 실패' : '') +
+      (data.historyError ? ' · 감시 이력 저장 실패(원본 보존)' : '') + ' | ' +
+      (data.accounts || []).map(a => a.accId + ': ' + (labels[a.status] || '미확인')).join(' | ') +
+      ' | 점검 ' + (data.checkedAt || '없음');
+  }
+  async function pollNaverAutomation() {
+    try {
+      const response = await fetch('./naver_automation.json?t=' + Date.now(), {cache:'no-store',signal:AbortSignal.timeout(12000)});
+      if (!response.ok) throw new Error('monitor missing');
+      naverMonitorSource = await response.json();
+      renderNaverAutomation(naverMonitorSource);
+      followStartedNaverWorkflow();
+      syncNaverPreparation();
+      renderAccountTable();
+      renderWorkflowTimeline();
+    } catch (_) {
+      renderNaverScheduler(null);
+      const el = document.getElementById('naver-automation-status');
+      if (el) el.textContent = '감시 기록 조회 불가 · 자동기동 등록/활성 여부 미확인';
+    }
+  }
+  pollNaverAutomation();
+  setInterval(pollNaverAutomation, 30000);
+
+  let naverPollRunning = false;
+  async function pollPipelineStatus() {
+    if (naverPollRunning) return;
+    naverPollRunning = true;
+    try {
+      const results = await Promise.allSettled([
+        window.NaverSchedule.loadPublicEvidence(),
+        fetch('./pipeline_status.js?t='+Date.now(), {cache:'no-store',signal:AbortSignal.timeout(12000)}).then(async response => {
+          if (!response.ok) throw new Error('pipeline unavailable');
+          const raw = await response.text();
+          const match = raw.match(/^\s*window\.__NAVER_PIPELINE_STATUS__\s*=\s*([\s\S]+?);?\s*$/);
+          if (!match) throw new Error('invalid pipeline snapshot');
+          return JSON.parse(match[1]);
+        }),
+        fetch('../naver_blog_posting/data/automation-journal.json?t='+Date.now(), {cache:'no-store',signal:AbortSignal.timeout(12000)}).then(response => {
+          if (!response.ok) throw new Error('journal unavailable');
+          return response.json();
+        }),
+        fetch('../naver_blog_posting/data/active-workflow.json?t='+Date.now(), {cache:'no-store',signal:AbortSignal.timeout(12000)}).then(response => {
+          if (response.status === 404) return null;
+          if (!response.ok) throw new Error('workflow unavailable');
+          return response.json();
+        })
+      ]);
+      naverScheduleSource = results[1].status === 'fulfilled' ? results[1].value : null;
+      naverJournalSource = results[2].status === 'fulfilled' ? results[2].value : null;
+      if (results[3].status === 'fulfilled' && (results[3].value !== null || naverWorkflowSource === null)) naverWorkflowSource = results[3].value;
+      naverScheduleError = results[1].status !== 'fulfilled' ? '서버 상태 조회 불가' : results[2].status !== 'fulfilled' ? '최근 시도 이력 조회 불가' : '';
+
+    } catch (_) { naverScheduleSource = null; naverJournalSource = null; naverScheduleError = '서버 상태 조회 불가'; }
+    finally {
+      naverPollRunning = false;
+      naverScheduleLoaded = true;
+      followStartedNaverWorkflow();
+      updateQuotaUI();
+    }
+  }
+  setInterval(pollPipelineStatus, 5000);
+  pollPipelineStatus();
+
+  const ACCOUNT_DETAILS = {
+    acc1: {
+      name: "1호기 soultin (시니어브리프)",
+      type: "본인 실명 C-Rank 브랜드 육성 계정",
+      typeBadge: "badge-real-sm",
+      typeText: "실명 1일 1포 (표준)",
+      url: "https://blog.naver.com/mustpickinfo",
+      target: "5060 은퇴 준비자, 국민연금 수급 대기자, 시니어 세대",
+      category: "국민·기초연금, 시니어 노후복지, 생활세금 팩트체크",
+      strategy: "스마트블록 역추적 (에어써치 침투율 55% 이상 키워드 우선 선점)",
+      timeline: "전날 20:00 예약 작업 · 다음 날 19:30 공개 (KST) · 실제 예약 기록 별도 확인",
+      cdpPort: "9334 (CentBrowserPortable_soultin)",
+      batPath: "C:\\99_포터블브라우저\\CentBrowserPotable_soultin\\soultin_start_cdp.bat",
+      rules: [
+        "1일 1포 포화점 절대 준수 (하루 2편 이상 절대 금지)",
+        "D.I.A.+ 충족을 위한 직접 표/차트 분석 및 나눔명조 19px 호흡 유지",
+        "스마트에디터 ONE 8대 블록 및 1:1 대표 썸네일 플래그 필수 적용",
+        "외부 상업 링크 전면 배제 (순수 C-Rank 지수 빌드업 목적)"
+      ]
+    },
+    acc2: {
+      name: "2호기 soul5373 (머스트헬스뷰)",
+      type: "본인 실명 전문성 C-Rank 확보 계정",
+      typeBadge: "badge-real-sm",
+      typeText: "실명 1일 1포 (표준)",
+      url: "https://blog.naver.com/mustinfo",
+      target: "중장년 건강 염려층, 건강기능식품 구매 검토자",
+      category: "5060 건기식 성분 팩트체크, 혈압·혈당 관리, 시니어 식단",
+      strategy: "트렌드×에버그린 브릿지 (방송 화제 키워드 → 공인 영양 성분으로 전환)",
+      timeline: "전날 20:30 예약 작업 · 다음 날 20:00 공개 (KST) · 실제 예약 기록 별도 확인",
+      cdpPort: "9333 (CentBrowserPortable_soul5373)",
+      batPath: "C:\\99_포터블브라우저\\CentBrowserPortable_soul5373\\soul5373_start_cdp.bat",
+      rules: [
+        "과대·과장 광고성 효능 단어 원천 차단 (의학적 팩트 근거만 서술)",
+        "식약처 건강기능식품 인정 원료 기준 공인 데이터 인용구 명시",
+        "실사풍 Google Flow 이미지 활용 및 인페인팅 워터마크 제거 필수"
+      ]
+    },
+    acc3: {
+      name: "3호기 yoon_master (윤뷰스)",
+      type: "본인 실명 고관여 라이프스타일 계정",
+      typeBadge: "badge-real-sm",
+      typeText: "실명 1일 1포 (표준)",
+      url: "https://blog.naver.com/yoonviews",
+      target: "5060 품격 라이프스타일 관심 여성 및 액티브 시니어",
+      category: "5060 데일리룩 패션, 프리미엄 가전·리빙, 힐링 여가",
+      strategy: "자동완성·질문형 롱테일 (실제 시니어 검색어 패턴 중심)",
+      timeline: "전날 21:00 예약 작업 · 다음 날 20:30 공개 (KST) · 실제 예약 기록 별도 확인",
+      cdpPort: "9335 (CentBrowserPotable_yoon_master)",
+      batPath: "C:\\99_포터블브라우저\\CentBrowserPotable_yoon_master\\yoon_master_start_cdp.bat",
+      rules: [
+        "1인칭 담백하고 우아한 나눔명조 에세이/정보 전달 톤 유지",
+        "생성형 AI 상투어 6대 금칙어 100% 배제",
+        "모바일 가독성 중심 1행 14~18자 호흡 유지"
+      ]
+    },
+    acc4: {
+      name: "4호기 adinfo0905 (직장인루틴)",
+      type: "비실명 격리 계정 (CF 외부유입 브릿지 채널)",
+      typeBadge: "badge-bridge-sm",
+      typeText: "비실명 1일 2포 (4시간 쿨다운)",
+      url: "https://blog.naver.com/adinfo0905",
+      target: "2040 직장인, 사무직, 절세 서식 및 생산성 도구 사용자",
+      category: "업무 생산성 템플릿, 직장인 연말정산·절세, 실무 서식",
+      strategy: "질문형 롱테일 키워드 + 본문 85% 지점 공식신청/서식 앵커 브릿지",
+      timeline: "전날 21:30~22:30에 2건 일괄 예약 · 다음 날 11:00 / 19:00 공개 (KST)",
+      cdpPort: "9231 (고정 프록시 IP 49.254.163.44 세션 격리)",
+      batPath: "C:\\99_포터블브라우저\\CentBrowserPotable_adinfo0905\\adinfo0905_start_cdp.bat",
+      rules: [
+        "타깃 사이트(www.must-pick.com) 링크는 글 도입부 절대 삽입 금지",
+        "본문 80% 이상 읽은 뒤 추가 정보를 원하는 독자에게만 출처형 앵커 노출",
+        "반드시 전용 고정 IP(49.254.163.44) 및 전용 CDP 9231 브라우저에서만 로그인/작업"
+      ]
+    },
+    acc5: {
+      name: "5호기 stone0747 (지원금마감속보)",
+      type: "비실명 격리 계정 (CF 외부유입 브릿지 채널)",
+      typeBadge: "badge-bridge-sm",
+      typeText: "비실명 1일 2포 (4시간 쿨다운)",
+      url: "https://blog.naver.com/stone0747",
+      target: "소상공인, 자영업자, 긴급 복지 및 지자체 지원금 대상자",
+      category: "중앙부처·지자체 지원금 마감속보, 소상공인 정책자금, 생활세무",
+      strategy: "D-1 타임래그 선점 공략 (마감 직전 검색량 급증 키워드 장악)",
+      timeline: "전날 22:30~23:30에 2건 일괄 예약 · 다음 날 11:00 / 19:00 공개 (KST)",
+      cdpPort: "9230 (CentBrowserPortable_stone0747)",
+      batPath: "C:\\99_포터블브라우저\\CentBrowserPotable_stone0747\\stone0747_start_cdp.bat",
+      rules: [
+        "신청 기한, 지원 금액, 자격 요건 3대 팩트 명확한 도표 요약",
+        "브릿지 링크(must-pick.com)는 '상세 신청 절차 및 서식 다운로드' 안내 형태로만 삽입",
+        "반드시 전용 CDP 9230 세션 유지 (타 계정 쿠키 혼입 방지)"
+      ]
+    }
+  };
+
+  function openAccountDetail(accId) {
+    const info = ACCOUNT_DETAILS[accId];
+    if (!info) return;
+
+    document.getElementById('acc-modal-title').textContent = `📊 [${info.name}] 상세 운영 명세서`;
+    const contentEl = document.getElementById('acc-modal-content');
+
+    contentEl.innerHTML = `
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:12px; background:#f0fdf4; border:1px solid #bbf0cb; border-radius:8px; margin-bottom:14px;">
+        <div>
+          <strong style="font-size:14px; color:#0f172a;">${info.name}</strong>
+          <span style="font-size:11px; color:#64748b; display:block; margin-top:2px;">블로그 URL: <a href="${info.url}" target="_blank" style="color:#0872ff; text-decoration:none;">${info.url}</a></span>
+        </div>
+        <span class="${info.typeBadge}" style="font-size:11px; padding:4px 8px;">${info.typeText}</span>
+      </div>
+
+      <div class="acc-modal-grid">
+        <div class="acc-modal-card">
+          <h4>🎯 페르소나 & 타깃 독자</h4>
+          <p>${info.target}</p>
+        </div>
+        <div class="acc-modal-card">
+          <h4>📂 주력 전문 카테고리</h4>
+          <p>${info.category}</p>
+        </div>
+        <div class="acc-modal-card">
+          <h4>⚡ 배정 상위노출 전략</h4>
+          <p>${info.strategy}</p>
+        </div>
+        <div class="acc-modal-card">
+          <h4>⏰ 권장 발행 시간 & 주기</h4>
+          <p>${info.timeline}</p>
+        </div>
+        <div class="acc-modal-card" style="grid-column: span 2;">
+          <h4>🖥️ 포터블 CDP 브라우저 격리 환경</h4>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:4px;">
+            <span style="font-size:11px; color:#475569;">${info.cdpPort}</span>
+            <button class="btn-cdp-run" onclick="copyCdpCommand('${info.batPath.replace(/\\/g, '\\\\')}')" style="font-size:10px; padding:3px 8px;">
+              🚀 BAT 경로 복사
+            </button>
+          </div>
+        </div>
+        <div class="acc-modal-card" style="grid-column: span 2;">
+          <h4>🛡️ 저품질 방지 안전 운영 수칙</h4>
+          <ul>
+            ${info.rules.map(r => `<li>${r}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('acc-detail-modal').classList.add('active');
+  }
+
+  function closeAccountDetail() {
+    document.getElementById('acc-detail-modal').classList.remove('active');
+  }
+
+  function switchTab(tabId) {
+    if (tabId === 'strategy') {
+      window.scrollTo({ top: 400, behavior: 'smooth' });
+    } else if (tabId === 'pipeline') {
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    } else if (tabId === 'cf-bridge') {
+      filterAccountGroup('NON_REAL');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      filterAccountGroup('ALL');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function copyCdpCommand(batPath) {
+    navigator.clipboard.writeText(batPath).then(() => {
+      alert(`포터블 브라우저 실행 경로가 클립보드에 복사되었습니다:\n\n${batPath}\n\nPowerShell이나 파일 탐색기에서 실행하여 브라우저 세션을 열 수 있습니다.`);
+    }).catch(() => {
+      alert(`경로:\n${batPath}`);
+    });
+  }
+
+  function openOutputPreview() {
+    document.getElementById('preview-modal').classList.add('active');
+  }
+  function closeModal() {
+    document.getElementById('preview-modal').classList.remove('active');
+  }
+
+  function openGuideModal(type) {
+    const modal = document.getElementById('guide-modal');
+    const title = document.getElementById('guide-title');
+    const content = document.getElementById('guide-content');
+
+    if (type === 'seo') {
+      title.textContent = '네이버 블로그 검색 최적화(SEO) 핵심 요약 (C-Rank & D.I.A.+)';
+      content.innerHTML = `
+        <h4 style="font-size:14px; margin-bottom:8px; color:#0f172a;">1. C-Rank (출처 신뢰도 알고리즘)</h4>
+        <p style="margin-bottom:12px; color:#475569;">
+          특정 블로그 출처의 신뢰도와 인기도를 종합 평가합니다. 핵심 3대 요소는 <strong>Context(관심사 집중도)</strong>, <strong>Content(생산 정보 품질)</strong>, <strong>Chain(반응 연쇄)</strong>입니다.
+        </p>
+        <h4 style="font-size:14px; margin-bottom:8px; color:#0f172a;">2. D.I.A. / D.I.A.+ (문서 의도 및 경험 분석 모델)</h4>
+        <p style="margin-bottom:12px; color:#475569;">
+          개별 문서의 정보성과 작성자의 <strong>고유한 경험 정보(직접 체험, 솔직한 팁)</strong>를 키워드별 선호도에 맞춰 분석합니다. 단순 기사 복붙이나 AI 양산형 글은 D.I.A. 평가에서 저조하여 노출되지 않습니다.
+        </p>
+      `;
+    } else {
+      title.textContent = '블로그 문체 및 포스팅 검사 기준 (guides/blog_style.md)';
+      content.innerHTML = `
+        <h4 style="font-size:14px; margin-bottom:8px; color:#0f172a;">1. 짧은 행갈이 호흡 (중앙값 14자)</h4>
+        <p style="margin-bottom:12px; color:#475569;">
+          모바일 독자의 스크롤 편의를 위해 한 문장을 2~4개 짧은 행으로 나누어 세로로 시선이 흐르도록 작성합니다.
+        </p>
+        <h4 style="font-size:14px; margin-bottom:8px; color:#0f172a;">2. 친근한 해요체 및 연결어 활용</h4>
+        <p style="margin-bottom:12px; color:#475569;">
+          기사식 평서문 대신 <code>~했어요</code>, <code>~있어요</code>, <code>~돼요</code>의 부드러운 존댓말을 기본으로 합니다.
+        </p>
+      `;
+    }
+    modal.classList.add('active');
+  }
+  function closeGuideModal() {
+    document.getElementById('guide-modal').classList.remove('active');
+  }
+</script>
+
+<script src="metrics.js?v=20261016-kst-rollover2"></script>
+</body>
+</html>

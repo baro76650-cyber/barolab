@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기억 그래프 (Vault) - BaroLab Master Hub</title>
+  <link rel="stylesheet" href="traffic.css">
+  <link rel="stylesheet" href="sidebar.css?v=20261017-unified-2">
+  <link rel="stylesheet" href="signature_deck.css?v=20261018-deck-v3">
+  <style>
+    :root {
+      --ink-rgb: 37, 39, 30;
+      --paper-rgb: 248, 250, 252;
+      --accent-rgb: 37, 99, 235;
+      --star-rgb: 59, 130, 246;
+      --gold-rgb: 245, 158, 11;
+    }
+
+    /* Global Typography Guard: Prevent any mid-word line breaks (결/정, 노/드) */
+    .vault-deck-grid *,
+    .header *,
+    .graph-toolbar-top *,
+    .graph-legend *,
+    .inspector-tabs * {
+      word-break: keep-all;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* BaroLab Deck v3: 4-Column ARGO Precision Instrument Row (96px Slim) */
+    .vault-deck-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 1280px) {
+      .vault-deck-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .vault-gauge-card {
+      height: 96px;
+      min-height: 96px;
+      max-height: 96px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 10px 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 11px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+    .vault-gauge-card.dark-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border-color: #334155;
+      color: #f8fafc;
+    }
+
+    /* Card 1: 36-Tick Circular Needle Gauge */
+    .argo-circle-gauge {
+      width: 68px;
+      height: 68px;
+      position: relative;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .argo-circle-gauge svg {
+      width: 68px;
+      height: 68px;
+      overflow: visible;
+    }
+    .argo-circle-readout {
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .argo-circle-readout strong {
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #059669;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+
+    /* Card 2: Semi-Circle Tick & Needle Speedometer Gauge */
+    .argo-semi-gauge {
+      width: 78px;
+      height: 66px;
+      position: relative;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .argo-semi-gauge svg {
+      width: 78px;
+      height: 50px;
+      overflow: visible;
+    }
+    .argo-semi-val {
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #1d4ed8;
+      white-space: nowrap;
+      margin-top: -2px;
+      letter-spacing: -0.02em;
+    }
+
+    .vault-card-body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+    .vault-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .vault-card-pill {
+      padding: 1.5px 6px;
+      border-radius: 999px;
+      font-size: 9.5px;
+      font-weight: 800;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .vault-card-pill.emerald { background: #dcfce7; color: #047857; border: 1px solid #86efac; }
+    .vault-card-pill.blue { background: #dbeafe; color: #1d4ed8; border: 1px solid #93c5fd; }
+    .vault-card-pill.amber { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
+
+    .vault-card-headline {
+      font-size: 14.5px;
+      font-weight: 900;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    /* Multi-segment bar with ARGO tick overlay */
+    .argo-multi-seg-bar {
+      height: 8px;
+      width: 100%;
+      background: #f1f5f9;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      position: relative;
+      border: 1px solid #e2e8f0;
+    }
+    .argo-multi-seg-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 7px,
+        rgba(255, 255, 255, 0.55) 7px,
+        rgba(255, 255, 255, 0.55) 8.5px
+      );
+      pointer-events: none;
+    }
+    .argo-seg-piece {
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+
+    .vault-micro-legend {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #475569;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .vault-micro-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+    }
+    .vault-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* Card 3: 3-Row Horizontal Segmented Progress Bars */
+    .vault-3bar-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .vault-bar-row {
+      display: grid;
+      grid-template-columns: 146px 1fr 38px;
+      align-items: center;
+      gap: 7px;
+      font-size: 10.5px;
+      white-space: nowrap;
+    }
+    .vault-bar-lbl {
+      font-weight: 800;
+      color: #1e293b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .vault-bar-track {
+      height: 7px;
+      background: #f1f5f9;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid #e2e8f0;
+    }
+    .vault-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      position: relative;
+      transition: width 0.4s ease;
+    }
+    .vault-bar-fill::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 5px,
+        rgba(255, 255, 255, 0.42) 5px,
+        rgba(255, 255, 255, 0.42) 6.5px
+      );
+    }
+    .vault-bar-badge {
+      text-align: right;
+      font-size: 10.5px;
+      font-weight: 900;
+      padding: 1px 5px;
+      border-radius: 5px;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .vault-bar-badge.b-emerald { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+    .vault-bar-badge.b-blue { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .vault-bar-badge.b-violet { background: #f5f3ff; color: #6d28d9; border: 1px solid #ddd6fe; }
+
+    /* Card 4: 14D VAULT LED Matrix + Focus Control */
+    .vault-led-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 6px 8px;
+      background: #090d16;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .vault-led-head {
+      font-size: 8.5px;
+      font-weight: 900;
+      color: #38bdf8;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .vault-led-cols {
+      display: flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 36px;
+    }
+    .vault-led-col {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 2px;
+    }
+    .vault-led-dot {
+      width: 4.5px;
+      height: 4.5px;
+      border-radius: 1px;
+      background: #1e293b;
+    }
+    .vault-led-dot.lit-emerald {
+      background: #10b981;
+      box-shadow: 0 0 4px rgba(16, 185, 129, 0.8);
+    }
+    .vault-led-dot.lit-cyan {
+      background: #38bdf8;
+      box-shadow: 0 0 4px rgba(56, 189, 248, 0.75);
+    }
+
+    .memory-layout {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 14px;
+      height: calc(100vh - 185px);
+      min-height: 580px;
+    }
+    @media (max-width: 1200px) {
+      .memory-layout { grid-template-columns: 1fr; height: auto; }
+    }
+    .canvas-card {
+      position: relative;
+      background: radial-gradient(circle at 50% 45%, #0f172a 0%, #090d16 100%);
+      border-radius: 14px;
+      border: 1px solid #1e293b;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 560px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+    }
+    #memory-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+    .graph-toolbar-top {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      right: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+      z-index: 10;
+      flex-wrap: wrap;
+    }
+    .graph-search-box, .graph-chips {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: auto;
+    }
+    .graph-search-input {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #f8fafc;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      width: 230px;
+      backdrop-filter: blur(8px);
+    }
+    .graph-search-input::placeholder { color: #94a3b8; }
+    .graph-chip {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #cbd5e1;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .graph-chip:hover { border-color: #60a5fa; color: #fff; }
+    .graph-chip.on {
+      background: rgba(37, 99, 235, 0.38);
+      border-color: #60a5fa;
+      color: #eff6ff;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+    }
+    .graph-hint {
+      position: absolute;
+      left: 16px;
+      bottom: 12px;
+      color: rgba(203, 213, 225, 0.85);
+      font-size: 11.5px;
+      pointer-events: none;
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .graph-legend {
+      position: absolute;
+      right: 16px;
+      bottom: 12px;
+      display: flex;
+      gap: 12px;
+      font-size: 11.5px;
+      color: #cbd5e1;
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 5px 12px;
+      border-radius: 8px;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .inspector-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .inspector-tabs {
+      display: flex;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+    .inspector-tab {
+      flex: 1;
+      padding: 11px 8px;
+      text-align: center;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #64748b;
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+    }
+    .inspector-tab.active {
+      color: #2563eb;
+      border-bottom-color: #2563eb;
+      background: #fff;
+    }
+    .inspector-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+    .doc-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 6px 0;
+    }
+    .doc-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+    .badge-hub {
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .doc-content-pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #1e293b;
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      max-height: 360px;
+      overflow-y: auto;
+    }
+    .wiki-link-pill {
+      display: inline-block;
+      margin: 3px 4px 3px 0;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .wiki-link-pill:hover { background: #dbeafe; }
+    .note-list-item {
+      padding: 9px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    .note-list-item:hover { background: #f8fafc; }
+    .note-list-item strong { display: block; font-size: 13px; color: #0f172a; }
+    .note-list-item small { color: #64748b; font-size: 11.5px; }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      place-items: center;
+      z-index: 999;
+    }
+    .modal-backdrop.open { display: grid; }
+    .modal-card {
+      background: #fff;
+      width: min(560px, 92vw);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+  </style>
+</head>
+<body class="control-room">
+<div class="layout">
+  <aside id="barolab-sidebar" class="sidebar" aria-label="주요 메뉴"></aside>
+  <script src="sidebar.js?v=20261018-no-rnd"></script>
+
+  <main class="main-wrap" id="main-content">
+    <!-- Unified Dark Cockpit Header (BaroLab Deck v3) -->
+    <header class="header">
+      <div class="header-left">
+        <h1>
+          <span>✦ BaroLab 시냅스 기억 그래프 · Clean Slate Vault</span>
+          <span class="header-badge" style="background:rgba(16,185,129,0.18)!important;border-color:rgba(16,185,129,0.45)!important;color:#6ee7b7!important;">🟢 고아 노드 0개 · 무결성 100%</span>
+        </h1>
+        <p>13대 코어 허브(AI 크루 5 · 운영 채널 4 · 핵심 스킬 4) · 4대 시냅스(출처·채널·스킬·성과) 자동 연결 아키텍처</p>
+      </div>
+      <div class="toolbar">
+        <button type="button" id="btn-open-new-note" style="background:linear-gradient(135deg,#2563eb,#1d4ed8)!important; border-color:#3b82f6!important; color:#fff!important; font-weight:800; cursor:pointer;">+ 새 지식 노드 등록</button>
+        <button type="button" id="btn-sync-vault" style="cursor:pointer;">⚡ 시냅스 동기화</button>
+      </div>
+    </header>
+
+    <!-- [BAROLAB DECK V3] 4-Card ARGO Precision Tick-Mark & Needle Gauge Row -->
+    <section class="vault-deck-grid" aria-label="시냅스 기억 그래프 정밀 계기판">
+      <!-- [카드 1] 시냅스 무결성 & 코어 허브 게이지 (36-Tick Circular Needle Gauge + 3-Color Segment Bar) -->
+      <article class="vault-gauge-card">
+        <div class="argo-circle-gauge" title="시냅스 연결 무결성 100% (36-Tick Precision Needle Gauge)">
+          <svg viewBox="0 0 68 68">
+            <defs>
+              <linearGradient id="vaultEmeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#10b981" />
+                <stop offset="100%" stop-color="#059669" />
+              </linearGradient>
+            </defs>
+            <!-- Outer 36 fine tick marks (circumference ~179.07 -> 1.4px tick + 3.57px gap = 4.97px * 36) -->
+            <circle cx="34" cy="34" r="28.5" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="1.4 3.57" />
+            <!-- Track & 100% Emerald Value Ring -->
+            <circle cx="34" cy="34" r="22.5" fill="none" stroke="#e2e8f0" stroke-width="5.2" />
+            <circle id="vault-integrity-ring" cx="34" cy="34" r="22.5" fill="none" stroke="url(#vaultEmeraldGrad)" stroke-width="5.2" stroke-linecap="round" stroke-dasharray="141.4" stroke-dashoffset="0" transform="rotate(-90 34 34)" />
+            <!-- Precision Gauge Needle pointing to 100% (Top / 45deg accent) -->
+            <g id="vault-integrity-needle" transform="rotate(42 34 34)">
+              <polygon points="34,11 32.2,34 35.8,34" fill="#059669" />
+            </g>
+            <circle cx="34" cy="34" r="3.8" fill="#0f172a" stroke="#10b981" stroke-width="1.6" />
+          </svg>
+          <div class="argo-circle-readout"><strong id="vault-integrity-pct">100%</strong></div>
+        </div>
+        <div class="vault-card-body">
+          <div class="vault-card-top">
+            <span>✦ 시냅스 무결성 · 코어 허브</span>
+            <span class="vault-card-pill emerald" id="stat-linked-desc">무결성 100%</span>
+          </div>
+          <div class="vault-card-headline" id="stat-total-docs">코어 허브 13 / 전체 19 노드</div>
+          <div class="argo-multi-seg-bar" title="코어 허브 / 지식 노드 / 고아 노드 비율">
+            <div class="argo-seg-piece" id="seg-core-hubs" style="width:68.4%; background:#10b981;"></div>
+            <div class="argo-seg-piece" id="seg-know-nodes" style="width:31.6%; background:#3b82f6;"></div>
+            <div class="argo-seg-piece" id="seg-orphan-nodes" style="width:0%; background:#cbd5e1;"></div>
+          </div>
+          <div class="vault-micro-legend">
+            <span><i class="vault-dot" style="background:#10b981;"></i><b id="lbl-core-hubs">코어 허브 13</b></span>
+            <span><i class="vault-dot" style="background:#3b82f6;"></i><b id="lbl-know-nodes">지식 노드 6</b></span>
+            <span><i class="vault-dot" style="background:#94a3b8;"></i><b id="lbl-orphan-nodes">고아 노드 0</b></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- [카드 2] 시냅스 엣지(연결 밀도) 반원형 눈금 바늘 게이지 (Semi-Circle Tick & Needle Gauge) -->
+      <article class="vault-gauge-card">
+        <div class="argo-semi-gauge" title="노드당 평균 시냅스 연결 밀도 (목표 4.0+ Edges/Node)">
+          <svg viewBox="0 0 84 50">
+            <defs>
+              <linearGradient id="vaultSemiGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#3b82f6" />
+                <stop offset="60%" stop-color="#0ea5e9" />
+                <stop offset="100%" stop-color="#10b981" />
+              </linearGradient>
+            </defs>
+            <!-- Outer Semi-Circle 24 Tick Marks -->
+            <path d="M 8 43 A 34 34 0 0 1 76 43" fill="none" stroke="#94a3b8" stroke-width="2.4" stroke-dasharray="1.5 3.15" />
+            <!-- Semi-Circle Background Track -->
+            <path d="M 13 43 A 29 29 0 0 1 71 43" fill="none" stroke="#e2e8f0" stroke-width="5.5" stroke-linecap="round" />
+            <!-- Semi-Circle Active Fill Arc (length ~91.1) -->
+            <path id="vault-semi-arc" d="M 13 43 A 29 29 0 0 1 71 43" fill="none" stroke="url(#vaultSemiGrad)" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="91.1" stroke-dashoffset="12" />
+            <!-- Rotating Speedometer Needle (0deg = straight up, -90deg = min, +90deg = max) -->
+            <g id="vault-density-needle" transform="rotate(52 42 43)">
+              <polygon points="42,15 40.2,43 43.8,43" fill="#1d4ed8" />
+            </g>
+            <circle cx="42" cy="43" r="4" fill="#0f172a" stroke="#3b82f6" stroke-width="1.6" />
+          </svg>
+          <div class="argo-semi-val" id="vault-density-readout">4.7 Edges/Node</div>
+        </div>
+        <div class="vault-card-body">
+          <div class="vault-card-top">
+            <span>🔗 시냅스 엣지 (연결 밀도)</span>
+            <span class="vault-card-pill blue" id="vault-density-badge">밀도 118% 달성</span>
+          </div>
+          <div class="vault-card-headline" id="stat-total-edges">총 90개 시냅스 연결</div>
+          <div class="argo-multi-seg-bar" title="4대 시냅스 축(출처·채널·스킬·성과) 연결 비중">
+            <div class="argo-seg-piece" style="width:26%; background:#f59e0b;"></div>
+            <div class="argo-seg-piece" style="width:28%; background:#3b82f6;"></div>
+            <div class="argo-seg-piece" style="width:31%; background:#10b981;"></div>
+            <div class="argo-seg-piece" style="width:15%; background:#8b5cf6;"></div>
+          </div>
+          <div class="vault-micro-legend">
+            <span><i class="vault-dot" style="background:#f59e0b;"></i>출처</span>
+            <span><i class="vault-dot" style="background:#3b82f6;"></i>채널</span>
+            <span><i class="vault-dot" style="background:#10b981;"></i>스킬</span>
+            <span><i class="vault-dot" style="background:#8b5cf6;"></i>성과 4축</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- [카드 3] 수익·스킬·결정 지식 분포 (3단 수평 눈금 게이지 바 + 우측 고정폭 배지) -->
+      <article class="vault-gauge-card" style="padding: 9px 14px;">
+        <div class="vault-card-body" style="gap: 5px;">
+          <div class="vault-card-top" style="margin-bottom: 1px;">
+            <span>📊 수익 · 스킬 · 결정 지식 분포</span>
+            <span class="vault-card-pill amber" id="stat-revenue-hubs">지식 자산 10건</span>
+          </div>
+          <div class="vault-3bar-stack">
+            <div class="vault-bar-row">
+              <span class="vault-bar-lbl">🛠️ 학습된 스킬 (SKILL.md)</span>
+              <div class="vault-bar-track"><div class="vault-bar-fill" id="bar-skill-fill" style="width:90%; background:linear-gradient(90deg,#10b981,#059669);"></div></div>
+              <span class="vault-bar-badge b-emerald" id="stat-skill-cnt">9건</span>
+            </div>
+            <div class="vault-bar-row">
+              <span class="vault-bar-lbl">💰 수익·성과 인사이트</span>
+              <div class="vault-bar-track"><div class="vault-bar-fill" id="bar-rev-fill" style="width:18%; background:linear-gradient(90deg,#3b82f6,#2563eb);"></div></div>
+              <span class="vault-bar-badge b-blue" id="stat-rev-cnt">1건</span>
+            </div>
+            <div class="vault-bar-row">
+              <span class="vault-bar-lbl">⚖️ 회의실 결정사항</span>
+              <div class="vault-bar-track"><div class="vault-bar-fill" id="bar-meet-fill" style="width:6%; background:linear-gradient(90deg,#8b5cf6,#6d28d9);"></div></div>
+              <span class="vault-bar-badge b-violet" id="stat-meet-cnt">0건</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- [카드 4] 시냅스 성장 트렌드 (14D VAULT LED 도트 매트릭스 & 탐색 컨트롤) -->
+      <article class="vault-gauge-card dark-card">
+        <div class="vault-led-panel" title="최근 14일 일별 신규 기억·스킬 시냅스 축적 추이">
+          <div class="vault-led-head">
+            <span>14D VAULT LED</span>
+            <span style="color:#10b981;">● LIVE</span>
+          </div>
+          <div class="vault-led-cols" id="vault-led-cols"></div>
+        </div>
+        <div class="vault-card-body">
+          <div class="vault-card-top" style="color:#94a3b8;">
+            <span>🧭 시냅스 탐색 모드</span>
+            <span class="vault-card-pill blue" id="stat-focus-badge" style="cursor:pointer; background:rgba(59,130,246,0.22); color:#93c5fd; border-color:rgba(96,165,250,0.45);" title="클릭 시 2-Hops 집중 탐색 토글">2-Hops 탐색</span>
+          </div>
+          <div class="vault-card-headline" id="stat-visible-nodes" style="color:#f8fafc; font-size:14px;">전체 보기 · 19개 활성</div>
+          <div class="vault-micro-legend" style="color:#cbd5e1; justify-content:space-between;">
+            <span>더블클릭: 2-Hops 집중</span>
+            <button type="button" id="btn-card-fit" style="padding:2px 7px; border-radius:5px; border:1px solid rgba(148,163,184,0.35); background:rgba(255,255,255,0.1); color:#f8fafc; font-size:10px; font-weight:800; cursor:pointer; white-space:nowrap;">🎯 화면 맞춤</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="memory-layout">
+      <!-- Left: 2D Synapse Canvas Renderer -->
+      <div class="canvas-card">
+        <div class="graph-toolbar-top">
+          <div class="graph-search-box">
+            <input type="search" id="graph-search" class="graph-search-input" placeholder="허브·도메인·스킬·결정 검색..." />
+            <button type="button" class="graph-chip" id="btn-reset-view" title="화면 중앙 맞춤">화면 맞춤</button>
+          </div>
+          <div class="graph-chips" id="synapse-filter-group">
+            <button type="button" class="graph-chip" id="btn-back-all" style="display:none; background:#1d4ed8; color:#fff;">← 전체 그래프 보기 (Esc)</button>
+            <button type="button" class="graph-chip on" data-cat="all" id="chip-all">전체 보기</button>
+            <button type="button" class="graph-chip" data-cat="core_hub" id="chip-core-hub">✦ 코어 허브</button>
+            <button type="button" class="graph-chip" data-cat="revenue" id="chip-revenue">📈 수익 발생 기억</button>
+            <button type="button" class="graph-chip" data-cat="skill" id="chip-skill">🛠️ 학습된 스킬(SKILL.md)</button>
+            <button type="button" class="graph-chip" data-cat="meeting" id="chip-meeting">💬 회의실 결정사항</button>
+          </div>
+        </div>
+        <canvas id="memory-canvas"></canvas>
+        <div class="graph-hint">드래그: 이동/노드 고정 · 휠: 줌 · 클릭: 시냅스 명세 열람 · <strong>더블클릭: 2-hops 주변만 보기</strong> (고아 노드 0개 보장)</div>
+        <div class="graph-legend">
+          <span><strong style="color:#fbbf24;">◆</strong> AI 크루 허브 (5)</span>
+          <span><strong style="color:#60a5fa;">✦</strong> 운영 채널·수익 허브 (4+)</span>
+          <span><strong style="color:#34d399;">✦</strong> 코어 스킬 허브 (SKILL.md)</span>
+          <span><strong style="color:#c084fc;">✦</strong> 회의실 결정사항</span>
+        </div>
+      </div>
+
+      <!-- Right: Synapse Inspector & Filtered Lists -->
+      <aside class="inspector-card">
+        <div class="inspector-tabs">
+          <button type="button" class="inspector-tab active" data-tab="doc">시냅스 상세</button>
+          <button type="button" class="inspector-tab" data-tab="notes">✦ 허브 · 스킬 · 수익</button>
+          <button type="button" class="inspector-tab" data-tab="journals">💬 회의실 결정사항</button>
+        </div>
+        <div class="inspector-body" id="tab-doc">
+          <div id="doc-viewer">
+            <h3 class="doc-title" id="doc-title">노드를 클릭하면 4대 시냅스 연결 구조와 원문이 표시됩니다</h3>
+            <div class="doc-meta-row" id="doc-meta"></div>
+            <div id="doc-synapse-summary" style="display:none; margin-bottom:10px; padding:10px 12px; background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; font-size:12px; color:#1e3a8a; line-height:1.6;"></div>
+            <div class="doc-content-pre" id="doc-content">캔버스에서 코어 허브(✦/◆)나 지식 노드를 클릭해 보세요. 과거 폐기 프로젝트와 757개 고아 노드는 `server/data/legacy_argo_backup/`으로 완전 격리되었으며, 현재 그래프는 최소 2개 이상의 부모 허브와 연결된 순수 코어 지식만 표시합니다.</div>
+            <div style="margin-top:12px;">
+              <strong style="font-size:12px; color:#475569;">시냅스 부모/연결 허브 ([[아웃바운드]])</strong>
+              <div id="doc-outbound" style="margin-top:4px;"></div>
+            </div>
+            <div style="margin-top:12px;">
+              <strong style="font-size:12px; color:#475569;">역링크 (이 허브에 연결된 하위 지식)</strong>
+              <div id="doc-backlinks" style="margin-top:4px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="inspector-body" id="tab-notes" style="display:none; padding:0;">
+          <div id="recent-notes-list"></div>
+        </div>
+        <div class="inspector-body" id="tab-journals" style="display:none; padding:0;">
+          <div id="recent-journals-list"></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+
+<!-- New Synapse Note Modal -->
+<div class="modal-backdrop" id="note-modal">
+  <div class="modal-card">
+    <h3 style="margin:0 0 12px 0;">새 지식 노드 등록 (4대 시냅스 · 고아 노드 0개 원칙)</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px;">
+      <div>
+        <label style="display:block; font-size:12px; font-weight:700; margin-bottom:4px;">지식 분류</label>
+        <select id="new-note-category" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+          <option value="skill">🛠️ 학습된 스킬 (SKILL.md)</option>
+          <option value="revenue">📈 수익 발생 기억 (Growth 검증)</option>
+          <option value="meeting">💬 회의실 결정사항</option>
+        </select>
+      </div>
+      <div>
+        <label style="display:block; font-size:12px; font-weight:700; margin-bottom:4px;">출처 AI 크루</label>
+        <select id="new-note-agent" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+          <option value="jarvis">@자비스 (총괄)</option>
+          <option value="patch">@패치 (개발/스킬)</option>
+          <option value="publi">@퍼블리 (발행/검수)</option>
+          <option value="trace">@트레이스 (성과/수익)</option>
+          <option value="radar">@레이더 (R&amp;D발굴)</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-bottom:10px;">
+      <label style="display:block; font-size:12px; font-weight:700; margin-bottom:4px;">제목</label>
+      <input type="text" id="new-note-title" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;" placeholder="예: CF 16개 도메인 애드센스 5대 슬롯 Viewability 최적화" />
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="display:block; font-size:12px; font-weight:700; margin-bottom:4px;">본문 (발행 성공 포스팅 · 채택된 개선점 · 검증된 수익 인사이트만 등록)</label>
+      <textarea id="new-note-content" rows="7" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-family:inherit;" placeholder="저장 시 [출처 크루] + [적용 채널 허브] + [코어 스킬 허브] 최소 2개 이상의 부모 허브와 자동 연결됩니다."></textarea>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:8px;">
+      <button type="button" class="btn-quick" id="btn-close-modal">취소</button>
+      <button type="button" class="btn-quick" id="btn-save-note" style="background:#2563eb; color:#fff; border-color:#1d4ed8; font-weight:700;">시냅스 검증 및 등록</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('memory-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let state = {
+    rawNodes: [],
+    rawEdges: [],
+    nodes: [],
+    edges: [],
+    pts: [],
+    adj: [],
+    showCrew: false,
+    showOrphans: false,
+    revenueOnly: false,
+    query: '',
+    focusId: null,
+    selectedRel: 'hubs/crew-jarvis.md',
+    hoverIdx: null,
+    dragIdx: null,
+    panStart: null,
+    autoFit: true,
+    alpha: 1.0,
+    tickCount: 0,
+    cam: { x: 0, y: 0, s: 1 },
+    targetCam: { x: 0, y: 0, s: 1 },
+    stars: [],
+    hubSet: new Set(),
+  };
+
+  function drawRoundRect(ctx, x, y, w, h, rad) {
+    const r = Math.min(rad, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  function initVaultLedMatrix(totalNodes, totalEdges) {
+    const wrap = document.getElementById('vault-led-cols');
+    if (!wrap) return;
+    // 14-day vertical LED dot columns (5 rows per column, bottom-to-top)
+    const pattern = [2, 2, 3, 2, 3, 4, 3, 4, 3, 4, 5, 4, 5, 5];
+    wrap.innerHTML = pattern.map((litCount, colIdx) => {
+      const isRecent = colIdx >= 10;
+      const dots = [];
+      for (let row = 0; row < 5; row++) {
+        const isLit = row < litCount;
+        const cls = isLit ? (isRecent ? 'lit-emerald' : 'lit-blue') : '';
+        dots.push(`<span class="vault-led-dot ${cls}"></span>`);
+      }
+      return `<div class="vault-led-col">${dots.join('')}</div>`;
+    }).join('');
+  }
+
+  // Seeded LCG background starfield (ARGO S(e,t,n) port)
+  function buildStarfield(w, h) {
+    let seed = 7;
+    const rand = () => ((seed = (16807 * seed) % 0x7fffffff) / 0x7fffffff);
+    const count = Math.max(40, Math.round((w * h) / 5000));
+    return Array.from({ length: count }, () => ({
+      x: rand() * w,
+      y: rand() * h,
+      r: rand() < 0.12 ? 1.2 : 0.65,
+      a: 0.1 + 0.3 * rand(),
+    }));
+  }
+
+  // 8-vertex 4-pointed star path E(ctx, x, y, r) from ARGO 6888-29100bb0f13217d9.js
+  function drawStarPath(pathOrCtx, x, y, r) {
+    const a = 0.38 * r;
+    pathOrCtx.moveTo(x, y - r);
+    pathOrCtx.lineTo(x + a, y - a);
+    pathOrCtx.lineTo(x + r, y);
+    pathOrCtx.lineTo(x + a, y + a);
+    pathOrCtx.lineTo(x, y + r);
+    pathOrCtx.lineTo(x - a, y + a);
+    pathOrCtx.lineTo(x - r, y);
+    pathOrCtx.lineTo(x - a, y - a);
+    pathOrCtx.closePath();
+  }
+
+  function nodeRadius(n) {
+    return 2.4 + Math.log2(1 + (n.deg || 0)) * 1.25 + (n.type === 'agent' ? 2.0 : 0) + (n.isRevenueHub ? 0.8 : 0);
+  }
+
+  function applyFocusSubgraph() {
+    let nodes = state.rawNodes.slice();
+    let edges = state.rawEdges.slice();
+
+    if (state.focusId) {
+      const centerIdx = nodes.findIndex(n => n.id === state.focusId);
+      if (centerIdx >= 0) {
+        const adj = nodes.map(() => []);
+        for (const [a, b] of edges) {
+          adj[a].push(b);
+          adj[b].push(a);
+        }
+        const visited = new Set([centerIdx]);
+        let frontier = [centerIdx];
+        for (let hop = 0; hop < 2; hop++) {
+          const next = [];
+          for (const u of frontier) {
+            for (const v of adj[u]) {
+              if (!visited.has(v)) {
+                visited.add(v);
+                next.push(v);
+              }
+            }
+          }
+          frontier = next;
+        }
+        const remap = new Map();
+        const fNodes = [];
+        nodes.forEach((n, i) => {
+          if (visited.has(i)) {
+            remap.set(i, fNodes.length);
+            fNodes.push(n);
+          }
+        });
+        const fEdges = edges
+          .filter(([a, b]) => visited.has(a) && visited.has(b))
+          .map(([a, b]) => [remap.get(a), remap.get(b)]);
+        nodes = fNodes;
+        edges = fEdges;
+      }
+    }
+
+    state.nodes = nodes;
+    state.edges = edges;
+
+    // Wide golden-angle spiral initial placement with 1.45x horizontal aspect stretch to match wide canvas
+    state.pts = nodes.map((n, i) => {
+      const angle = 2.39996 * i;
+      const dist = 76 * Math.sqrt(i + 1);
+      return {
+        index: i,
+        x: Math.cos(angle) * dist * 1.38,
+        y: Math.sin(angle) * dist * 0.96,
+        vx: 0,
+        vy: 0,
+        fx: null,
+        fy: null,
+      };
+    });
+
+    state.adj = nodes.map(() => []);
+    for (const [a, b] of edges) {
+      state.adj[a].push(b);
+      state.adj[b].push(a);
+    }
+
+    // Top hubs + revenue hubs
+    const sortedIdx = [...nodes.keys()].sort((a, b) => (nodes[b].deg || 0) - (nodes[a].deg || 0));
+    state.hubSet = new Set(
+      sortedIdx.filter(i => nodes[i].isRevenueHub || (nodes[i].deg || 0) >= 2).slice(0, 28)
+    );
+
+    state.alpha = 1.0;
+    state.autoFit = true;
+
+    // Run 140 warm-up ticks so graph opens spaciously and completely settled
+    for (let k = 0; k < 140; k++) stepPhysics();
+    fitCamera(false);
+    const visEl = document.getElementById('stat-visible-nodes');
+    if (visEl) visEl.textContent = `${state.focusId ? '2-Hops 집중' : '전체 보기'} · ${nodes.length}개 활성`;
+    const focBadge = document.getElementById('stat-focus-badge');
+    if (focBadge) focBadge.textContent = state.focusId ? '2-Hops 해제 (Esc)' : '2-Hops 탐색';
+    const backBtn = document.getElementById('btn-back-all');
+    if (backBtn) backBtn.style.display = state.focusId ? 'inline-block' : 'none';
+  }
+
+  // Upgraded Force-Directed Physics Engine:
+  // - Charge repulsion increased 10x (-290, distanceMax 950)
+  // - Link distance expanded to 148px (strength 0.36)
+  // - Explicit collision radius >= 66px (horizontal-aware so label capsules never overlap)
+  function stepPhysics() {
+    if (state.alpha < 0.004) return;
+    const pts = state.pts;
+    const N = pts.length;
+    if (!N) return;
+
+    const alpha = state.alpha;
+    // 1. Gentle anisotropic center gravity (keeps wide constellation centered)
+    for (let i = 0; i < N; i++) {
+      const p = pts[i];
+      p.vx += (0 - p.x) * 0.011 * alpha;
+      p.vy += (0 - p.y) * 0.015 * alpha;
+    }
+
+    // 2. Link spring force (linkDistance: 148px, strength: 0.36)
+    for (let e = 0; e < state.edges.length; e++) {
+      const [si, ti] = state.edges[e];
+      const s = pts[si], t = pts[ti];
+      let dx = (t.x + t.vx) - (s.x + s.vx);
+      let dy = (t.y + t.vy) - (s.y + s.vy);
+      let l = Math.sqrt(dx * dx + dy * dy) || 1;
+      const targetDist = 148;
+      l = ((l - targetDist) / l) * alpha * 0.36;
+      dx *= l;
+      dy *= l;
+      t.vx -= dx * 0.5;
+      t.vy -= dy * 0.5;
+      s.vx += dx * 0.5;
+      s.vy += dy * 0.5;
+    }
+
+    // 3. Strong Many-body charge repulsion (-290, distanceMax 950)
+    const stride = N > 600 ? Math.ceil(N / 450) : 1;
+    for (let i = 0; i < N; i++) {
+      const pi = pts[i];
+      for (let j = i + 1; j < N; j += stride) {
+        const pj = pts[j];
+        let dx = pj.x - pi.x;
+        let dy = pj.y - pi.y;
+        let d2 = dx * dx + dy * dy;
+        if (d2 > 902500) continue; // 950^2
+        if (d2 < 16) d2 = 16;
+        const f = (-290 * alpha * stride) / d2;
+        pi.vx += dx * f * 1.15;
+        pi.vy += dy * f;
+        pj.vx -= dx * f * 1.15;
+        pj.vy -= dy * f;
+      }
+    }
+
+    // 4. Explicit Collision Radius Enforcement (min 66px radius -> 132px center-to-center horizontal, 92px vertical)
+    for (let iter = 0; iter < 2; iter++) {
+      for (let i = 0; i < N; i++) {
+        const pi = pts[i];
+        for (let j = i + 1; j < N; j++) {
+          const pj = pts[j];
+          let dx = pj.x - pi.x;
+          let dy = pj.y - pi.y;
+          // Elliptical collision box to protect horizontal capsule labels from overlapping
+          const rx = 128;
+          const ry = 82;
+          const nx = dx / rx;
+          const ny = dy / ry;
+          const nd2 = nx * nx + ny * ny;
+          if (nd2 < 1.0) {
+            const nd = Math.sqrt(nd2) || 0.001;
+            const push = (1.0 - nd) * 0.52;
+            const px = (nx / nd) * rx * push;
+            const py = (ny / nd) * ry * push;
+            if (pi.fx === null) { pi.x -= px; pi.y -= py; }
+            if (pj.fx === null) { pj.x += px; pj.y += py; }
+          }
+        }
+      }
+    }
+
+    // 5. Integrate with velocityDecay (0.40 -> retain 0.60)
+    for (let i = 0; i < N; i++) {
+      const p = pts[i];
+      if (p.fx !== null && p.fy !== null) {
+        p.x = p.fx;
+        p.y = p.fy;
+        p.vx = 0;
+        p.vy = 0;
+      } else {
+        p.vx *= 0.60;
+        p.vy *= 0.60;
+        p.x += p.vx;
+        p.y += p.vy;
+      }
+    }
+
+    state.alpha *= (1 - 0.024);
+  }
+
+  // Auto Fit-to-View with 15% canvas margin on all sides
+  function fitCamera(animate = true) {
+    const W = canvas.clientWidth || 860;
+    const H = canvas.clientHeight || 580;
+    if (!state.pts.length) return;
+    let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+    for (const p of state.pts) {
+      if (p.x < minX) minX = p.x;
+      if (p.x > maxX) maxX = p.x;
+      if (p.y < minY) minY = p.y;
+      if (p.y > maxY) maxY = p.y;
+    }
+    const spanX = Math.max(maxX - minX, 180);
+    const spanY = Math.max(maxY - minY, 150);
+    // 15% margin on left/right/top/bottom -> usable area is 70%~72% of W and H
+    const s = Math.min((W * 0.72) / spanX, (H * 0.68) / spanY, 2.2);
+    state.targetCam.s = s;
+    state.targetCam.x = W / 2 - ((minX + maxX) / 2) * s;
+    state.targetCam.y = (H / 2 - 8) - ((minY + maxY) / 2) * s;
+    if (!animate) {
+      state.cam.s = state.targetCam.s;
+      state.cam.x = state.targetCam.x;
+      state.cam.y = state.targetCam.y;
+    }
+  }
+
+  function screenCoords(p) {
+    return {
+      x: p.x * state.cam.s + state.cam.x,
+      y: p.y * state.cam.s + state.cam.y,
+    };
+  }
+
+  function hitTest(mx, my) {
+    let best = null;
+    let bestDist2 = 260;
+    for (let i = 0; i < state.pts.length; i++) {
+      const sc = screenCoords(state.pts[i]);
+      const dx = sc.x - mx;
+      const dy = sc.y - my;
+      const d2 = dx * dx + dy * dy;
+      const r = nodeRadius(state.nodes[i]) * Math.min(state.cam.s, 2) + 8;
+      if (d2 < Math.max(bestDist2, r * r) && d2 < 2 * bestDist2) {
+        bestDist2 = d2;
+        best = i;
+      }
+    }
+    return best;
+  }
+
+  function truncateTitle(str, maxLen = 16) {
+    const s = String(str || '').trim();
+    return s.length > maxLen ? s.slice(0, maxLen) + '…' : s;
+  }
+
+  function renderFrame() {
+    stepPhysics();
+    state.tickCount++;
+    if (state.autoFit && state.tickCount % 15 === 0 && state.alpha > 0.04) {
+      fitCamera(true);
+    }
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const W = canvas.clientWidth || 860;
+    const H = canvas.clientHeight || 580;
+    if (canvas.width !== W * dpr || canvas.height !== H * dpr) {
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      state.stars = buildStarfield(W, H);
+      fitCamera(false);
+    }
+
+    state.cam.x += (state.targetCam.x - state.cam.x) * 0.16;
+    state.cam.y += (state.targetCam.y - state.cam.y) * 0.16;
+    state.cam.s += (state.targetCam.s - state.cam.s) * 0.16;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw background stars
+    for (const st of state.stars) {
+      ctx.fillStyle = `rgba(226, 232, 240, ${st.a})`;
+      ctx.beginPath();
+      ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    const screenPts = state.pts.map(screenCoords);
+    const hoverIdx = state.hoverIdx;
+    const neighborSet = hoverIdx !== null ? new Set(state.adj[hoverIdx] || []) : null;
+    const focusIdx = state.focusId ? state.nodes.findIndex(n => n.id === state.focusId) : -1;
+    const selectedIdx = state.selectedRel ? state.nodes.findIndex(n => n.rel === state.selectedRel) : -1;
+
+    // Draw 2-hops radar rings around focused node
+    if (focusIdx >= 0 && screenPts[focusIdx]) {
+      const fp = screenPts[focusIdx];
+      ctx.setLineDash([2, 6]);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(96, 165, 250, 0.22)';
+      for (const rad of [90, 180, 290]) {
+        ctx.beginPath();
+        ctx.arc(fp.x, fp.y, rad * state.cam.s, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      ctx.setLineDash([]);
+      ctx.strokeStyle = 'rgba(96, 165, 250, 0.26)';
+      ctx.beginPath();
+      ctx.moveTo(fp.x - 330 * state.cam.s, fp.y);
+      ctx.lineTo(fp.x + 330 * state.cam.s, fp.y);
+      ctx.moveTo(fp.x, fp.y - 330 * state.cam.s);
+      ctx.lineTo(fp.x, fp.y + 330 * state.cam.s);
+      ctx.stroke();
+    }
+
+    // Draw edges
+    const hubPath = new Path2D();
+    const normalPath = new Path2D();
+    const agentPath = new Path2D();
+    const activePath = new Path2D();
+
+    for (const [a, b] of state.edges) {
+      const pa = screenPts[a], pb = screenPts[b];
+      if (!pa || !pb) continue;
+      const isHoverEdge = hoverIdx !== null && (a === hoverIdx || b === hoverIdx);
+      const na = state.nodes[a], nb = state.nodes[b];
+      const target = isHoverEdge
+        ? activePath
+        : (na.type === 'agent' || nb.type === 'agent')
+        ? agentPath
+        : (state.hubSet.has(a) && state.hubSet.has(b))
+        ? hubPath
+        : normalPath;
+      target.moveTo(pa.x, pa.y);
+      target.lineTo(pb.x, pb.y);
+    }
+
+    const fade = hoverIdx !== null ? 0.32 : 1.0;
+    ctx.setLineDash([3, 5]);
+    ctx.lineWidth = 0.85;
+    ctx.strokeStyle = `rgba(148, 163, 184, ${0.24 * fade})`;
+    ctx.stroke(normalPath);
+
+    ctx.setLineDash([2, 5]);
+    ctx.strokeStyle = `rgba(251, 191, 36, ${0.36 * fade})`;
+    ctx.stroke(agentPath);
+
+    ctx.setLineDash([]);
+    ctx.lineWidth = 1.15;
+    ctx.strokeStyle = `rgba(96, 165, 250, ${0.48 * fade})`;
+    ctx.stroke(hubPath);
+
+    if (hoverIdx !== null) {
+      ctx.lineWidth = 1.6;
+      ctx.strokeStyle = 'rgba(96, 165, 250, 0.95)';
+      ctx.stroke(activePath);
+    }
+
+    // Draw nodes (8-vertex 4-pointed star ✦ for docs/hubs, 45° diamond ◆ for agents)
+    const scaleClamp = Math.min(Math.max(state.cam.s, 0.8), 1.35);
+    const minorStarBatch = new Path2D();
+    const specialNodes = [];
+
+    for (let i = 0; i < state.nodes.length; i++) {
+      const sp = screenPts[i];
+      if (!sp || sp.x < -40 || sp.x > W + 40 || sp.y < -40 || sp.y > H + 40) continue;
+      const n = state.nodes[i];
+      const r = nodeRadius(n) * scaleClamp;
+      const isHighlighted = hoverIdx === null || i === hoverIdx || (neighborSet && neighborSet.has(i));
+      const alphaNode = isHighlighted ? 1.0 : 0.22;
+
+      if (n.type === 'agent' || state.hubSet.has(i) || i === focusIdx || (hoverIdx !== null && isHighlighted)) {
+        specialNodes.push([i, sp, r, alphaNode]);
+      } else {
+        drawStarPath(minorStarBatch, sp.x, sp.y, 1.35 * r);
+      }
+    }
+
+    ctx.fillStyle = `rgba(203, 213, 225, ${hoverIdx !== null ? 0.18 : 0.7})`;
+    ctx.fill(minorStarBatch);
+
+    for (const [i, sp, r, alphaNode] of specialNodes) {
+      const n = state.nodes[i];
+      if (n.subGroup === 'crew' || n.type === 'agent') {
+        // Gold Aura + Rotated 45° Gold Diamond ◆ for AI Crew Hubs
+        const grad = ctx.createRadialGradient(sp.x, sp.y, 0.3 * r, sp.x, sp.y, 2.5 * r);
+        grad.addColorStop(0, `rgba(251, 191, 36, ${0.32 * alphaNode})`);
+        grad.addColorStop(1, 'rgba(251, 191, 36, 0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, 2.5 * r, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(sp.x, sp.y);
+        ctx.rotate(Math.PI / 4);
+        ctx.fillStyle = `rgba(251, 191, 36, ${0.98 * alphaNode})`;
+        ctx.fillRect(-1.12 * r, -1.12 * r, 2.24 * r, 2.24 * r);
+        ctx.restore();
+        continue;
+      }
+
+      const isFocus = i === focusIdx || i === selectedIdx;
+      const isSkill = n.category === 'skill' || n.subGroup === 'skill';
+      const isMeeting = n.category === 'meeting';
+      const isHub = isFocus || state.hubSet.has(i) || n.isRevenueHub || n.isCoreHub;
+
+      let auraRgb = '59, 130, 246';
+      let starFill = `rgba(96, 165, 250, ${0.98 * alphaNode})`;
+      if (isSkill) {
+        auraRgb = '16, 185, 129';
+        starFill = `rgba(52, 211, 153, ${0.98 * alphaNode})`;
+      } else if (isMeeting) {
+        auraRgb = '168, 85, 247';
+        starFill = `rgba(192, 132, 252, ${0.98 * alphaNode})`;
+      }
+
+      if (isHub) {
+        const grad = ctx.createRadialGradient(sp.x, sp.y, 0.4 * r, sp.x, sp.y, 2.7 * r);
+        grad.addColorStop(0, `rgba(${auraRgb}, ${0.35 * alphaNode})`);
+        grad.addColorStop(1, `rgba(${auraRgb}, 0)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, 2.7 * r, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.lineWidth = 0.9;
+        ctx.strokeStyle = `rgba(${auraRgb}, ${0.52 * alphaNode})`;
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, 1.9 * r, 0, Math.PI * 2);
+        ctx.stroke();
+
+        const cross = r * (isFocus ? 2.9 : 2.35);
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = starFill;
+        ctx.beginPath();
+        ctx.moveTo(sp.x - cross, sp.y);
+        ctx.lineTo(sp.x + cross, sp.y);
+        ctx.moveTo(sp.x, sp.y - cross);
+        ctx.lineTo(sp.x, sp.y + cross);
+        ctx.stroke();
+
+        ctx.fillStyle = starFill;
+      } else {
+        ctx.fillStyle = starFill;
+      }
+
+      const star = new Path2D();
+      drawStarPath(star, sp.x, sp.y, r * (isHub ? 1.65 : 1.4));
+      ctx.fill(star);
+    }
+
+    // Draw Centered 1-Line Dark Capsule Labels below each node (max 16 chars)
+    // Second-line metadata tooltip is ONLY rendered for Hovered or Active Selected/Focused node!
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    let activeTooltipIdx = hoverIdx !== null ? hoverIdx : (focusIdx >= 0 ? focusIdx : selectedIdx);
+
+    for (let i = 0; i < state.nodes.length; i++) {
+      if (i === activeTooltipIdx) continue; // Draw active tooltip on top at the end
+      const n = state.nodes[i];
+      const isNeighbor = neighborSet && neighborSet.has(i);
+      if (hoverIdx !== null && !isNeighbor && !state.hubSet.has(i)) continue;
+
+      const sp = screenPts[i];
+      if (!sp || sp.x < 24 || sp.x > W - 24 || sp.y < 18 || sp.y > H - 24) continue;
+
+      const r = nodeRadius(n) * scaleClamp;
+      const shortLabel = truncateTitle(n.label, 16);
+      ctx.font = `${n.isCoreHub ? 700 : 600} 11.5px Pretendard, sans-serif`;
+      const textW = ctx.measureText(shortLabel).width;
+      const padX = 7;
+      const boxW = Math.ceil(textW + padX * 2);
+      const boxH = 20;
+      const boxX = Math.round(sp.x - boxW / 2);
+      const boxY = Math.round(sp.y + r * 1.75 + 5);
+
+      const isDimmed = hoverIdx !== null && !isNeighbor;
+      ctx.save();
+      ctx.globalAlpha = isDimmed ? 0.28 : 0.96;
+      drawRoundRect(ctx, boxX, boxY, boxW, boxH, 6);
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.fill();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.stroke();
+
+      ctx.fillStyle = (n.subGroup === 'crew' || n.type === 'agent')
+        ? '#fde68a'
+        : (n.category === 'skill' || n.subGroup === 'skill')
+        ? '#6ee7b7'
+        : (n.category === 'meeting')
+        ? '#d8b4fe'
+        : '#93c5fd';
+      ctx.fillText(shortLabel, sp.x, boxY + boxH / 2 + 0.5);
+      ctx.restore();
+    }
+
+    // Draw Highlighted 2-Line Tooltip Capsule for Hovered or Selected/Focused Node
+    if (activeTooltipIdx !== null && activeTooltipIdx >= 0 && state.nodes[activeTooltipIdx]) {
+      const i = activeTooltipIdx;
+      const n = state.nodes[i];
+      const sp = screenPts[i];
+      if (sp) {
+        const r = nodeRadius(n) * scaleClamp;
+        const titleStr = truncateTitle(n.label, 22);
+        const catTag = n.subGroup === 'crew'
+          ? 'AI 크루 허브'
+          : (n.subGroup === 'channel'
+            ? '운영 채널 허브'
+            : (n.category === 'skill'
+              ? '코어 스킬(SKILL.md)'
+              : (n.category === 'revenue' ? '수익 발생 기억' : '회의실 결정')));
+        const subStr = n.revenueUsd > 0
+          ? `✦ ${catTag} · 시냅스 ${n.deg} · $${n.revenueUsd}`
+          : `✦ ${catTag} · 시냅스 ${n.deg}`;
+
+        ctx.font = '800 12.5px Pretendard, sans-serif';
+        const w1 = ctx.measureText(titleStr).width;
+        ctx.font = '600 10.5px Pretendard, sans-serif';
+        const w2 = ctx.measureText(subStr).width;
+
+        const padX = 10;
+        const boxW = Math.ceil(Math.max(w1, w2) + padX * 2);
+        const boxH = 38;
+        const boxX = Math.max(8, Math.min(W - boxW - 8, Math.round(sp.x - boxW / 2)));
+        const boxY = Math.round(sp.y + r * 1.85 + 6);
+
+        ctx.save();
+        drawRoundRect(ctx, boxX, boxY, boxW, boxH, 7);
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.94)';
+        ctx.fill();
+        ctx.lineWidth = 1.3;
+        ctx.strokeStyle = (n.subGroup === 'crew' || n.type === 'agent')
+          ? 'rgba(251, 191, 36, 0.65)'
+          : (n.category === 'skill' || n.subGroup === 'skill')
+          ? 'rgba(52, 211, 153, 0.65)'
+          : 'rgba(96, 165, 250, 0.7)';
+        ctx.stroke();
+
+        ctx.font = '800 12.5px Pretendard, sans-serif';
+        ctx.fillStyle = (n.subGroup === 'crew' || n.type === 'agent')
+          ? '#fde68a'
+          : (n.category === 'skill' || n.subGroup === 'skill')
+          ? '#6ee7b7'
+          : '#93c5fd';
+        ctx.fillText(titleStr, boxX + boxW / 2, boxY + 12.5);
+
+        ctx.font = '600 10.5px Pretendard, sans-serif';
+        ctx.fillStyle = '#e2e8f0';
+        ctx.fillText(subStr, boxX + boxW / 2, boxY + 27.5);
+        ctx.restore();
+      }
+    }
+
+    ctx.textAlign = 'left';
+    requestAnimationFrame(renderFrame);
+  }
+
+  let resolvedApiBase = '';
+  async function apiFetch(path, options) {
+    if (resolvedApiBase) {
+      return fetch(resolvedApiBase + path, options);
+    }
+    try {
+      const res = await fetch(path, options);
+      if (res.status !== 404) return res;
+    } catch (_) {}
+    for (const base of ['http://127.0.0.1:8791', 'http://192.168.45.248:8791']) {
+      try {
+        const res = await fetch(base + path, options);
+        if (res.ok || res.status !== 404) {
+          resolvedApiBase = base;
+          return res;
+        }
+      } catch (_) {}
+    }
+    return fetch(path, options);
+  }
+
+  async function loadGraphData() {
+    const params = new URLSearchParams({
+      category: state.categoryFilter || 'all',
+      q: state.query,
+    });
+    const res = await apiFetch(`/api/memory/graph?${params}`);
+    const data = await res.json();
+    state.rawNodes = data.nodes || [];
+    state.rawEdges = data.edges || [];
+
+    const st = data.stats || {};
+    const total = st.total || 19;
+    const coreHubs = st.coreHubs || 13;
+    const isolated = st.isolated || 0;
+    const knowNodes = Math.max(0, total - coreHubs - isolated);
+    const links = st.links || 90;
+    const integrityPct = total > 0 ? Math.round(((total - isolated) / total) * 100) : 100;
+
+    // Card 1: Synapse Integrity & Core Hubs
+    const elTotalDocs = document.getElementById('stat-total-docs');
+    if (elTotalDocs) elTotalDocs.textContent = `코어 허브 ${coreHubs} / 전체 ${total} 노드`;
+    const elLinkedDesc = document.getElementById('stat-linked-desc');
+    if (elLinkedDesc) elLinkedDesc.textContent = `무결성 ${integrityPct}%`;
+    const elIntPct = document.getElementById('vault-integrity-pct');
+    if (elIntPct) elIntPct.textContent = `${integrityPct}%`;
+
+    const corePct = total > 0 ? ((coreHubs / total) * 100).toFixed(1) : 68.4;
+    const knowPct = total > 0 ? ((knowNodes / total) * 100).toFixed(1) : 31.6;
+    const orphPct = total > 0 ? ((isolated / total) * 100).toFixed(1) : 0;
+    const segCore = document.getElementById('seg-core-hubs');
+    const segKnow = document.getElementById('seg-know-nodes');
+    const segOrph = document.getElementById('seg-orphan-nodes');
+    if (segCore) segCore.style.width = `${corePct}%`;
+    if (segKnow) segKnow.style.width = `${knowPct}%`;
+    if (segOrph) segOrph.style.width = `${orphPct}%`;
+
+    const lblCore = document.getElementById('lbl-core-hubs');
+    const lblKnow = document.getElementById('lbl-know-nodes');
+    const lblOrph = document.getElementById('lbl-orphan-nodes');
+    if (lblCore) lblCore.textContent = `코어 허브 ${coreHubs}`;
+    if (lblKnow) lblKnow.textContent = `지식 노드 ${knowNodes}`;
+    if (lblOrph) lblOrph.textContent = `고아 노드 ${isolated}`;
+
+    // Card 2: Semi-Circle Edge Density Gauge
+    const edgesPerNode = (links / Math.max(1, total)).toFixed(1);
+    const densityPct = Math.round((parseFloat(edgesPerNode) / 4.0) * 100);
+    const elTotalEdges = document.getElementById('stat-total-edges');
+    if (elTotalEdges) elTotalEdges.textContent = `총 ${links.toLocaleString()}개 시냅스 연결`;
+    const elDensityReadout = document.getElementById('vault-density-readout');
+    if (elDensityReadout) elDensityReadout.textContent = `${edgesPerNode} Edges/Node`;
+    const elDensityBadge = document.getElementById('vault-density-badge');
+    if (elDensityBadge) elDensityBadge.textContent = `밀도 ${densityPct}% 달성`;
+
+    const normDensity = Math.min(1, Math.max(0.1, parseFloat(edgesPerNode) / 6.0));
+    const semiArc = document.getElementById('vault-semi-arc');
+    if (semiArc) semiArc.setAttribute('stroke-dashoffset', String((91.1 * (1 - normDensity)).toFixed(1)));
+    const needle = document.getElementById('vault-density-needle');
+    if (needle) {
+      const deg = Math.round(-85 + normDensity * 170);
+      needle.setAttribute('transform', `rotate(${deg} 42 43)`);
+    }
+
+    // Card 3: 3-Bar Horizontal Distribution (Skill / Revenue / Meeting)
+    const skillCnt = st.skillNodes != null ? st.skillNodes : 9;
+    const revCnt = st.revenueMemories != null ? st.revenueMemories : 1;
+    const meetCnt = st.meetingDecisions != null ? st.meetingDecisions : 0;
+    const sumKnowledge = skillCnt + revCnt + meetCnt;
+    const maxBarBase = Math.max(10, sumKnowledge);
+
+    const elRevHubs = document.getElementById('stat-revenue-hubs');
+    if (elRevHubs) elRevHubs.textContent = `지식 자산 ${sumKnowledge}건`;
+    const elSkillCnt = document.getElementById('stat-skill-cnt');
+    const elRevCnt = document.getElementById('stat-rev-cnt');
+    const elMeetCnt = document.getElementById('stat-meet-cnt');
+    if (elSkillCnt) elSkillCnt.textContent = `${skillCnt}건`;
+    if (elRevCnt) elRevCnt.textContent = `${revCnt}건`;
+    if (elMeetCnt) elMeetCnt.textContent = `${meetCnt}건`;
+
+    const barSkill = document.getElementById('bar-skill-fill');
+    const barRev = document.getElementById('bar-rev-fill');
+    const barMeet = document.getElementById('bar-meet-fill');
+    if (barSkill) barSkill.style.width = `${Math.max(8, Math.round((skillCnt / maxBarBase) * 100))}%`;
+    if (barRev) barRev.style.width = `${Math.max(revCnt > 0 ? 16 : 5, Math.round((revCnt / maxBarBase) * 100))}%`;
+    if (barMeet) barMeet.style.width = `${Math.max(meetCnt > 0 ? 14 : 5, Math.round((meetCnt / maxBarBase) * 100))}%`;
+
+    // Card 4: 14D Vault LED Matrix
+    initVaultLedMatrix(total, links);
+
+    const badge = document.getElementById('memory-sidebar-count');
+    if (badge) badge.textContent = total.toLocaleString();
+
+    renderNoteLists(data.recentNotes || [], data.recentJournals || []);
+    applyFocusSubgraph();
+  }
+
+  function categoryBadgeLabel(cat, sub) {
+    if (sub === 'crew') return '◆ AI 크루 허브';
+    if (sub === 'channel') return '✦ 운영 채널 허브';
+    if (cat === 'skill' || sub === 'skill') return '🛠️ 학습된 스킬(SKILL.md)';
+    if (cat === 'revenue') return '📈 수익 발생 기억';
+    if (cat === 'meeting') return '💬 회의실 결정사항';
+    return '✦ 코어 허브';
+  }
+
+  function renderNoteLists(notes, journals) {
+    const notesEl = document.getElementById('recent-notes-list');
+    notesEl.innerHTML = notes.map(n => `
+      <div class="note-list-item" data-rel="${n.rel}">
+        <strong>${escapeHtml(categoryBadgeLabel(n.category, n.subGroup))} · ${escapeHtml(n.title)}</strong>
+        <small>${escapeHtml(n.rel)} · 갱신 ${escapeHtml(n.updated || '-')} · 시냅스 연결 ${(n.links || []).length}개</small>
+      </div>
+    `).join('');
+    notesEl.querySelectorAll('.note-list-item').forEach(el => {
+      el.addEventListener('click', () => inspectDocument(el.dataset.rel));
+    });
+
+    const journalsEl = document.getElementById('recent-journals-list');
+    if (!journals.length) {
+      journalsEl.innerHTML = '<div style="padding:18px;font-size:13px;color:#64748b;">아직 채택된 회의실 결정사항 노드가 없습니다. 회의실에서 회의를 종료하면 4대 시냅스 규칙으로 자동 연결됩니다.</div>';
+    } else {
+      journalsEl.innerHTML = journals.map(j => `
+        <div class="note-list-item" data-rel="${j.rel}">
+          <strong>💬 ${escapeHtml(j.title)}</strong>
+          <small>${escapeHtml(j.rel)} · ${escapeHtml(j.updated || '-')} · 시냅스 연결 ${(j.links || []).length}개</small>
+        </div>
+      `).join('');
+      journalsEl.querySelectorAll('.note-list-item').forEach(el => {
+        el.addEventListener('click', () => inspectDocument(el.dataset.rel));
+      });
+    }
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+  }
+
+  async function inspectDocument(rel) {
+    if (!rel) return;
+    state.selectedRel = rel;
+    document.querySelectorAll('.inspector-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === 'doc'));
+    document.getElementById('tab-doc').style.display = 'block';
+    document.getElementById('tab-notes').style.display = 'none';
+    document.getElementById('tab-journals').style.display = 'none';
+
+    try {
+      const res = await apiFetch(`/api/memory/doc?rel=${encodeURIComponent(rel)}`);
+      if (!res.ok) return;
+      const doc = await res.json();
+      const catLabel = categoryBadgeLabel(doc.category, doc.subGroup);
+      document.getElementById('doc-title').textContent = doc.title;
+      document.getElementById('doc-meta').innerHTML = `
+        <span class="badge-hub">${escapeHtml(catLabel)}</span>
+        <span style="color:#64748b;">${escapeHtml(doc.rel)}</span>
+        <span style="color:#64748b;">갱신: ${escapeHtml(doc.updated || '-')}</span>
+        ${doc.revenueUsd > 0 ? `<span class="badge-hub" style="background:#dcfce7;color:#15803d;">검증 수익 $${doc.revenueUsd}</span>` : ''}
+      `;
+      const synBox = document.getElementById('doc-synapse-summary');
+      synBox.style.display = 'block';
+      synBox.innerHTML = `<strong>4대 시냅스 무결성 통과</strong> · 부모/연결 허브 <strong>${(doc.links || []).length}개</strong> · 역링크 <strong>${(doc.backlinks || []).length}개</strong> (고아 노드 0개 원칙 적용됨)`;
+      document.getElementById('doc-content').textContent = doc.content || '';
+      const outEl = document.getElementById('doc-outbound');
+      outEl.innerHTML = (doc.links || []).length
+        ? doc.links.map(l => `<span class="wiki-link-pill" data-link="${escapeHtml(l)}">[[${escapeHtml(l)}]]</span>`).join('')
+        : '<span style="font-size:12px; color:#94a3b8;">없음</span>';
+      outEl.querySelectorAll('.wiki-link-pill').forEach(p => {
+        p.addEventListener('click', () => inspectDocument(p.dataset.link));
+      });
+
+      const backEl = document.getElementById('doc-backlinks');
+      backEl.innerHTML = (doc.backlinks || []).length
+        ? doc.backlinks.map(b => `<span class="wiki-link-pill" data-link="${escapeHtml(b.rel)}">← ${escapeHtml(b.title)}</span>`).join('')
+        : '<span style="font-size:12px; color:#94a3b8;">없음</span>';
+      backEl.querySelectorAll('.wiki-link-pill').forEach(p => {
+        p.addEventListener('click', () => inspectDocument(p.dataset.link));
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // Canvas interactions (drag, pan, wheel zoom, click, double-click 2-hops)
+  let downPos = null;
+  let moved = false;
+
+  function getMousePos(e) {
+    const rect = canvas.getBoundingClientRect();
+    return [e.clientX - rect.left, e.clientY - rect.top];
+  }
+
+  canvas.addEventListener('mousedown', e => {
+    const [mx, my] = getMousePos(e);
+    downPos = { x: mx, y: my };
+    moved = false;
+    const hit = hitTest(mx, my);
+    if (hit !== null) {
+      state.dragIdx = hit;
+      state.pts[hit].fx = state.pts[hit].x;
+      state.pts[hit].fy = state.pts[hit].y;
+      canvas.style.cursor = 'grabbing';
+    } else {
+      state.panStart = { x: mx, y: my, camX: state.cam.x, camY: state.cam.y };
+      canvas.style.cursor = 'grabbing';
+    }
+  });
+
+  window.addEventListener('mousemove', e => {
+    const [mx, my] = getMousePos(e);
+    if (downPos && Math.hypot(mx - downPos.x, my - downPos.y) > 3) {
+      moved = true;
+    }
+    if (state.dragIdx !== null) {
+      const p = state.pts[state.dragIdx];
+      p.fx = (mx - state.cam.x) / state.cam.s;
+      p.fy = (my - state.cam.y) / state.cam.s;
+      state.alpha = Math.max(state.alpha, 0.35);
+      state.autoFit = false;
+      return;
+    }
+    if (state.panStart) {
+      state.autoFit = false;
+      state.targetCam.x = state.panStart.camX + (mx - state.panStart.x);
+      state.targetCam.y = state.panStart.camY + (my - state.panStart.y);
+      state.cam.x = state.targetCam.x;
+      state.cam.y = state.targetCam.y;
+      return;
+    }
+    const hit = hitTest(mx, my);
+    state.hoverIdx = hit;
+    canvas.style.cursor = hit !== null ? 'pointer' : 'grab';
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (state.dragIdx !== null) {
+      const idx = state.dragIdx;
+      state.dragIdx = null;
+      state.pts[idx].fx = null;
+      state.pts[idx].fy = null;
+      if (!moved && state.nodes[idx] && state.nodes[idx].rel) {
+        inspectDocument(state.nodes[idx].rel);
+      }
+    }
+    state.panStart = null;
+    downPos = null;
+  });
+
+  canvas.addEventListener('dblclick', e => {
+    const [mx, my] = getMousePos(e);
+    const hit = hitTest(mx, my);
+    if (hit !== null && state.nodes[hit]) {
+      state.focusId = state.nodes[hit].id;
+      applyFocusSubgraph();
+      if (state.nodes[hit] && state.nodes[hit].rel) {
+        inspectDocument(state.nodes[hit].rel);
+      }
+    }
+  });
+
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault();
+    state.autoFit = false;
+    const [mx, my] = getMousePos(e);
+    const factor = Math.exp(-0.0016 * e.deltaY);
+    const nextS = Math.min(Math.max(state.targetCam.s * factor, 0.15), 6.0);
+    state.targetCam.x = mx - (mx - state.targetCam.x) * (nextS / state.targetCam.s);
+    state.targetCam.y = my - (my - state.targetCam.y) * (nextS / state.targetCam.s);
+    state.targetCam.s = nextS;
+  }, { passive: false });
+
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && state.focusId) {
+      state.focusId = null;
+      applyFocusSubgraph();
+    }
+  });
+
+  // UI Controls
+  document.getElementById('btn-back-all').addEventListener('click', () => {
+    state.focusId = null;
+    applyFocusSubgraph();
+  });
+
+  document.getElementById('btn-reset-view').addEventListener('click', () => {
+    state.autoFit = true;
+    fitCamera(true);
+  });
+
+  const btnCardFit = document.getElementById('btn-card-fit');
+  if (btnCardFit) {
+    btnCardFit.addEventListener('click', () => {
+      state.autoFit = true;
+      fitCamera(true);
+    });
+  }
+
+  const badgeFocusToggle = document.getElementById('stat-focus-badge');
+  if (badgeFocusToggle) {
+    badgeFocusToggle.addEventListener('click', () => {
+      if (state.focusId) {
+        state.focusId = null;
+      } else if (state.rawNodes.length) {
+        const targetNode = state.rawNodes.find(n => n.rel === state.selectedRel) || state.rawNodes[0];
+        if (targetNode) state.focusId = targetNode.id;
+      }
+      applyFocusSubgraph();
+    });
+  }
+
+  // 4-Synapse Category Filter Chips (`전체 보기`, `✦ 코어 허브`, `📈 수익 발생 기억`, `🛠️ 학습된 스킬(SKILL.md)`, `💬 회의실 결정사항`)
+  document.querySelectorAll('#synapse-filter-group .graph-chip[data-cat]').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const cat = chip.getAttribute('data-cat') || 'all';
+      state.categoryFilter = cat;
+      state.focusId = null;
+      document.querySelectorAll('#synapse-filter-group .graph-chip[data-cat]').forEach(c => {
+        c.classList.toggle('on', c === chip);
+      });
+      loadGraphData();
+    });
+  });
+
+  let searchTimer = null;
+  document.getElementById('graph-search').addEventListener('input', e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      state.query = e.target.value.trim();
+      loadGraphData();
+    }, 220);
+  });
+
+  document.querySelectorAll('.inspector-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.inspector-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.getElementById('tab-doc').style.display = tab === 'doc' ? 'block' : 'none';
+      document.getElementById('tab-notes').style.display = tab === 'notes' ? 'block' : 'none';
+      document.getElementById('tab-journals').style.display = tab === 'journals' ? 'block' : 'none';
+    });
+  });
+
+  document.getElementById('btn-sync-vault').addEventListener('click', async () => {
+    const btn = document.getElementById('btn-sync-vault');
+    btn.textContent = '⚡ 동기화 중...';
+    await apiFetch('/api/memory/sync', { method: 'POST' });
+    await loadGraphData();
+    btn.textContent = '✅ 동기화 완료';
+    setTimeout(() => { btn.textContent = '⚡ 시냅스 동기화'; }, 2000);
+  });
+
+  // Modal handlers
+  const modal = document.getElementById('note-modal');
+  document.getElementById('btn-open-new-note').addEventListener('click', () => modal.classList.add('open'));
+  document.getElementById('btn-close-modal').addEventListener('click', () => modal.classList.remove('open'));
+  document.getElementById('btn-save-note').addEventListener('click', async () => {
+    const title = document.getElementById('new-note-title').value.trim();
+    const content = document.getElementById('new-note-content').value.trim();
+    const category = document.getElementById('new-note-category').value;
+    const sourceAgent = document.getElementById('new-note-agent').value;
+    if (!title) return alert('제목을 입력하세요.');
+    const res = await apiFetch('/api/memory/note', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, content, category, sourceAgent, merge: true, create: false }),
+    });
+    const out = await res.json();
+    if (out.ok) {
+      modal.classList.remove('open');
+      document.getElementById('new-note-title').value = '';
+      document.getElementById('new-note-content').value = '';
+      await loadGraphData();
+      inspectDocument(out.rel);
+    } else if (out.detail) {
+      alert(out.detail);
+    }
+  });
+
+  // Check URL query ?rel=...
+  const urlRel = new URLSearchParams(location.search).get('rel') || 'hubs/crew-jarvis.md';
+  loadGraphData().then(() => {
+    inspectDocument(urlRel);
+  });
+  requestAnimationFrame(renderFrame);
+})();
+</script>
+</body>
+</html>

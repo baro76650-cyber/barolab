@@ -1,0 +1,423 @@
+{
+  "recordedAt": "2026-10-14T19:12:47.392268+09:00",
+  "status": "qa_complete",
+  "sourceAndArtifactsFrozen": true,
+  "modules": {
+    "greeting": {
+      "versionCode": 2,
+      "versionName": "0.2.0-internal-preview",
+      "aab": "Y:\\10_Project\\BaroLab\\daily_apps\\greeting\\build\\outputs\\bundle\\internal\\greeting-internal.aab",
+      "aabSha256": "54615bb43ea9f09d4868c289b15c1c737692a4a547820951249fb7be22d71a51",
+      "aabBytes": 11840975,
+      "apkSha256": "7031648dc38c3e529195798c0e90d4e1341a3bc0e7a090e144b73d05a2d3b443",
+      "signatureExitCode": 0,
+      "signatureProof": "v2-greeting-signature.txt",
+      "packageEvidence": "package: name='com.barolab.morningcard' versionCode='2' versionName='0.2.0-internal-preview' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+      "officialTestAdAppIdInManifest": true,
+      "unitTests": [
+        {
+          "name": "com.barolab.morningcard.GreetingScheduleTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0"
+        },
+        {
+          "name": "com.barolab.morningcard.GreetingTextBoundsTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0"
+        }
+      ],
+      "lint": [],
+      "dataPreservation": {
+        "beforeFavorites": 1,
+        "afterFavorites": 2,
+        "everyLegacyFavoriteExactPreserved": true,
+        "legacyThemeIds": [
+          5
+        ]
+      },
+      "sourceHashes": {
+        "greeting\\src\\main\\AndroidManifest.xml": "1a7dd8c5b7c181bd089e1e8e3c94a54d7f2247e7c7854adf4bea211860f97411",
+        "greeting\\src\\main\\assets\\messages.json": "e0dc249ed86a4b66994ceda2bd8e0c9e9105b7fca16fdc66efd740d966346113",
+        "greeting\\src\\main\\res\\drawable\\ic_greeting.xml": "b3d46119ba67ac4bca9183fd99de3ee2158f890ea8a7a8a5ab7eee0ff8815d99",
+        "greeting\\src\\main\\res\\values\\styles.xml": "642035745615cefc30c7b51f038d1705dbeab5bcc54378d1521de1157aa78c21",
+        "greeting\\src\\main\\java\\com\\barolab\\morningcard\\CardRenderer.java": "070ecfa41dfd4935971bca47653263ff7221cc8ed42160501da3d6b2c41faa1d",
+        "greeting\\src\\main\\java\\com\\barolab\\morningcard\\CardState.java": "be4ae03efa702edbeb33ac13eb2bd164c9d810b7868bff8dda5887c1a53cb5a4",
+        "greeting\\src\\main\\java\\com\\barolab\\morningcard\\GreetingSchedule.java": "345154eb30f89489b893e4fe11d2797952a240d6296cfcb53bd8134b9530f542",
+        "greeting\\src\\main\\java\\com\\barolab\\morningcard\\MainActivity.java": "5ff84978dcb1d8c7e2d8ed3a0f0969a7f39bccc29ad6063898eeaeb30e1d9499",
+        "greeting\\src\\main\\java\\com\\barolab\\morningcard\\MessageRepository.java": "3f14f1b867f6b3e31a24da4e72e48de2f601fffd3aef0e17ad112462685288a7"
+      },
+      "officialTestBannerUnitInGeneratedBuildConfig": true
+    },
+    "magnifier": {
+      "versionCode": 2,
+      "versionName": "0.2.0-internal-preview",
+      "aab": "Y:\\10_Project\\BaroLab\\daily_apps\\magnifier\\build\\outputs\\bundle\\internal\\magnifier-internal.aab",
+      "aabSha256": "c6f3755cbcabc18593e9378aaa4af61c3334668183ca94615b663722bcd3577e",
+      "aabBytes": 8329856,
+      "apkSha256": "3b6c62209a83cf8d0af0a92f3e90e3fafcf65a58cb5edf8ef9dde0a2fd5413a5",
+      "signatureExitCode": 0,
+      "signatureProof": "v2-magnifier-signature.txt",
+      "packageEvidence": "package: name='com.barolab.biglens' versionCode='2' versionName='0.2.0-internal-preview' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+      "officialTestAdAppIdInManifest": true,
+      "unitTests": [
+        {
+          "name": "com.barolab.biglens.PhotoViewportTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0"
+        },
+        {
+          "name": "com.barolab.biglens.ZoomRangeTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0"
+        }
+      ],
+      "lint": [
+        {
+          "id": "ClickableViewAccessibility",
+          "severity": "Warning",
+          "message": "`FrozenImageView#onTouchEvent` should call `FrozenImageView#performClick` when a click is detected"
+        },
+        {
+          "id": "ClickableViewAccessibility",
+          "severity": "Warning",
+          "message": "`onTouch` lambda should call `View#performClick` when a click is detected"
+        }
+      ],
+      "dataPreservation": null,
+      "sourceHashes": {
+        "magnifier\\src\\main\\AndroidManifest.xml": "1064cbe61166002277ec473eb6f2185814af4d37ea01db79d89af1fa1845ebcb",
+        "magnifier\\src\\main\\res\\drawable\\ic_lens.xml": "e921dcc6b584ae7985e1af67ea73ae30e05525dfa28d8ebaf8c4acee8b819321",
+        "magnifier\\src\\main\\res\\values\\styles.xml": "dc7908a270b6b8cce805c31faa8d6f509181295af4cf83ca15eccdc004a8fe97",
+        "magnifier\\src\\main\\java\\com\\barolab\\biglens\\FrozenImageView.java": "7dfa3d61100bb649815593020a0ff089cef78ccb4299209916da7c4dd4f33619",
+        "magnifier\\src\\main\\java\\com\\barolab\\biglens\\HelpActivity.java": "84823fa0497f5d3a1d3557290d0bcd7db806c2b63de45021615525531e302eb6",
+        "magnifier\\src\\main\\java\\com\\barolab\\biglens\\MainActivity.java": "96acd0abe9498ab3f3fd23a6bcca58e5855f1ffe4b901ce90e0a8461afe91840",
+        "magnifier\\src\\main\\java\\com\\barolab\\biglens\\PhotoViewport.java": "c6b6b360d2119a74168e5606e8261674a5569f8346e92855bb521f784a52204e",
+        "magnifier\\src\\main\\java\\com\\barolab\\biglens\\ZoomRange.java": "836d34a898991b03d7a94cff25b8596f2f964929c677e478aebf87cc9812f866"
+      },
+      "officialTestBannerUnitInGeneratedBuildConfig": true
+    },
+    "shopping": {
+      "versionCode": 2,
+      "versionName": "0.2.0-internal-preview",
+      "aab": "Y:\\10_Project\\BaroLab\\daily_apps\\shopping\\build\\outputs\\bundle\\internal\\shopping-internal.aab",
+      "aabSha256": "7940daf974e87ad5ccda8384a8726fb4cd943396b250d8da6d2a4f076b434955",
+      "aabBytes": 5914075,
+      "apkSha256": "9da9cd4d8c6ea0dc798f041b092034d195992a57de7bc01754bf155d15c06f39",
+      "signatureExitCode": 0,
+      "signatureProof": "v2-shopping-signature.txt",
+      "packageEvidence": "package: name='com.barolab.voicebasket' versionCode='2' versionName='0.2.0-internal-preview' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+      "officialTestAdAppIdInManifest": true,
+      "unitTests": [
+        {
+          "name": "com.barolab.voicebasket.BasketParserTest",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0"
+        },
+        {
+          "name": "com.barolab.voicebasket.SubmissionGuardTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0"
+        }
+      ],
+      "lint": [
+        {
+          "id": "ObsoleteSdkInt",
+          "severity": "Warning",
+          "message": "Unnecessary; `SDK_INT` is always >= 31"
+        },
+        {
+          "id": "AccessibilityFocus",
+          "severity": "Warning",
+          "message": "Do not force accessibility focus, as this interferes with screen readers and gives an inconsistent user experience, especially across apps"
+        },
+        {
+          "id": "SetTextI18n",
+          "severity": "Warning",
+          "message": "Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        },
+        {
+          "id": "SetTextI18n",
+          "severity": "Warning",
+          "message": "Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        },
+        {
+          "id": "SetTextI18n",
+          "severity": "Warning",
+          "message": "Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        },
+        {
+          "id": "SetTextI18n",
+          "severity": "Warning",
+          "message": "Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        }
+      ],
+      "dataPreservation": {
+        "beforeLists": 4,
+        "afterLists": 7,
+        "everyPreUpdateListExactPreserved": true,
+        "newQaLists": [
+          {
+            "title": "QA20",
+            "template": false,
+            "itemCount": 21
+          },
+          {
+            "title": "QA20 템플릿",
+            "template": true,
+            "itemCount": 21
+          },
+          {
+            "title": "QA20 템플릿 다시 장보기",
+            "template": false,
+            "itemCount": 4
+          }
+        ]
+      },
+      "sourceHashes": {
+        "shopping\\src\\main\\AndroidManifest.xml": "953c63f6ca2342fcd055dd7b411870f7a8d7d735c5af1df55a621849dbf9ad6a",
+        "shopping\\src\\main\\res\\drawable\\ic_basket.xml": "f68c089ffe93570a94acd0d884dec730e79f808d83a66a7e72c232a1b2ff5781",
+        "shopping\\src\\main\\res\\values\\ids.xml": "9aa3777baf6b3366e775d7cd3297707448cd33a3dfcad665a6e449b538b438e0",
+        "shopping\\src\\main\\res\\values\\styles.xml": "e23c03ad1ec3748ad274f2222cabdd95296e708de0251fb8ce58f725c10844e7",
+        "shopping\\src\\main\\res\\xml\\data_extraction_rules.xml": "a0f9ac77b79b8be8fe0dcff7a8db8807a6134798fb8a513c6821f48afefd7088",
+        "shopping\\src\\main\\java\\com\\barolab\\voicebasket\\BasketParser.java": "39eea0e40eddd1eda8808e5d9efe9ad6735adbf0b4c86c6b59e86b0a00777470",
+        "shopping\\src\\main\\java\\com\\barolab\\voicebasket\\BasketStore.java": "0e5e36845ad53e3ea34769a2d494f52474bc6eb64d546516e9f0acd8441421b4",
+        "shopping\\src\\main\\java\\com\\barolab\\voicebasket\\MainActivity.java": "79b1fde64d042e6b50bcf5fcc984a863a5457d2d7df224cfbfc50f9217f3bda0",
+        "shopping\\src\\main\\java\\com\\barolab\\voicebasket\\SubmissionGuard.java": "2839bea167b72dda63196235a94c160aa450323f362557fb8d5595fdf4e32642",
+        "shopping\\src\\main\\java\\com\\barolab\\voicebasket\\VoiceInput.java": "6d2c61d69cf81c24b2fcaf9296ed47d6d6c12ee6241d1a8bf795b45ddf397448"
+      },
+      "officialTestBannerUnitInGeneratedBuildConfig": true
+    }
+  },
+  "device": "API36 emulator-5556, emulated camera, no host microphone/camera",
+  "buildProofs": [
+    "v2-build-internal.log",
+    "v2-greeting-build.log",
+    "v2-magnifier-build.log"
+  ],
+  "runtime": {
+    "greeting": [
+      "Data-clear-free signed v1 to v2 update preserved every original favorite including legacy theme5.",
+      "Completed card, direct image share, optional editor; original recommendation/input duplicate removed.",
+      "Unapplied ASCII edit canceled to original Korean text; uncommitted draft retained across landscape/font1.3 configuration then canceled.",
+      "Three original photo themes6/7/8 exported through real system share sheet, inspected at1080x1350; no recipient selected.",
+      "font2.0 image share opened system chooser; landscape1.3 editor and home actions reachable.",
+      "Two identical save taps produced one new favorite (old1 -> new total2).",
+      "300-character ordinary text/299-newline adversarial input boundary tested on actual renderable policy; oversized line breaks rejected without truncating original text."
+    ],
+    "magnifier": [
+      "Emulated CameraX live preview, freeze, photo4x slider and pan, reset1x, return live.",
+      "True grayscale inversion selected; SAF saved the entire filtered snapshot, not only viewport crop.",
+      "font2.0 and landscape1.3 preview/controls reachable; latest short-label screenshot tracked separately.",
+      "Latest status bar icons white on navy."
+    ],
+    "shopping": [
+      "Signed v1 to v2 update preserved all4 original list JSON objects exactly.",
+      "Actual keyboard20-item preview, edited21st item invalidated review and disabled add; new preview committed one21-item batch.",
+      "Mid-list check moved purchased row into bought section without resetting to top; undo restored prior row position.",
+      "Selected4 of21 template items created new4-item list, all unchecked; template source stayed21 items.",
+      "font2.0 add-confirm dock and landscape1.3 input-confirm dock accessible.",
+      "Existing Korean fixture list displayed real updated compact item/check UI."
+    ]
+  },
+  "screenshots": {
+    "v2-greeting-01-legacy-home.png": {
+      "sha256": "b168098c277720fc42bf1086bebe0f0672f4c2a4944ee50140126aa510cc4805",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-greeting-02-legacy-favorite.png": {
+      "sha256": "9a866f2162c96cbd0733b7beeb889ae54c4e75337413a0d2f23a0e9d426069e7",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-greeting-03-photo-home.png": {
+      "sha256": "35072606c5df4e4251541fa464a0c9373a28c3426da1b8da8cc3157f3528469f",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-greeting-04-share.png": {
+      "sha256": "9900cb23979ce3959459d85e1952e94e05f059dc6b143f43f1080dec0af7d44b",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-greeting-05-font200.png": {
+      "sha256": "c9105b4bcbf25a926bf326a9f53fd575ac70537883f1a953a0523969fb9301fc",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-greeting-06-editor-landscape.png": {
+      "sha256": "e18dde2d3f1e4284cf44b01797342d0e54f1bd3f2a9d95c067f872883c825617",
+      "width": 1920,
+      "height": 1080
+    },
+    "v2-greeting-07-landscape-home.png": {
+      "sha256": "a83792ebeb66b7f0b5bd9fa60b8a40f19b1c3df099ff4ee77762c8d120ef64c2",
+      "width": 1920,
+      "height": 1080
+    },
+    "v2-greeting-08-favorites.png": {
+      "sha256": "bc106cd979b6670f36eebe9213d62e3e9f1860530efddbfdb8ffe8f56861bae8",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-greeting-photo-7-home.png": {
+      "sha256": "18d6e40dd90864835fd93eec0d75c0a8aa0e2a841cc8883fd023e12432336abf",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-greeting-photo-8-home.png": {
+      "sha256": "18d6e40dd90864835fd93eec0d75c0a8aa0e2a841cc8883fd023e12432336abf",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-magnifier-01-live.png": {
+      "sha256": "ffa97599c84383d59ab66b8d95169ec5541c382718d3ad1d0e64fb2e256d4be9",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-magnifier-02-frozen.png": {
+      "sha256": "4e6594295cf664adf31fddb05673e7792be010479fca0ea6fa6d82d5ad85a7d3",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-magnifier-03-inverted.png": {
+      "sha256": "755c57fe4554b02b94117438af7f231f19e3062044467d4fa4939c1f1c97f202",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-magnifier-04-zoom-pan.png": {
+      "sha256": "c2e1812666714e2c7f34f2f037a6538ab245fa102549b5e33ac943fa5839dd8b",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-magnifier-final-01-live.png": {
+      "sha256": "cc69b33f636ff6ca9cf2b1b74874867885b4dd20f536211c6e4e60b8249194f0",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-magnifier-final-02-font200.png": {
+      "sha256": "e27492b9c128f5b3d3f8b3f939dfbbfcafb753771872752bb49485883a79c430",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-magnifier-final-03-landscape-font130.png": {
+      "sha256": "8a459746f9a7bba60ffc4a86f2498c746e629e5c9f5a96f66e05f5417d3d86df",
+      "width": 1920,
+      "height": 1080
+    },
+    "v2-magnifier-final-04-font200-responsive.png": {
+      "sha256": "d9f9f745782e0e62dfbf66d8eddd9371a0430867c37550a34d74133283da7199",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-shopping-01-overview.png": {
+      "sha256": "fd0a8a378826a370f108ccecb4367c816fec45445ff9eea5d027ac00739709a2",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-shopping-02-compact-items.png": {
+      "sha256": "c6e8de455f0606bad3a81b13fecfa7f5335af63cbe94e8fb9c2e3b6676b14946",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-shopping-03-midlist-before.png": {
+      "sha256": "8c54792bc0ada48d9d08e5bf9ca92faf412c4214a74291c1736a646575a54024",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-shopping-04-midlist-checked.png": {
+      "sha256": "b209253861935a6d8ff769f51fefadfb60fa304bfbc1d8e048f2e6c00d129266",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-shopping-05-reuse-four.png": {
+      "sha256": "29e2a33666283e959fdfa4338aef3ed6df26dc942be5796658245b6c20fdc972",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-shopping-06-reused-four.png": {
+      "sha256": "523faf4d627a4ae4a398c5829a3d8b0389eb1f54ecb577d7d09dfb19a3601a68",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-shopping-07-font200-dock.png": {
+      "sha256": "c13971524c06e2e15bcaacd133567244cfaee79555cf0d600a5c3b79735d69e3",
+      "width": 1080,
+      "height": 1920
+    },
+    "v2-shopping-08-landscape-font130.png": {
+      "sha256": "e25f0f66e9b84f9fc3cfc3e84ee304ab4924954a4260c5f26a41d83e205bb3e1",
+      "width": 1920,
+      "height": 1080
+    },
+    "v2-shopping-09-korean-items.png": {
+      "sha256": "6d4405e15447fbcf685a39d4438977bd1e435560a63f20e4446a78a2c34d026b",
+      "width": 1080,
+      "height": 1920
+    }
+  },
+  "limits": [
+    "Dedicated API36 emulator-5556 only; no physical Samsung camera or Korean speech recognition verified.",
+    "Korean shopping list is the documented pre-existing local fixture, not voice-recognition success.",
+    "Actual target-age usability remains unverified; no installation/revenue/sent-message claims.",
+    "TalkBack directional actions are implemented; complete physical screen-reader usability is not established.",
+    "font_scale2.0 can wrap secondary wording; core actions remain reachable.",
+    "REA v1 static reports are historical, not a fresh v2 or v4 runtime proof."
+  ],
+  "productionAdsEnabled": false,
+  "publicProductionRelease": false,
+  "productionReadiness": "Existing fail-closed per-app approval flags retained false; only official Google test IDs in internal artifacts.",
+  "photoExports": {
+    "photo-6.png": "fcadbab5cd8877a66f3d7962d88b37e55eb1324665b2cd8dd00d9b25db8e2b61",
+    "photo-7.png": "aa6e17d486288b0b6c4a8f670f6359a25f1ce424a6be4ee06fa906d373f4c751",
+    "photo-8.png": "75f2ed33eff92ae1e24c4de7c727071da03a6aa711196fb773a3679d530e87df"
+  },
+  "finalVisualEvidence": {
+    "greeting": "screenshots/v2-greeting-03-photo-home.png",
+    "magnifier": "screenshots/v2-magnifier-final-04-font200-responsive.png",
+    "shopping": "screenshots/v2-shopping-09-korean-items.png"
+  },
+  "supersededMagnifierVisuals": "Earlier screenshots precede latest short large-font labels; final04-responsive is current large-font proof. Functional pan/inversion/save tests preceded label-only change.",
+  "buildConventionSha256": "41824eedab2abee0df1c637979d2d8701f2fbf9c87bb9f8d9ae331924b4db2ca",
+  "productionApprovalFlags": {
+    "greeting.privacyReviewed": "false",
+    "greeting.contentReviewed": "false",
+    "greeting.productionAdsConfirmed": "false",
+    "magnifier.privacyReviewed": "false",
+    "magnifier.contentReviewed": "false",
+    "magnifier.productionAdsConfirmed": "false",
+    "shopping.privacyReviewed": "false",
+    "shopping.contentReviewed": "false",
+    "shopping.productionAdsConfirmed": "false"
+  },
+  "emulatorCleanup": {
+    "font_scale": "1.0",
+    "accelerometer_rotation": "1",
+    "user_rotation": "0",
+    "wmSize": "Physical size: 1080x2400",
+    "adbd": "adbd not running as root",
+    "shutdown": "OK: killing emulator, bye bye\r\r\nOK"
+  },
+  "screenshotEvidenceCorrections": {
+    "v2-greeting-photo-7-home.png / v2-greeting-photo-8-home.png": {
+      "status": "identical_stale_or_duplicate_snapshot",
+      "supportsDifferentSelectedThemes": false,
+      "note": "Do not treat these two home screenshots as independent sea/autumn theme evidence. UI capture did not establish a fresh frame after selection."
+    },
+    "actualPhotoExports": {
+      "status": "distinct_files_manually_reviewed_pass",
+      "files": [
+        "v2-greeting-cards/photo-6.png",
+        "v2-greeting-cards/photo-7.png",
+        "v2-greeting-cards/photo-8.png"
+      ],
+      "note": "These actual exported images have different SHA256 values and remain the evidence for the three distinct photo themes."
+    }
+  }
+}

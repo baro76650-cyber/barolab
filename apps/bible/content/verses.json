@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "translation": {
+    "id": "ebible-kor1910",
+    "name": "한국어 성경 — Korean Bible 1910 (eBible KOROLD)",
+    "language": "ko",
+    "copyrightNotice": "Public Domain. eBible.org: The Holy Bible in Korean, 1910 translation (KOROLD/kor). Contributor: 레널즈, 이승두, 김정삼.",
+    "sourceUrl": "https://ebible.org/bible/details.php?all=1&id=kor",
+    "rightsConfirmed": true,
+    "rightsScope": "provider-declared public-domain text; reproduction, apps, sharing and commercial reuse. App/ad/voice policies are separate."
+  },
+  "verses": [
+    {
+      "id": "psa-23-1",
+      "day": 1,
+      "reference": "시편 23:1",
+      "text": "(다윗의 시) 여호와는 나의 목자시니 내가 부족함이 없으리로다",
+      "sourceUrl": "https://ebible.org/kor/PSA023.htm#V1"
+    },
+    {
+      "id": "psa-121-2",
+      "day": 2,
+      "reference": "시편 121:2",
+      "text": "나의 도움이 천지를 지으신 여호와에게서로다",
+      "sourceUrl": "https://ebible.org/kor/PSA121.htm#V2"
+    },
+    {
+      "id": "psa-56-3",
+      "day": 3,
+      "reference": "시편 56:3",
+      "text": "내가 두려워하는 날에는 주를 의지하리이다",
+      "sourceUrl": "https://ebible.org/kor/PSA056.htm#V3"
+    },
+    {
+      "id": "psa-46-10",
+      "day": 4,
+      "reference": "시편 46:10",
+      "text": "이르시기를 너희는 가만히 있어 내가 하나님 됨을 알찌어다 ! 내가 열방과 세계중에서 높임을 받으리라 하시도다",
+      "sourceUrl": "https://ebible.org/kor/PSA046.htm#V10"
+    },
+    {
+      "id": "psa-34-8",
+      "day": 5,
+      "reference": "시편 34:8",
+      "text": "너희는 여호와의 선하심을 맛보아 알지어다 ! 그에게 피하는 자는 복이 있도다",
+      "sourceUrl": "https://ebible.org/kor/PSA034.htm#V8"
+    },
+    {
+      "id": "psa-37-5",
+      "day": 6,
+      "reference": "시편 37:5",
+      "text": "너의 길을 여호와께 맡기라 ! 저를 의지하면 저가 이루시고",
+      "sourceUrl": "https://ebible.org/kor/PSA037.htm#V5"
+    },
+    {
+      "id": "psa-119-105",
+      "day": 7,
+      "reference": "시편 119:105",
+      "text": "주의 말씀은 내 발에 등이요 내 길에 빛이니이다",
+      "sourceUrl": "https://ebible.org/kor/PSA119.htm#V105"
+    },
+    {
+      "id": "pro-3-5",
+      "day": 8,
+      "reference": "잠언 3:5",
+      "text": "너는 마음을 다하여 여호와를 의뢰하고 네 명철을 의지하지 말라",
+      "sourceUrl": "https://ebible.org/kor/PRO03.htm#V5"
+    },
+    {
+      "id": "pro-16-9",
+      "day": 9,
+      "reference": "잠언 16:9",
+      "text": "사람이 마음으로 자기의 길을 계획할지라도 그 걸음을 인도하는 자는 여호와시니라",
+      "sourceUrl": "https://ebible.org/kor/PRO16.htm#V9"
+    },
+    {
+      "id": "isa-40-31",
+      "day": 10,
+      "reference": "이사야 40:31",
+      "text": "오직 여호와를 앙망하는 자는 새 힘을 얻으리니 독수리의 날개치며 올라감 같을 것이요 달음박질하여도 곤비치 아니하겠고 걸어가도 피곤치 아니하리로다",
+      "sourceUrl": "https://ebible.org/kor/ISA40.htm#V31"
+    },
+    {
+      "id": "isa-41-10",
+      "day": 11,
+      "reference": "이사야 41:10",
+      "text": "두려워 말라 내가 너와 함께 함이니라 놀라지 말라 나는 네 하나님이 됨이니라 내가 너를 굳세게 하리라 참으로 너를 도와 주리라 참으로 나의 의로운 오른손으로 너를 붙들리라",
+      "sourceUrl": "https://ebible.org/kor/ISA41.htm#V10"
+    },
+    {
+      "id": "lam-3-23",
+      "day": 12,
+      "reference": "예레미야애가 3:23",
+      "text": "이것이 아침마다 새로우니 주의 성실이 크도소이다",
+      "sourceUrl": "https://ebible.org/kor/LAM03.htm#V23"
+    },
+    {
+      "id": "mat-6-34",
+      "day": 13,
+      "reference": "마태복음 6:34",
+      "text": "그러므로 내일 일을 위하여 염려하지 말라 내일 일은 내일 염려할 것이요 한 날 괴로움은 그 날에 족하니라",
+      "sourceUrl": "https://ebible.org/kor/MAT06.htm#V34"
+    },
+    {
+      "id": "mat-11-28",
+      "day": 14,
+      "reference": "마태복음 11:28",
+      "text": "수고하고 무거운 짐진 자들아 ! 다 내게로 오라 내가 너희를 쉬게 하리라",
+      "sourceUrl": "https://ebible.org/kor/MAT11.htm#V28"
+    },
+    {
+      "id": "joh-14-27",
+      "day": 15,
+      "reference": "요한복음 14:27",
+      "text": "평안을 너희에게 끼치노니 곧 나의 평안을 너희에게 주노라 내가 너희에게 주는 것은 세상이 주는 것 같지 아니하니라 너희는 마음에 근심도 말고 두려워하지도 말라",
+      "sourceUrl": "https://ebible.org/kor/JHN14.htm#V27"
+    },
+    {
+      "id": "joh-15-9",
+      "day": 16,
+      "reference": "요한복음 15:9",
+      "text": "아버지께서 나를 사랑하신 것같이 나도 너희를 사랑하였으니 나의 사랑 안에 거하라",
+      "sourceUrl": "https://ebible.org/kor/JHN15.htm#V9"
+    },
+    {
+      "id": "rom-8-28",
+      "day": 17,
+      "reference": "로마서 8:28",
+      "text": "우리가 알거니와 하나님을 사랑하는 자 곧 그 뜻대로 부르심을 입은 자들에게는 모든 것이 합력하여 선을 이루느니라",
+      "sourceUrl": "https://ebible.org/kor/ROM08.htm#V28"
+    },
+    {
+      "id": "rom-12-12",
+      "day": 18,
+      "reference": "로마서 12:12",
+      "text": "소망 중에 즐거워하며 환난 중에 참으며 기도에 항상 힘쓰며",
+      "sourceUrl": "https://ebible.org/kor/ROM12.htm#V12"
+    },
+    {
+      "id": "rom-15-13",
+      "day": 19,
+      "reference": "로마서 15:13",
+      "text": "소망의 하나님이 모든 기쁨과 평강을 믿음 안에서 너희에게 충만케 하사 성령의 능력으로 소망이 넘치게 하시기를 원하노라",
+      "sourceUrl": "https://ebible.org/kor/ROM15.htm#V13"
+    },
+    {
+      "id": "1co-13-13",
+      "day": 20,
+      "reference": "고린도전서 13:13",
+      "text": "그런즉 믿음, 소망, 사랑, 이 세가지는 항상 있을 것인데 그 중에 제일은 사랑이라 !",
+      "sourceUrl": "https://ebible.org/kor/1CO13.htm#V13"
+    },
+    {
+      "id": "2co-5-17",
+      "day": 21,
+      "reference": "고린도후서 5:17",
+      "text": "그런즉 누구든지 그리스도 안에 있으면 새로운 피조물이라 이전 것은 지나갔으니 보라! 새것이 되었도다",
+      "sourceUrl": "https://ebible.org/kor/2CO05.htm#V17"
+    },
+    {
+      "id": "gal-6-9",
+      "day": 22,
+      "reference": "갈라디아서 6:9",
+      "text": "우리가 선을 행하되 낙심하지 말지니 피곤하지 아니하면 때가 이르매 거두리라",
+      "sourceUrl": "https://ebible.org/kor/GAL06.htm#V9"
+    },
+    {
+      "id": "eph-4-32",
+      "day": 23,
+      "reference": "에베소서 4:32",
+      "text": "서로 인자하게 하며 불쌍히 여기며 서로 용서하기를 하나님이 그리스도 안에서 너희를 용서하심과 같이 하라",
+      "sourceUrl": "https://ebible.org/kor/EPH04.htm#V32"
+    },
+    {
+      "id": "phi-4-6",
+      "day": 24,
+      "reference": "빌립보서 4:6",
+      "text": "아무 것도 염려하지 말고 오직 모든 일에 기도와 간구로 너희 구할 것을 감사함으로 하나님께 아뢰라",
+      "sourceUrl": "https://ebible.org/kor/PHP04.htm#V6"
+    },
+    {
+      "id": "phi-4-7",
+      "day": 25,
+      "reference": "빌립보서 4:7",
+      "text": "그리하면 모든 지각에 뛰어난 하나님의 평강이 그리스도 예수 안에서 너희 마음과 생각을 지키시리라",
+      "sourceUrl": "https://ebible.org/kor/PHP04.htm#V7"
+    },
+    {
+      "id": "phi-4-13",
+      "day": 26,
+      "reference": "빌립보서 4:13",
+      "text": "내게 능력 주시는 자 안에서 내가 모든 것을 할 수 있느니라 !",
+      "sourceUrl": "https://ebible.org/kor/PHP04.htm#V13"
+    },
+    {
+      "id": "col-3-15",
+      "day": 27,
+      "reference": "골로새서 3:15",
+      "text": "그리스도의 평강이 너희 마음을 주장하게 하라 평강을 위하여 너희가 한 몸으로 부르심을 받았나니 또한 너희는 감사하는 자가 되라",
+      "sourceUrl": "https://ebible.org/kor/COL03.htm#V15"
+    },
+    {
+      "id": "1th-5-16",
+      "day": 28,
+      "reference": "데살로니가전서 5:16",
+      "text": "항상 기뻐하라 !",
+      "sourceUrl": "https://ebible.org/kor/1TH05.htm#V16"
+    },
+    {
+      "id": "1th-5-17",
+      "day": 29,
+      "reference": "데살로니가전서 5:17",
+      "text": "쉬지 말고 기도하라 !",
+      "sourceUrl": "https://ebible.org/kor/1TH05.htm#V17"
+    },
+    {
+      "id": "psa-23-4",
+      "day": 30,
+      "reference": "시편 23:4",
+      "text": "내가 사망의 음침한 골짜기로 다닐지라도 해를 두려워하지 않을것은 주께서 나와 함께 하심이라 주의 지팡이와 막대기가 나를 안위하시나이다",
+      "sourceUrl": "https://ebible.org/kor/PSA023.htm#V4"
+    }
+  ]
+}

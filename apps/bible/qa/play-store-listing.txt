@@ -1,0 +1,116 @@
+- text: Google Play Console 로드 중
+- banner:
+  - link "Google Play Console 로고":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+    - button "Google Play Console 로고"
+  - button "읽지 않은 알림 알림 센터 열기": 읽지 않은 알림
+  - button "하루말씀 - 큰 글씨 성경·말씀 카드"
+  - button "개발자 계정 전환":
+    - img "개발자 계정 전환"
+- navigation:
+  - link "모든 앱":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+  - list:
+    - listitem "대시보드":
+      - button "대시보드"
+    - listitem "통계":
+      - button "통계"
+    - listitem "게시 개요":
+      - button "게시 개요"
+    - listitem "Google Play로 보호됨":
+      - button "Google Play로 보호됨"
+    - listitem "테스트 및 출시":
+      - button "테스트 및 출시"
+    - listitem "모니터링 및 개선":
+      - button "모니터링 및 개선"
+    - listitem "사용자 늘리기":
+      - button "사용자 늘리기"
+      - list:
+        - listitem "앱 정보":
+          - button "앱 정보"
+          - list:
+            - listitem "스토어 등록정보":
+              - button "스토어 등록정보"
+            - listitem "스토어 설정":
+              - button "스토어 설정"
+        - listitem "스토어 실적":
+          - button "스토어 실적"
+        - listitem "번역":
+          - button "번역"
+        - listitem "딥 링크":
+          - button "딥 링크"
+    - listitem "Play를 통한 수익 창출":
+      - button "Play를 통한 수익 창출"
+- heading "스토어 등록정보" [level=1]
+- button "맞춤 등록정보 만들기"
+- button "그룹 만들기"
+- heading "Play에서 사용자에게 앱이 표시되는 방식 관리" [level=2]
+- paragraph: 스토어 등록정보를 통해 좋은 첫인상을 주고 사용자가 앱을 찾아서 사용할 수 있도록 도와주세요. 맞춤 등록정보를 사용하여 맞춤형 콘텐츠로 특정 잠재고객을 타겟팅하세요.
+- link "스토어 등록정보 자세히 알아보기(새 탭에서 열림)":
+  - /url: https://support.google.com/googleplay/android-developer/answer/9156429
+  - text: 자세히 알아보기
+- button "스토어 등록정보에 관한 자세한 설명 숨기기": 숨기기
+- tablist:
+  - tab "등록정보" [selected]
+  - tab "그룹"
+- heading "내 Play 실적" [level=2]
+- button "측정항목 선택": 설치 수
+- button "최근 28일 측정항목을 필터링할 기간 선택": date_range 최근 28일
+- button "도달범위 방문자의 세부정보 표시"
+- button "방문자"
+- text: 0 0% 델타(증가할수록 좋음) 이전 기간 대비
+- img "차트 왼쪽과 오른쪽 키를 사용하여 도메인 값을 탐색하세요."
+- button "확보 순 사용자 설치 클릭수의 세부정보 표시"
+- button "순 사용자 설치 클릭수"
+- text: 0 0% 델타(증가할수록 좋음) 이전 기간 대비
+- img "차트 왼쪽과 오른쪽 키를 사용하여 도메인 값을 탐색하세요."
+- button "확보(%) 클릭률의 세부정보 표시"
+- button "클릭률"
+- text: 0% 0% 델타(증가할수록 좋음) 이전 기간 대비
+- img "차트 왼쪽과 오른쪽 키를 사용하여 도메인 값을 탐색하세요."
+- button "기본 등록정보"
+- link "기본 등록정보 수정":
+  - /url: /console/u/0/developers/7752283694845461925/app/4975007773224005878/store-listings/default/edit
+- grid "기본 스토어 등록정보":
+  - row "이름 최근 업데이트 날짜 방문자 전환율 실험 상태":
+    - columnheader "이름"
+    - columnheader "최근 업데이트 날짜"
+    - columnheader "방문자"
+    - columnheader "전환율"
+    - columnheader "실험"
+    - columnheader "상태"
+    - cell
+    - cell
+  - row "기본 스토어 등록정보 2026년 10월 14일 - - 설정 검토를 위해 전송 준비 완료 기본 등록정보 보기":
+    - gridcell "기본 스토어 등록정보"
+    - gridcell "2026년 10월 14일"
+    - gridcell "-"
+    - gridcell "-"
+    - gridcell "설정":
+      - button "설정"
+    - gridcell "검토를 위해 전송 준비 완료"
+    - gridcell:
+      - 'listbox "작업 선택: 데이터 보기, 그룹 내에 새 등록정보 만들기"':
+        - 'button "작업 선택: 데이터 보기, 그룹 내에 새 등록정보 만들기"'
+    - gridcell "기본 등록정보 보기":
+      - link "기본 등록정보 보기":
+        - /url: /console/u/0/developers/7752283694845461925/app/4975007773224005878/store-listings/0
+- heading "맞춤형 콘텐츠로 특정 사용자 타겟팅" [level=2]
+- text: 맞춤 스토어 등록정보를 만들어 맞춤형 콘텐츠로 특정 사용자를 타겟팅하세요. 맞춤 스토어 등록정보를 만든 후 실험을 실행하여 다양한 그래픽과 현지화된 텍스트를 테스트하고 실적이 가장 우수한 항목을 확인할 수 있습니다.
+- button "맞춤 스토어 등록정보 만들기"
+- link "제품 업데이트":
+  - /url: https://play.google.com/console/about/whats-new/
+- link "상태 대시보드":
+  - /url: https://status.play.google.com/
+- link "도움말":
+  - /url: /console/u/0/developers/7752283694845461925/help-and-support?app=4975007773224005878
+- text: © 2026 Google
+- link "개인 정보 보호":
+  - /url: https://www.google.com/policies/privacy/
+- link "개발자 배포 계약":
+  - /url: https://play.google.com/about/developer-distribution-agreement.html
+- link "서비스 약관":
+  - /url: https://play.google.com/about/console/terms-of-service/
+- heading "한곳에서 스토어 등록정보를 관리하고 실적을 추적하세요" [level=1]
+- paragraph: 기본 스토어 등록정보와 맞춤 스토어 등록정보를 통합하여 더욱 쉽게 관리하고 실적을 비교할 수 있게 되었습니다.
+- button "등록정보 보기"

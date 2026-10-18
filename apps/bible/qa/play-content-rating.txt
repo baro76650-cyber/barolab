@@ -1,0 +1,123 @@
+- text: Google Play Console 로드 중
+- banner:
+  - link "Google Play Console 로고":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+    - button "Google Play Console 로고"
+  - button "읽지 않은 알림 알림 센터 열기": 읽지 않은 알림
+  - button "하루말씀 - 큰 글씨 성경·말씀 카드"
+  - button "개발자 계정 전환":
+    - img "개발자 계정 전환"
+- navigation:
+  - link "모든 앱":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+  - list:
+    - listitem "대시보드":
+      - button "대시보드"
+    - listitem "통계":
+      - button "통계"
+    - listitem "게시 개요":
+      - button "게시 개요"
+    - listitem "Google Play로 보호됨":
+      - button "Google Play로 보호됨"
+    - listitem "테스트 및 출시":
+      - button "테스트 및 출시"
+    - listitem "모니터링 및 개선":
+      - button "모니터링 및 개선"
+      - list:
+        - listitem "도달범위 및 기기":
+          - button "도달범위 및 기기"
+        - listitem "평점 및 리뷰":
+          - button "평점 및 리뷰"
+        - listitem "Android vitals":
+          - button "Android vitals"
+        - listitem "정책 및 프로그램":
+          - button "정책 및 프로그램"
+          - list:
+            - listitem "정책 상태":
+              - button "정책 상태"
+            - listitem "앱 콘텐츠":
+              - button "앱 콘텐츠"
+            - listitem "프로그램":
+              - button "프로그램"
+    - listitem "사용자 늘리기":
+      - button "사용자 늘리기"
+    - listitem "Play를 통한 수익 창출":
+      - button "Play를 통한 수익 창출"
+- link "대시보드 페이지로 돌아가기":
+  - /url: /console/u/0/developers/7752283694845461925/app/4975007773224005878/app-dashboard
+  - text: 대시보드
+- heading "콘텐츠 등급" [level=1]
+- button "변경사항 취소" [disabled]
+- tablist:
+  - tab "1/3단계, 카테고리" [disabled]: 카테고리
+  - tab "2/3단계, 설문지" [disabled]: 설문지
+  - tab "3/3단계, 요약" [selected]: 3 요약
+- tabpanel:
+  - heading "요약" [level=2]
+  - paragraph: 아래 표시된 등급은 Google Play에서 사용자에게 표시되는 등급과 다를 수 있습니다.
+  - list:
+    - listitem: 앱 콘텐츠에 대한 허위 진술이 있는 경우 Google에서 앱 또는 앱 업데이트를 거부할 수 있습니다.
+    - listitem: Google은 귀하의 설문지 응답을 바탕으로 현지 법률의 요구에 따라 특정 지역에서 표시될 등급을 결정할 수 있습니다.
+    - listitem: IARC에 참여하는 등급 부여 기관은 귀하의 앱을 검토한 후 등급을 변경할 수 있습니다.
+  - paragraph:
+    - text: Google 및 IARC는 등급 부여 기관과 연락처 정보, 설문지 응답, 등급, 개발자 지원 요청, 앱 세부정보를 공유합니다.
+    - link "앱 및 게임의 콘텐츠 등급 자세히 알아보기, 새 탭에서 열기":
+      - /url: https://support.google.com/googleplay/android-developer/answer/188189
+      - text: 자세히 알아보기
+  - text: 카테고리 다른 모든 앱 유형
+  - heading "내 등급" [level=2]
+  - heading "브라질" [level=3]
+  - text: "등급 부여 기관: Classificação Indicativa (ClassInd) 평점"
+  - img "전체이용가"
+  - text: 전체이용가 콘텐츠 설명어 -
+  - heading "북미" [level=3]
+  - text: "등급 부여 기관: Entertainment Software Rating Board (ESRB) 평점"
+  - img "전체이용가"
+  - text: 전체이용가 콘텐츠 설명어 -
+  - heading "유럽" [level=3]
+  - text: "등급 부여 기관: Pan-European Game Information (PEGI) 평점"
+  - img "PEGI 3"
+  - text: PEGI 3 콘텐츠 설명어 -
+  - heading "독일" [level=3]
+  - text: "등급 부여 기관: Unterhaltungssoftware Selbstkontrolle (USK) 평점"
+  - 'img "USK: 전체이용가"'
+  - text: "USK: 전체이용가 콘텐츠 설명어 -"
+  - heading "기타 국가" [level=3]
+  - text: "등급 부여 기관: IARC Generic 평점"
+  - img "만 3세 이상"
+  - text: 만 3세 이상 콘텐츠 설명어 -
+  - heading "러시아" [level=3]
+  - text: "등급 부여 기관: Google Play 평점"
+  - img "3세 이상"
+  - text: 3세 이상 콘텐츠 설명어 -
+  - heading "대한민국" [level=3]
+  - text: "등급 부여 기관: Google Play 만 19세 미만의 사용자에게 적합하지 않은 게임은 게임물관리위원회에서 등급을 지정하지 않았다면 대한민국 Google Play에서 삭제될 수 있습니다."
+  - link "GRAC 자세히 알아보기, 새 탭에서 열기":
+    - /url: https://www.grac.or.kr/english/enforcement/Enforcement.aspx
+    - text: 자세히 알아보기
+  - text: 평점
+  - img "3세 이상"
+  - text: 3세 이상 콘텐츠 설명어 -
+- text: 변경사항이 저장되었습니다. 게시 개요에서 전송하여 검토를 받으세요.
+- button "뒤로"
+- button "저장"
+- link "제품 업데이트":
+  - /url: https://play.google.com/console/about/whats-new/
+- link "상태 대시보드":
+  - /url: https://status.play.google.com/
+- link "도움말":
+  - /url: /console/u/0/developers/7752283694845461925/help-and-support?app=4975007773224005878
+- text: © 2026 Google
+- link "개인 정보 보호":
+  - /url: https://www.google.com/policies/privacy/
+- link "개발자 배포 계약":
+  - /url: https://play.google.com/about/developer-distribution-agreement.html
+- link "서비스 약관":
+  - /url: https://play.google.com/about/console/terms-of-service/
+- status
+- dialog "게시 개요로 이동하시겠어요? 닫기":
+  - heading "게시 개요로 이동하시겠어요?" [level=1]
+  - button "닫기"
+  - text: 변경사항이 저장되었습니다. 검토를 위해 Google에 전송하려면 게시 개요로 이동하세요.
+  - button "나중에"
+  - button "개요로 이동"

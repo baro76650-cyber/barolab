@@ -1,0 +1,42 @@
+{
+  "recordedAt": "2026-10-14T09:46:55.119419+00:00",
+  "status": "integrated_build_and_emulator_qa_complete_physical_device_pending",
+  "routing": [
+    {
+      "provider": "freellm",
+      "requested_model": "auto",
+      "returned_model": "unknown",
+      "status": "failed",
+      "attempt": 1,
+      "latency_ms": 2080,
+      "time_utc": "2026-10-14T09:43:36Z",
+      "usage": {}
+    },
+    {
+      "provider": "agy",
+      "requested_model": "gemini-3.8-flash-medium",
+      "returned_model": "unknown",
+      "status": "ok",
+      "attempt": 1,
+      "latency_ms": 24212,
+      "time_utc": "2026-10-14T09:44:00Z",
+      "usage": {
+        "input_tokens": 13043,
+        "output_tokens": 1772,
+        "total_tokens": 14815
+      }
+    }
+  ],
+  "manualReview": "Reviewed actual bounded draft; manually integrated. No model shell or candidate patch auto-execution. Magnifier retained configuration state replaces draft ViewModel; existing vertical landscape scroll retained, no horizontal dependency. Bible utterance ID plus engine generation fences retained; no unsupported OEM engine assumptions; source-char reading anchor replaces pixel-only restore.",
+  "sources": {
+    "bible_app/app/src/main/java/com/barolab/harubible/MainActivity.java": "ab7060b3f86f17cf6d0c8b6ef81b61a6f15342a142af18750f6b666d49bad267",
+    "bible_app/app/src/main/java/com/barolab/harubible/OfflineTtsController.java": "8e25cdeff845563dd40a78e8097d479928dc096df9ec69b3760d81d40e9cf636"
+  },
+  "limits": [
+    "Physical Samsung audio/camera validation pending",
+    "No production advertising or public-release readiness assertion",
+    "Build/runtime coordinator owns subsequent verification receipt"
+  ],
+  "verificationEvidence": "bible_app/qa/v4-build-verification.json",
+  "independentReview": "daily_apps/qa/v2-independent-review.json"
+}

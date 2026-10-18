@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Threads 수익화·외부유입 하이브리드 관제 · BaroLab</title>
+  <link rel="stylesheet" href="traffic.css">
+  <link rel="stylesheet" href="threads.css?v=20261017-dress-1">
+  <link rel="stylesheet" href="sidebar.css?v=20261017-unified-2">
+  <link rel="stylesheet" href="signature_deck.css?v=20261017-sig-1">
+  <style>
+    body.threads-page {
+      background: #f1f5f9;
+      color: #0f172a;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    }
+    .th-hybrid-main {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 16px 20px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .th-top-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #f8fafc;
+      padding: 14px 20px;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+    }
+    .th-top-title-box h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+    .th-top-title-box p {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .th-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      white-space: nowrap;
+    }
+    .th-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+    }
+    .th-btn-smart {
+      padding: 9px 15px;
+      border-radius: 10px;
+      border: 1px solid #3b82f6;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.32);
+      transition: transform 0.12s ease;
+    }
+    .th-btn-smart:hover {
+      transform: translateY(-1px);
+    }
+    .th-btn-ghost {
+      padding: 8px 13px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.08);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* TIER 1: 4-Col Slim KPI & 4-Slot Gauge Bar */
+    .th-tier1-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1.35fr 1.1fr 1fr;
+      gap: 12px;
+    }
+    .th-kpi-card {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 13px;
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      min-height: 88px;
+    }
+    .th-slot-pills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      width: 100%;
+      margin-top: 6px;
+    }
+    .th-slot-chip {
+      padding: 5px 6px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      text-align: center;
+      font-size: 10.5px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .th-slot-chip.st-done {
+      background: #ecfdf5;
+      border-color: #6ee7b7;
+      color: #065f46;
+    }
+    .th-slot-chip.st-queued {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1e40af;
+    }
+    .th-slot-chip.st-wait {
+      background: #fffbeb;
+      border-color: #fde68a;
+      color: #92400e;
+    }
+    .th-slot-chip small {
+      display: block;
+      font-size: 9.5px;
+      font-weight: 700;
+      opacity: 0.85;
+      margin-top: 1px;
+    }
+    .th-mini-stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      width: 100%;
+      margin-top: 6px;
+    }
+    .th-mini-stat {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 5px 7px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .th-mini-stat span {
+      display: block;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 700;
+    }
+    .th-mini-stat strong {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    /* TIER 2: 6-Step Live Pipeline Stepper + Hook Vault Drawer */
+    .th-tier2-card {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 13px;
+      padding: 13px 16px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+    .th-stepper-6 {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .th-step-item {
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 8px 10px;
+      position: relative;
+    }
+    .th-step-item.done {
+      border-color: #a7f3d0;
+      background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+    }
+    .th-step-item.active {
+      border-color: #60a5fa;
+      background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.14);
+    }
+    .th-step-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 900;
+      color: #0f172a;
+      white-space: nowrap;
+      margin-bottom: 3px;
+    }
+    .th-step-sub {
+      font-size: 10px;
+      color: #475569;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    /* Hook Vault Strip */
+    .th-hook-vault-bar {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .th-hook-chips {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+    .th-hook-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 9px;
+      border-radius: 8px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      font-size: 11px;
+      font-weight: 700;
+      color: #1e293b;
+      cursor: pointer;
+    }
+    .th-hook-badge:hover {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+    .th-hook-score {
+      background: #dcfce7;
+      color: #166534;
+      font-weight: 900;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+
+    /* TIER 3: Connected Main + 2-Min Delayed Follow-up Thread Preview Board */
+    .th-tier3-board {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 13px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+    .th-thread-pair-card {
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      background: #ffffff;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.15s ease;
+    }
+    .th-thread-pair-card:hover {
+      border-color: #3b82f6;
+    }
+    .th-pair-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 14px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 11.5px;
+      font-weight: 800;
+    }
+    .th-pair-body {
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .th-bubble-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      position: relative;
+    }
+    .th-avatar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 32px;
+      flex-shrink: 0;
+    }
+    .th-avatar-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #0f172a;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .th-avatar-circle.reply {
+      background: #2563eb;
+      width: 26px;
+      height: 26px;
+      font-size: 10px;
+    }
+    .th-connector-line {
+      width: 2px;
+      height: 28px;
+      background: #94a3b8;
+      margin-top: 3px;
+    }
+    .th-bubble-content {
+      flex: 1;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 13px;
+    }
+    .th-bubble-content.reply {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+      margin-left: 10px;
+    }
+    .th-bubble-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 5px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #334155;
+    }
+    .th-bubble-text {
+      white-space: pre-wrap;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: #0f172a;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    /* Smart Editor Modal */
+    .th-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(15, 23, 42, 0.62);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .th-modal-dialog {
+      width: 100%;
+      max-width: 920px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.32);
+    }
+    .th-variants-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .th-variant-card {
+      border: 2px solid #e2e8f0;
+      border-radius: 11px;
+      padding: 10px 12px;
+      background: #f8fafc;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .th-variant-card.selected {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+    .th-variant-card textarea {
+      width: 100%;
+      min-height: 125px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 12px;
+      line-height: 1.45;
+      font-family: inherit;
+      resize: vertical;
+    }
+  </style>
+  <script src="threads-summary.js?v=20261017-dress-1" defer></script>
+  <script src="threads.js?v=20261017-dress-1" defer></script>
+</head>
+<body class="control-room threads-page">
+  <a class="skip-link" href="#main-content">본문으로 이동</a>
+  <aside id="barolab-sidebar" class="sidebar" aria-label="주요 메뉴"></aside>
+  <script src="sidebar.js?v=20261018-no-rnd"></script>
+
+  <main class="th-hybrid-main" id="main-content">
+    <!-- Top Header -->
+    <header class="th-top-header">
+      <div class="th-top-title-box">
+        <h1>
+          <span>🧵 Threads 바이럴·수익화 하이브리드 관제 데크</span>
+          <span class="th-pill-badge" id="th-conn-pill">🟢 @mustpickinfo 공식 API 연결 완료</span>
+        </h1>
+        <p>본문 링크 0개 원칙 · 구어체 3줄 요약 후킹 · 90~180초 지연 첫 타래(댓글) CF 16개 도메인 & 제휴 링크 자동 연결</p>
+      </div>
+      <div class="th-header-actions">
+        <button type="button" class="th-btn-smart" id="btn-open-smart-editor">✨ + 스마트 에디터 (URL/키워드 3버전 즉시 생성)</button>
+        <button type="button" class="th-btn-ghost" id="threads-refresh">🔄 원장 새로고침</button>
+        <a class="th-btn-ghost" href="settings.html#threads-settings">⚙️ API 연결 설정</a>
+      </div>
+    </header>
+
+    <!-- [TIER 1] Top Slim KPI & 4-Slot Gauge Bar -->
+    <section class="th-tier1-grid" aria-label="상단 4슬롯 진행률 및 핵심 지표 게이지 바">
+      <!-- Col 1: 4-Slot Daily Progress Ring & Bar -->
+      <article class="th-kpi-card">
+        <div class="sig-gauge-ring-box">
+          <svg viewBox="0 0 64 64">
+            <circle class="sig-tick-circle" cx="32" cy="32" r="29.5"></circle>
+            <circle class="sig-ring-bg" cx="32" cy="32" r="24"></circle>
+            <circle class="sig-ring-fg" id="th-gauge-ring" cx="32" cy="32" r="24" stroke="#2563eb" stroke-dasharray="150.8" stroke-dashoffset="37.7"></circle>
+          </svg>
+          <div class="sig-gauge-center">
+            <span id="th-gauge-pct">100%</span>
+            <small>4슬롯</small>
+          </div>
+        </div>
+        <div class="sig-card-info" style="flex:1;">
+          <div class="sig-card-label">
+            <span>🎯 오늘 4슬롯 하이브리드 편성</span>
+            <span id="th-slot-fraction" style="color:#2563eb;font-weight:900;">4 / 4 슬롯 가동</span>
+          </div>
+          <div class="sig-card-main-val" id="th-slot-headline" style="font-size:13px;">밑밥 1 · CF유입 2 · 제휴 1</div>
+          <div class="sig-seg-track">
+            <div class="sig-seg-fill" id="th-gauge-bar" style="width:100%;"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Col 2: 4-Slot Schedule Status Chips (08:00 / 12:30 / 18:10 / 21:30) -->
+      <article class="th-kpi-card">
+        <div style="width:100%;">
+          <div class="sig-card-label">
+            <span>⏰ 일일 4슬롯 트랙 편성표 (Track A·B·C)</span>
+            <span style="color:#059669;font-weight:800;">연속 운영(Continuous) ON</span>
+          </div>
+          <div class="th-slot-pills-grid" id="th-slot-chips-box">
+            <div class="th-slot-chip st-done">08:00 밑밥글<small>🟢 링크 0개</small></div>
+            <div class="th-slot-chip st-done">12:30 CF유입<small>🔵 첫타래 링크</small></div>
+            <div class="th-slot-chip st-queued">18:10 공감·제휴<small>🔵 토스/쿠팡</small></div>
+            <div class="th-slot-chip st-queued">21:30 CF유입<small>🔵 고단가 요약</small></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Col 3: Views · Replies · CF Inbound · Affiliate Clicks -->
+      <article class="th-kpi-card">
+        <div style="width:100%;">
+          <div class="sig-card-label">
+            <span>📈 누적 조회 · 답글 · CF 유입(UTM) · 제휴 클릭</span>
+            <span id="th-Allow-domains-badge" style="color:#2563eb;font-weight:800;">16개 CF + 제휴 허용</span>
+          </div>
+          <div class="th-mini-stat-row">
+            <div class="th-mini-stat"><span>누적 게시</span><strong id="th-stat-published">1건</strong></div>
+            <div class="th-mini-stat"><span>답글·타래</span><strong id="th-stat-replies">연결 가동</strong></div>
+            <div class="th-mini-stat"><span>CF 유입(UTM)</span><strong id="th-stat-utm">추적 중</strong></div>
+            <div class="th-mini-stat"><span>링크 클릭</span><strong id="th-stat-clicks">0회</strong></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Col 4: Delay Rule & Safety Status -->
+      <article class="th-kpi-card" style="background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;border-color:#334155;">
+        <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+          <div class="sig-card-label" style="color:#94a3b8;">
+            <span>🛡️ 스레드 노출 보호 안전장치</span>
+            <span style="color:#34d399;font-weight:900;">● ACTIVE</span>
+          </div>
+          <div style="font-size:12px;font-weight:800;color:#f8fafc;">
+            본문 링크 0개 · 첫 타래 90~180초 딜레이
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button type="button" class="sig-btn primary" style="flex:1;padding:5px 8px;font-size:11px;" onclick="window.BaroThreadsDeck.openSmartEditor()">⚡ URL 즉시 변환</button>
+            <button type="button" class="sig-btn" style="padding:5px 8px;font-size:11px;" onclick="window.BaroThreadsDeck.openHookModal()">📡 훅 볼트</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- [TIER 2] Live 6-Step Workflow Stepper & Radar Viral Hook Vault -->
+    <section class="th-tier2-card" aria-label="스레드 6단계 라이브 파이프라인 및 바이럴 훅 벤치마킹 볼트">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <strong style="font-size:13px;font-weight:900;color:#0f172a;">🧵 스레드 수익화(드레스) 6단계 라이브 워크플로우</strong>
+          <span class="sig-tier2-active-pill">🟢 구어체 3버전 + 타래 분리 엔진 가동 중</span>
+        </div>
+        <span style="font-size:11px;font-weight:700;color:#475569;">
+          전단지 문구 영구 금지 · `.go.kr` 족쇄 해제 (16개 CF 도메인 전면 개방) · 공정위/운영 고지 타래 최상단 자동 배치
+        </span>
+      </div>
+
+      <div class="th-stepper-6">
+        <div class="th-step-item done">
+          <div class="th-step-head"><span>① 원고 3버전 생성</span><span style="color:#059669;">🟢 완료</span></div>
+          <div class="th-step-sub">친근형 · 어그로 후킹형 · 페르소나형 동시 생성</div>
+        </div>
+        <div class="th-step-item done">
+          <div class="th-step-head"><span>② 팩트/공정위 검수</span><span style="color:#059669;">🟢 완료</span></div>
+          <div class="th-step-sub">원문 팩트 대조 & 대가성/소유 고지문 자동 삽입</div>
+        </div>
+        <div class="th-step-item done">
+          <div class="th-step-head"><span>③ 본문(링크0개) 게시</span><span style="color:#059669;">🟢 가동</span></div>
+          <div class="th-step-sub">외부 URL 0개 · 마지막 줄 첫 타래(👇) 유도</div>
+        </div>
+        <div class="th-step-item active">
+          <div class="th-step-head"><span>④ 2분 딜레이 대기</span><span style="color:#2563eb;">🔵 90~180s</span></div>
+          <div class="th-step-sub">봇 판정 회피 및 초기 체류시간 확보 안전 지연</div>
+        </div>
+        <div class="th-step-item active">
+          <div class="th-step-head"><span>⑤ 첫 타래 링크 게시</span><span style="color:#2563eb;">🔵 자동연결</span></div>
+          <div class="th-step-sub">`reply_to_id`로 CF 16개 블로그 · 제휴 링크 답글</div>
+        </div>
+        <div class="th-step-item done">
+          <div class="th-step-head"><span>⑥ 24h/72h 성과 측정</span><span style="color:#059669;">🟢 추적중</span></div>
+          <div class="th-step-sub">조회·답글·GA4 UTM 유입 세션 자동 피드백</div>
+        </div>
+      </div>
+
+      <!-- Radar Viral Hook Vault Bar -->
+      <div class="th-hook-vault-bar">
+        <div style="display:flex;align-items:center;gap:6px;white-space:nowrap;">
+          <span style="font-size:11.5px;font-weight:900;color:#0f172a;">📡 @radar 바이럴 훅 벤치마킹 볼트 (`threads-hooks.json`):</span>
+        </div>
+        <div class="th-hook-chips" id="th-hook-vault-chips">
+          <!-- Populated by JS -->
+        </div>
+        <button type="button" class="sig-btn" style="background:#f1f5f9;color:#0f172a;border:1px solid #cbd5e1;" onclick="window.BaroThreadsDeck.openHookModal()">+ 새 바이럴 훅 공식 추출</button>
+      </div>
+    </section>
+
+    <!-- [TIER 3] Date Tabs + Connected Main & 2-Min Delayed Follow-up Thread Preview Board -->
+    <section class="th-tier3-board" aria-label="본문 및 2분 딜레이 첫 답글 타래 연결 프리뷰 보드">
+      <div class="sig-tier3-controls" style="margin-bottom:12px;">
+        <div class="sig-tabs-left">
+          <div class="sig-btn-group" role="tablist" aria-label="날짜 필터">
+            <button type="button" class="sig-tab-btn active" data-th-date="all" onclick="window.BaroThreadsDeck.setDateFilter('all')">전체 타래 (실전+슬롯)</button>
+            <button type="button" class="sig-tab-btn" data-th-date="today" onclick="window.BaroThreadsDeck.setDateFilter('today')">📅 오늘 4슬롯</button>
+            <button type="button" class="sig-tab-btn" data-th-date="published" onclick="window.BaroThreadsDeck.setDateFilter('published')">🟢 공개완료</button>
+          </div>
+          <div class="sig-btn-group" role="tablist" aria-label="트랙 모드 필터">
+            <button type="button" class="sig-tab-btn active" data-th-mode="all" onclick="window.BaroThreadsDeck.setModeFilter('all')">전체 트랙</button>
+            <button type="button" class="sig-tab-btn" data-th-mode="warmup" onclick="window.BaroThreadsDeck.setModeFilter('warmup')">☕ Track A (밑밥글·링크0)</button>
+            <button type="button" class="sig-tab-btn" data-th-mode="cf_inbound" onclick="window.BaroThreadsDeck.setModeFilter('cf_inbound')">🚀 Track B (16개 CF 유입)</button>
+            <button type="button" class="sig-tab-btn" data-th-mode="affiliate" onclick="window.BaroThreadsDeck.setModeFilter('affiliate')">💰 Track C (토스·쿠팡 제휴)</button>
+          </div>
+          <input type="search" class="sig-search-input" id="th-search-input" placeholder="제목 / 본문 / 도메인 검색...">
+        </div>
+        <div style="font-size:11.5px;font-weight:800;color:#475569;" id="th-pair-count-label">
+          총 4개 타래 세트
+        </div>
+      </div>
+
+      <!-- Connected Main + Followup Thread List -->
+      <div id="th-connected-threads-list">
+        <!-- Rendered by threads.js -->
+      </div>
+    </section>
+
+    <!-- Collapsible Legacy Diagnostics & Measurement Details -->
+    <details class="traffic-panel" style="background:#fff;border:1px solid #cbd5e1;border-radius:12px;padding:12px 16px;">
+      <summary style="font-weight:900;font-size:13px;cursor:pointer;color:#334155;">
+        ⚙️ 공식 API 원장 상세 진단 · 24h/72h/7d 체크포인트 측정 테이블 펼치기
+      </summary>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:12px;">
+        <section data-threads-summary="compact" aria-label="Threads 운영 요약"></section>
+        <div>
+          <p class="revenue-meta" id="threads-config">운영 설정 확인 중</p>
+          <p class="revenue-meta" id="threads-readiness">게시 권한·인증 유효성 확인 중</p>
+          <p class="revenue-meta" id="threads-worker">5분 조건 점검 작업 등록 미확인</p>
+          <p class="revenue-meta" id="threads-next">실제 실행 일정 미확인</p>
+          <p class="revenue-meta" id="threads-issue">연결 상태 확인 중</p>
+        </div>
+        <div>
+          <p class="revenue-meta" id="threads-measurement">측정 기록 미확인</p>
+          <div class="revenue-table-wrap">
+            <table class="traffic-table">
+              <thead><tr><th>확인 시점</th><th>수집 대상 게시물</th><th>수집 완료 게시물</th><th>상태</th></tr></thead>
+              <tbody id="threads-windows"><tr><td colspan="4">미수집</td></tr></tbody>
+            </table>
+          </div>
+          <div id="threads-post-metrics"></div>
+          <p id="threads-revenue" class="revenue-meta">게시자 수익 귀속 미확인</p>
+          <p id="threads-feedback" class="revenue-meta">비교할 실제 성과와 개선 기록을 기다리고 있습니다.</p>
+        </div>
+        <div id="threads-records" aria-live="polite"></div>
+      </div>
+    </details>
+  </main>
+
+  <!-- [MODAL 1] Smart Editor (URL/Keyword -> 3 Persona Variants + Delayed Followup Preview) -->
+  <div class="th-modal-backdrop" id="th-smart-editor-modal" onclick="if(event.target===this)this.style.display='none'">
+    <div class="th-modal-dialog" onclick="event.stopPropagation()">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;">
+        <div>
+          <strong style="font-size:15px;font-weight:900;">✨ 스레드 스마트 에디터 (URL/유튜브/CF글 ➔ 구어체 3버전 즉시 생성)</strong>
+          <div style="font-size:11px;color:#94a3b8;margin-top:2px;">외부 뉴스·유튜브 링크·16개 CF 블로그 URL을 넣으면 본문(링크0개) 3가지 버전과 2분 딜레이 첫 타래를 자동 조립합니다.</div>
+        </div>
+        <button type="button" onclick="document.getElementById('th-smart-editor-modal').style.display='none'" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:#fff;border-radius:8px;width:30px;height:30px;cursor:pointer;font-weight:900;">✕</button>
+      </div>
+
+      <div style="padding:16px 18px;display:flex;flex-direction:column;gap:12px;">
+        <!-- Input Bar -->
+        <div style="display:grid;grid-template-columns:2fr 0.9fr 0.9fr auto;gap:8px;align-items:end;">
+          <div>
+            <label style="display:block;font-size:11px;font-weight:800;color:#334155;margin-bottom:4px;">원천 URL (CF 블로그 / 뉴스 / 유튜브 링크)</label>
+            <input type="url" id="th-se-url" value="https://www.must-pick.com/family-relation-certificate-general-detailed-specific-guide" placeholder="https://..." style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;font-size:12px;font-weight:600;">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:800;color:#334155;margin-bottom:4px;">편성 슬롯 (KST)</label>
+            <select id="th-se-slot" style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;font-size:12px;font-weight:700;">
+              <option value="08:00">08:00 (출근길 밑밥)</option>
+              <option value="12:30" selected>12:30 (점심 CF유입)</option>
+              <option value="18:10">18:10 (퇴근 제휴/공감)</option>
+              <option value="21:30">21:30 (야간 고단가 CF)</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:800;color:#334155;margin-bottom:4px;">발행 트랙 모드</label>
+            <select id="th-se-mode" style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;font-size:12px;font-weight:700;">
+              <option value="cf_inbound" selected>🚀 Track B: CF 블로그 유입</option>
+              <option value="affiliate">💰 Track C: 토스·쿠팡 제휴</option>
+              <option value="warmup">☕ Track A: 순수 밑밥글(링크0)</option>
+            </select>
+          </div>
+          <button type="button" class="th-btn-smart" id="th-se-generate-btn" onclick="window.BaroThreadsDeck.runSmartGenerate()">⚡ 3버전 원고 즉시 생성</button>
+        </div>
+
+        <div id="th-se-affiliate-row" style="display:none;">
+          <label style="display:block;font-size:11px;font-weight:800;color:#b45309;margin-bottom:4px;">제휴 링크 URL (`toss.im`, `link.coupang.com`, `ohou.se`, `oliveyoung.co.kr`, `adpick.co.kr`)</label>
+          <input type="url" id="th-se-affiliate-url" placeholder="https://toss.im/... 또는 https://link.coupang.com/..." style="width:100%;padding:8px 10px;border:1px solid #fcd34d;border-radius:8px;font-size:12px;">
+        </div>
+
+        <!-- 3 Persona Variants Cards -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <strong style="font-size:12.5px;font-weight:900;color:#0f172a;">① 본문(Main) 구어체 3가지 버전 비교·선택 (본문 내 외부 링크 0개 강제)</strong>
+            <span id="th-se-status-msg" style="font-size:11px;font-weight:800;color:#2563eb;">버전을 클릭해 선택하거나 문구를 자유롭게 다듬으세요.</span>
+          </div>
+          <div class="th-variants-grid">
+            <div class="th-variant-card" data-var-card="friendly" onclick="window.BaroThreadsDeck.selectVariant('friendly')">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong style="font-size:12px;color:#0f172a;">① 기본 친근형</strong>
+                <span class="th-hook-score" id="th-score-friendly">후킹 89점</span>
+              </div>
+              <textarea id="th-text-friendly" onclick="event.stopPropagation()"></textarea>
+            </div>
+            <div class="th-variant-card selected" data-var-card="hook" onclick="window.BaroThreadsDeck.selectVariant('hook')">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong style="font-size:12px;color:#1d4ed8;">② 강렬한 어그로 후킹형 (추천)</strong>
+                <span class="th-hook-score" id="th-score-hook">후킹 95점</span>
+              </div>
+              <textarea id="th-text-hook" onclick="event.stopPropagation()"></textarea>
+            </div>
+            <div class="th-variant-card" data-var-card="persona" onclick="window.BaroThreadsDeck.selectVariant('persona')">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong style="font-size:12px;color:#0f172a;">③ 내 페르소나 맞춤형</strong>
+                <span class="th-hook-score" id="th-score-persona">후킹 92점</span>
+              </div>
+              <textarea id="th-text-persona" onclick="event.stopPropagation()"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Follow-up Delayed Reply Preview -->
+        <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:10px 13px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
+            <strong style="font-size:12px;color:#0369a1;">↳ ② 첫 번째 후속 답글 (Follow-up 타래 · 본문 게시 90~180초 뒤 자동 등록)</strong>
+            <span style="font-size:10.5px;font-weight:800;color:#0284c7;">공정위 대가성/운영 고지 최상단 + UTM/제휴 링크</span>
+          </div>
+          <textarea id="th-se-followup-text" style="width:100%;min-height:66px;border:1px solid #93c5fd;border-radius:8px;padding:8px;font-size:12px;font-family:inherit;"></textarea>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-top:4px;">
+          <span style="font-size:11px;color:#64748b;font-weight:700;">※ 큐 등록 시 `validate_document()`가 본문 링크 0개 여부 및 타래 고지문을 즉시 검증합니다.</span>
+          <div style="display:flex;gap:8px;">
+            <button type="button" onclick="document.getElementById('th-smart-editor-modal').style.display='none'" style="padding:8px 14px;border-radius:8px;border:1px solid #cbd5e1;background:#f8fafc;font-size:12px;font-weight:800;cursor:pointer;">닫기</button>
+            <button type="button" class="th-btn-smart" id="th-se-queue-btn" onclick="window.BaroThreadsDeck.queueSelectedDraft()">🚀 선택한 버전으로 타래 발행 큐 등록</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- [MODAL 2] Viral Hook Benchmark Extractor -->
+  <div class="th-modal-backdrop" id="th-hook-vault-modal" onclick="if(event.target===this)this.style.display='none'">
+    <div class="th-modal-dialog" style="max-width:620px;" onclick="event.stopPropagation()">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 18px;background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;">
+        <strong style="font-size:14.5px;font-weight:900;">📡 @radar 스레드 바이럴 훅 공식 추출기 (`threads-hooks.json`)</strong>
+        <button type="button" onclick="document.getElementById('th-hook-vault-modal').style.display='none'" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:#fff;border-radius:8px;width:28px;height:28px;cursor:pointer;">✕</button>
+      </div>
+      <div style="padding:16px 18px;display:flex;flex-direction:column;gap:10px;">
+        <p style="margin:0;font-size:11.5px;color:#475569;font-weight:600;">
+          반응이 터진 인기 스레드 원문을 붙여넣으면, 본문 내용은 복제하지 않고 <strong>[첫 줄 후킹 공식 + 줄바꿈 리듬 + 댓글 유도 패턴]</strong> 구조만 추출해 볼트에 영구 저장합니다.
+        </p>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:800;margin-bottom:4px;">카테고리</label>
+          <input type="text" id="th-hk-cat" value="정책·금융·꿀팁" style="width:100%;padding:7px 10px;border:1px solid #cbd5e1;border-radius:8px;font-size:12px;">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:800;margin-bottom:4px;">벤치마킹할 인기 스레드 샘플 텍스트</label>
+          <textarea id="th-hk-sample" rows="4" placeholder="솔직히 이거 몰라서 매년 35만 원 그냥 날리는 직장인 진짜 많더라...&#10;&#10;① 핵심 포인트 1&#10;② 핵심 포인트 2&#10;&#10;자세한 신청 링크는 아래 첫 댓글(타래)에 남겨둘게 👇" style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;font-size:12px;font-family:inherit;"></textarea>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;">
+          <button type="button" onclick="document.getElementById('th-hook-vault-modal').style.display='none'" style="padding:7px 13px;border-radius:8px;border:1px solid #cbd5e1;background:#f8fafc;font-size:12px;font-weight:800;cursor:pointer;">취소</button>
+          <button type="button" class="th-btn-smart" onclick="window.BaroThreadsDeck.saveNewHookFormula()">📡 구조 공식 추출 및 볼트 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

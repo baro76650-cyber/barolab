@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "maxPerCycle": 1,
+  "maxUpdatesPerDay": 1,
+  "maxResearchPerDay": 4,
+  "cooldownHours": 672,
+  "cycleIntervalMinutes": 30,
+  "publishingLookaheadMinutes": 10,
+  "auditIntervalMinutes": 2,
+  "auditBatchSize": 10,
+  "auditBudgetSeconds": 40,
+  "updatedAt": "2026-10-13T19:46:16.344738+00:00"
+}

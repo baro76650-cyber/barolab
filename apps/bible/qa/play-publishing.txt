@@ -1,0 +1,127 @@
+- text: Google Play Console 로드 중
+- banner:
+  - link "Google Play Console 로고":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+    - button "Google Play Console 로고"
+  - button "읽지 않은 알림 알림 센터 열기": 읽지 않은 알림
+  - button "하루말씀 - 큰 글씨 성경·말씀 카드"
+  - button "개발자 계정 전환":
+    - img "개발자 계정 전환"
+- navigation:
+  - link "모든 앱":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+  - list:
+    - listitem "대시보드":
+      - button "대시보드"
+    - listitem "통계":
+      - button "통계"
+    - listitem "게시 개요":
+      - button "게시 개요"
+    - listitem "Google Play로 보호됨":
+      - button "Google Play로 보호됨"
+    - listitem "테스트 및 출시":
+      - button "테스트 및 출시"
+    - listitem "모니터링 및 개선":
+      - button "모니터링 및 개선"
+    - listitem "사용자 늘리기":
+      - button "사용자 늘리기"
+    - listitem "Play를 통한 수익 창출":
+      - button "Play를 통한 수익 창출"
+- heading "게시 개요" [level=1]
+- text: 앱 변경사항의 개요를 확인하고, 변경사항을 전송하여 검토를 받거나 게시할 시점을 관리하세요.
+- button "관리형 게시가 사용 중지됨"
+- link "제출 활동":
+  - /url: /console/u/0/developers/7752283694845461925/app/4975007773224005878/publishing/submission-activity
+- heading "변경사항이 아직 검토를 위해 제출되지 않음" [level=2]
+- button "\"변경사항이 아직 검토를 위해 제출되지 않음\"에 대한 추가 정보" [expanded]
+- button "검토를 위해 앱 전송" [disabled]
+- 'button "콘텐츠 숨기기: 변경사항이 아직 검토를 위해 제출되지 않음" [expanded]': 숨기기
+- text: 검토를 위해 변경사항을 전송하려면 앱 대시보드에서 필수 단계를 완료하세요.
+- link "대시보드로 이동":
+  - /url: /console/u/0/developers/7752283694845461925/app/4975007773224005878/app-dashboard
+- grid "변경사항":
+  - row "변경된 항목 설명":
+    - columnheader "변경된 항목"
+    - columnheader "설명"
+    - cell
+  - row "스토어 등록정보 button":
+    - gridcell "스토어 등록정보"
+    - button "button" [disabled]: 나중을 위해 저장
+  - row "한국어 – ko-KR 기본 스토어 등록정보 언어를 추가합니다. 앱 이름(하루말씀 - 큰 글씨 성경·말씀 카드) 및 다른 모든 필수 정보가 제공되었습니다.":
+    - gridcell "한국어 – ko-KR 기본 스토어 등록정보"
+    - gridcell "언어를 추가합니다. 앱 이름(하루말씀 - 큰 글씨 성경·말씀 카드) 및 다른 모든 필수 정보가 제공되었습니다."
+    - gridcell:
+      - listbox "추가 작업":
+        - button "추가 작업"
+  - row "앱 콘텐츠":
+    - gridcell "앱 콘텐츠"
+  - row "콘텐츠 등급 새 설문지 제출":
+    - gridcell "콘텐츠 등급"
+    - gridcell "새 설문지 제출"
+    - gridcell:
+      - listbox "추가 작업":
+        - button "추가 작업"
+  - row "타겟층 및 콘텐츠 타겟층 및 콘텐츠 정보를 업데이트합니다. 타겟 연령대는 만 18세 이상입니다.":
+    - gridcell "타겟층 및 콘텐츠"
+    - gridcell "타겟층 및 콘텐츠 정보를 업데이트합니다. 타겟 연령대는 만 18세 이상입니다."
+    - gridcell:
+      - listbox "추가 작업":
+        - button "추가 작업"
+  - row "개인정보처리방침 개인정보처리방침 URL을 https://haru-malsseum.pages.dev/privacy(으)로 설정":
+    - gridcell "개인정보처리방침"
+    - gridcell "개인정보처리방침 URL을 https://haru-malsseum.pages.dev/privacy(으)로 설정"
+    - gridcell:
+      - listbox "추가 작업":
+        - button "추가 작업"
+  - row "광고 선언 광고 선언 업데이트":
+    - gridcell "광고 선언"
+    - gridcell "광고 선언 업데이트"
+    - gridcell:
+      - listbox "추가 작업":
+        - button "추가 작업"
+  - row "데이터 보안 데이터 보안 설문지 작성":
+    - gridcell "데이터 보안"
+    - gridcell "데이터 보안 설문지 작성"
+    - gridcell:
+      - listbox "추가 작업":
+        - button "추가 작업"
+  - row "건강 앱 건강 앱 선언 완료":
+    - gridcell "건강 앱"
+    - gridcell "건강 앱 선언 완료"
+    - gridcell:
+      - listbox "추가 작업":
+        - button "추가 작업"
+  - row "스토어 설정":
+    - gridcell "스토어 설정"
+  - row "앱 카테고리 앱 카테고리(도서/참고자료 앱) 선택":
+    - gridcell "앱 카테고리"
+    - gridcell "앱 카테고리(도서/참고자료 앱) 선택"
+    - gridcell:
+      - listbox "추가 작업":
+        - button "추가 작업"
+- heading "제출해 주신 내용" [level=3]
+- text: 다음 목록의 항목은 게시되지 않았지만 앱 검토 시 고려됩니다.
+- list:
+  - listitem:
+    - link "앱 콘텐츠"
+    - text: ": 로그인 세부정보 안내 업데이트(특수한 액세스 권한 없이 모든 기능 사용 가능)"
+  - listitem:
+    - link "앱 콘텐츠"
+    - text: ": '정부 앱' 선언 업데이트됨"
+  - listitem:
+    - link "앱 콘텐츠"
+    - text: ": '금융 기능' 선언 업데이트됨"
+- link "제품 업데이트":
+  - /url: https://play.google.com/console/about/whats-new/
+- link "상태 대시보드":
+  - /url: https://status.play.google.com/
+- link "도움말":
+  - /url: /console/u/0/developers/7752283694845461925/help-and-support?app=4975007773224005878
+- text: © 2026 Google
+- link "개인 정보 보호":
+  - /url: https://www.google.com/policies/privacy/
+- link "개발자 배포 계약":
+  - /url: https://play.google.com/about/developer-distribution-agreement.html
+- link "서비스 약관":
+  - /url: https://play.google.com/about/console/terms-of-service/
+- tooltip "검토 전에 변경사항이 검사됩니다. 발견된 문제가 없으면 검토를 위해 전송할 수 있습니다."

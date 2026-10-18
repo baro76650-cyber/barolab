@@ -1,0 +1,23 @@
+{
+  "lists": [
+    {
+      "name": "모든 행 선택",
+      "checked": "mixed"
+    },
+    {
+      "name": "BaroLab 생활 앱 내부 테스트",
+      "checked": "true"
+    },
+    {
+      "name": "하루말씀 내부 테스트",
+      "checked": "false"
+    }
+  ],
+  "links": [
+    {
+      "label": "링크 복사: https://play.google.com/apps/internaltest/4701400802151181455",
+      "disabled": false
+    }
+  ],
+  "observedAt": "2026-10-14T19:12:25.741056+09:00"
+}

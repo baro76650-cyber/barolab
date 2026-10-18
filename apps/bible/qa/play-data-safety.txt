@@ -1,0 +1,148 @@
+- text: Google Play Console 로드 중
+- banner:
+  - link "Google Play Console 로고":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+    - button "Google Play Console 로고"
+  - button "읽지 않은 알림 알림 센터 열기": 읽지 않은 알림
+  - button "하루말씀 - 큰 글씨 성경·말씀 카드"
+  - button "개발자 계정 전환":
+    - img "개발자 계정 전환"
+- navigation:
+  - link "모든 앱":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+  - list:
+    - listitem "대시보드":
+      - button "대시보드"
+    - listitem "통계":
+      - button "통계"
+    - listitem "게시 개요":
+      - button "게시 개요"
+    - listitem "Google Play로 보호됨":
+      - button "Google Play로 보호됨"
+    - listitem "테스트 및 출시":
+      - button "테스트 및 출시"
+    - listitem "모니터링 및 개선":
+      - button "모니터링 및 개선"
+      - list:
+        - listitem "도달범위 및 기기":
+          - button "도달범위 및 기기"
+        - listitem "평점 및 리뷰":
+          - button "평점 및 리뷰"
+        - listitem "Android vitals":
+          - button "Android vitals"
+        - listitem "정책 및 프로그램":
+          - button "정책 및 프로그램"
+          - list:
+            - listitem "정책 상태":
+              - button "정책 상태"
+            - listitem "앱 콘텐츠":
+              - button "앱 콘텐츠"
+            - listitem "프로그램":
+              - button "프로그램"
+    - listitem "사용자 늘리기":
+      - button "사용자 늘리기"
+    - listitem "Play를 통한 수익 창출":
+      - button "Play를 통한 수익 창출"
+- link "대시보드 페이지로 돌아가기":
+  - /url: /console/u/0/developers/7752283694845461925/app/4975007773224005878/app-dashboard
+  - text: 대시보드
+- heading "데이터 보안" [level=1]
+- button "CSV 파일로 내보내기"
+- button "CSV에서 가져오기"
+- heading "앱 데이터 수집 및 공유 방식에 관한 정보 제공" [level=2]
+- paragraph: 사용자가 앱의 개인 정보 보호, 보안, 데이터 취급 관행에 관해 보다 정확하게 이해한 후 다운로드할 수 있도록 앱의 보안에 관한 정보를 제공해 주세요. 제공해 주신 정보는 사용자가 데이터의 수집 및 공유 방식을 확인할 수 있도록 스토어 등록정보 아래에 표시됩니다.
+- button "데이터 보안에 관한 자세한 설명 숨기기": 숨기기
+- tablist:
+  - tab "1/5단계, 개요" [disabled]: 개요
+  - tab "2/5단계, 데이터 수집 및 보안" [disabled]: 데이터 수집 및 보안
+  - tab "3/5단계, 데이터 유형" [disabled]: 데이터 유형
+  - tab "4/5단계, 데이터 취급 및 처리" [disabled]: 데이터 취급 및 처리
+  - tab "5/5단계, 미리보기" [selected]: 5 미리보기
+- tabpanel:
+  - heading "스토어 등록정보 미리보기" [level=2]
+  - button "모두 접기"
+  - text: 알려주신 내용을 바탕으로 Google Play에서 다음 정보가 사용자에게 표시됩니다.
+  - heading "공유되는 데이터" [level=3]
+  - text: 다른 회사나 조직과 공유될 수 있는 데이터
+  - strong: 위치
+  - text: 대략적인 위치
+  - button "세부정보 숨기기" [expanded]
+  - heading "공유되는 데이터 및 공유 목적" [level=4]
+  - strong: 대략적인 위치
+  - paragraph: 애널리틱스, 사기 예방, 보안, 규정 준수, 광고 또는 마케팅
+  - strong: 앱 정보 및 성능
+  - text: 진단
+  - button "세부정보 숨기기" [expanded]
+  - heading "공유되는 데이터 및 공유 목적" [level=4]
+  - strong: 진단
+  - paragraph: 애널리틱스, 사기 예방, 보안, 규정 준수, 광고 또는 마케팅
+  - strong: 앱 활동
+  - text: 앱 상호작용
+  - button "세부정보 숨기기" [expanded]
+  - heading "공유되는 데이터 및 공유 목적" [level=4]
+  - strong: 앱 상호작용
+  - paragraph: 애널리틱스, 사기 예방, 보안, 규정 준수, 광고 또는 마케팅
+  - strong: 기기 또는 기타 ID
+  - text: 기기 또는 기타 ID
+  - button "세부정보 숨기기" [expanded]
+  - heading "공유되는 데이터 및 공유 목적" [level=4]
+  - strong: 기기 또는 기타 ID
+  - paragraph: 애널리틱스, 사기 예방, 보안, 규정 준수, 광고 또는 마케팅
+  - heading "수집되는 데이터" [level=3]
+  - text: 이 앱에서 수집할 수 있는 데이터
+  - strong: 위치
+  - text: 대략적인 위치
+  - button "세부정보 숨기기" [expanded]
+  - heading "수집되는 데이터 및 수집 목적" [level=4]
+  - strong: 대략적인 위치
+  - paragraph: 애널리틱스, 사기 예방, 보안, 규정 준수, 광고 또는 마케팅
+  - strong: 앱 정보 및 성능
+  - text: 진단
+  - button "세부정보 숨기기" [expanded]
+  - heading "수집되는 데이터 및 수집 목적" [level=4]
+  - strong: 진단
+  - paragraph: 애널리틱스, 사기 예방, 보안, 규정 준수, 광고 또는 마케팅
+  - strong: 앱 활동
+  - text: 앱 상호작용
+  - button "세부정보 숨기기" [expanded]
+  - heading "수집되는 데이터 및 수집 목적" [level=4]
+  - strong: 앱 상호작용
+  - paragraph: 애널리틱스, 사기 예방, 보안, 규정 준수, 광고 또는 마케팅
+  - strong: 기기 또는 기타 ID
+  - text: 기기 또는 기타 ID
+  - button "세부정보 숨기기" [expanded]
+  - heading "수집되는 데이터 및 수집 목적" [level=4]
+  - strong: 기기 또는 기타 ID
+  - paragraph: 애널리틱스, 사기 예방, 보안, 규정 준수, 광고 또는 마케팅
+  - heading "데이터 삭제" [level=3]
+  - text: 사용자가 삭제할 수 있는 데이터입니다.
+  - strong: 앱 데이터 관리
+  - paragraph:
+    - text: 전체 계정을 삭제하지 않고도 개발자가 이 앱을 통해 수집한 특정 데이터를 삭제하도록 요청할 수 있습니다. 이 데이터에는 활동 내역, 거래 내역, 이미지, 동영상 등이 포함될 수 있습니다.
+    - link "https://haru-malsseum.pages.dev/privacy#data-deletion":
+      - /url: https://haru-malsseum.pages.dev/privacy#data-deletion
+  - heading "보안 권장사항" [level=3]
+  - heading "전송 중 데이터 암호화됨" [level=4]:
+    - strong: 전송 중 데이터 암호화됨
+  - paragraph: 데이터가 보안 연결을 통해 전송됩니다
+  - heading "개인정보처리방침" [level=3]
+  - paragraph: https://haru-malsseum.pages.dev/privacy
+- text: 5/5단계, 미리보기 변경사항이 저장되었습니다. 게시 개요에서 전송하여 검토를 받으세요.
+- button "삭제" [disabled]
+- button "뒤로"
+- button "임시보관함에 저장" [disabled]
+- button "저장" [disabled]
+- link "제품 업데이트":
+  - /url: https://play.google.com/console/about/whats-new/
+- link "상태 대시보드":
+  - /url: https://status.play.google.com/
+- link "도움말":
+  - /url: /console/u/0/developers/7752283694845461925/help-and-support?app=4975007773224005878
+- text: © 2026 Google
+- link "개인 정보 보호":
+  - /url: https://www.google.com/policies/privacy/
+- link "개발자 배포 계약":
+  - /url: https://play.google.com/about/developer-distribution-agreement.html
+- link "서비스 약관":
+  - /url: https://play.google.com/about/console/terms-of-service/
+- status

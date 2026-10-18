@@ -1,0 +1,104 @@
+2026-10-14T17:14:23.021090+09:00
+https://play.google.com/console/u/0/developers/7752283694845461925/app/4975007773224005878/store-listings/default/edit
+- text: Google Play Console 로드 중
+- banner:
+  - link "Google Play Console 로고":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+    - button "Google Play Console 로고"
+  - button "읽지 않은 알림 알림 센터 열기": 읽지 않은 알림
+  - button "오늘의 성경말씀 - 큰글씨·듣기·공유"
+  - button "개발자 계정 전환":
+    - img "개발자 계정 전환"
+- navigation:
+  - link "모든 앱":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+  - list:
+    - listitem "대시보드":
+      - button "대시보드"
+    - listitem "통계":
+      - button "통계"
+    - listitem "게시 개요":
+      - button "게시 개요"
+    - listitem "Google Play로 보호됨":
+      - button "Google Play로 보호됨"
+    - listitem "테스트 및 출시":
+      - button "테스트 및 출시"
+    - listitem "모니터링 및 개선":
+      - button "모니터링 및 개선"
+    - listitem "사용자 늘리기":
+      - button "사용자 늘리기"
+      - list:
+        - listitem "앱 정보":
+          - button "앱 정보"
+          - list:
+            - listitem "스토어 등록정보":
+              - button "스토어 등록정보"
+            - listitem "스토어 설정":
+              - button "스토어 설정"
+        - listitem "스토어 실적":
+          - button "스토어 실적"
+        - listitem "번역":
+          - button "번역"
+        - listitem "딥 링크":
+          - button "딥 링크"
+    - listitem "Play를 통한 수익 창출":
+      - button "Play를 통한 수익 창출"
+- link "스토어 등록정보 페이지로 돌아가기":
+  - /url: /console/u/0/developers/7752283694845461925/app/4975007773224005878/store-listings
+  - text: 스토어 등록정보
+- heading "기본 스토어 등록정보" [level=1]
+- text: 검토를 위해 전송 준비 완료 앱 이름, 아이콘, 스크린샷 등을 수정하여 앱이 Google Play에서 사용자에게 표시될 방식을 나타내세요.
+- tablist:
+  - tab "1/2단계, 애셋" [disabled]: 애셋
+  - tab "2/2단계, 리뷰" [selected]: 2 리뷰
+- tabpanel:
+  - heading "AI 애셋 선언" [level=2]
+  - paragraph:
+    - text: 규정에 따라 특정 상황에서는 AI 생성 애셋을 사용하는 콘텐츠에 라벨을 지정해야 합니다.
+    - link "AI 생성 콘텐츠 선언 자세히 알아보기, 새 탭에서 열기":
+      - /url: https://support.google.com/googleplay/android-developer/answer/17262077?hl=ko
+      - text: 자세히 알아보기
+  - radiogroup "AI 애셋 선언 옵션":
+    - radio "애셋 라벨 지정 안함" [disabled]
+    - text: 애셋 라벨 지정 안함
+    - radio "AI를 사용하여 생성 또는 수정한 것으로 애셋 라벨 지정" [checked] [disabled]
+    - text: AI를 사용하여 생성 또는 수정한 것으로 애셋 라벨 지정 다음 단계에서 개별 애셋에 라벨을 지정합니다.
+    - button "AI 생성 애셋 라벨 지정"
+  - heading "애셋 리뷰" [level=2]
+  - text: 다음의 애셋 보기
+  - button "기본값 – 한국어 – ko-KR"
+  - text: "앱 이름 오늘의 성경말씀 - 큰글씨·듣기·공유 간단한 설명 매일 한 구절, 큰글씨로 읽고 편안하게 듣고 말씀 카드로 나누세요. 자세한 설명 하루에 한 구절, 편안한 큰 글씨로 말씀을 읽어 보세요. 현재 포함된 30개 구절을 날짜에 따라 하루 하나씩 순환합니다. 마음에 남는 구절은 즐겨찾기에 저장하고, 원하는 시각의 알림을 선택하거나 말씀 카드를 다른 앱으로 공유할 수 있습니다. - 글씨 크기 선택과 즐겨찾기 - 읽는 중에도 바로 바꾸는 글씨 크기 - 포함된 30말씀을 목록과 검색으로 찾아 읽기 - 하루 한 번, 내가 정하는 알림 - 설치된 한국어 오프라인 음성으로 듣기 - 본문·구절·출처가 담긴 카드 공유 - 회원가입 없이 읽기와 저장 읽기와 저장은 인터넷 없이 사용할 수 있습니다. 듣기는 기기에 한국어 오프라인 음성이 설치되어 있어야 합니다. 알림은 기기 절전·권한 상태에 따라 지연될 수 있습니다. 공유에는 사용자가 선택한 다른 앱이 필요합니다. 성경 전체를 제공하지 않으며, 제공자의 공개 영역 자료인 ‘한국어 성경 — Korean Bible 1910(eBible KOROLD)’의 선정 구절을 사용합니다. 본문을 개역개정이나 1961 개역한글로 표시하지 않습니다. AI 묵상·기도문은 포함하지 않았습니다. 무료 운영을 위한 Google AdMob 배너 광고가 포함됩니다. 비맞춤 광고를 요청하며 광고·동의 SDK의 데이터 처리는 개인정보처리방침에서 확인할 수 있습니다. 광고 클릭이나 시청은 말씀 이용의 조건이 아닙니다. 문의: baro76650@gmail.com 앱 아이콘"
+  - img "앱 아이콘"
+  - text: 그래픽 이미지
+  - img "그래픽 이미지"
+  - text: 동영상 -- 휴대전화 스크린샷
+  - img "휴대전화 스크린샷"
+  - img "휴대전화 스크린샷"
+  - img "휴대전화 스크린샷"
+  - img "휴대전화 스크린샷"
+  - text: 7인치 태블릿 스크린샷 -- 10인치 태블릿 스크린샷 -- 데스크톱 스크린샷 -- Android XR 스크린샷 -- 공간 XR 동영상 -- 비공간 XR 동영상 --
+- text: 변경사항이 저장되었습니다. 게시 개요에서 전송하여 검토를 받으세요.
+- button "삭제" [disabled]
+- button "뒤로"
+- button "임시보관함에 저장" [disabled]
+- button "저장" [disabled]
+- link "제품 업데이트":
+  - /url: https://play.google.com/console/about/whats-new/
+- link "상태 대시보드":
+  - /url: https://status.play.google.com/
+- link "도움말":
+  - /url: /console/u/0/developers/7752283694845461925/help-and-support?app=4975007773224005878
+- text: © 2026 Google
+- link "개인 정보 보호":
+  - /url: https://www.google.com/policies/privacy/
+- link "개발자 배포 계약":
+  - /url: https://play.google.com/about/developer-distribution-agreement.html
+- link "서비스 약관":
+  - /url: https://play.google.com/about/console/terms-of-service/
+- dialog "게시 개요로 이동하시겠어요? 닫기":
+  - heading "게시 개요로 이동하시겠어요?" [level=1]
+  - button "닫기"
+  - text: 변경사항이 저장되었습니다. 검토를 위해 Google에 전송하려면 게시 개요로 이동하세요.
+  - button "나중에"
+  - button "개요로 이동"
+- status

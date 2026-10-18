@@ -1,0 +1,2957 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>통합 종합상황실 - BaroLab ARGO Gauge Control Hub</title>
+
+  <link rel="stylesheet" href="traffic.css">
+  <link rel="stylesheet" href="projects.css">
+  <link rel="stylesheet" href="growth-actions.css?v=20261014-growth-1">
+  <link rel="stylesheet" href="sidebar.css?v=20261017-unified-2">
+  <link rel="stylesheet" href="overview-kin.css?v=20261015-1">
+  <script src="kin-summary.js?v=20261015-2" defer></script>
+  <script src="overview-kin.js?v=20261015-2" defer></script>
+  <link rel="stylesheet" href="threads.css?v=20261015-2">
+  <script src="threads-summary.js?v=20261015-5" defer></script>
+
+  <style>
+    /* ==========================================================================
+       ARGO Visual Gauge Cockpit (1080p Single-Screen · Max 1600px · 12-Col Grid)
+       ========================================================================== */
+    :root {
+      --argo-blue: #2563eb;
+      --argo-blue-lt: #3b82f6;
+      --argo-emerald: #10b981;
+      --argo-emerald-dk: #059669;
+      --argo-gold: #f59e0b;
+      --argo-purple: #8b5cf6;
+      --argo-dark: #0f172a;
+      --argo-dark-card: #111827;
+    }
+
+    body.control-room.overview-page .main-wrap {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 10px 18px 20px;
+      box-sizing: border-box;
+    }
+
+    /* Hide all verbose disclaimers and long text descriptions */
+    body.overview-page .section-caption,
+    body.overview-page .revenue-note,
+    body.overview-page .threads-note,
+    body.overview-page .bento-hidden-meta {
+      display: none !important;
+    }
+
+    /* Compact Header */
+    body.overview-page .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 14px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+    }
+    body.overview-page .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    body.overview-page .header-left h1 {
+      font-size: 16.5px;
+      font-weight: 800;
+      margin: 0;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .header-sub-pill {
+      font-size: 11px;
+      font-weight: 700;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.16);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    body.overview-page .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    body.overview-page .date-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+    }
+    body.overview-page .date-box .clock {
+      font-size: 13px;
+      font-weight: 800;
+      color: #f8fafc;
+      font-variant-numeric: tabular-nums;
+    }
+    body.overview-page .date-box .tz {
+      font-size: 10px;
+      color: #94a3b8;
+    }
+    body.overview-page .live-status {
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #a7f3d0;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 8px;
+    }
+    body.overview-page .btn-quick {
+      padding: 5px 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #f8fafc;
+      cursor: pointer;
+    }
+    body.overview-page .btn-quick:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* Master 12-Column Bento Grid */
+    .bento-cockpit {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    /* ==========================================================================
+       1. Top 4 Big Gauge Cards (ARGO SVG Donut / Arc / Dual-Ring Style)
+       ========================================================================== */
+    .argo-big-gauge-card {
+      grid-column: span 3;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 13px;
+      padding: 11px 13px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .argo-big-gauge-card.dark-vault {
+      background: radial-gradient(circle at 20% 20%, #1e293b 0%, #0f172a 100%);
+      border-color: #334155;
+      color: #f8fafc;
+      cursor: pointer;
+    }
+    .argo-big-gauge-card.dark-vault:hover {
+      border-color: #60a5fa;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.22);
+    }
+    .argo-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      min-width: 0;
+    }
+    .argo-card-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .dark-vault .argo-card-title {
+      color: #f8fafc;
+    }
+    .pillar-badge {
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+    }
+    .argo-gauge-body {
+      display: grid;
+      grid-template-columns: 82px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+    }
+    .argo-svg-wrap {
+      width: 82px;
+      height: 78px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .argo-svg-wrap svg {
+      width: 82px;
+      height: 78px;
+      overflow: visible;
+    }
+    .argo-tick-ring {
+      fill: none;
+      stroke: #cbd5e1;
+      stroke-width: 2;
+      stroke-dasharray: 1.4 3.8;
+      opacity: 0.85;
+    }
+    .dark-vault .argo-tick-ring {
+      stroke: rgba(148, 163, 184, 0.42);
+    }
+    .argo-ring-bg {
+      fill: none;
+      stroke: #e2e8f0;
+    }
+    .dark-vault .argo-ring-bg {
+      stroke: rgba(148, 163, 184, 0.2);
+    }
+    .argo-ring-fg {
+      fill: none;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.65s cubic-bezier(0.22, 1, 0.36, 1), stroke-dasharray 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .argo-svg-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      text-align: center;
+    }
+    .argo-svg-center.arc-center {
+      padding-top: 16px;
+    }
+    .argo-pct-num {
+      font-size: 15px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .dark-vault .argo-pct-num {
+      color: #ffffff;
+    }
+    .argo-pct-sub,
+    #metric-revenue-value,
+    #metric-index-value {
+      font-size: 9.5px !important;
+      font-weight: 700 !important;
+      color: #64748b !important;
+      margin-top: 2px !important;
+      line-height: 1.1 !important;
+      white-space: nowrap !important;
+    }
+    .dark-vault .argo-pct-sub {
+      color: #93c5fd !important;
+    }
+
+    /* Right side of Big Gauge Card: 3 Mini Horizontal Bars */
+    .argo-bars-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+    .argo-bar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5px;
+      min-width: 0;
+    }
+    .argo-bar-label-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #475569;
+      white-space: nowrap;
+      min-width: 0;
+    }
+    .argo-bar-label-line > span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+    .dark-vault .argo-bar-label-line {
+      color: #cbd5e1;
+    }
+    .argo-bar-label-line strong {
+      color: #0f172a;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .dark-vault .argo-bar-label-line strong {
+      color: #ffffff;
+    }
+    .argo-hbar-track {
+      width: 100%;
+      height: 5.5px;
+      background: #f1f5f9;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .dark-vault .argo-hbar-track {
+      background: rgba(148, 163, 184, 0.2);
+    }
+    /* ARGO Precision Segmented Tick Overlay on Progress Tracks */
+    .argo-hbar-track::after,
+    .master-gauge-track::after,
+    .doctor-gauge-track::after,
+    .nv-cooldown-track::after,
+    .cf-tile-gauge-track::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent calc(20% - 1.5px),
+        rgba(255, 255, 255, 0.65) calc(20% - 1.5px),
+        rgba(255, 255, 255, 0.65) 20%
+      );
+      pointer-events: none;
+    }
+    .dark-vault .argo-hbar-track::after {
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent calc(20% - 1.5px),
+        rgba(15, 23, 42, 0.65) calc(20% - 1.5px),
+        rgba(15, 23, 42, 0.65) 20%
+      );
+    }
+    .argo-hbar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+    .fill-blue { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+    .fill-emerald { background: linear-gradient(90deg, #10b981, #059669); }
+    .fill-gold { background: linear-gradient(90deg, #fbbf24, #d97706); }
+    .fill-purple { background: linear-gradient(90deg, #a78bfa, #7c3aed); }
+
+    .argo-card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding-top: 5px;
+      border-top: 1px solid #f1f5f9;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #475569;
+      white-space: nowrap;
+    }
+    .argo-card-foot > span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .dark-vault .argo-card-foot {
+      border-top-color: rgba(148, 163, 184, 0.18);
+      color: #94a3b8;
+    }
+    .argo-foot-link {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #2563eb;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .dark-vault .argo-foot-link {
+      color: #60a5fa;
+    }
+
+    /* ==========================================================================
+       2. Middle Bento Matrix (Left 7 Cols + Right 5 Cols)
+       ========================================================================== */
+    .bento-col-left {
+      grid-column: span 7;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+    .bento-col-right {
+      grid-column: span 5;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+    #legacy-remodel-gauge-card,
+    #app-projects-gauge-card,
+    #ai-crew-gauge-card {
+      flex: 1 1 auto;
+      justify-content: space-between;
+    }
+
+    .bento-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 13px;
+      padding: 11px 14px;
+      box-shadow: 0 2px 5px rgba(15, 23, 42, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bento-box-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: nowrap;
+    }
+    .bento-box-title {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 0;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #0f172a;
+      min-width: 0;
+    }
+    .bento-box-title > span {
+      white-space: nowrap !important;
+    }
+    .bento-mini-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 3.5px;
+      padding: 2px 6.5px;
+      border-radius: 6px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      font-size: 10px;
+      font-weight: 700;
+      color: #334155;
+      white-space: nowrap !important;
+      flex-shrink: 0;
+    }
+    .bento-mini-chip strong {
+      color: #0f172a;
+      font-weight: 800;
+      white-space: nowrap !important;
+    }
+    .bento-go-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #0f172a;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      white-space: nowrap !important;
+      flex-shrink: 0;
+    }
+    .bento-go-btn:hover {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+    }
+
+    /* Master Progress Bar at Top of CF 16 Board */
+    .master-gauge-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 5px 10px;
+    }
+    .master-gauge-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: #334155;
+      white-space: nowrap;
+    }
+    .master-gauge-track {
+      flex: 1;
+      height: 7px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .master-gauge-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #10b981);
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+    .master-gauge-pct {
+      font-size: 11px;
+      font-weight: 900;
+      color: #0f172a;
+      min-width: 38px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* CF 16 Domains 4x4 Grid with Per-Tile Traffic Mini Gauge & Click-to-Work Hover */
+    .cf-bento-grid-16 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .cf-mini-tile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 4px;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      text-decoration: none;
+      color: #0f172a;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease, background 0.14s ease;
+      min-width: 0;
+      cursor: pointer;
+    }
+    .cf-mini-tile:hover {
+      transform: translateY(-2px);
+      border-color: #60a5fa;
+      background: #f1f5f9;
+      box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
+    }
+    .cf-mini-tile.st-done {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+    .cf-mini-tile.st-done:hover {
+      border-color: #10b981;
+      box-shadow: 0 5px 14px rgba(16, 185, 129, 0.16);
+    }
+    .cf-mini-tile.st-active {
+      background: #eff6ff;
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+    }
+    .cf-tile-row1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      min-width: 0;
+    }
+    .cf-tile-left {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+      overflow: hidden;
+    }
+    .cf-tile-dot {
+      font-size: 9.5px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .cf-tile-name {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cf-tile-uv {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #334155;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1px 4px;
+      border-radius: 4px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .cf-tile-gauge-track {
+      width: 100%;
+      height: 3.5px;
+      background: rgba(148, 163, 184, 0.22);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .cf-tile-gauge-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      transition: width 0.4s ease;
+    }
+
+    /* Naver 5 Accounts Board with Segmented Battery Gauge & Click-to-Work Hover */
+    .nv-bento-grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .nv-mini-tile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 5px;
+      padding: 7px 8px;
+      border-radius: 9px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      text-decoration: none;
+      color: #0f172a;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+      cursor: pointer;
+      min-width: 0;
+    }
+    .nv-mini-tile:hover {
+      transform: translateY(-2px);
+      border-color: #60a5fa;
+      box-shadow: 0 5px 14px rgba(15, 23, 42, 0.09);
+    }
+    .nv-mini-tile.is-done {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+    .nv-mini-tile.is-reserved {
+      background: #eff6ff;
+      border-color: #93c5fd;
+    }
+    .nv-mini-tile.is-active {
+      background: #eff6ff;
+      border-color: #60a5fa;
+    }
+    .nv-tile-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      min-width: 0;
+    }
+    .nv-tile-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .nv-tile-type {
+      font-size: 9px;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 4px;
+      background: #e2e8f0;
+      color: #334155;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .nv-tile-type.bridge {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    /* Segmented Battery Bar ([■■] 2/2) */
+    .nv-battery-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+    }
+    .nv-battery-cells {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      flex: 1;
+      padding: 2px;
+      background: #e2e8f0;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+    }
+    .batt-cell {
+      flex: 1;
+      height: 11px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.7);
+      transition: background 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8.5px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1;
+    }
+    .batt-cell.filled {
+      background: linear-gradient(90deg, #10b981, #059669);
+      box-shadow: 0 0 4px rgba(16, 185, 129, 0.45);
+    }
+    .batt-cell.reserved {
+      background: linear-gradient(90deg, #2563eb 0%, #3b82f6 62%, #93c5fd 100%);
+      box-shadow: 0 0 4px rgba(59, 130, 246, 0.4);
+    }
+    .batt-cell.working {
+      background: linear-gradient(90deg, #f59e0b, #d97706);
+    }
+    .nv-battery-txt {
+      font-size: 11px;
+      font-weight: 900;
+      color: #0f172a;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    /* 4-Hour Cooldown Timer Gauge Bar */
+    .nv-cooldown-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .nv-cooldown-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3px;
+      font-size: 9px;
+      font-weight: 700;
+      color: #475569;
+      white-space: nowrap;
+    }
+    .nv-cooldown-meta > span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .nv-cooldown-track {
+      width: 100%;
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .nv-cooldown-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+    .nv-cooldown-fill.ready { background: #10b981; }
+    .nv-cooldown-fill.cooling { background: #f59e0b; }
+    .nv-cooldown-fill.done { background: #059669; }
+    .nv-cooldown-fill.reserved { background: #2563eb; }
+
+    /* Multi-Channel Pair (Kin + Threads Circular Mini Gauges) */
+    .bento-channel-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .mini-gauge-row {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      align-items: center;
+      gap: 8px;
+    }
+    .mini-svg-box {
+      width: 58px;
+      height: 58px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mini-svg-box svg {
+      width: 58px;
+      height: 58px;
+      transform: rotate(-90deg);
+    }
+    .mini-svg-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.05;
+    }
+    .mini-svg-label small {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    /* App Projects 4-Step Milestone Gauge Bars */
+    .bento-apps-list-4 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+      flex: 1;
+      align-content: stretch;
+    }
+    .app-gauge-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-decoration: none;
+      color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+    .app-gauge-card:hover {
+      border-color: #93c5fd;
+      background: #eff6ff;
+    }
+    .app-gauge-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+    }
+    .app-gauge-name {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .app-gauge-pct {
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #059669;
+      font-variant-numeric: tabular-nums;
+    }
+    /* 4-Step Segmented Milestone Bar: 개발 -> 테스터 -> 14일 D-Day -> 정식 출시 */
+    .app-step-segments {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+    }
+    .app-step-seg {
+      height: 5px;
+      border-radius: 999px;
+      background: #e2e8f0;
+      transition: background 0.3s ease;
+    }
+    .app-step-seg.done {
+      background: linear-gradient(90deg, #10b981, #059669);
+    }
+    .app-step-seg.active {
+      background: linear-gradient(90deg, #3b82f6, #2563eb);
+    }
+    .app-step-caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .app-step-caption > span:first-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+    .app-step-caption > span:last-child {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    /* AI Crew 6 Compact Gauge Bar & Content Doctor Remodeling Gauge */
+    .bento-crew-grid-5 {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 6px;
+      flex: 1;
+      align-items: stretch;
+    }
+    .crew-mini-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 4px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .crew-mini-card.is-working {
+      background: #eff6ff;
+      border-color: #60a5fa;
+    }
+    .crew-mini-card.is-doctor {
+      background: #f0fdfa;
+      border-color: #5eead4;
+    }
+    .crew-mini-role {
+      font-size: 8.8px;
+      font-weight: 700;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .crew-mini-name {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0f172a;
+      white-space: nowrap;
+    }
+    .crew-mini-state {
+      font-size: 9px;
+      font-weight: 800;
+      color: #059669;
+      white-space: nowrap;
+    }
+    .doctor-gauge-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+      gap: 6px;
+    }
+    .doctor-gauge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #1e293b;
+      white-space: nowrap;
+    }
+    .doctor-gauge-track {
+      height: 8px;
+      border-radius: 999px;
+      background: #e2e8f0;
+      overflow: hidden;
+      position: relative;
+    }
+    .doctor-gauge-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #0d9488, #10b981, #3b82f6);
+      transition: width 0.5s ease;
+    }
+    .doctor-grade-pills {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 5px;
+    }
+    .doctor-grade-pill {
+      padding: 4px 6px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      white-space: nowrap;
+    }
+    .doctor-latest-line {
+      font-size: 10px;
+      font-weight: 700;
+      color: #0f766e;
+      background: #f0fdfa;
+      border: 1px solid #ccfbf1;
+      border-radius: 6px;
+      padding: 4px 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Click-to-Work Quick Preview Modal (BaroLab Signature Hybrid) */
+    .baro-work-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(15, 23, 42, 0.58);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .baro-work-modal-backdrop.open {
+      display: flex;
+    }
+    .baro-work-modal-card {
+      width: 100%;
+      max-width: 560px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.28);
+      overflow: hidden;
+      animation: baroModalPop 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes baroModalPop {
+      from { opacity: 0; transform: translateY(8px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .baro-work-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 13px 16px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #f8fafc;
+    }
+    .baro-work-modal-head-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .baro-work-modal-badge {
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .baro-work-modal-badge.st-public {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(52, 211, 153, 0.45);
+      color: #6ee7b7;
+    }
+    .baro-work-modal-badge.st-reserved {
+      background: rgba(59, 130, 246, 0.22);
+      border: 1px solid rgba(96, 165, 250, 0.5);
+      color: #93c5fd;
+    }
+    .baro-work-modal-badge.st-waiting {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: #fde68a;
+    }
+    .baro-work-modal-close {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #f8fafc;
+      border-radius: 7px;
+      width: 28px;
+      height: 28px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .baro-work-modal-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .baro-work-post-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 11px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .baro-work-post-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .baro-work-post-url {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #2563eb;
+      word-break: break-all;
+      text-decoration: none;
+    }
+    .baro-work-post-url:hover {
+      text-decoration: underline;
+    }
+    .baro-work-stepper {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 5px;
+    }
+    .baro-work-step {
+      padding: 6px 4px;
+      border-radius: 7px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      text-align: center;
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .baro-work-step.done {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #047857;
+    }
+    .baro-work-step.active {
+      background: #eff6ff;
+      border-color: #60a5fa;
+      color: #1d4ed8;
+    }
+    .baro-work-modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      padding-top: 4px;
+    }
+    .baro-work-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .baro-work-btn.primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border-color: #1d4ed8;
+      color: #ffffff;
+    }
+    .baro-work-btn.emerald {
+      background: linear-gradient(135deg, #10b981, #059669);
+      border-color: #059669;
+      color: #ffffff;
+    }
+
+    /* Tier 3: Collapsible Tab Drawer */
+    .bento-drawer-wrap {
+      grid-column: span 12;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 8px 14px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+    }
+    .bento-tab-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .bento-tab-buttons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .bento-tab-btn {
+      padding: 5px 11px;
+      border-radius: 7px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #334155;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+    .bento-tab-btn:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+    .bento-tab-btn.active {
+      background: #0f172a;
+      border-color: #0f172a;
+      color: #ffffff;
+    }
+    .bento-tab-panel {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #e2e8f0;
+    }
+    .bento-tab-panel.active {
+      display: block;
+    }
+
+    @media (max-width: 1280px) {
+      .argo-big-gauge-card { grid-column: span 6; }
+      .bento-col-left, .bento-col-right { grid-column: span 12; }
+    }
+    @media (max-width: 768px) {
+      .argo-big-gauge-card { grid-column: span 12; }
+      .cf-bento-grid-16 { grid-template-columns: repeat(2, 1fr); }
+      .nv-bento-grid-5 { grid-template-columns: repeat(2, 1fr); }
+      .bento-channel-pair { grid-template-columns: 1fr; }
+      .bento-crew-grid-5 { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body class="control-room overview-page">
+<a class="skip-link" href="#main-content">본문으로 이동</a>
+
+<!-- Shared SVG Gradient Definitions for ARGO Gauges -->
+<svg width="0" height="0" style="position:absolute; pointer-events:none;" aria-hidden="true">
+  <defs>
+    <linearGradient id="argoGradBlueEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="55%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <linearGradient id="argoGradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <linearGradient id="argoGradEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="argoGradVault" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="50%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="layout">
+  <!-- Unified Sidebar -->
+  <aside id="barolab-sidebar" class="sidebar" aria-label="주요 메뉴"></aside>
+  <script src="sidebar.js?v=20261018-no-rnd"></script>
+
+  <!-- Main Wrap -->
+  <main class="main-wrap" id="main-content">
+    <!-- Top Dark Cockpit Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1><span>✦ 통합 종합상황실</span></h1>
+        <span class="header-sub-pill">BaroLab Signature Hybrid Deck · CF 16 · 네이버 5 · 지식iN 2 · Threads · 앱 4 · AI 크루 6</span>
+      </div>
+
+      <div class="toolbar">
+        <div class="date-box">
+          <div class="clock" id="live-clock">--:--:--</div>
+          <div class="tz">KST</div>
+        </div>
+        <div class="live-status">
+          <span class="live-dot"></span>
+          <span>서버 연결 확인 중</span>
+        </div>
+        <button class="btn-quick" onclick="window.BaroLabHistory && window.BaroLabHistory.openModal()" title="과거 일자별 발행 완료 내역 조회">
+          <span>📜 지난 발행내역</span>
+        </button>
+        <button class="btn-quick" id="btn-manual-refresh" type="button">🔄 새로고침</button>
+      </div>
+    </header>
+
+    <!-- ======================================================================
+         ARGO 3-TIER BENTO COCKPIT GRID (12 Columns)
+         ====================================================================== -->
+    <div class="bento-cockpit">
+
+      <!-- ====================================================================
+           [1단: 상단 4대 코어 목표 '빅 게이지(Big Gauge) 카드']
+           ==================================================================== -->
+
+      <!-- Big Gauge 1: 💰 일일 수익 목표 게이지 (Goal: $100/day, Semicircle Arc Gauge + ARGO Tick Ring) -->
+      <article class="argo-big-gauge-card" title="일일 목표 $100.00 대비 실시간 수익 달성률">
+        <div class="argo-card-head">
+          <span class="argo-card-title">💰 일일 수익 목표 ($100/day)</span>
+          <span class="pillar-badge badge-orange" id="metric-revenue-badge">확인 중</span>
+        </div>
+        <div class="argo-gauge-body">
+          <!-- Left: Semicircle Arc Speedometer with Outer Tick Ring (r=38, arc length = 119.38) -->
+          <div class="argo-svg-wrap">
+            <svg viewBox="0 0 96 76">
+              <path class="argo-tick-ring" d="M 5 62 A 43 43 0 0 1 91 62"></path>
+              <path class="argo-ring-bg" d="M 10 62 A 38 38 0 0 1 86 62" stroke-width="8.5" stroke-linecap="round"></path>
+              <path class="argo-ring-fg" id="arc-revenue-goal" d="M 10 62 A 38 38 0 0 1 86 62" stroke="url(#argoGradBlueEmerald)" stroke-width="8.5" stroke-dasharray="119.4" stroke-dashoffset="114"></path>
+            </svg>
+            <div class="argo-svg-center arc-center">
+              <span class="argo-pct-num" id="gauge-rev-pct">0.0%</span>
+              <span class="argo-pct-sub" id="metric-revenue-value">$0.00</span>
+            </div>
+          </div>
+          <!-- Right: 3 Mini Horizontal Bars (AdSense / AdPost / Affiliate) -->
+          <div class="argo-bars-col">
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>애드센스 (CF 16)</span><strong id="val-rev-adsense">$0.00</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-emerald" id="bar-rev-adsense" style="width:6%;"></div></div>
+            </div>
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>애드포스트 (네이버)</span><strong id="val-rev-adpost">₩0</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-blue" id="bar-rev-adpost" style="width:4%;"></div></div>
+            </div>
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>제휴 마케팅</span><strong id="val-rev-affiliate">₩0</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-gold" id="bar-rev-affiliate" style="width:4%;"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="argo-card-foot">
+          <span id="kpi-revenue-goal-pct">목표 $100.00 기준</span>
+          <span id="metric-revenue-source" class="bento-hidden-meta">USD · KRW</span>
+          <span id="metric-revenue-growth" class="bento-hidden-meta">확인분</span>
+          <a class="argo-foot-link" href="#bento-drawer" onclick="window.switchBentoTab && window.switchBentoTab('revenue'); return false;">상세 수익표 ↗</a>
+        </div>
+      </article>
+
+      <!-- Big Gauge 2: 📝 오늘 전체 발행 게이지 (Goal: 23편, Double Donut Ring Gauge + ARGO Tick Ring) -->
+      <article class="argo-big-gauge-card" title="바깥 링: CF 16편 · 안쪽 링: 네이버 7편">
+        <div class="argo-card-head">
+          <span class="argo-card-title">📝 오늘 전체 발행 (Goal: 23편)</span>
+          <span class="pillar-badge badge-orange" id="kpi-todo-badge">0 / 23편 (0%)</span>
+        </div>
+        <div class="argo-gauge-body">
+          <!-- Left: Double Donut Ring (Outer r=35 C=219.9 for CF 16, Inner r=25 C=157.1 for Naver 7) -->
+          <div class="argo-svg-wrap">
+            <svg viewBox="0 0 88 88" style="transform: rotate(-90deg);">
+              <circle class="argo-tick-ring" cx="44" cy="44" r="41"></circle>
+              <circle class="argo-ring-bg" cx="44" cy="44" r="35" stroke-width="6.5"></circle>
+              <circle class="argo-ring-fg" id="ring-pub-cf" cx="44" cy="44" r="35" stroke="url(#argoGradBlue)" stroke-width="6.5" stroke-dasharray="219.9" stroke-dashoffset="219.9"></circle>
+              <circle class="argo-ring-bg" cx="44" cy="44" r="25" stroke-width="5.5"></circle>
+              <circle class="argo-ring-fg" id="ring-pub-naver" cx="44" cy="44" r="25" stroke="url(#argoGradEmerald)" stroke-width="5.5" stroke-dasharray="157.1" stroke-dashoffset="157.1"></circle>
+            </svg>
+            <div class="argo-svg-center">
+              <span class="argo-pct-num" id="gauge-pub-pct">0%</span>
+              <span class="argo-pct-sub" id="kpi-todo-val">0/23편</span>
+            </div>
+          </div>
+          <!-- Right: Outer & Inner Ring Breakdown Bars -->
+          <div class="argo-bars-col">
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>🔵 CF 블로그 (16)</span><strong id="val-pub-cf">0 / 16편</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-blue" id="bar-pub-cf" style="width:0%;"></div></div>
+            </div>
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>🟢 네이버 5계정</span><strong id="val-pub-naver">0 / 7편</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-emerald" id="bar-pub-naver" style="width:0%;"></div></div>
+            </div>
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>⚡ 실시간 파이프라인</span><strong id="kpi-todo-rate" style="color:#2563eb;">대기 중</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="argo-card-foot">
+          <span id="kpi-todo-desc">CF 0/16편 · 네이버 0/7편</span>
+          <a class="argo-foot-link" href="cf.html">발행 관제 ↗</a>
+        </div>
+      </article>
+
+      <!-- Big Gauge 3: 🔍 검색 색인 건강도 게이지 (Goal: 95%+, Multi-Segment Donut Gauge + ARGO Tick Ring) -->
+      <article class="argo-big-gauge-card" title="Google/네이버 색인 건강도 (목표 95%+)">
+        <div class="argo-card-head">
+          <span class="argo-card-title">🔍 검색 색인 건강도 (95%+)</span>
+          <span class="pillar-badge badge-orange" id="metric-index-badge">확인 중</span>
+        </div>
+        <div class="argo-gauge-body">
+          <!-- Left: Multi-segment Donut (r=33, C=207.35) -->
+          <div class="argo-svg-wrap">
+            <svg viewBox="0 0 84 84" style="transform: rotate(-90deg);">
+              <circle class="argo-tick-ring" cx="42" cy="42" r="39.5"></circle>
+              <circle class="argo-ring-bg" cx="42" cy="42" r="33" stroke-width="7.5"></circle>
+              <!-- Wait (Blue) -->
+              <circle class="argo-ring-fg" id="ring-idx-wait" cx="42" cy="42" r="33" stroke="#3b82f6" stroke-width="7.5" stroke-dasharray="0 207.4" stroke-dashoffset="0"></circle>
+              <!-- Unindexed (Amber) -->
+              <circle class="argo-ring-fg" id="ring-idx-unindexed" cx="42" cy="42" r="33" stroke="#f59e0b" stroke-width="7.5" stroke-dasharray="0 207.4" stroke-dashoffset="0"></circle>
+              <!-- Indexed (Emerald) -->
+              <circle class="argo-ring-fg" id="ring-idx-ok" cx="42" cy="42" r="33" stroke="#10b981" stroke-width="7.5" stroke-dasharray="0 207.4" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="argo-svg-center">
+              <span class="argo-pct-num" id="gauge-idx-pct">--%</span>
+              <span class="argo-pct-sub" id="metric-index-value">확인 중</span>
+            </div>
+          </div>
+          <!-- Right: 3 Ratio Bars (Indexed / Waiting / Unindexed) -->
+          <div class="argo-bars-col">
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>🟢 색인 완료</span><strong id="val-idx-ok">0건 (0%)</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-emerald" id="bar-idx-ok" style="width:0%;"></div></div>
+            </div>
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>🔵 검사 대기</span><strong id="val-idx-wait">0건 (0%)</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-blue" id="bar-idx-wait" style="width:0%;"></div></div>
+            </div>
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>🟠 미색인 점검</span><strong id="val-idx-unindexed">0건 (0%)</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-gold" id="bar-idx-unindexed" style="width:0%;"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="argo-card-foot">
+          <span id="metric-index-scope">공개 글 확인 중</span>
+          <span id="metric-index-source" class="bento-hidden-meta"></span>
+          <span id="bento-cdp-status-pill" style="color:#059669;">🟢 CDP 5/5 가동</span>
+        </div>
+      </article>
+
+      <!-- Big Gauge 4: 🧠 지식그래프 시냅스 연결 게이지 (ARGO Original Dark Vault Card + Tick Ring) -->
+      <article class="argo-big-gauge-card dark-vault" onclick="location.href='memory.html'" title="클릭 시 시냅스 기억 그래프(memory.html)로 이동">
+        <div class="argo-card-head">
+          <span class="argo-card-title">🧠 지식그래프 시냅스 게이지</span>
+          <span class="pillar-badge badge-green" id="argo-vault-badge" style="font-size:10px;">고아 0개</span>
+        </div>
+        <div class="argo-gauge-body">
+          <!-- Left: ARGO Original Donut Gauge (r=33, C=207.35) -->
+          <div class="argo-svg-wrap">
+            <svg viewBox="0 0 84 84" style="transform: rotate(-90deg);">
+              <circle class="argo-tick-ring" cx="42" cy="42" r="39.5"></circle>
+              <circle class="argo-ring-bg" cx="42" cy="42" r="33" stroke-width="7.5"></circle>
+              <circle class="argo-ring-fg" id="ring-mem-synapse" cx="42" cy="42" r="33" stroke="url(#argoGradVault)" stroke-width="7.5" stroke-dasharray="207.4" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="argo-svg-center">
+              <span class="argo-pct-num" id="gauge-mem-pct">100%</span>
+              <span class="argo-pct-sub" id="gauge-mem-sub">연결률</span>
+            </div>
+          </div>
+          <!-- Right: 3 Horizontal Bars (✦ 코어·수익 허브 / 🛠️ 학습된 스킬 / 📈 검증된 기억) -->
+          <div class="argo-bars-col">
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>✦ 코어·수익 허브</span><strong id="val-mem-core">13개</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-gold" id="bar-mem-core" style="width:92%;"></div></div>
+            </div>
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>🛠️ 학습된 스킬</span><strong id="val-mem-skill">4개</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-emerald" id="bar-mem-skill" style="width:80%;"></div></div>
+            </div>
+            <div class="argo-bar-row">
+              <div class="argo-bar-label-line"><span>📈 검증된 기억</span><strong id="val-mem-rev">14개</strong></div>
+              <div class="argo-hbar-track"><div class="argo-hbar-fill fill-blue" id="bar-mem-rev" style="width:100%;"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="argo-card-foot">
+          <span id="bento-memory-node-pill">시냅스 엣지 47개 · Clean Seed</span>
+          <a class="argo-foot-link" href="memory.html" onclick="event.stopPropagation();">기억 그래프 열기 →</a>
+        </div>
+      </article>
+
+      <!-- ====================================================================
+           [2단 좌측 (7컬럼): 블로그 주력 엔진 세그먼트 & 프로그레스 매트릭스]
+           ==================================================================== -->
+      <div class="bento-col-left">
+
+        <!-- 1. ⚡ CF 블로그 16개 도메인 보드 (상단 전체 게이지 바 + 16개 타일 하단 트래픽 미니 게이지 + 원클릭 작업물 모달) -->
+        <section class="bento-box" aria-label="CF 블로그 16개 도메인 보드">
+          <div class="bento-box-head">
+            <h2 class="bento-box-title">
+              <span>⚡ CF 블로그 16개 도메인</span>
+              <span class="bento-mini-chip">🟢 완료 <strong id="cf-summary-completed-count">0건</strong></span>
+              <span class="bento-mini-chip">🟡 대기 <strong id="cf-summary-waiting-count">16건</strong></span>
+              <span class="bento-mini-chip">👥 오늘 방문 <strong id="overview-today-cf">미수집</strong></span>
+              <span class="bento-mini-chip" style="background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8;">🖱️ 타일 클릭 시 작업물 바로보기</span>
+            </h2>
+            <a class="bento-go-btn" href="cf.html">CF 관제실 →</a>
+          </div>
+
+          <!-- Top Master Progress Gauge Bar (0% ~ 100%) -->
+          <div class="master-gauge-strip">
+            <span class="master-gauge-label">오늘 16개 도메인 발행 게이지</span>
+            <div class="master-gauge-track">
+              <div class="master-gauge-fill" id="cf-master-gauge-fill" style="width: 0%;"></div>
+            </div>
+            <span class="master-gauge-pct" id="cf-master-gauge-pct">0%</span>
+          </div>
+
+          <!-- 4x4 Domain Tiles with Bottom Traffic Mini Gauge Bars -->
+          <div class="cf-bento-grid-16" id="bento-cf-grid-16"></div>
+        </section>
+
+        <!-- 2. 🟢 네이버 블로그 5개 계정 + 칸막이형 배터리 게이지([■■] 2/2) + 4시간 쿨타임 타이머 게이지 -->
+        <section class="bento-box" aria-label="네이버 블로그 5개 계정 및 쿨타임 게이지">
+          <div class="bento-box-head">
+            <h2 class="bento-box-title">
+              <span>🟢 네이버 블로그 5개 계정</span>
+              <span class="bento-mini-chip">할당량 <strong id="nv-summary-total-progress">0 / 7편</strong></span>
+              <span class="bento-mini-chip">주력 <strong id="nv-summary-real-progress">0 / 3편</strong></span>
+              <span class="bento-mini-chip">브릿지 <strong id="nv-summary-bridge-progress">0 / 4편</strong></span>
+              <span class="bento-mini-chip">👥 오늘 방문 <strong id="overview-today-naver">미수집</strong></span>
+            </h2>
+            <a class="bento-go-btn" href="naver.html">네이버 관제실 →</a>
+          </div>
+
+          <div class="nv-bento-grid-5" id="bento-naver-grid-5">
+            <!-- Account 1: 시니어브리프 (1/1) -->
+            <a class="nv-mini-tile" id="mini-box-acc1" href="naver.html?acc=acc1" data-nv-acc="acc1">
+              <div class="nv-tile-top">
+                <span class="nv-tile-title">시니어브리프</span>
+                <span class="nv-tile-type">주력</span>
+              </div>
+              <div class="nv-battery-row">
+                <div class="nv-battery-cells" id="nv-batt-acc1"><span class="batt-cell"></span></div>
+                <span class="nv-battery-txt"><span id="mini-count-acc1">0</span>/1</span>
+              </div>
+              <div class="nv-cooldown-wrap">
+                <div class="nv-cooldown-meta">
+                  <span id="mini-status-acc1">🟢 대기</span>
+                  <span id="nv-visit-acc1">👥 -</span>
+                </div>
+                <div class="nv-cooldown-track"><div class="nv-cooldown-fill ready" id="nv-coolbar-acc1" style="width:100%;"></div></div>
+              </div>
+            </a>
+
+            <!-- Account 2: 머스트헬스뷰 (1/1) -->
+            <a class="nv-mini-tile" id="mini-box-acc2" href="naver.html?acc=acc2" data-nv-acc="acc2">
+              <div class="nv-tile-top">
+                <span class="nv-tile-title">머스트헬스뷰</span>
+                <span class="nv-tile-type">주력</span>
+              </div>
+              <div class="nv-battery-row">
+                <div class="nv-battery-cells" id="nv-batt-acc2"><span class="batt-cell"></span></div>
+                <span class="nv-battery-txt"><span id="mini-count-acc2">0</span>/1</span>
+              </div>
+              <div class="nv-cooldown-wrap">
+                <div class="nv-cooldown-meta">
+                  <span id="mini-status-acc2">🟢 대기</span>
+                  <span id="nv-visit-acc2">👥 -</span>
+                </div>
+                <div class="nv-cooldown-track"><div class="nv-cooldown-fill ready" id="nv-coolbar-acc2" style="width:100%;"></div></div>
+              </div>
+            </a>
+
+            <!-- Account 3: 윤뷰스 (1/1) -->
+            <a class="nv-mini-tile" id="mini-box-acc3" href="naver.html?acc=acc3" data-nv-acc="acc3">
+              <div class="nv-tile-top">
+                <span class="nv-tile-title">윤뷰스</span>
+                <span class="nv-tile-type">주력</span>
+              </div>
+              <div class="nv-battery-row">
+                <div class="nv-battery-cells" id="nv-batt-acc3"><span class="batt-cell"></span></div>
+                <span class="nv-battery-txt"><span id="mini-count-acc3">0</span>/1</span>
+              </div>
+              <div class="nv-cooldown-wrap">
+                <div class="nv-cooldown-meta">
+                  <span id="mini-status-acc3">🟢 대기</span>
+                  <span id="nv-visit-acc3">👥 -</span>
+                </div>
+                <div class="nv-cooldown-track"><div class="nv-cooldown-fill ready" id="nv-coolbar-acc3" style="width:100%;"></div></div>
+              </div>
+            </a>
+
+            <!-- Account 4: 직장인루틴 (2/2) -->
+            <a class="nv-mini-tile" id="mini-box-acc4" href="naver.html?acc=acc4" data-nv-acc="acc4">
+              <div class="nv-tile-top">
+                <span class="nv-tile-title">직장인루틴</span>
+                <span class="nv-tile-type bridge">브릿지</span>
+              </div>
+              <div class="nv-battery-row">
+                <div class="nv-battery-cells" id="nv-batt-acc4"><span class="batt-cell"></span><span class="batt-cell"></span></div>
+                <span class="nv-battery-txt"><span id="mini-count-acc4">0</span>/2</span>
+              </div>
+              <div class="nv-cooldown-wrap">
+                <div class="nv-cooldown-meta">
+                  <span id="mini-status-acc4">🟢 대기</span>
+                  <span id="nv-visit-acc4">👥 -</span>
+                </div>
+                <div class="nv-cooldown-track"><div class="nv-cooldown-fill ready" id="nv-coolbar-acc4" style="width:100%;"></div></div>
+              </div>
+            </a>
+
+            <!-- Account 5: 지원금속보 (2/2) -->
+            <a class="nv-mini-tile" id="mini-box-acc5" href="naver.html?acc=acc5" data-nv-acc="acc5">
+              <div class="nv-tile-top">
+                <span class="nv-tile-title">지원금속보</span>
+                <span class="nv-tile-type bridge">브릿지</span>
+              </div>
+              <div class="nv-battery-row">
+                <div class="nv-battery-cells" id="nv-batt-acc5"><span class="batt-cell"></span><span class="batt-cell"></span></div>
+                <span class="nv-battery-txt"><span id="mini-count-acc5">0</span>/2</span>
+              </div>
+              <div class="nv-cooldown-wrap">
+                <div class="nv-cooldown-meta">
+                  <span id="mini-status-acc5">🟢 대기</span>
+                  <span id="nv-visit-acc5">👥 -</span>
+                </div>
+                <div class="nv-cooldown-track"><div class="nv-cooldown-fill ready" id="nv-coolbar-acc5" style="width:100%;"></div></div>
+              </div>
+            </a>
+          </div>
+          <!-- Hidden legacyvisitors coverage holder -->
+          <span id="overview-visitors-coverage" class="bento-hidden-meta"></span>
+        </section>
+
+        <!-- 3. 🩺 기존 글 리모델링 게이지 (닥터 7대 정밀 검진 & 무삭제 재생 현황) -->
+        <section class="bento-box" id="legacy-remodel-gauge-card" aria-label="기존 글 리모델링 게이지" style="padding:10px 12px; border-color:#99f6e4; background:linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);">
+          <div class="bento-box-head" style="margin-bottom:4px;">
+            <h2 class="bento-box-title" style="font-size:12.5px;">
+              <span>🩺 기존 글 리모델링 게이지</span>
+              <span class="bento-mini-chip" id="doctor-quota-chip" style="background:#ccfbf1; color:#0f766e;">일일 할당량 10/20건 (50%)</span>
+            </h2>
+            <div style="display:flex; gap:5px; align-items:center;">
+              <button type="button" class="bento-go-btn" id="bento-btn-doctor-patrol" style="background:#0d9488; border-color:#0d9488; color:#fff; cursor:pointer;" title="닥터 에이전트가 즉시 기존 글 5건을 순찰·검진하고 구버전 카테고리를 자동 패치합니다">🩺 5건 즉시 검진</button>
+              <a class="bento-go-btn" href="chat.html">💬 수술 중계 →</a>
+            </div>
+          </div>
+          <div class="doctor-gauge-wrap">
+            <div class="doctor-gauge-row">
+              <span id="doctor-inventory-label">전체 1,984건 중 <strong style="color:#0d9488;" id="doctor-audited-count">25건</strong> 정밀 검진 완료</span>
+              <span id="doctor-remodel-label">즉시 패치·리모델링 <strong style="color:#2563eb;" id="doctor-remodeled-count">21건</strong> (일일 목표 20건)</span>
+            </div>
+            <div class="doctor-gauge-track" title="오늘 기존 글 리모델링 할당량 달성 게이지 (Goal: 20건/일)">
+              <div class="doctor-gauge-fill" id="doctor-quota-bar" style="width:50%;"></div>
+            </div>
+            <div class="doctor-grade-pills">
+              <span class="doctor-grade-pill" style="background:#ecfdf5; border-color:#a7f3d0; color:#047857;" id="doctor-grade-a" title="주제·이미지·색인 모두 양호 (현행 유지)">🟢 A정상 6건</span>
+              <span class="doctor-grade-pill" style="background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8;" id="doctor-grade-b" title="구버전 카테고리 ➔ 4대 전문 카테고리 즉시 API 자동 패치 완료">🔵 B패치 7건</span>
+              <span class="doctor-grade-pill" style="background:#fffbeb; border-color:#fde68a; color:#b45309;" id="doctor-grade-c" title="@퍼블리 인계: 3~4단어 롱테일 제목 + 실제 캡처 보강 대상">🟡 C리모델링 8건</span>
+              <span class="doctor-grade-pill" style="background:#fef2f2; border-color:#fecaca; color:#b91c1c;" id="doctor-grade-d" title="주제 이탈: 일괄 삭제 금지 · 하루 1~2건 안전 이관/Noindex">🔴 D안전캡 4건</span>
+            </div>
+            <div class="doctor-latest-line" id="doctor-latest-post-line" title="최근 닥터 7대 정밀 검진 처방 내역">
+              🩺 최근 순찰: 7대 정밀 검진 엔진 가동 중 (카테고리 자동 재매핑 &amp; 간접체험 리모델링)
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ====================================================================
+           [2단 우측 (5컬럼): 지식iN & Threads 미니 게이지 + 앱 4종 스텝 게이지 + AI 크루]
+           ==================================================================== -->
+      <div class="bento-col-right">
+
+        <!-- 4. 💡 지식iN & @ Threads 할당량 게이지 (원형 미니 게이지 + 프로그레스 바) -->
+        <div class="bento-channel-pair">
+
+          <!-- 지식iN 할당량 게이지 카드 -->
+          <section class="bento-box overview-kin-panel" aria-labelledby="overview-kin-title" style="padding:10px 12px;">
+            <div class="bento-box-head">
+              <h2 class="bento-box-title" id="overview-kin-title" style="font-size:12.5px;">💡 지식iN 게이지</h2>
+              <span class="pillar-badge badge-orange" id="overview-kin-state" role="status" style="font-size:9.5px; padding:2px 6px;">확인 중</span>
+            </div>
+            <div class="mini-gauge-row">
+              <!-- Circular Mini Gauge (r=23, C=144.5) -->
+              <div class="mini-svg-box">
+                <svg viewBox="0 0 56 56">
+                  <circle class="argo-tick-ring" cx="28" cy="28" r="27"></circle>
+                  <circle class="argo-ring-bg" cx="28" cy="28" r="23" stroke-width="5.5"></circle>
+                  <circle class="argo-ring-fg" id="ring-kin-quota" cx="28" cy="28" r="23" stroke="url(#argoGradEmerald)" stroke-width="5.5" stroke-dasharray="144.5" stroke-dashoffset="144.5"></circle>
+                </svg>
+                <div class="mini-svg-label">
+                  <span id="gauge-kin-pct">0%</span>
+                  <small>달성</small>
+                </div>
+              </div>
+              <div class="argo-bars-col">
+                <div class="argo-bar-row">
+                  <div class="argo-bar-label-line"><span>공개 확인 답변</span><strong id="overview-kin-verified">0건</strong></div>
+                  <div class="argo-hbar-track"><div class="argo-hbar-fill fill-emerald" id="bar-kin-verified" style="width:0%;"></div></div>
+                </div>
+                <div class="argo-bar-row">
+                  <div class="argo-bar-label-line"><span>남은 회차</span><strong id="overview-kin-remaining">-회</strong></div>
+                  <div class="argo-hbar-track"><div class="argo-hbar-fill fill-blue" id="bar-kin-runs" style="width:50%;"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="argo-card-foot" style="padding-top:4px;">
+              <span style="font-size:10.5px;"><span id="overview-kin-next-label">다음</span>: <strong id="overview-kin-next">-</strong> · <span id="overview-kin-effect">-</span></span>
+              <a class="bento-go-btn" href="kin.html">지식iN →</a>
+            </div>
+            <!-- Preserved hidden bindings for overview-kin.js -->
+            <div class="bento-hidden-meta">
+              <span id="overview-kin-source"></span>
+              <small id="overview-kin-submissions"></small>
+              <small id="overview-kin-budget"></small>
+              <small id="overview-kin-next-detail"></small>
+              <small id="overview-kin-effect-detail"></small>
+              <span id="overview-kin-last"></span>
+              <span id="overview-kin-followup"></span>
+            </div>
+          </section>
+
+          <!-- @ Threads 할당량 게이지 카드 -->
+          <section class="bento-box" aria-label="Threads 할당량 게이지" style="padding:10px 12px;">
+            <div class="bento-box-head">
+              <h2 class="bento-box-title" style="font-size:12.5px;">🧵 Threads 게이지</h2>
+              <span class="pillar-badge badge-orange" id="bento-threads-badge" style="font-size:9.5px; padding:2px 6px;">대기</span>
+            </div>
+            <div class="mini-gauge-row">
+              <!-- Circular Mini Gauge (r=23, C=144.5) -->
+              <div class="mini-svg-box">
+                <svg viewBox="0 0 56 56">
+                  <circle class="argo-tick-ring" cx="28" cy="28" r="27"></circle>
+                  <circle class="argo-ring-bg" cx="28" cy="28" r="23" stroke-width="5.5"></circle>
+                  <circle class="argo-ring-fg" id="ring-threads-quota" cx="28" cy="28" r="23" stroke="url(#argoGradBlue)" stroke-width="5.5" stroke-dasharray="144.5" stroke-dashoffset="100"></circle>
+                </svg>
+                <div class="mini-svg-label">
+                  <span id="gauge-threads-pct">0%</span>
+                  <small>일 할당</small>
+                </div>
+              </div>
+              <div class="argo-bars-col">
+                <div class="argo-bar-row">
+                  <div class="argo-bar-label-line"><span>오늘 본문/후속</span><strong id="bento-threads-today">0/0건</strong></div>
+                  <div class="argo-hbar-track"><div class="argo-hbar-fill fill-blue" id="bar-threads-today" style="width:10%;"></div></div>
+                </div>
+                <div class="argo-bar-row">
+                  <div class="argo-bar-label-line"><span>누적 공개 확인</span><strong id="bento-threads-published">0건</strong></div>
+                  <div class="argo-hbar-track"><div class="argo-hbar-fill fill-purple" id="bar-threads-total" style="width:25%;"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="argo-card-foot" style="padding-top:4px;">
+              <span id="bento-threads-meta" style="font-size:10.5px;">@mustpickinfo</span>
+              <a class="bento-go-btn" href="threads.html">Threads →</a>
+            </div>
+            <div data-threads-summary="overview" id="overview-threads" class="bento-hidden-meta"></div>
+          </section>
+
+        </div>
+
+        <!-- 5. 📱 앱 프로젝트 4종 출시 마일스톤 스텝 게이지 (0% ~ 100%) -->
+        <section class="bento-box" id="app-projects-gauge-card" aria-label="앱 프로젝트 4종 출시 마일스톤 게이지" style="padding:10px 12px;">
+          <div class="bento-box-head">
+            <h2 class="bento-box-title" style="font-size:12.5px;">
+              <span>📱 앱 프로젝트 4종 출시 마일스톤 게이지</span>
+              <span class="bento-mini-chip" id="bento-apps-summary">개발 → 테스터 → 14일 D-Day → 출시</span>
+            </h2>
+            <a class="bento-go-btn" href="apps.html">앱 관제실 →</a>
+          </div>
+          <div class="bento-apps-list-4" id="bento-apps-grid-4">
+            <!-- App 1: 오늘의 안부 -->
+            <a class="app-gauge-card" href="apps.html" id="app-card-greeting">
+              <div class="app-gauge-top">
+                <span class="app-gauge-name">🟢 오늘의 안부</span>
+                <span class="app-gauge-pct" id="app-pct-greeting">75%</span>
+              </div>
+              <div class="app-step-segments" id="app-segs-greeting">
+                <span class="app-step-seg done"></span>
+                <span class="app-step-seg done"></span>
+                <span class="app-step-seg active"></span>
+                <span class="app-step-seg"></span>
+              </div>
+              <div class="app-step-caption">
+                <span id="app-stage-greeting">14일 비공개 테스트 진행</span>
+                <span>출시 D-Day</span>
+              </div>
+            </a>
+
+            <!-- App 2: 큰글씨 돋보기 -->
+            <a class="app-gauge-card" href="apps.html" id="app-card-magnifier">
+              <div class="app-gauge-top">
+                <span class="app-gauge-name">🟢 큰글씨 돋보기</span>
+                <span class="app-gauge-pct" id="app-pct-magnifier">75%</span>
+              </div>
+              <div class="app-step-segments" id="app-segs-magnifier">
+                <span class="app-step-seg done"></span>
+                <span class="app-step-seg done"></span>
+                <span class="app-step-seg active"></span>
+                <span class="app-step-seg"></span>
+              </div>
+              <div class="app-step-caption">
+                <span id="app-stage-magnifier">14일 비공개 테스트 진행</span>
+                <span>출시 D-Day</span>
+              </div>
+            </a>
+
+            <!-- App 3: 말로 장보기 -->
+            <a class="app-gauge-card" href="apps.html" id="app-card-shopping">
+              <div class="app-gauge-top">
+                <span class="app-gauge-name">🟢 말로 장보기</span>
+                <span class="app-gauge-pct" id="app-pct-shopping">75%</span>
+              </div>
+              <div class="app-step-segments" id="app-segs-shopping">
+                <span class="app-step-seg done"></span>
+                <span class="app-step-seg done"></span>
+                <span class="app-step-seg active"></span>
+                <span class="app-step-seg"></span>
+              </div>
+              <div class="app-step-caption">
+                <span id="app-stage-shopping">14일 비공개 테스트 진행</span>
+                <span>출시 D-Day</span>
+              </div>
+            </a>
+
+            <!-- App 4: 오늘의 성경말씀 -->
+            <a class="app-gauge-card" href="apps.html" id="app-card-bible_app">
+              <div class="app-gauge-top">
+                <span class="app-gauge-name">🟢 오늘의 성경말씀</span>
+                <span class="app-gauge-pct" id="app-pct-bible_app">75%</span>
+              </div>
+              <div class="app-step-segments" id="app-segs-bible_app">
+                <span class="app-step-seg done"></span>
+                <span class="app-step-seg done"></span>
+                <span class="app-step-seg active"></span>
+                <span class="app-step-seg"></span>
+              </div>
+              <div class="app-step-caption">
+                <span id="app-stage-bible_app">14일 비공개 테스트 진행</span>
+                <span>출시 D-Day</span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- 6. 🤖 AI 크루 6인 가동 상태 & 회의실/기억그래프 바로가기 -->
+        <section class="bento-box" id="ai-crew-gauge-card" aria-label="AI 크루 6인 실시간 가동률" style="padding:10px 12px;">
+          <div class="bento-box-head">
+            <h2 class="bento-box-title" style="font-size:12.5px;">
+              <span>🤖 AI 크루 6인 가동 게이지</span>
+            </h2>
+            <div style="display:flex; gap:5px; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="bento-go-btn" id="bento-btn-toggle-autonomous" style="background:#ecfdf5; border-color:#10b981; color:#047857; cursor:pointer;" title="회의실에서 에이전트들이 스스로 소통하며 일하는 자율 협업 워커를 가동/일시정지합니다">▶️ 자율 협업 가동 중</button>
+              <a class="bento-go-btn" href="chat.html">💬 회의실 열기</a>
+              <a class="bento-go-btn" href="memory.html">🧠 기억 그래프</a>
+            </div>
+          </div>
+          <div class="bento-crew-grid-5" id="bento-crew-grid-5">
+            <div class="crew-mini-card" id="crew-card-jarvis">
+              <span class="crew-mini-role">총괄 아키텍트</span>
+              <span class="crew-mini-name">자비스</span>
+              <span class="crew-mini-state" id="crew-state-jarvis">🟢 100%</span>
+            </div>
+            <div class="crew-mini-card is-doctor" id="crew-card-doctor">
+              <span class="crew-mini-role">콘텐츠 감사</span>
+              <span class="crew-mini-name">🩺 닥터</span>
+              <span class="crew-mini-state" id="crew-state-doctor" style="color:#0d9488;">🟢 순찰 중</span>
+            </div>
+            <div class="crew-mini-card" id="crew-card-patch">
+              <span class="crew-mini-role">개발 · 스킬</span>
+              <span class="crew-mini-name">패치</span>
+              <span class="crew-mini-state" id="crew-state-patch">🟢 100%</span>
+            </div>
+            <div class="crew-mini-card" id="crew-card-publi">
+              <span class="crew-mini-role">발행 · 검수</span>
+              <span class="crew-mini-name">퍼블리</span>
+              <span class="crew-mini-state" id="crew-state-publi">🟢 가동 중</span>
+            </div>
+            <div class="crew-mini-card" id="crew-card-trace">
+              <span class="crew-mini-role">성과 · 수익</span>
+              <span class="crew-mini-name">트레이스</span>
+              <span class="crew-mini-state" id="crew-state-trace">🟢 집계 중</span>
+            </div>
+            <div class="crew-mini-card" id="crew-card-radar">
+              <span class="crew-mini-role">R&amp;D 발굴</span>
+              <span class="crew-mini-name">레이더</span>
+              <span class="crew-mini-state" id="crew-state-radar">🟢 탐색 중</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ====================================================================
+           [3단 하단 (접이식 탭, 12컬럼): 상세 검색어 순위표 & 일별 수익 테이블]
+           ==================================================================== -->
+      <section class="bento-drawer-wrap" id="bento-drawer" aria-label="상세 분석 접이식 탭">
+        <div class="bento-tab-bar">
+          <div class="bento-tab-buttons" role="tablist">
+            <button type="button" class="bento-tab-btn" data-bento-tab="actions" onclick="window.switchBentoTab('actions')">
+              <span>🚨 지금 확인할 일</span>
+            </button>
+            <button type="button" class="bento-tab-btn" data-bento-tab="ranks" onclick="window.switchBentoTab('ranks')">
+              <span>🔍 검색 순위 TOP</span>
+            </button>
+            <button type="button" class="bento-tab-btn" data-bento-tab="revenue" onclick="window.switchBentoTab('revenue')">
+              <span>💰 상세 수익표</span>
+            </button>
+            <button type="button" class="bento-tab-btn" data-bento-tab="sources" onclick="window.switchBentoTab('sources')">
+              <span>🛠️ 원천 연결 상태</span>
+            </button>
+          </div>
+          <span style="font-size:11px; color:#64748b; font-weight:700;">탭 클릭 시 상세 표 열기 / 다시 클릭 시 접기</span>
+        </div>
+
+        <!-- TAB 1: 🚨 지금 확인할 일 -->
+        <div class="bento-tab-panel" id="bento-panel-actions">
+          <div class="insight-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+            <aside class="action-panel" aria-labelledby="action-title" style="margin:0;">
+              <div class="traffic-head"><h2 id="action-title">지금 확인할 일</h2><span class="action-label">콘텐츠 관리</span></div>
+              <p class="section-caption">확인된 문제부터, 성장 후보까지.</p>
+              <a class="action-item" href="kin.html" id="overview-kin-todo"><span class="action-tag">지식인 오늘 할 일</span><strong id="overview-kin-task-title">운영 상태 확인</strong><p id="overview-kin-task-detail">자동 작업, 공개 답변 검증과 유입 측정을 함께 확인합니다.</p><span class="action-link">운영 원장 · 최근 결과 보기</span></a>
+              <a class="action-item" href="threads.html"><span class="action-tag">Threads 오늘 할 일</span><strong id="threads-overview-task">API 연결 상태 확인</strong><p id="threads-overview-detail">@mustpickinfo 계정 연결, 원고 검수와 공개 확인 기록을 구분합니다.</p><span class="action-link">원고 · 공개 게시 · 효과 측정 보기</span></a>
+              <a class="action-item" href="growth.html?bucket=not_indexed#content-management"><span class="action-tag warning">색인 점검</span><strong id="action-unindexed">조회 중</strong><span class="action-link">원인 점검 목록 보기</span></a>
+              <a class="action-item" href="growth.html?bucket=opportunity#content-management"><span class="action-tag growth">개선 후보</span><strong id="action-opportunity">조회 중</strong><span class="action-link">콘텐츠 개선 후보 보기</span></a>
+              <a class="action-item" href="growth.html?bucket=inspection_pending#content-management"><span class="action-tag">검사 대기 범위</span><strong id="action-unchecked">조회 중</strong></a>
+              <p class="revenue-meta" id="content-maintenance-summary">색인 점검·개선 후보 조회 중</p>
+              <p class="revenue-meta" id="inspection-automation-status">자동 색인 검사 실행 이력 조회 중</p>
+            </aside>
+
+            <div>
+              <section class="traffic-panel growth-action-panel" id="growth-action-center" aria-labelledby="growth-action-title" style="margin-bottom:12px;">
+                <div class="traffic-head"><div><h2 id="growth-action-title">성장과 개선 우선순위</h2><p class="section-caption">어디서 성장하고, 무엇이 막혔는지 확인하세요.</p></div><a class="overview-button" href="growth.html#growth-action-center">도메인 비교 · 개선 기록</a></div>
+                <p class="revenue-meta" id="growth-comparison-period">28일 성과 비교 원천 확인 중</p>
+                <div class="growth-collection-health" id="growth-collection-health" role="status">지속 수집 상태 확인 중</div>
+                <div class="growth-action-summary" id="growth-action-summary"></div>
+                <div class="growth-priorities" id="growth-priorities"></div>
+                <div class="overview-kin-priority" id="overview-kin-priority"><a href="kin.html">지식인 운영 우선순위 확인</a><p id="overview-kin-priority-detail">현재 회차와 공개 확인·유입 측정 상태를 확인하고 있습니다.</p></div>
+                <p class="revenue-note" id="growth-action-source"></p>
+                <details class="growth-diagnosis"><summary>변화의 근거와 다음 행동</summary><label class="growth-diagnosis-filter">진단할 도메인<select id="growth-diagnosis-domain"></select></label><div id="growth-diagnosis-content"></div></details>
+              </section>
+
+              <section class="traffic-panel growth-action-panel" id="auto-maintenance" aria-labelledby="maintenance-title">
+                <div class="traffic-head"><div><h2 id="maintenance-title">자동 콘텐츠 유지관리</h2></div><a class="overview-button" href="growth.html#auto-maintenance">운영 설정 · 변경 영수증</a></div>
+                <p id="maintenance-status" class="revenue-meta" role="status">자동 운영 상태 조회 중</p>
+                <div id="maintenance-summary" class="growth-action-summary"></div>
+                <p id="maintenance-coverage" class="revenue-note"></p>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: 🔍 검색 순위 TOP -->
+        <div class="bento-tab-panel" id="bento-panel-ranks">
+          <section class="traffic-panel overview-panel rank-panel" id="rank-overview" aria-labelledby="rank-title" style="margin:0;">
+            <div class="traffic-head"><div><h2 id="rank-title">검색에서 발견되는 콘텐츠</h2></div><a href="growth.html?period=month" class="overview-button">상세 분석</a></div>
+            <div class="overview-filter"><label>보고 기간 <select id="traffic-period"><option value="month">최근 30일</option><option value="week">최근 7일</option><option value="day">최근 확정 하루</option></select></label><span id="rank-source">원천 보고서 조회 중</span></div>
+            <div class="rank-grid">
+              <article class="rank-card rank-top"><span>5위 이내</span><strong id="rank-5">미수집</strong><small id="rank-5-scope">Google 관측</small><a id="rank-5-link" class="rank-detail-link" href="growth.html?period=month&amp;rank=5">검색어 보기 →</a></article>
+              <article class="rank-card"><span>10위 이내</span><strong id="rank-10">미수집</strong><small id="rank-10-scope">Google 관측</small><a id="rank-10-link" class="rank-detail-link" href="growth.html?period=month&amp;rank=10">검색어 보기 →</a></article>
+              <article class="rank-card"><span>50위 이내</span><strong id="rank-50">미수집</strong><small id="rank-50-scope">Google 관측</small><a id="rank-50-link" class="rank-detail-link" href="growth.html?period=month&amp;rank=50">검색어 보기 →</a></article>
+              <article class="rank-card"><span>100위 이내</span><strong id="rank-100">미수집</strong><small id="rank-100-scope">Google 관측</small><a id="rank-100-link" class="rank-detail-link" href="growth.html?period=month&amp;rank=100">검색어 보기 →</a></article>
+            </div>
+            <div class="ranking-highlight-head"><h3>도메인별 주목할 검색어</h3><span id="rank-highlight-selection">도메인별 대표 관측 우선 · 최대 5행</span></div>
+            <div class="revenue-table-wrap"><table class="traffic-table overview-keywords"><thead><tr><th>검색어</th><th>평균 순위</th><th>노출</th><th>클릭</th><th>도메인 · 상세 보기</th></tr></thead><tbody id="rank-highlights"></tbody></table></div>
+          </section>
+        </div>
+
+        <!-- TAB 3: 💰 상세 수익표 -->
+        <div class="bento-tab-panel" id="bento-panel-revenue">
+          <section class="revenue-panel" aria-labelledby="revenue-title" style="margin:0;">
+            <div class="revenue-title">
+              <div><h2 id="revenue-title">수익의 흐름</h2></div>
+              <span class="pillar-badge badge-orange">원천 보고서 기준 · 예상 수익</span>
+            </div>
+            <p class="revenue-meta" id="revenue-period">이번 달 · 어제 · 오늘 · 한국 시간</p>
+            <div class="revenue-table-wrap">
+              <table class="revenue-table" aria-label="기간별 수익 비교">
+                <thead><tr><th scope="col">수익 종류</th><th scope="col">이번 달 누적<br>(어제까지)</th><th scope="col">어제</th><th scope="col">오늘</th><th scope="col">이번 달 현재</th></tr></thead>
+                <tbody id="revenue-overview"><tr><td colspan="5">수익 원천 조회 중</td></tr></tbody>
+              </table>
+            </div>
+            <p class="revenue-meta" id="revenue-updated">수익 원천 수집 대기</p>
+            <details><summary>이번 달 일별 내역</summary>
+              <div class="revenue-table-wrap"><table class="revenue-table" aria-label="이번 달 일별 수익">
+                <thead><tr><th scope="col">날짜</th><th scope="col">애드센스</th><th scope="col">애드포스트</th><th scope="col">제휴마케팅</th></tr></thead>
+                <tbody id="revenue-daily"></tbody>
+              </table></div>
+            </details>
+            <details><summary>계정·업체별 수집 범위와 연결 상태</summary><div id="revenue-sources"></div></details>
+          </section>
+        </div>
+
+        <!-- TAB 4: 🛠️ 원천 연결 상태 -->
+        <div class="bento-tab-panel" id="bento-panel-sources">
+          <section class="source-panel" style="margin:0;">
+            <h2>원천 연결 · 수집 상태</h2>
+            <p class="refresh-status" id="metrics-refresh-status" role="status" aria-live="polite" style="font-size:12px; color:#475569;">통계 조회 중</p>
+            <p id="metric-traffic-summary" style="font-size:13px;color:#64748b;margin:8px 0;">원천 데이터 미연결 — 방문자수 미확인</p>
+            <p id="metric-collected-at" style="font-size:11px;color:#64748b;">수집 이력 없음</p>
+            <div id="rank-naver-status" style="font-size:12px; color:#64748b; margin:4px 0;">네이버 검색 순위 미측정</div>
+            <div style="overflow:auto;margin-top:12px;"><table style="width:100%;border-collapse:collapse;text-align:left;">
+              <thead><tr><th>채널</th><th>Google 색인 확인</th><th>수집 요청</th><th>트래픽</th></tr></thead>
+              <tbody id="metric-sites"></tbody>
+            </table></div>
+          </section>
+          <section class="operation-links bento-hidden-meta" aria-label="블로그 발행·지식인·앱 운영 대시보드">
+            <a href="cf.html"><span>CF 블로그</span></a>
+            <a href="naver.html"><span>네이버 블로그</span></a>
+            <a href="kin.html"><strong id="overview-kin-operation-link">지식인</strong></a>
+            <a href="threads.html"><strong id="threads-overview-operation">Threads</strong></a>
+            <a href="apps.html"><span>앱 프로젝트</span></a>
+          </section>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- Click-to-Work Quick Preview & Direct Action Modal -->
+<div class="baro-work-modal-backdrop" id="baro-work-preview-modal" role="dialog" aria-modal="true" aria-labelledby="baro-work-modal-title">
+  <div class="baro-work-modal-card" onclick="event.stopPropagation()">
+    <div class="baro-work-modal-head">
+      <div class="baro-work-modal-head-left">
+        <span class="baro-work-modal-badge st-public" id="baro-work-modal-badge">🟢 공개 발행 완료</span>
+        <strong id="baro-work-modal-title" style="font-size:13.5px; font-weight:800; white-space:nowrap;">도메인/계정 작업물 확인</strong>
+      </div>
+      <button type="button" class="baro-work-modal-close" onclick="window.closeWorkPreviewModal()" aria-label="닫기">✕</button>
+    </div>
+    <div class="baro-work-modal-body">
+      <div class="baro-work-post-box">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:11px; font-weight:700; color:#64748b;">
+          <span id="baro-work-modal-meta">오늘 발행 원장</span>
+          <span id="baro-work-modal-time">KST</span>
+        </div>
+        <h3 class="baro-work-post-title" id="baro-work-modal-post-title">발행 제목 확인 중</h3>
+        <a class="baro-work-post-url" id="baro-work-modal-url" href="#" target="_blank" rel="noopener">-</a>
+      </div>
+      <div>
+        <div style="font-size:10.5px; font-weight:800; color:#334155; margin-bottom:5px;">실시간 5단계 파이프라인 검증 상태</div>
+        <div class="baro-work-stepper" id="baro-work-modal-stepper">
+          <span class="baro-work-step done">① 기획·리서치</span>
+          <span class="baro-work-step done">② 캡처·EXIF세탁</span>
+          <span class="baro-work-step done">③ 간접체험 집필</span>
+          <span class="baro-work-step done">④ 부분수선·검수</span>
+          <span class="baro-work-step done">⑤ 발행·색인확인</span>
+        </div>
+      </div>
+      <div class="baro-work-modal-actions" id="baro-work-modal-actions">
+        <button type="button" class="baro-work-btn" onclick="window.closeWorkPreviewModal()">닫기</button>
+        <a class="baro-work-btn" id="baro-work-btn-detail" href="cf.html">📊 채널 상세 관제실 →</a>
+        <a class="baro-work-btn emerald" id="baro-work-btn-live" href="#" target="_blank" rel="noopener">🚀 실제 발행 글 새 탭 열기 ↗</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="naver_schedule.js?v=20261017-rss-verify"></script>
+<script src="history_manager.js?v=20261017-rss-verify"></script>
+<script src="traffic.js?v=20261016-kst-rollover"></script>
+<script src="metrics.js?v=20261016-kst-rollover2"></script>
+<script src="growth-actions.js?v=20261016-kst-rollover2"></script>
+<script>
+  // 0. Click-to-Work Modal Controller
+  const workModalEl = document.getElementById('baro-work-preview-modal');
+  if (workModalEl) {
+    workModalEl.addEventListener('click', () => window.closeWorkPreviewModal());
+  }
+  window.closeWorkPreviewModal = function () {
+    if (workModalEl) workModalEl.classList.remove('open');
+  };
+  window.openWorkPreviewModal = function (opts) {
+    if (!workModalEl) return;
+    const badgeEl = document.getElementById('baro-work-modal-badge');
+    const titleEl = document.getElementById('baro-work-modal-title');
+    const metaEl = document.getElementById('baro-work-modal-meta');
+    const timeEl = document.getElementById('baro-work-modal-time');
+    const postTitleEl = document.getElementById('baro-work-modal-post-title');
+    const urlEl = document.getElementById('baro-work-modal-url');
+    const stepperEl = document.getElementById('baro-work-modal-stepper');
+    const btnDetail = document.getElementById('baro-work-btn-detail');
+    const btnLive = document.getElementById('baro-work-btn-live');
+
+    const kind = opts.kind || 'waiting'; // 'public' | 'reserved' | 'active' | 'waiting'
+    if (badgeEl) {
+      badgeEl.className = 'baro-work-modal-badge ' + (kind === 'public' ? 'st-public' : kind === 'reserved' ? 'st-reserved' : 'st-waiting');
+      badgeEl.textContent = opts.badgeText || (kind === 'public' ? '🟢 공개 발행 완료' : kind === 'reserved' ? '🔵 예약 등록 완료' : '🟡 작업 대기');
+    }
+    if (titleEl) titleEl.textContent = opts.headerTitle || '작업물 바로보기';
+    if (metaEl) metaEl.textContent = opts.metaText || '오늘 발행 원장';
+    if (timeEl) timeEl.textContent = opts.timeText || '오늘 KST';
+    if (postTitleEl) postTitleEl.textContent = opts.postTitle || '예정된 발행 원고';
+    if (urlEl) {
+      urlEl.textContent = opts.liveUrl || opts.detailUrl || '';
+      urlEl.href = opts.liveUrl || opts.detailUrl || '#';
+    }
+    if (stepperEl) {
+      const stepLabels = ['① 기획·리서치', '② 캡처·EXIF세탁', '③ 간접체험 집필', '④ 부분수선·검수', '⑤ 발행·색인확인'];
+      const doneSteps = kind === 'public' ? 5 : (kind === 'reserved' ? 4 : (kind === 'active' ? 3 : 1));
+      stepperEl.innerHTML = stepLabels.map((lbl, idx) => {
+        const stepNum = idx + 1;
+        const cls = stepNum <= doneSteps ? 'done' : (stepNum === doneSteps + 1 && kind !== 'waiting' ? 'active' : '');
+        return `<span class="baro-work-step ${cls}">${lbl}</span>`;
+      }).join('');
+    }
+    if (btnDetail) {
+      btnDetail.href = opts.detailUrl || 'cf.html';
+      btnDetail.textContent = opts.detailLabel || '📊 채널 상세 관제실 →';
+    }
+    if (btnLive) {
+      if (opts.liveUrl) {
+        btnLive.style.display = 'inline-flex';
+        btnLive.href = opts.liveUrl;
+        btnLive.textContent = kind === 'public' ? '🚀 실제 발행 글 새 탭 열기 ↗' : '🔗 블로그 홈 새 탭 열기 ↗';
+      } else {
+        btnLive.style.display = 'none';
+      }
+    }
+    workModalEl.classList.add('open');
+  };
+
+  // 1. Live Clock
+  function updateClock() {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const el = document.getElementById('live-clock');
+    if (el) el.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  // 2. Collapsible Bento Drawer Tabs
+  window.switchBentoTab = function (tabId) {
+    const buttons = document.querySelectorAll('.bento-tab-btn');
+    const panels = {
+      actions: document.getElementById('bento-panel-actions'),
+      ranks: document.getElementById('bento-panel-ranks'),
+      revenue: document.getElementById('bento-panel-revenue'),
+      sources: document.getElementById('bento-panel-sources')
+    };
+    const targetPanel = panels[tabId];
+    if (!targetPanel) return;
+    const isAlreadyOpen = targetPanel.classList.contains('active');
+    buttons.forEach(btn => {
+      btn.classList.toggle('active', !isAlreadyOpen && btn.dataset.bentoTab === tabId);
+    });
+    Object.values(panels).forEach(panel => {
+      if (panel) panel.classList.toggle('active', !isAlreadyOpen && panel === targetPanel);
+    });
+  };
+
+  const API_BASE = (window.location.origin && window.location.origin.startsWith('http'))
+    ? window.location.origin
+    : 'http://127.0.0.1:8790';
+
+  // 3. CF 16 Domains Canonical Catalog
+  const CF_DOMAINS_16 = [
+    { domain: 'must-good.com', label: 'MustGood' },
+    { domain: 'baronote.kr', label: '바로노트' },
+    { domain: 'justinfo.co.kr', label: '저스트인포' },
+    { domain: 'topnote.kr', label: '탑노트' },
+    { domain: 'meganote.kr', label: '메가노트' },
+    { domain: 'smilenote.kr', label: '스마일노트' },
+    { domain: 'healthcox.com', label: 'HealthCox' },
+    { domain: 'maxnote.kr', label: '맥스노트' },
+    { domain: 'must-joy.com', label: '머스트조이' },
+    { domain: 'tripmarvel.com', label: 'TripMarvel' },
+    { domain: 'must-pick.com', label: 'MustPick' },
+    { domain: 'woorinote.kr', label: '우리노트' },
+    { domain: 'daynote.kr', label: '데이노트' },
+    { domain: 'nolplace.com', label: 'Nolplace' },
+    { domain: 'soulnote.kr', label: '소울노트' },
+    { domain: 'joynote.kr', label: '조이노트' }
+  ];
+
+  const QUOTA_CONFIG = {
+    acc1: { name: 'soultin', blogId: 'mustpickinfo', title: '시니어브리프', target: 1, type: 'REAL', cooldownHours: 4 },
+    acc2: { name: 'soul5373', blogId: 'mustinfo', title: '머스트헬스뷰', target: 1, type: 'REAL', cooldownHours: 4 },
+    acc3: { name: 'yoon_master', blogId: 'yoonviews', title: '윤뷰스', target: 1, type: 'REAL', cooldownHours: 4 },
+    acc4: { name: 'adinfo0905', blogId: 'adinfo0905', title: '직장인루틴', target: 2, type: 'BRIDGE', cooldownHours: 4 },
+    acc5: { name: 'stone0747', blogId: 'stone0747', title: '지원금속보', target: 2, type: 'BRIDGE', cooldownHours: 4 }
+  };
+
+  let latestVisitorMap = { cf: {}, cfWeek: {}, naver: {} };
+  let latestCfPublishedMap = {};
+  let latestNaverQuotaMap = {};
+
+  // Helper: Set SVG ring stroke-dashoffset by percentage (0~100)
+  function setRingGauge(elId, circumference, pct) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    const clamped = Math.max(0, Math.min(100, Number(pct) || 0));
+    const offset = circumference * (1 - clamped / 100);
+    el.style.strokeDasharray = `${circumference}`;
+    el.style.strokeDashoffset = `${offset.toFixed(2)}`;
+  }
+
+  window.handleCfTileClick = function (event, domain) {
+    if (event) event.preventDefault();
+    const item = CF_DOMAINS_16.find(d => d.domain === domain) || { domain, label: domain };
+    const pub = latestCfPublishedMap[domain];
+    const uv = latestVisitorMap.cf[domain];
+    const uvStr = uv != null ? `오늘 방문 ${uv}명` : 'GA4 수집 중';
+
+    if (pub) {
+      window.openWorkPreviewModal({
+        kind: 'public',
+        badgeText: '🟢 CF 공개 발행 완료',
+        headerTitle: `${item.label} (${domain})`,
+        metaText: `카테고리: ${pub.category || '전문 칼럼'} · ${uvStr} · EXIF 세탁 완료`,
+        timeText: `발행 시각: ${pub.time || '오늘'}`,
+        postTitle: pub.title || `${domain} 오늘 발행 포스트`,
+        liveUrl: pub.url || `https://${domain}`,
+        detailUrl: `cf.html?domain=${encodeURIComponent(domain)}`,
+        detailLabel: '⚡ CF 상세 관제실 열기 →'
+      });
+    } else {
+      window.openWorkPreviewModal({
+        kind: 'waiting',
+        badgeText: '🟡 오늘 발행 대기 / 스케줄',
+        headerTitle: `${item.label} (${domain})`,
+        metaText: `도메인 전문 주제 파이프라인 대기 · ${uvStr}`,
+        timeText: '자동 순환 스케줄 대기',
+        postTitle: `[${item.label}] 오늘 롱테일 키워드 기획·간접체험 원고 대기 중`,
+        liveUrl: `https://${domain}`,
+        detailUrl: `cf.html?domain=${encodeURIComponent(domain)}`,
+        detailLabel: '⚡ CF 관제실에서 즉시 실행 →'
+      });
+    }
+  };
+
+  window.handleNaverTileClick = function (event, accId) {
+    if (event) event.preventDefault();
+    const cfg = QUOTA_CONFIG[accId];
+    if (!cfg) return;
+    const accData = latestNaverQuotaMap[accId] || { count: 0, publicItems: [], reserved: 0, reservedItems: [] };
+    const pubItem = (accData.publicItems || [])[0];
+    const resItem = (accData.reservedItems || [])[0];
+    const uv = latestVisitorMap.naver[cfg.name];
+    const uvStr = uv != null ? `오늘 방문 ${uv}명` : '방문자 집계 중';
+
+    if (pubItem) {
+      window.openWorkPreviewModal({
+        kind: 'public',
+        badgeText: '🟢 네이버 공개 발행 완료',
+        headerTitle: `${cfg.title} (${cfg.blogId})`,
+        metaText: `${cfg.type === 'REAL' ? '주력 블로그' : '브릿지 블로그'} · ${uvStr} · RSS 실발행 검증 완료`,
+        timeText: `공개 시각: ${pubItem.time || pubItem.actualTime || '오늘'}`,
+        postTitle: pubItem.title || `${cfg.title} 오늘 발행 글`,
+        liveUrl: pubItem.url || `https://blog.naver.com/${cfg.blogId}`,
+        detailUrl: `naver.html?acc=${encodeURIComponent(accId)}`,
+        detailLabel: '🟢 네이버 상세 관제실 열기 →'
+      });
+    } else if (resItem) {
+      window.openWorkPreviewModal({
+        kind: 'reserved',
+        badgeText: `🔵 예약 등록 완료 (${resItem.actualTime || '오늘'})`,
+        headerTitle: `${cfg.title} (${cfg.blogId})`,
+        metaText: `${cfg.type === 'REAL' ? '주력 3대 전략' : '브릿지 유입'} · 예약 시간 도달 시 자동 공개 전환`,
+        timeText: `예약 슬롯: ${resItem.actualTime || resItem.reserveTime || '오늘 오후'}`,
+        postTitle: resItem.title || `${cfg.title} 오늘 예약 등록 원고`,
+        liveUrl: resItem.url || `https://blog.naver.com/${cfg.blogId}`,
+        detailUrl: `naver.html?acc=${encodeURIComponent(accId)}`,
+        detailLabel: '📋 예약 원고·스케줄 상세 보기 →'
+      });
+    } else {
+      window.openWorkPreviewModal({
+        kind: 'waiting',
+        badgeText: '🟡 다음 슬롯 대기 중',
+        headerTitle: `${cfg.title} (${cfg.blogId})`,
+        metaText: `${cfg.type === 'REAL' ? '주력 블로그' : '브릿지 블로그'} · 4시간 쿨타임 안전 간격 준수`,
+        timeText: '오늘 할당량 대기',
+        postTitle: `[${cfg.title}] 다음 예약/발행 파이프라인 대기 중`,
+        liveUrl: `https://blog.naver.com/${cfg.blogId}`,
+        detailUrl: `naver.html?acc=${encodeURIComponent(accId)}`,
+        detailLabel: '🟢 네이버 관제실 이동 →'
+      });
+    }
+  };
+
+  function renderCF16Grid() {
+    const grid = document.getElementById('bento-cf-grid-16');
+    if (!grid) return;
+    const history = window.BaroLabHistory;
+    const today = history ? history.getKSTDateString() : '';
+    const store = history ? history.loadHistoryStore() : {};
+    const cfEntry = (store[today] && store[today].cf) || { items: [], active: null };
+    const publishedMap = {};
+    (cfEntry.items || []).forEach(it => {
+      if (it.domain) publishedMap[it.domain] = it;
+    });
+    latestCfPublishedMap = publishedMap;
+    const activeDomain = cfEntry.active?.domain || '';
+
+    grid.innerHTML = CF_DOMAINS_16.map(item => {
+      const pub = publishedMap[item.domain];
+      const isAct = activeDomain === item.domain;
+      const uv = latestVisitorMap.cf[item.domain];
+      const weekUv = latestVisitorMap.cfWeek[item.domain] || 0;
+      const uvText = uv != null ? `${uv}명` : '-';
+      // Per-domain weekly traffic goal gauge (target 100 weekly UV baseline)
+      const trafficGoalPct = Math.min(100, Math.max(pub ? 35 : 8, Math.round(((weekUv || (uv || 0) * 5) / 100) * 100)));
+      let stClass = '';
+      let dot = '🟡';
+      let statusTip = '대기 중 (클릭 시 상세 파이프라인 확인)';
+      let href = pub?.url || `cf.html?domain=${encodeURIComponent(item.domain)}`;
+
+      if (pub) {
+        stClass = 'st-done';
+        dot = '🟢';
+        statusTip = `발행 완료 (${pub.time || '오늘'}): ${pub.title || ''} — 클릭 시 작업물 프리뷰 및 바로가기`;
+      } else if (isAct) {
+        stClass = 'st-active';
+        dot = '⚡';
+        statusTip = `집필/발행 진행 중 (${cfEntry.active?.stageName || ''})`;
+      }
+
+      return `
+        <a class="cf-mini-tile ${stClass}" href="${href}" onclick="window.handleCfTileClick(event, '${item.domain}')" title="[${item.domain}] ${statusTip} · 오늘 ${uvText}">
+          <div class="cf-tile-row1">
+            <span class="cf-tile-left">
+              <span class="cf-tile-dot">${dot}</span>
+              <span class="cf-tile-name">${item.domain.replace(/\.(com|co\.kr|kr)$/, '')}</span>
+            </span>
+            <span class="cf-tile-uv">👥 ${uvText}</span>
+          </div>
+          <div class="cf-tile-gauge-track" title="도메인 주간 트래픽 목표 게이지 (${trafficGoalPct}%)">
+            <div class="cf-tile-gauge-fill" style="width:${trafficGoalPct}%;"></div>
+          </div>
+        </a>
+      `;
+    }).join('');
+  }
+
+  function getTodayKey() {
+    if (window.BaroLabHistory) return `naver_quota_${window.BaroLabHistory.getKSTDateString()}`;
+    const d = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    return `naver_quota_${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  }
+
+  function loadQuotaData() {
+    const history = window.BaroLabHistory;
+    const today = history && history.getKSTDateString();
+    const storeEntry = history && history.loadHistoryStore()[today]?.naver || {};
+    const rows = storeEntry.items || [];
+    const resRows = storeEntry.reservedItems || [];
+    let stored = {};
+    try {
+      stored = JSON.parse(localStorage.getItem(getTodayKey()) || '{}') || {};
+    } catch (_) {}
+    return Object.fromEntries(Object.keys(QUOTA_CONFIG).map(account => {
+      const accRows = rows.filter(item => item.accId === account && item.source === 'server-public-verification' && window.NaverSchedule?.publicVerified(item));
+      const accResItems = stored[account]?.reservedItems || resRows.filter(item => item.accId === account);
+      const reservedCount = stored[account]?.reserved ?? accResItems.length;
+      return [account, {
+        count: accRows.length,
+        publicItems: accRows,
+        reserved: reservedCount,
+        reservedItems: accResItems,
+        processing: stored[account]?.processing || null,
+        lastTime: stored[account]?.lastTime || null
+      }];
+    }));
+  }
+
+  function updateQuotaUI() {
+    const data = loadQuotaData();
+    latestNaverQuotaMap = data;
+    let totalPublic = 0;
+    let totalReserved = 0;
+    let totalAchieved = 0;
+    let realAchieved = 0;
+    let bridgeAchieved = 0;
+    const now = Date.now();
+
+    Object.keys(QUOTA_CONFIG).forEach(accId => {
+      const cfg = QUOTA_CONFIG[accId];
+      const accData = data[accId] || { count: 0, publicItems: [], reserved: 0, reservedItems: [], processing: null, lastTime: null };
+      const pubCount = Math.min(cfg.target, accData.count);
+      const resCount = Math.min(Math.max(0, cfg.target - pubCount), accData.reserved || 0);
+      const achievedCount = Math.min(cfg.target, pubCount + resCount);
+
+      totalPublic += pubCount;
+      totalReserved += resCount;
+      totalAchieved += achievedCount;
+      if (cfg.type === 'REAL') realAchieved += achievedCount;
+      else bridgeAchieved += achievedCount;
+
+      const miniCountEl = document.getElementById(`mini-count-${accId}`);
+      const miniStatusEl = document.getElementById(`mini-status-${accId}`);
+      const miniBoxEl = document.getElementById(`mini-box-${accId}`);
+      const visitEl = document.getElementById(`nv-visit-${accId}`);
+      const battContainer = document.getElementById(`nv-batt-${accId}`);
+      const coolBar = document.getElementById(`nv-coolbar-${accId}`);
+
+      if (miniBoxEl) {
+        miniBoxEl.onclick = (e) => window.handleNaverTileClick(e, accId);
+      }
+
+      if (miniCountEl) miniCountEl.textContent = achievedCount;
+      if (visitEl) {
+        const uv = latestVisitorMap.naver[cfg.name];
+        visitEl.textContent = uv != null ? `👥 ${uv}명` : '👥 -';
+      }
+
+      // Render Segmented Battery Cells: Solid Green for Public, Blue Check (✓) for Reserved
+      if (battContainer) {
+        const cellsHtml = [];
+        for (let i = 0; i < cfg.target; i++) {
+          if (i < pubCount) {
+            const pItem = accData.publicItems?.[i];
+            const tip = pItem ? `공개 발행 완료: ${pItem.title || ''}` : '공개 발행 완료';
+            cellsHtml.push(`<span class="batt-cell filled" title="${tip}"></span>`);
+          } else if (i < achievedCount) {
+            const rItem = accData.reservedItems?.[i - pubCount];
+            const tip = rItem ? `예약 등록 완료 (${rItem.actualTime || ''}): ${rItem.title || ''}` : '오늘 예약 등록 완료';
+            cellsHtml.push(`<span class="batt-cell reserved" title="${tip}">✓</span>`);
+          } else if (i === achievedCount && accData.processing) {
+            cellsHtml.push(`<span class="batt-cell working" title="집필/발행 진행 중"></span>`);
+          } else {
+            cellsHtml.push(`<span class="batt-cell" title="작업 대기"></span>`);
+          }
+        }
+        battContainer.innerHTML = cellsHtml.join('');
+      }
+
+      // Cooldown timer bar & status
+      const cooldownMin = cfg.cooldownHours * 60;
+      const diffMin = accData.lastTime ? Math.floor((now - accData.lastTime) / 60000) : cooldownMin;
+      const firstResTime = accData.reservedItems?.[0]?.actualTime || '';
+
+      if (pubCount >= cfg.target) {
+        if (miniStatusEl) miniStatusEl.textContent = '🟢 공개 완료';
+        if (coolBar) { coolBar.style.width = '100%'; coolBar.className = 'nv-cooldown-fill done'; }
+        if (miniBoxEl) { miniBoxEl.classList.add('is-done'); miniBoxEl.classList.remove('is-reserved', 'is-active'); }
+      } else if (achievedCount >= cfg.target) {
+        if (miniStatusEl) {
+          miniStatusEl.textContent = pubCount > 0
+            ? `🟢공개${pubCount}·🔵예약${resCount}`
+            : `🔵 예약(${firstResTime || '완료'})`;
+        }
+        if (coolBar) { coolBar.style.width = '100%'; coolBar.className = 'nv-cooldown-fill reserved'; }
+        if (miniBoxEl) { miniBoxEl.classList.add('is-reserved'); miniBoxEl.classList.remove('is-done', 'is-active'); }
+      } else if (accData.processing) {
+        const pct = accData.processing.progressPct || 35;
+        if (miniStatusEl) miniStatusEl.textContent = `⚡ 집필 ${pct}%`;
+        if (coolBar) { coolBar.style.width = `${pct}%`; coolBar.className = 'nv-cooldown-fill cooling'; }
+        if (miniBoxEl) { miniBoxEl.classList.add('is-active'); miniBoxEl.classList.remove('is-done', 'is-reserved'); }
+      } else if (achievedCount > 0) {
+        if (miniStatusEl) {
+          miniStatusEl.textContent = pubCount > 0
+            ? `🟢 1차공개·2차가능`
+            : `🔵 1차예약·2차가능`;
+        }
+        if (coolBar) { coolBar.style.width = '60%'; coolBar.className = 'nv-cooldown-fill ready'; }
+        if (miniBoxEl) miniBoxEl.classList.remove('is-done', 'is-reserved', 'is-active');
+      } else if (diffMin < cooldownMin) {
+        const remainMin = cooldownMin - diffMin;
+        const remainPct = Math.max(8, Math.round((remainMin / cooldownMin) * 100));
+        if (miniStatusEl) miniStatusEl.textContent = `⏳ 쿨타임 ${remainMin}분`;
+        if (coolBar) { coolBar.style.width = `${remainPct}%`; coolBar.className = 'nv-cooldown-fill cooling'; }
+        if (miniBoxEl) miniBoxEl.classList.remove('is-done', 'is-reserved', 'is-active');
+      } else {
+        if (miniStatusEl) miniStatusEl.textContent = `🟢 ${achievedCount + 1}차 가능`;
+        if (coolBar) { coolBar.style.width = '100%'; coolBar.className = 'nv-cooldown-fill ready'; }
+        if (miniBoxEl) miniBoxEl.classList.remove('is-done', 'is-reserved', 'is-active');
+      }
+    });
+
+    const totalTarget = 7;
+    const todayStats = (window.BaroLabHistory && window.BaroLabHistory.getTodayStats)
+      ? window.BaroLabHistory.getTodayStats()
+      : { cfCompleted: 0, cfTarget: 16 };
+    const cfCompleted = todayStats.cfCompleted;
+    const cfTarget = todayStats.cfTarget || 16;
+    const overallCompleted = cfCompleted + totalAchieved;
+    const overallTarget = cfTarget + totalTarget;
+    const overallPct = Math.round((overallCompleted / overallTarget) * 100);
+    const cfPct = Math.round((cfCompleted / cfTarget) * 100);
+    const nvPct = Math.round((totalAchieved / totalTarget) * 100);
+
+    // Update Big Gauge 2: Double Donut Ring (CF Outer r=35 C=219.9, Naver Inner r=25 C=157.1)
+    setRingGauge('ring-pub-cf', 219.9, cfPct);
+    setRingGauge('ring-pub-naver', 157.1, nvPct);
+
+    const gaugePubPct = document.getElementById('gauge-pub-pct');
+    if (gaugePubPct) gaugePubPct.textContent = `${overallPct}%`;
+
+    const valPubCf = document.getElementById('val-pub-cf');
+    const barPubCf = document.getElementById('bar-pub-cf');
+    if (valPubCf) valPubCf.textContent = `${cfCompleted}/${cfTarget}편 (${cfPct}%)`;
+    if (barPubCf) barPubCf.style.width = `${cfPct}%`;
+
+    const valPubNv = document.getElementById('val-pub-naver');
+    const barPubNv = document.getElementById('bar-pub-naver');
+    if (valPubNv) {
+      valPubNv.textContent = totalReserved > 0
+        ? `${totalAchieved}/${totalTarget}편 (🟢${totalPublic}·🔵${totalReserved})`
+        : `${totalAchieved}/${totalTarget}편 (${nvPct}%)`;
+    }
+    if (barPubNv) barPubNv.style.width = `${nvPct}%`;
+
+    const cfMasterFill = document.getElementById('cf-master-gauge-fill');
+    const cfMasterPct = document.getElementById('cf-master-gauge-pct');
+    if (cfMasterFill) cfMasterFill.style.width = `${cfPct}%`;
+    if (cfMasterPct) cfMasterPct.textContent = `${cfPct}% (${cfCompleted}/${cfTarget})`;
+
+    const kpiBadgeEl = document.getElementById('kpi-todo-badge');
+    const kpiValEl = document.getElementById('kpi-todo-val');
+    const kpiDescEl = document.getElementById('kpi-todo-desc');
+    const kpiRateEl = document.getElementById('kpi-todo-rate');
+
+    if (kpiBadgeEl) {
+      kpiBadgeEl.textContent = `${overallCompleted}/${overallTarget}편 (${overallPct}%)`;
+      kpiBadgeEl.className = `pillar-badge ${overallCompleted === overallTarget ? 'badge-green' : ((overallCompleted > 0 || todayStats.cfActive || todayStats.naverActive) ? 'badge-blue' : 'badge-orange')}`;
+    }
+    if (kpiValEl) kpiValEl.textContent = `${overallCompleted}/${overallTarget}편`;
+    if (kpiDescEl) {
+      const nvLabel = totalReserved > 0 ? `네이버 ${totalAchieved}/${totalTarget}(공${totalPublic}·예${totalReserved})` : `네이버 ${totalAchieved}/${totalTarget}편`;
+      kpiDescEl.textContent = `CF ${cfCompleted}/${cfTarget}편 · ${nvLabel}`;
+    }
+    if (kpiRateEl) {
+      const remain = overallTarget - overallCompleted;
+      const liveParts = [];
+      if (todayStats.cfActive?.domain) liveParts.push(`CF ${todayStats.cfActive.domain}`);
+      if (todayStats.naverActive?.account) liveParts.push(`네이버 ${todayStats.naverActive.account}`);
+      if (liveParts.length > 0) {
+        kpiRateEl.textContent = `⚡ ${liveParts.join(' · ')}`;
+        kpiRateEl.style.color = '#2563eb';
+      } else {
+        kpiRateEl.textContent = remain === 0 ? '🟢 전원 완료' : `${remain}편 대기`;
+        kpiRateEl.style.color = remain === 0 ? '#16a34a' : '#2563eb';
+      }
+    }
+
+    const cfCompletedCountEl = document.getElementById('cf-summary-completed-count');
+    const cfWaitingCountEl = document.getElementById('cf-summary-waiting-count');
+    if (cfCompletedCountEl) cfCompletedCountEl.textContent = `${cfCompleted}건`;
+    if (cfWaitingCountEl) cfWaitingCountEl.textContent = `${Math.max(0, cfTarget - cfCompleted)}건`;
+
+    const nvTotEl = document.getElementById('nv-summary-total-progress');
+    const nvRealEl = document.getElementById('nv-summary-real-progress');
+    const nvBridgeEl = document.getElementById('nv-summary-bridge-progress');
+    if (nvTotEl) {
+      nvTotEl.textContent = totalReserved > 0
+        ? `${totalAchieved}/${totalTarget}편 (🟢${totalPublic}·🔵${totalReserved})`
+        : `${totalAchieved}/${totalTarget}편`;
+    }
+    if (nvRealEl) nvRealEl.textContent = `${realAchieved}/3편`;
+    if (nvBridgeEl) nvBridgeEl.textContent = `${bridgeAchieved}/4편`;
+
+    const publiState = document.getElementById('crew-state-publi');
+    const publiCard = document.getElementById('crew-card-publi');
+    if (publiState && publiCard) {
+      if (todayStats.cfActive?.domain || todayStats.naverActive?.account) {
+        publiState.textContent = `⚡ ${todayStats.cfActive?.domain || todayStats.naverActive?.account}`;
+        publiCard.classList.add('is-working');
+      } else {
+        publiState.textContent = `🟢 ${overallPct}% 완료`;
+        publiCard.classList.remove('is-working');
+      }
+    }
+
+    renderCF16Grid();
+  }
+
+  // 4. Sync All ARGO Gauges with Live Server Metrics, Projects, Kin, Threads & Memory Vault
+  async function syncArgoGauges() {
+    // 4-1. Server & 5 CDP Browsers status
+    try {
+      const res = await fetch(`${API_BASE}/api/status`);
+      if (res.ok) {
+        const data = await res.json();
+        const badge = document.querySelector('.live-status');
+        const cdpPill = document.getElementById('bento-cdp-status-pill');
+        const cdpLabel = `CDP ${data.cdp_online_count ?? 5}/${data.cdp_total_count ?? 5} 가동`;
+        if (badge) {
+          badge.innerHTML = `<span class="live-dot" aria-hidden="true"></span><span>서버 정상 · ${cdpLabel}</span>`;
+        }
+        if (cdpPill) {
+          const allUp = (data.cdp_online_count ?? 5) >= (data.cdp_total_count ?? 5);
+          cdpPill.textContent = `${allUp ? '🟢' : '🟡'} ${cdpLabel}`;
+        }
+      }
+    } catch (_) {}
+
+    // 4-2. Revenue Speedometer Arc, Index Multi-Donut & Per-Domain Visitors from /api/metrics
+    try {
+      const res = await fetch(`${API_BASE}/api/metrics`, { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        const analysis = data.trafficAnalysis || {};
+        const today = window.BaroLabHistory ? window.BaroLabHistory.getKSTDateString() : new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10);
+
+        (analysis.sites || []).forEach(r => {
+          const dom = r.site?.site_id;
+          const users = r.ga4?.periods?.today?.users;
+          const weekUsers = r.ga4?.periods?.week?.users;
+          if (dom && Number.isSafeInteger(users)) latestVisitorMap.cf[dom] = users;
+          if (dom && Number.isSafeInteger(weekUsers)) latestVisitorMap.cfWeek[dom] = weekUsers;
+        });
+
+        (analysis.naverBlogs || []).forEach(r => {
+          const rawId = String(r.site?.site_id || '').replace(/^naver:/, '');
+          const users = r.days?.[today] ?? r.days?.[r.date];
+          if (rawId && Number.isSafeInteger(users)) {
+            latestVisitorMap.naver[rawId] = users;
+            const matchedCfg = Object.values(QUOTA_CONFIG).find(c => c.blogId === rawId || c.name === rawId);
+            if (matchedCfg) latestVisitorMap.naver[matchedCfg.name] = users;
+          }
+        });
+
+        // Big Gauge 1: Revenue Speedometer Arc ($100/day goal, arc length = 119.4)
+        const revCats = data.revenue?.categories || [];
+        const adsenseCat = revCats.find(c => c.id === 'adsense');
+        const adpostCat = revCats.find(c => c.id === 'adpost');
+        const affCat = revCats.find(c => c.id === 'affiliate');
+
+        const adsenseTodayUsd = Number(adsenseCat?.periods?.today?.amounts?.USD ?? adsenseCat?.periods?.yesterday?.amounts?.USD ?? 0);
+        const adpostTodayKrw = Number(adpostCat?.periods?.today?.amounts?.KRW ?? 0);
+        const affTodayKrw = Number(affCat?.periods?.today?.amounts?.KRW ?? 0);
+
+        const totalUsdEquiv = adsenseTodayUsd + ((adpostTodayKrw + affTodayKrw) / 1400);
+        const revGoalPct = Math.min(100, Math.round((totalUsdEquiv / 100) * 1000) / 10);
+
+        setRingGauge('arc-revenue-goal', 119.4, Math.max(3, revGoalPct));
+        const gaugeRevPct = document.getElementById('gauge-rev-pct');
+        if (gaugeRevPct) gaugeRevPct.textContent = `${revGoalPct.toFixed(1)}%`;
+
+        const valAdsense = document.getElementById('val-rev-adsense');
+        const barAdsense = document.getElementById('bar-rev-adsense');
+        if (valAdsense) valAdsense.textContent = `$${adsenseTodayUsd.toFixed(2)}`;
+        if (barAdsense) barAdsense.style.width = `${Math.max(5, Math.min(100, (adsenseTodayUsd / 100) * 100))}%`;
+
+        const valAdpost = document.getElementById('val-rev-adpost');
+        const barAdpost = document.getElementById('bar-rev-adpost');
+        if (valAdpost) valAdpost.textContent = adpostTodayKrw > 0 ? `₩${adpostTodayKrw.toLocaleString('ko-KR')}` : '집계 대기';
+        if (barAdpost) barAdpost.style.width = `${Math.max(4, Math.min(100, ((adpostTodayKrw / 1400) / 30) * 100))}%`;
+
+        const valAff = document.getElementById('val-rev-affiliate');
+        const barAff = document.getElementById('bar-rev-affiliate');
+        if (valAff) valAff.textContent = affTodayKrw > 0 ? `₩${affTodayKrw.toLocaleString('ko-KR')}` : '집계 대기';
+        if (barAff) barAff.style.width = `${Math.max(4, Math.min(100, ((affTodayKrw / 1400) / 30) * 100))}%`;
+
+        const goalPctEl = document.getElementById('kpi-revenue-goal-pct');
+        if (goalPctEl) goalPctEl.textContent = `일 목표 $100 중 $${totalUsdEquiv.toFixed(2)} (${revGoalPct.toFixed(1)}%)`;
+
+        // Big Gauge 3: Search Indexing Health Multi-Donut (C = 207.35)
+        const audit = data.contentAudit;
+        const idx = data.indexing || {};
+        const totalPosts = Number(audit?.inventoryTotal || idx.inventoryTotal || 199);
+        const unindexedCnt = Number(audit?.counts?.not_indexed ?? 0);
+        const inspectedCnt = Number(idx.inspected || (audit?.rows ? audit.rows.filter(r => r.index !== 'unknown').length : 0));
+        const indexedCnt = Number(idx.indexed || Math.max(0, inspectedCnt - unindexedCnt));
+        const waitCnt = Math.max(0, totalPosts - indexedCnt - unindexedCnt);
+
+        const okPct = totalPosts > 0 ? Math.round((indexedCnt / totalPosts) * 100) : 0;
+        const waitPct = totalPosts > 0 ? Math.round((waitCnt / totalPosts) * 100) : 0;
+        const unidxPct = totalPosts > 0 ? Math.max(0, 100 - okPct - waitPct) : 0;
+        const inspectedHealthPct = inspectedCnt > 0 ? Math.round((indexedCnt / inspectedCnt) * 100) : okPct;
+
+        const C = 207.35;
+        const okLen = (okPct / 100) * C;
+        const waitLen = (waitPct / 100) * C;
+        const unidxLen = (unidxPct / 100) * C;
+
+        const ringOk = document.getElementById('ring-idx-ok');
+        const ringWait = document.getElementById('ring-idx-wait');
+        const ringUnidx = document.getElementById('ring-idx-unindexed');
+        if (ringOk) {
+          ringOk.style.strokeDasharray = `${okLen.toFixed(1)} ${C}`;
+          ringOk.style.strokeDashoffset = '0';
+        }
+        if (ringWait) {
+          ringWait.style.strokeDasharray = `${waitLen.toFixed(1)} ${C}`;
+          ringWait.style.strokeDashoffset = `${(-okLen).toFixed(1)}`;
+        }
+        if (ringUnidx) {
+          ringUnidx.style.strokeDasharray = `${unidxLen.toFixed(1)} ${C}`;
+          ringUnidx.style.strokeDashoffset = `${(-(okLen + waitLen)).toFixed(1)}`;
+        }
+
+        const gaugeIdxPct = document.getElementById('gauge-idx-pct');
+        if (gaugeIdxPct) gaugeIdxPct.textContent = `${inspectedHealthPct}%`;
+
+        const setIdxBar = (valId, barId, cnt, pct) => {
+          const vEl = document.getElementById(valId);
+          const bEl = document.getElementById(barId);
+          if (vEl) vEl.textContent = `${cnt}건 (${pct}%)`;
+          if (bEl) bEl.style.width = `${Math.max(3, pct)}%`;
+        };
+        setIdxBar('val-idx-ok', 'bar-idx-ok', indexedCnt, okPct);
+        setIdxBar('val-idx-wait', 'bar-idx-wait', waitCnt, waitPct);
+        setIdxBar('val-idx-unindexed', 'bar-idx-unindexed', unindexedCnt, unidxPct);
+
+        updateQuotaUI();
+      }
+    } catch (_) {}
+
+    // 4-3. Big Gauge 4: Memory Graph Synapse Gauge (ARGO Original Style)
+    try {
+      const res = await fetch(`${API_BASE}/api/memory/graph?limit=100`, { cache: 'no-store' });
+      if (res.ok) {
+        const gData = await res.json();
+        const st = gData.stats || {};
+        const total = Number(st.total || 14);
+        const linked = Number(st.linked ?? total);
+        const isolated = Number(st.isolated || 0);
+        const links = Number(st.links || 47);
+        const coreHubs = Number(st.coreHubs || 13);
+        const skillNodes = Number(st.skillNodes || 4);
+        const revHubs = Number(st.revenueHubs || st.revenueMemories || 14);
+
+        const connectPct = total > 0 ? Math.round((linked / total) * 100) : 100;
+        setRingGauge('ring-mem-synapse', 207.4, connectPct);
+
+        const pctEl = document.getElementById('gauge-mem-pct');
+        const subEl = document.getElementById('gauge-mem-sub');
+        const badgeEl = document.getElementById('argo-vault-badge');
+        const pillEl = document.getElementById('bento-memory-node-pill');
+
+        if (pctEl) pctEl.textContent = `${connectPct}%`;
+        if (subEl) subEl.textContent = `노드 ${total}개`;
+        if (badgeEl) badgeEl.textContent = `고아 ${isolated}개 · 100% 연결`;
+        if (pillEl) pillEl.textContent = `시냅스 엣지 ${links}개 · 고아 ${isolated}개`;
+
+        const elCore = document.getElementById('val-mem-core');
+        const elSkill = document.getElementById('val-mem-skill');
+        const elRev = document.getElementById('val-mem-rev');
+        if (elCore) elCore.textContent = `${coreHubs}개`;
+        if (elSkill) elSkill.textContent = `${skillNodes}개`;
+        if (elRev) elRev.textContent = `${revHubs}개`;
+      }
+    } catch (_) {}
+
+    // 4-4. App Projects 4-Step Milestone Gauges
+    try {
+      const res = await fetch(`${API_BASE}/api/projects`, { cache: 'no-store' });
+      if (res.ok) {
+        const pData = await res.json();
+        const projects = Array.isArray(pData.projects) ? pData.projects : [];
+        projects.forEach(p => {
+          const ms = p.milestones || [];
+          const vCnt = ms.filter(m => m.status === 'verified').length;
+          const ipCnt = ms.filter(m => m.status === 'in_progress').length;
+          const tCnt = Math.max(1, ms.length);
+          const pct = p.status === 'released' ? 100 : Math.min(95, Math.round(((vCnt + ipCnt * 0.5) / tCnt) * 100));
+
+          const pctEl = document.getElementById(`app-pct-${p.id}`);
+          const stageEl = document.getElementById(`app-stage-${p.id}`);
+          const segsBox = document.getElementById(`app-segs-${p.id}`);
+          if (pctEl) pctEl.textContent = `${pct}%`;
+          if (stageEl) stageEl.textContent = `${p.stage || '내부 테스트'} (검증 ${vCnt}/${tCnt})`;
+          if (segsBox) {
+            const filledSteps = p.status === 'released' ? 4 : Math.max(1, Math.min(3, vCnt));
+            segsBox.innerHTML = [1, 2, 3, 4].map(stepIdx => {
+              const cls = stepIdx <= filledSteps ? 'done' : (stepIdx === filledSteps + 1 ? 'active' : '');
+              return `<span class="app-step-seg ${cls}"></span>`;
+            }).join('');
+          }
+        });
+      }
+    } catch (_) {}
+
+    // 4-5. Content Doctor (🩺 기존 글 리모델링 게이지) live status from /api/auditor/status
+    await syncContentDoctorGauge();
+  }
+
+  async function syncContentDoctorGauge() {
+    try {
+      const res = await fetch(`${API_BASE}/api/auditor/status`, { cache: 'no-store' });
+      if (!res.ok) return;
+      const doc = await res.json();
+      const gc = doc.gradeCounts || doc.grades || doc.byGrade || {};
+      let aCnt = Number(gc.A ?? gc.a ?? doc.gradeA ?? 0);
+      let bCnt = Number(gc.B ?? gc.b ?? doc.gradeB ?? 0);
+      let cCnt = Number(gc.C ?? gc.c ?? doc.gradeC ?? 0);
+      let dCnt = Number(gc.D ?? gc.d ?? doc.gradeD ?? 0);
+
+      if ((aCnt + bCnt + cCnt + dCnt) === 0 && Array.isArray(doc.recentAudits) && doc.recentAudits.length > 0) {
+        doc.recentAudits.forEach(item => {
+          const g = String(item.grade || item.checklist?.['7_finalGrade']?.grade || 'A').toUpperCase();
+          if (g === 'A') aCnt++;
+          else if (g === 'B') bCnt++;
+          else if (g === 'C') cCnt++;
+          else if (g === 'D') dCnt++;
+        });
+      }
+
+      const sumGrades = aCnt + bCnt + cCnt + dCnt;
+      const totalInv = Number(doc.totalInventory || 1984);
+      const auditedCnt = sumGrades > 0 ? sumGrades : Number(doc.auditedCount || 0);
+      const remodeledCnt = Number(doc.remodeledCount ?? (bCnt + cCnt));
+      const dailyTarget = Number(doc.dailyQuotaTarget || 20);
+      const todayAudited = Number(doc.todayAudited || auditedCnt);
+      const quotaPct = Math.min(100, Math.max(5, Number(doc.todayQuotaPct || Math.round((todayAudited / dailyTarget) * 100))));
+
+      const chipEl = document.getElementById('doctor-quota-chip');
+      const invEl = document.getElementById('doctor-inventory-label');
+      const remEl = document.getElementById('doctor-remodel-label');
+      const barEl = document.getElementById('doctor-quota-bar');
+      const gaEl = document.getElementById('doctor-grade-a');
+      const gbEl = document.getElementById('doctor-grade-b');
+      const gcEl = document.getElementById('doctor-grade-c');
+      const gdEl = document.getElementById('doctor-grade-d');
+      const latestEl = document.getElementById('doctor-latest-post-line');
+      const crewDocEl = document.getElementById('crew-state-doctor');
+
+      if (chipEl) chipEl.textContent = `일일 할당량 ${todayAudited}/${dailyTarget}건 (${quotaPct}%)`;
+      if (invEl) invEl.innerHTML = `전체 ${totalInv.toLocaleString('ko-KR')}건 중 <strong style="color:#0d9488;" id="doctor-audited-count">${auditedCnt}건</strong> 정밀 검진 완료`;
+      if (remEl) remEl.innerHTML = `즉시 패치·리모델링 <strong style="color:#2563eb;" id="doctor-remodeled-count">${remodeledCnt}건</strong> (일일 목표 ${dailyTarget}건)`;
+      if (barEl) barEl.style.width = `${quotaPct}%`;
+      if (gaEl) gaEl.textContent = `🟢 A정상 ${aCnt}건`;
+      if (gbEl) gbEl.textContent = `🔵 B패치 ${bCnt}건`;
+      if (gcEl) gcEl.textContent = `🟡 C리모델링 ${cCnt}건`;
+      if (gdEl) gdEl.textContent = `🔴 D안전캡 ${dCnt}건`;
+      if (crewDocEl) crewDocEl.textContent = `🩺 ${todayAudited}/${dailyTarget}건`;
+
+      const latest = (doc.recentAudits || [])[0];
+      if (latest && latestEl) {
+        const catPatch = latest.checklist?.['3_categoryRemap'];
+        const catNote = catPatch?.patched ? ` (${catPatch.oldCategory}➔${catPatch.newCategory} 패치)` : '';
+        latestEl.textContent = `🩺 최근 검진: [${latest.domain}] 「${latest.title}」 ➔ ${latest.gradeBadge}${catNote}`;
+      }
+    } catch (_) {}
+  }
+
+  const bentoDocBtn = document.getElementById('bento-btn-doctor-patrol');
+  if (bentoDocBtn) {
+    bentoDocBtn.addEventListener('click', async () => {
+      bentoDocBtn.disabled = true;
+      bentoDocBtn.textContent = '🩺 검진 중...';
+      try {
+        await fetch(`${API_BASE}/api/auditor/patrol`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ count: 5, broadcast: true }),
+        });
+        await syncContentDoctorGauge();
+        await syncArgoGauges();
+      } catch (_) {} finally {
+        bentoDocBtn.disabled = false;
+        bentoDocBtn.textContent = '🩺 5건 즉시 검진';
+      }
+    });
+  }
+
+  // 5. Bind Kin & Threads Circular Mini Gauges
+  function bindChannelMiniGauges() {
+    if (window.BaroLabKinSummary) {
+      window.BaroLabKinSummary.subscribe(state => {
+        if (!state || !state.data) return;
+        const view = window.BaroLabKinSummary.summarize(state);
+        const auto = view.automation || {};
+        const pub = Number(view.todayPublished || 0);
+        const rem = Number(auto.globalRemainingRuns ?? 4);
+        const targetRuns = Math.max(4, pub + rem);
+        const usedRuns = Math.max(0, targetRuns - rem);
+        const pct = Math.min(100, Math.round(((pub > 0 ? pub : usedRuns * 0.5) / 4) * 100));
+
+        setRingGauge('ring-kin-quota', 144.5, pct);
+        const pctEl = document.getElementById('gauge-kin-pct');
+        if (pctEl) pctEl.textContent = `${pct}%`;
+        const barV = document.getElementById('bar-kin-verified');
+        const barR = document.getElementById('bar-kin-runs');
+        if (barV) barV.style.width = `${Math.min(100, (pub / 4) * 100)}%`;
+        if (barR) barR.style.width = `${Math.min(100, (rem / targetRuns) * 100)}%`;
+      });
+    } else {
+      setTimeout(bindChannelMiniGauges, 300);
+      return;
+    }
+
+    if (window.BaroLabThreadsSummary) {
+      window.BaroLabThreadsSummary.subscribe(s => {
+        const v = window.BaroLabThreadsSummary.summarize(s);
+        const op = v.operation || {};
+        const num = window.BaroLabThreadsSummary.number;
+        const mainCnt = Number(v.todayMain || 0);
+        const followCnt = Number(v.todayFollowup || 0);
+        const cap = Number(v.configuration?.mainDailyCap || 3);
+        const pct = Math.min(100, Math.round(((mainCnt + followCnt * 0.5) / cap) * 100));
+
+        setRingGauge('ring-threads-quota', 144.5, Math.max(8, pct));
+        const pctEl = document.getElementById('gauge-threads-pct');
+        if (pctEl) pctEl.textContent = `${pct}%`;
+
+        const badge = document.getElementById('bento-threads-badge');
+        const todayEl = document.getElementById('bento-threads-today');
+        const pubEl = document.getElementById('bento-threads-published');
+        const metaEl = document.getElementById('bento-threads-meta');
+        const barToday = document.getElementById('bar-threads-today');
+        const barTotal = document.getElementById('bar-threads-total');
+
+        if (badge) {
+          badge.textContent = op.label || '대기';
+          badge.className = 'pillar-badge ' + (op.kind === 'active' ? 'badge-blue' : op.kind === 'waiting' ? 'badge-green' : 'badge-orange');
+        }
+        if (todayEl) todayEl.textContent = `${num(v.todayMain)} / ${num(v.todayFollowup)}건`;
+        if (pubEl) pubEl.textContent = `${num(v.published)}건`;
+        if (metaEl) metaEl.textContent = `@mustpickinfo · ${op.label || '대기'}`;
+        if (barToday) barToday.style.width = `${Math.max(8, pct)}%`;
+        if (barTotal) barTotal.style.width = `${Math.max(12, Math.min(100, (Number(v.published || 0) / 20) * 100))}%`;
+      });
+    }
+  }
+
+  window.addEventListener('storage', e => {
+    if (e.key === getTodayKey()) updateQuotaUI();
+  });
+  window.addEventListener('barolab-publications-updated', updateQuotaUI);
+
+  // Autonomous Crew Worker Toggle on Main Dashboard
+  let bentoAutonomousEnabled = true;
+  async function syncBentoAutonomousStatus() {
+    const btn = document.getElementById('bento-btn-toggle-autonomous');
+    if (!btn) return;
+    try {
+      const res = await fetch('/api/chat/autonomous/status');
+      if (!res.ok) return;
+      const st = await res.json();
+      bentoAutonomousEnabled = Boolean(st.enabled);
+      if (bentoAutonomousEnabled) {
+        btn.textContent = st.running ? '⚡ 자율 협업 중계 중' : '▶️ 자율 협업 가동 중';
+        btn.style.background = '#ecfdf5';
+        btn.style.borderColor = '#10b981';
+        btn.style.color = '#047857';
+      } else {
+        btn.textContent = '⏸️ 자율 협업 일시정지';
+        btn.style.background = '#f1f5f9';
+        btn.style.borderColor = '#cbd5e1';
+        btn.style.color = '#475569';
+      }
+    } catch (_) {}
+  }
+
+  const bentoAutoBtn = document.getElementById('bento-btn-toggle-autonomous');
+  if (bentoAutoBtn) {
+    bentoAutoBtn.addEventListener('click', async () => {
+      try {
+        const res = await fetch('/api/chat/autonomous/toggle', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ enabled: !bentoAutonomousEnabled }),
+        });
+        if (res.ok) await syncBentoAutonomousStatus();
+      } catch (_) {}
+    });
+  }
+
+  updateQuotaUI();
+  bindChannelMiniGauges();
+  syncContentDoctorGauge();
+  syncArgoGauges();
+  syncBentoAutonomousStatus();
+  setInterval(syncArgoGauges, 15000);
+  setInterval(syncBentoAutonomousStatus, 8000);
+</script>
+
+</body>
+</html>

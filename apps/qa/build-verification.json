@@ -1,0 +1,197 @@
+{
+  "recordedAt": "2026-10-14T18:10:27.000081+09:00",
+  "versionCode": 1,
+  "versionName": "0.1.0-internal-preview",
+  "artifactsFrozen": true,
+  "modules": {
+    "greeting": {
+      "bundle": "daily_apps\\greeting\\build\\outputs\\bundle\\internal\\greeting-internal.aab",
+      "bytes": 5559374,
+      "sha256": "fbcdc718963c10a0536e74c3e201142ac278af43be3b4e8ff9c8c2d5e4f3ae40",
+      "apkSha256": "1422ecd8ab507aa501a8710e502580d082c86706af290829925469f7deb90210",
+      "tests": [
+        {
+          "name": "com.barolab.morningcard.GreetingScheduleTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0"
+        }
+      ],
+      "signatureProof": "qa/signature-greeting.txt",
+      "staticAnalysis": "qa/rea-greeting.json"
+    },
+    "magnifier": {
+      "bundle": "daily_apps\\magnifier\\build\\outputs\\bundle\\internal\\magnifier-internal.aab",
+      "bytes": 8323870,
+      "sha256": "ef5945fd59d45d2aa92911f787fdac5344a9ed07b59b5a21bf11868e1615f1cf",
+      "apkSha256": "070f6a3fca9c5d8dcd3450eec445c67eee422e13f88d770d7f7008f0a684956e",
+      "tests": [
+        {
+          "name": "com.barolab.biglens.ZoomRangeTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0"
+        }
+      ],
+      "signatureProof": "qa/signature-magnifier.txt",
+      "staticAnalysis": "qa/rea-magnifier.json"
+    },
+    "shopping": {
+      "bundle": "daily_apps\\shopping\\build\\outputs\\bundle\\internal\\shopping-internal.aab",
+      "bytes": 5908871,
+      "sha256": "8d708cdf448f4e56aef8bcdd0253b0106b63413d8e27b5012f7ead7a2e759060",
+      "apkSha256": "027e8f036f38e517d95d3beb69a943c8ad437a5148dad265a096c7cda22e51ff",
+      "tests": [
+        {
+          "name": "com.barolab.voicebasket.BasketParserTest",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0"
+        }
+      ],
+      "signatureProof": "qa/signature-shopping.txt",
+      "staticAnalysis": "qa/rea-shopping.json"
+    }
+  },
+  "build": "qa/build-internal.log",
+  "lint": {
+    "greeting": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "magnifier": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "shopping": {
+      "errors": 0,
+      "warnings": 2
+    }
+  },
+  "productionGate": "all three verifyReleaseReadiness failed as expected: approvals false; qa/production-gate.log",
+  "ads": "Official Google test application/banner IDs in internal artifacts. Future production IDs stored ignored with all approvals false.",
+  "runtime": {
+    "device": "Dedicated API36 emulator-5556, emulated back camera; no host camera/microphone",
+    "greeting": [
+      "60-message library visible",
+      "Six distinct theme exports manually visually reviewed: readable Korean phrases, no sender/header/footer overlap",
+      "Favorite snapshot including fictional Baro persisted after confirmed UI save and process restart",
+      "Image sharing invoked system chooser; no recipient selected",
+      "Text sharing invoked system chooser; no recipient selected",
+      "SAF save canceled safely, then saved PNG in Downloads",
+      "fontScale1.3 / 1920x1080 compact configuration: scroll and actions accessible"
+    ],
+    "magnifier": [
+      "Permission denial and subsequent grant",
+      "Emulated CameraX live preview, zoom, freeze, contrast, resume",
+      "SAF PNG save",
+      "Landscape fontScale1.3 controls accessible"
+    ],
+    "shopping": [
+      "Keyboard ASCII input, 3-item confirmation, edit quantity, check, delete/undo",
+      "Archive and reuse with check reset; persistence after process restart",
+      "Microphone permission denial retains keyboard alternative",
+      "Uncommitted draft retained on configuration change; explicit discard",
+      "Korean store list is documented local template fixture plus actual UI reuse/check/edit, not Korean voice recognition"
+    ]
+  },
+  "limits": [
+    "Physical Samsung camera/flash/readability not verified",
+    "Physical Korean speech recognition not verified; no voice-success claim",
+    "Portrait/landscape configuration tests use wm overrides; not physical-device tests",
+    "Static REA analysis is not runtime or signing validation",
+    "Immediate force-stop before asynchronous preference write was not used as a successful persistence assertion; normal confirmed-save/restart passed"
+  ],
+  "screenshots": {
+    "greeting-final-01-home.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "2553ca9f809c6440ab368b417662c562876c8bed77c4ba3f029dab669ba78547"
+    },
+    "greeting-final-02-editor.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "7ae4704720e126f9a88a0de4d73b2cf737f89e249e15937ab0138d87023b1e66"
+    },
+    "greeting-final-03-favorite.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "ba88ec9ce5c2f1aeab1d537a6fc05f01b5ff7f10e6c19ea25456dcc5bb4e4ae2"
+    },
+    "greeting-final-04-library.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "1755ed20a87863be7c97e977883525b79500cc6ab6347fc1b449847bf4cc5dae"
+    },
+    "greeting-final-05-landscape-font130.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "7cfd844a3759d8f189ccbc1aefa74036f1b4913856cb91fffd5f3bf42c612f94"
+    },
+    "greeting-final-06-save-picker.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "8238b6ffe7fce8f4dbbc77ff7aebf1dee01e8f4cd45f9f7fa6d456886f4f96d9"
+    },
+    "magnifier-final-01-live.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "e37f8c06442e1285821a956007b7f41532766331343b4e74b572944119b13524"
+    },
+    "magnifier-final-02-frozen.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "104af76c46fea5743193022bc2eec1e2864bc0c6b286cb1ad9f905c1a7a0cdcf"
+    },
+    "magnifier-final-03-help.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "a2ad818f08d8bfba14563fba6a926cffb31aee7e23ba1d86b4037727afe4e65a"
+    },
+    "magnifier-final-04-landscape-font130.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "92386122b8c593acb72fd9caa797714ea2e754d663a4401453c39af5891a514b"
+    },
+    "shopping-final-01-korean-overview.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "8b2bc14d1a3010c9121f94077ecd22a4ab408d81a865ee5e1e73036f2604cbe4"
+    },
+    "shopping-final-02-korean-items.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "40761b867075f60dd24795aa490b5dc45b8519902cad1c58c97271fc609ecdb3"
+    },
+    "shopping-final-03-korean-check.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "ecc0f2b7f94439a36be88fe3364cdef08c37524130be6c6f1207b8d67ae29f23"
+    },
+    "shopping-final-04-korean-edit.png": {
+      "width": 1080,
+      "height": 1920,
+      "sha256": "47aa312be7f1d29034b605dbb8bbbbfd93d3729238516c24fa63bdc057ffa781"
+    },
+    "shopping-final-05-landscape-draft.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "488130d80dc9618f57d3c68cbf7265ba1db892369f1b5e385f2f4ec464e615cb"
+    }
+  },
+  "themeExports": {
+    "theme-1.png": "b72430cbea8d633e1629bdd0fd151e436d2785efb39cc81cf05174d74f30029a",
+    "theme-2.png": "f963d2ebcd656ff85b161a45e98482c9afeb88b8f0b301519a391c846acfde82",
+    "theme-3.png": "b4a3296490a296ce66827de669d2d36fee96f522ce25cd46f572a5b1db544b90",
+    "theme-4.png": "fb6e3f26baba69b785f6cc61fe6f5aa74875e32d6cfdb7d472029a1efe1b5583",
+    "theme-5.png": "6678e6351ae6dd7569d5d04d6a1128d327e67bc661002e105a76c8926cfdbbba",
+    "theme-6.png": "480975d0c655425defa05d23b85e5865ac19f482f48003c892c87bcfe59e88e0"
+  },
+  "emulatorCleanup": {
+    "font_scale": "1.0",
+    "accelerometer_rotation": "1",
+    "user_rotation": "0",
+    "wmSize": "Physical size: 1080x2400",
+    "shutdown": "OK: killing emulator, bye bye\r\r\nOK"
+  }
+}

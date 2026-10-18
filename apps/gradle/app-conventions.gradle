@@ -1,0 +1,30 @@
+def apps=[greeting:'com.barolab.morningcard',magnifier:'com.barolab.biglens',shopping:'com.barolab.voicebasket']
+def privateConfig=new Properties()
+def fileConfig=rootProject.file('release.properties')
+if(fileConfig.exists()) fileConfig.withInputStream { privateConfig.load(it) }
+def setting={ suffix -> privateConfig.getProperty(project.name+'.'+suffix,'') }
+def realApp=setting('admobAppId'), realUnit=setting('bannerUnitId')
+def keys=new Properties()
+def keyFile=new File(System.getenv('DAILY_SIGNING_PROPERTIES') ?: new File(System.getProperty('user.home'),'.codex/secure/daily-apps/signing.properties').path)
+if(keyFile.exists()) keyFile.withInputStream { keys.load(it) }
+android {
+ namespace apps[project.name]
+ compileSdk 36
+ defaultConfig { applicationId apps[project.name]; minSdk 26; targetSdk 36; versionCode 2; versionName '0.2.0'; manifestPlaceholders=[admobAppId:'UNCONFIGURED']; buildConfigField 'String','AD_UNIT_ID','"UNCONFIGURED"'; buildConfigField 'boolean','IS_PREVIEW','false' }
+ signingConfigs { upload { if(keyFile.exists()) { storeFile file(keys.getProperty('storeFile')); storePassword keys.getProperty('storePassword'); keyAlias keys.getProperty('keyAlias'); keyPassword keys.getProperty('keyPassword') } } }
+ buildTypes {
+  debug { applicationIdSuffix '.debug'; versionNameSuffix '-preview'; manifestPlaceholders.admobAppId='ca-app-pub-3940256099942544~3347511713'; buildConfigField 'String','AD_UNIT_ID','"ca-app-pub-3940256099942544/6300978111"'; buildConfigField 'boolean','IS_PREVIEW','true' }
+  internal { initWith debug; applicationIdSuffix=null; versionNameSuffix='-internal-preview'; debuggable false; signingConfig signingConfigs.upload; matchingFallbacks=['debug'] }
+  release { minifyEnabled false; signingConfig signingConfigs.upload; manifestPlaceholders.admobAppId=realApp ?: 'UNCONFIGURED'; buildConfigField 'String','AD_UNIT_ID','"'+(realUnit ?: 'UNCONFIGURED')+'"' }
+ }
+ buildFeatures { buildConfig true }
+ compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
+tasks.register('verifyInternalReadiness') { doLast { if(!keyFile.exists() || !new File(keys.getProperty('storeFile','')).isFile()) throw new GradleException('Persistent daily-app upload signing identity required outside repository.') } }
+tasks.matching { it.name=='preInternalBuild' }.configureEach { dependsOn 'verifyInternalReadiness' }
+tasks.register('verifyReleaseReadiness') { doLast {
+ if(!(realApp ==~ /ca-app-pub-\d{16}~\d{10}/) || !(realUnit ==~ /ca-app-pub-\d{16}\/\d{10}/) || realApp.contains('3940256099942544') || realUnit.contains('3940256099942544') || realApp.endsWith('~3426234878')) throw new GradleException('New app-specific production AdMob identity required; test/Bible IDs forbidden.')
+ if(realApp.split('~')[0]!=realUnit.split('/')[0] || setting('privacyReviewed')!='true' || setting('contentReviewed')!='true' || setting('productionAdsConfirmed')!='true') throw new GradleException('Per-app ad identity, privacy and content release reviews required.')
+} }
+tasks.matching { it.name=='preReleaseBuild' }.configureEach { dependsOn 'verifyReleaseReadiness' }
+dependencies { implementation project(':common'); testImplementation 'junit:junit:4.13.2' }

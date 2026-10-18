@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>앱 프로젝트 관제 · BaroLab</title>
+  <link rel="stylesheet" href="traffic.css">
+  <link rel="stylesheet" href="projects.css?v=20261017-apps-1">
+  <link rel="stylesheet" href="sidebar.css?v=20261017-unified-2">
+  <link rel="stylesheet" href="signature_deck.css?v=20261017-sig-2">
+  <script src="kin-summary.js?v=20261015-2" defer></script>
+  <script src="threads-summary.js?v=20261015-5" defer></script>
+  <script src="signature_deck.js?v=20261017-sig-2" defer></script>
+</head>
+<body class="control-room apps-page">
+<a class="skip-link" href="#main-content">본문으로 이동</a>
+
+<div class="layout">
+  <aside id="barolab-sidebar" class="sidebar" aria-label="주요 메뉴"></aside>
+  <script src="sidebar.js?v=20261018-no-rnd"></script>
+
+  <main class="main-wrap" id="main-content">
+    <header class="header">
+      <div class="header-left">
+        <h1><span>앱 프로젝트 관제실</span></h1>
+        <p>오늘의 성경말씀 · 인사말 · 돋보기 · 말로 장보기 — Android 생활 앱 개발·검증·출시 및 수익화 현황</p>
+        <p class="refresh-status" id="app-project-status" role="status" aria-live="polite">프로젝트 등록 정보 조회 중</p>
+      </div>
+      <div class="toolbar">
+        <div class="date-box">
+          <div class="clock" id="live-clock">--:--:--</div>
+          <div class="tz">KST (Asia/Seoul)</div>
+        </div>
+        <button class="btn-quick" id="apps-refresh" type="button">상태 새로고침</button>
+      </div>
+    </header>
+
+    <section class="pillar-row" aria-label="앱 프로젝트 핵심 요약">
+      <div class="pillar-card">
+        <div class="pillar-head">
+          <span class="pillar-title">등록 앱 프로젝트</span>
+          <span class="pillar-badge badge-blue" id="apps-kpi-total-badge">확인 중</span>
+        </div>
+        <div class="pillar-val" id="apps-kpi-total-val">0 <small style="font-size:14px; color:#64748b;">/ 4개</small></div>
+        <div class="pillar-desc">
+          <span id="apps-kpi-total-desc">성경말씀 · 인사말 · 돋보기 · 장보기</span>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-head">
+          <span class="pillar-title">Play 배포 단계</span>
+          <span class="pillar-badge badge-blue" id="apps-kpi-release-badge">내부 테스트</span>
+        </div>
+        <div class="pillar-val" id="apps-kpi-release-val">0 <small style="font-size:14px; color:#64748b;">개 내부 배포</small></div>
+        <div class="pillar-desc">
+          <span id="apps-kpi-release-desc">정식 출시 및 실기기 검증 현황</span>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-head">
+          <span class="pillar-title">마일스톤 검증</span>
+          <span class="pillar-badge badge-green" id="apps-kpi-milestone-badge">집계 중</span>
+        </div>
+        <div class="pillar-val" id="apps-kpi-milestone-val">0 <small style="font-size:14px; color:#64748b;">건 완료</small></div>
+        <div class="pillar-desc">
+          <span id="apps-kpi-milestone-desc">진행 중 · 대기 항목 구분</span>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-head">
+          <span class="pillar-title">AdMob 수익 · 활성 이용자</span>
+          <span class="pillar-badge badge-orange" id="apps-kpi-revenue-badge">별도 집계</span>
+        </div>
+        <div class="pillar-val" style="color:#64748b;" id="apps-kpi-revenue-val">미연동</div>
+        <div class="pillar-desc">
+          <span id="apps-kpi-revenue-desc">블로그 수익·방문자와 합산하지 않음</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="traffic-panel" id="app-projects" aria-labelledby="app-project-title">
+      <div class="traffic-head">
+        <div>
+          <h2 id="app-project-title">앱별 상세 진행 및 검증 현황</h2>
+          <p class="section-caption">기획 · 빌드 · 실기기 검증 · AdMob/UMP · Google Play 배포 단계별 검증 기록</p>
+        </div>
+        <div class="app-filter-bar" id="app-filter-bar" role="tablist" aria-label="앱 필터"></div>
+      </div>
+      <div id="app-project-list"></div>
+      <p class="revenue-note" style="margin-top:14px;">앱 수익과 이용자는 블로그 합계에 포함하지 않습니다. AdMob과 분석 원천이 연결되기 전에는 미수집으로 표시합니다.</p>
+    </section>
+
+    <footer class="dashboard-footer">
+      <div>BaroLab 앱 프로젝트 관제실 · Android 생활 앱 포트폴리오</div>
+      <div>오늘의 성경말씀 · 인사말 · 돋보기 · 말로 장보기</div>
+      <div>Asia/Seoul (KST)</div>
+    </footer>
+  </main>
+</div>
+
+<script src="projects.js?v=20261017-apps-1" defer></script>
+<script>
+  function updateClock() {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const el = document.getElementById('live-clock');
+    if (el) el.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+</body>
+</html>

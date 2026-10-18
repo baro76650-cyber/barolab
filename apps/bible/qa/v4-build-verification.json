@@ -1,0 +1,128 @@
+{
+  "recordedAt": "2026-10-14T19:12:47.392268+09:00",
+  "status": "qa_complete",
+  "sourceAndArtifactsFrozen": true,
+  "artifact": {
+    "versionCode": 4,
+    "versionName": "0.4.0-internal-preview",
+    "aab": "Y:\\10_Project\\BaroLab\\bible_app\\app\\build\\outputs\\bundle\\internal\\app-internal.aab",
+    "aabSha256": "1a4001bc7d7144e995f85f68fa9fd21adb0fa28cefa2cbef0716b10485c0b99c",
+    "aabBytes": 5564425,
+    "apkSha256": "d6f0a6c2b445849dac01f9036e6760cabcae7652ed426e6bee21c7f0f2d2f7d2",
+    "signatureExitCode": 0,
+    "signatureProof": "v4-bible-signature.txt",
+    "packageEvidence": "package: name='com.barolab.harubible' versionCode='4' versionName='0.4.0-internal-preview' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+    "officialTestAdAppIdInManifest": true,
+    "unitTests": [
+      {
+        "name": "com.barolab.harubible.DailyReadingTest",
+        "tests": "6",
+        "failures": "0",
+        "errors": "0"
+      },
+      {
+        "name": "com.barolab.harubible.OfflineVoicePolicyTest",
+        "tests": "6",
+        "failures": "0",
+        "errors": "0"
+      }
+    ],
+    "lint": [
+      {
+        "id": "AndroidGradlePluginVersion",
+        "severity": "Warning",
+        "message": "A newer version of Gradle than 8.13 is available: 8.14.6"
+      },
+      {
+        "id": "SetTextI18n",
+        "severity": "Warning",
+        "message": "Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+      },
+      {
+        "id": "SetTextI18n",
+        "severity": "Warning",
+        "message": "Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+      }
+    ],
+    "dataPreservation": {
+      "beforeSavedCount": 1,
+      "afterSavedCount": 1,
+      "savedVerseIdsPreserved": true
+    }
+  },
+  "buildProof": "v4-build-internal.log",
+  "runtime": [
+    "Signed v3 to v4 update without clear retained saved verse1 ->1.",
+    "READY -> actual engine onStart callback showed SPEAKING/stop; stop returned READY.",
+    "42sp choice and selected verse retained after process restart; initial v4 reading-position/restart screenshots recorded.",
+    "Final compact header and font2.0 responsive labels inspected; font2.0 listen/stop reachable; landscape1.3 body scroll and pinned actions reachable."
+  ],
+  "screenshots": {
+    "v4-final-01-today.png": {
+      "sha256": "ed68b298750af1dcbbbc6aff92317a4ecbceb042e139ddcfe337e6e76883a687",
+      "width": 1080,
+      "height": 1920
+    },
+    "v4-final-02-font200.png": {
+      "sha256": "6b23ab65e6f05aa9a7dd0a10ab658682a3f83f7d7a2bd7ac70b6c36205f9e6b4",
+      "width": 1080,
+      "height": 1920
+    },
+    "v4-final-03-landscape-font130.png": {
+      "sha256": "d3076d94d5caf28c558969e4c0b1436f292affcb3a78aeb84b8de50fcab4b1fa",
+      "width": 1920,
+      "height": 1080
+    },
+    "v4-final-04-font200-responsive.png": {
+      "sha256": "2387ddb3a144b207dfa1446ccb3340d2786873ebcbce0bf2d75c8194f977470f",
+      "width": 1080,
+      "height": 1920
+    },
+    "v4-final-05-today.png": {
+      "sha256": "2387ddb3a144b207dfa1446ccb3340d2786873ebcbce0bf2d75c8194f977470f",
+      "width": 1080,
+      "height": 1920
+    }
+  },
+  "supersededScreenshots": "v4-01..04 and v4-final-01..03 precede final responsive-label update. v4-final-04-font200-responsive.png is the verified current font2.0 image. v4-final-05-today.png has the identical SHA and is a stale/duplicate frame after setting font1.0; it is NOT evidence of the default-font screen.",
+  "limits": [
+    "Dedicated API36 emulator-5556 only; no physical Samsung camera or Korean speech recognition verified.",
+    "Korean shopping list is the documented pre-existing local fixture, not voice-recognition success.",
+    "Actual target-age usability remains unverified; no installation/revenue/sent-message claims.",
+    "TalkBack directional actions are implemented; complete physical screen-reader usability is not established.",
+    "font_scale2.0 can wrap secondary wording; core actions remain reachable.",
+    "REA v1 static reports are historical, not a fresh v2 or v4 runtime proof.",
+    "Physical Galaxy speaker playback still unverified; emulator TTS callback is not physical-phone proof.",
+    "Engine-missing/setup-return regression from prior versions was not repeated in full; no new fake success assertion."
+  ],
+  "productionAdsEnabled": false,
+  "publicProductionRelease": false,
+  "sourceHashes": {
+    "app\\src\\main\\java\\com\\barolab\\harubible\\AdsController.java": "276b54f257349cc849187c1facde45da90fe12c928ce6fa3c38bdf90e1d5e21c",
+    "app\\src\\main\\java\\com\\barolab\\harubible\\DailyReading.java": "355814fb6f5a34bd5d725da890309a4e7561efc27a0c3532d7243b8699e493b5",
+    "app\\src\\main\\java\\com\\barolab\\harubible\\MainActivity.java": "ab7060b3f86f17cf6d0c8b6ef81b61a6f15342a142af18750f6b666d49bad267",
+    "app\\src\\main\\java\\com\\barolab\\harubible\\OfflineTtsController.java": "8e25cdeff845563dd40a78e8097d479928dc096df9ec69b3760d81d40e9cf636",
+    "app\\src\\main\\java\\com\\barolab\\harubible\\OfflineVoicePolicy.java": "1fda2f5ead53d8ccffce709273b447f7eb0156b3970d57a0042cc949230d2b67",
+    "app\\src\\main\\java\\com\\barolab\\harubible\\ReminderReceiver.java": "4b2d67670c6f6211b8f872c2956664189a42718da96a71f32337e41726b9eb13",
+    "app\\src\\main\\java\\com\\barolab\\harubible\\ShareImageProvider.java": "9811f55ae62f80cd6791f2142a3eac179acda8ffca9861d32e97218ff75c5914",
+    "app\\src\\main\\java\\com\\barolab\\harubible\\VerseCard.java": "33f98c53a948cecd580e03cf750050e7269130a453ba9f962d9b3c945b2e0637",
+    "app\\src\\main\\java\\com\\barolab\\harubible\\VerseRepository.java": "9e808f7948afb7dca0f0144b6b8cff988032859c6489eb80f1df0caead1998f9"
+  },
+  "emulatorCleanup": {
+    "font_scale": "1.0",
+    "accelerometer_rotation": "1",
+    "user_rotation": "0",
+    "wmSize": "Physical size: 1080x2400",
+    "adbd": "adbd not running as root",
+    "shutdown": "OK: killing emulator, bye bye\r\r\nOK"
+  },
+  "screenshotEvidenceCorrections": {
+    "v4-final-05-today.png": {
+      "status": "duplicate_stale_frame",
+      "identicalTo": "v4-final-04-font200-responsive.png",
+      "supportsDefaultFontToday": false
+    },
+    "currentVerifiedVisual": "v4-final-04-font200-responsive.png",
+    "defaultFontFinalCapture": "not established by final05; no new capture performed"
+  }
+}

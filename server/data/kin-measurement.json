@@ -1,0 +1,130 @@
+{
+  "schema": "naver-kin-measurement-v1",
+  "checkedAt": "2026-10-18T17:06:44.943821+09:00",
+  "source": "GA4 Data API",
+  "timezone": "Asia/Seoul",
+  "startDate": "2026-10-15",
+  "endDate": "2026-10-17",
+  "trialStartDate": "2026-10-15",
+  "trialEndDate": "2026-10-21",
+  "finalCollectionDate": "2026-10-24",
+  "baselineStartDate": "2026-10-08",
+  "baselineEndDate": "2026-10-14",
+  "periodKind": "trial_to_yesterday",
+  "trialCollectionPending": false,
+  "trackingValidationStatus": "unverified_stream_binding",
+  "trackingValidationNote": "GA4 조회 성공 · 두 사이트 기존 호스트 방문 확인 · 기사 UTM 도착 쿼리 보존 확인. GA 태그 ID와 조회 속성의 직접 일치는 Admin 권한 부족으로 미검증입니다. 조회 성공만으로 지식iN 유입 성과를 판정하지 않습니다.",
+  "scope": "owned approved hosts; exact sessionSource=naver_kin, sessionMedium=referral, sessionManualCampaignName=cf_bridge",
+  "provisional": true,
+  "lagNote": "최근 48시간은 GA4 처리 지연으로 변할 수 있습니다. 미측정·동의 거부·차단 방문은 포함되지 않습니다.",
+  "causalityNote": "UTM 세션 귀속이며 실제 사람·증분 효과·수익 발생을 단독 증명하지 않습니다.",
+  "sites": [
+    {
+      "host": "www.must-good.com",
+      "status": "collected",
+      "sessions": 0,
+      "engagedSessions": 0,
+      "pageViews": 0,
+      "reportMetadata": {
+        "timeZone": "Asia/Seoul",
+        "currencyCode": "USD",
+        "subjectToThresholding": null,
+        "samplingMetadatas": null,
+        "dataLossFromOtherRow": null,
+        "rowCount": 0,
+        "returnedRows": 0
+      }
+    },
+    {
+      "host": "www.must-pick.com",
+      "status": "collected",
+      "sessions": 0,
+      "engagedSessions": 0,
+      "pageViews": 0,
+      "reportMetadata": {
+        "timeZone": "Asia/Seoul",
+        "currencyCode": "KRW",
+        "subjectToThresholding": null,
+        "samplingMetadatas": null,
+        "dataLossFromOtherRow": null,
+        "rowCount": 0,
+        "returnedRows": 0
+      }
+    }
+  ],
+  "sessions": 0,
+  "engagedSessions": 0,
+  "pageViews": 0,
+  "publisherRevenue": null,
+  "revenueStatus": "unverified_publisher_link",
+  "revenueReason": "GA4 게시자 광고 수익 연결과 답변별 수익 범위를 검증하지 못했습니다. AdSense 전체 수익을 배분하지 않습니다.",
+  "rows": [],
+  "dailyFunnel": [
+    {
+      "day": "2026-10-18",
+      "discovered": 3,
+      "drafted": 3,
+      "attempted": 3,
+      "published_verified": 2
+    },
+    {
+      "day": "2026-10-17",
+      "discovered": 0,
+      "drafted": 0,
+      "attempted": 0,
+      "published_verified": 0
+    },
+    {
+      "day": "2026-10-16",
+      "discovered": 0,
+      "drafted": 0,
+      "attempted": 0,
+      "published_verified": 0
+    },
+    {
+      "day": "2026-10-15",
+      "discovered": 3,
+      "drafted": 1,
+      "attempted": 1,
+      "published_verified": 1
+    }
+  ],
+  "funnelStartDate": "2026-10-15",
+  "funnelEndDate": "2026-10-18",
+  "funnelTodayProvisional": true,
+  "funnelPeriodKind": "trial",
+  "funnelScope": "발굴·초안은 생성일, 제출·공개검증은 제출일 코호트의 현재 상태; 오늘은 미실행 슬롯 포함 잠정 집계; 전이 이벤트 수 아님",
+  "complete": true,
+  "status": "collected",
+  "trackingValidation": {
+    "checkedAt": "2026-10-15T08:06:02.589399+00:00",
+    "method": "read-only HTTP HTML + authenticated GA4 host report; JavaScript not executed; no synthetic pageview",
+    "startDate": "2026-10-08",
+    "endDate": "2026-10-14",
+    "streamBindingStatus": "unverified_admin_403",
+    "sites": [
+      {
+        "host": "www.must-good.com",
+        "property": "556127526",
+        "existingSessions": 26,
+        "tag": "G-QHHS9W3H61",
+        "articleUrl": "https://www.must-good.com/national-museum-korea-reservation-backpack-photo-guide",
+        "utmHTTPStatus": 200,
+        "queryPreserved": true,
+        "redirectCount": 0
+      },
+      {
+        "host": "www.must-pick.com",
+        "property": "545137532",
+        "existingSessions": 37,
+        "tag": "G-4ZJC2D7R2W",
+        "articleUrl": "https://www.must-pick.com/robot-vacuum-consumables-replacement-compatibility",
+        "utmHTTPStatus": 200,
+        "queryPreserved": true,
+        "redirectCount": 0
+      }
+    ]
+  },
+  "matchedSessions": 0,
+  "unmatchedSessions": 0
+}

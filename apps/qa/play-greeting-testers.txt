@@ -1,0 +1,79 @@
+2026-10-14T09:10:18.735586+00:00
+Google Play Console 로드 중
+notifications_unread
+읽지 않은 알림
+오늘의 안부 - 인사말 카드·공유
+keyboard_backspace
+모든 앱
+dashboard
+대시보드
+bar_chart
+통계
+overview
+게시 개요
+shield
+Google Play로 보호됨
+rocket_launch
+테스트 및 출시
+최신 버전 및 번들
+프로덕션
+테스트
+expand_less
+공개 테스트
+비공개 테스트
+내부 테스트
+사전 출시 보고서
+expand_more
+내부 앱 공유
+사전 등록
+앱 무결성
+고급 설정
+vital_signs
+모니터링 및 개선
+finance_mode
+사용자 늘리기
+sell
+Play를 통한 수익 창출
+내부 테스트
+phonelink
+휴대전화, 태블릿, Desktop (Googlebook OS, ChromeOS), Android XR
+arrow_drop_down
+새 버전 만들기
+내부 테스트 버전을 생성 및 관리하여 앱을 최대 100명의 내부 테스터에게 공개하세요. 자세히 알아보기
+info
+앱의 임시 이름: 'com.barolab.morningcard (unreviewed)'
+앱 설정이 완료되고 앱 검토가 끝날 때까지 내부 테스터가 앱을 다운로드할 때 앱의 임시 이름이 표시됩니다.
+자세히 알아보기
+닫기
+휴대전화, 태블릿, Desktop, Android XR 트랙 요약
+트랙 일시중지
+활성최신 출시 버전: 0.1.0-internal-preview앱의 임시 이름: 'com.barolab.morningcard (unreviewed)'   
+help
+출시
+테스터
+테스터
+최대 100명의 테스터가 내부 테스트에 참여할 수 있습니다. 테스터를 100명 넘게 선택할 수 있지만 먼저 참여하는 100명만 인정됩니다.
+테스터
+목록 이름
+사용자
+BaroLab 생활 앱 내부 테스트
+1
+arrow_right_alt
+하루말씀 내부 테스트
+1
+arrow_right_alt
+이메일 목록 만들기
+테스트 참여 방법
+웹에서 참여
+테스터는 웹에서 테스트에 참여할 수 있습니다.
+link
+링크 복사
+저장
+제품 업데이트
+상태 대시보드
+도움말
+© 2026 Google
+개인 정보 보호
+개발자 배포 계약
+서비스 약관
+{"checks": [{"aria": "모든 행 선택", "state": "mixed"}, {"aria": "BaroLab 생활 앱 내부 테스트", "state": "true"}, {"aria": "하루말씀 내부 테스트", "state": "false"}], "links": [{"label": "링크 복사: https://play.google.com/apps/internaltest/4701400802151181455", "disabled": false}]}

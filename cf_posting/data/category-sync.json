@@ -1,0 +1,181 @@
+{
+  "checkedAt": "2026-10-17T18:30:00+09:00",
+  "domains": [
+    {
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "slogan": "정부지원금·복지·민원 전문 미디어",
+      "archetype": "portal-wiki",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보",
+      "after": "정부지원금,청년·장년복지,민원·서류발급,세금·환급",
+      "categories": ["정부지원금", "청년·장년복지", "민원·서류발급", "세금·환급"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "baronote.kr",
+      "brandName": "바로노트 핀테크랩",
+      "slogan": "연금·대출·신용·금융 계산 전문 미디어",
+      "archetype": "portal-wiki",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보,소비정보",
+      "after": "국민·기초연금,대출·금리비교,신용·카드혜택,보험·절세전략",
+      "categories": ["국민·기초연금", "대출·금리비교", "신용·카드혜택", "보험·절세전략"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "woorinote.kr",
+      "brandName": "우리노트 부동산경제",
+      "slogan": "청약·전월세·주거지원 전문 미디어",
+      "archetype": "portal-wiki",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보,부동산정보",
+      "after": "청약·분양가이드,전월세·계약체크,주거복지·대출,부동산세금",
+      "categories": ["청약·분양가이드", "전월세·계약체크", "주거복지·대출", "부동산세금"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "justinfo.co.kr",
+      "brandName": "저스트인포 법률·행정",
+      "slogan": "생활법률·분쟁해결·공식절차 백과",
+      "archetype": "portal-wiki",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보",
+      "after": "생활법률·권리,소비자피해·환불,교통·과태료,근로·실업급여",
+      "categories": ["생활법률·권리", "소비자피해·환불", "교통·과태료", "근로·실업급여"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "topnote.kr",
+      "brandName": "탑노트 테크독스",
+      "slogan": "PC·스마트폰·클라우드 문제해결 매뉴얼",
+      "archetype": "tech-docs",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보,IT가전,IT정보",
+      "after": "윈도우·맥 설정,스마트폰·통신,구글·오피스팁,보안·계정복구",
+      "categories": ["윈도우·맥 설정", "스마트폰·통신", "구글·오피스팁", "보안·계정복구"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "maxnote.kr",
+      "brandName": "맥스노트 AI워크",
+      "slogan": "생성형 AI·업무자동화·생산성 툴 미디어",
+      "archetype": "tech-docs",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보,생산성도구,IT생산성",
+      "after": "AI툴 실전가이드,업무자동화·노션,크리에이터도구,IT트렌드분석",
+      "categories": ["AI툴 실전가이드", "업무자동화·노션", "크리에이터도구", "IT트렌드분석"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "soulnote.kr",
+      "brandName": "소울노트 자격·커리어",
+      "slogan": "국가자격증·국비지원·내일배움카드 가이드",
+      "archetype": "tech-docs",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보,자기계발",
+      "after": "내일배움카드·국비,유망국가자격증,시험일정·기출팁,이직·커리어설계",
+      "categories": ["내일배움카드·국비", "유망국가자격증", "시험일정·기출팁", "이직·커리어설계"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "meganote.kr",
+      "brandName": "메가노트 모빌리티",
+      "slogan": "자동차 구매·유지보수·보험·전기차 미디어",
+      "archetype": "tech-docs",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보,테크정보,여행정보",
+      "after": "신차·전기차제원,자동차보험·특약,정비·소모품교체,운전·주유혜택",
+      "categories": ["신차·전기차제원", "자동차보험·특약", "정비·소모품교체", "운전·주유혜택"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "tripmarvel.com",
+      "brandName": "트립마블 트래블저널",
+      "slogan": "국내외 여행 코스·교통·예약 실전 가이드",
+      "archetype": "visual-magazine",
+      "beforeRecheck": "여행코스·일정,항공·교통,숙소·예약,여행준비·체크리스트,여행비용·티켓,국내외여행,여행정보",
+      "after": "국내여행·수목원,해외여행·패스,항공·숙소예약팁,시즌축제·코스",
+      "categories": ["국내여행·수목원", "해외여행·패스", "항공·숙소예약팁", "시즌축제·코스"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "nolplace.com",
+      "brandName": "놀플레이스 주말나들이",
+      "slogan": "가족 나들이·전시·테마파크·주차 가이드",
+      "archetype": "visual-magazine",
+      "beforeRecheck": "캠핑장비,차박세팅,캠핑장시설,계절준비,초보체크리스트,핫플레이스,나들이정보",
+      "after": "수목원·테마파크,아이와가볼만한곳,전시·팝업·공연,주차·예매꿀팁",
+      "categories": ["수목원·테마파크", "아이와가볼만한곳", "전시·팝업·공연", "주차·예매꿀팁"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "must-joy.com",
+      "brandName": "머스트조이 컬처매거진",
+      "slogan": "미식·로컬맛집·카페·문화공간 큐레이션",
+      "archetype": "visual-magazine",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보,문화취미,문화생활",
+      "after": "로컬맛집·웨이팅,감성카페·베이커리,문화·전시리뷰,특산물·미식가이드",
+      "categories": ["로컬맛집·웨이팅", "감성카페·베이커리", "문화·전시리뷰", "특산물·미식가이드"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "healthcox.com",
+      "brandName": "헬스콕스 메디컬가이드",
+      "slogan": "통증·재활·건강검진·질환 케어 미디어",
+      "archetype": "curation-feed",
+      "beforeRecheck": "건강정보,다이어트·식단,운동·피트니스,의학건강,의학정보",
+      "after": "관절·통증케어,국가건강검진,만성질환·혈관,수면·영양의학",
+      "categories": ["관절·통증케어", "국가건강검진", "만성질환·혈관", "수면·영양의학"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "smilenote.kr",
+      "brandName": "스마일노트 시니어웰니스",
+      "slogan": "중장년 건강·운동·은퇴설계 매거진",
+      "archetype": "curation-feed",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보,건강정보",
+      "after": "시니어건강·운동,시니어혜택·우대,은퇴·노후준비,보조기기·돌봄",
+      "categories": ["시니어건강·운동", "시니어혜택·우대", "은퇴·노후준비", "보조기기·돌봄"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "daynote.kr",
+      "brandName": "데이노트 살림백과",
+      "slogan": "주방·살림·수납·제철요리 실용 매거진",
+      "archetype": "curation-feed",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보,살림정보",
+      "after": "주방·식재료보관,세탁·청소꿀팁,제철레시피,공과금·생활절약",
+      "categories": ["주방·식재료보관", "세탁·청소꿀팁", "제철레시피", "공과금·생활절약"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "must-pick.com",
+      "brandName": "머스트픽 컨슈머리포트",
+      "slogan": "가전·디지털·생활용품 스펙 비교 & 구매가이드",
+      "archetype": "curation-feed",
+      "beforeRecheck": "지원금·수당,생활·교통,육아·교육,금융·세금,연금·노후,주거·전월세,건강·의료,일자리·취업",
+      "after": "대형·주방가전,생활·계절가전,디지털·기어가이드,A/S·수리비용",
+      "categories": ["대형·주방가전", "생활·계절가전", "디지털·기어가이드", "A/S·수리비용"],
+      "menuVerified": true,
+      "missing": []
+    },
+    {
+      "domain": "joynote.kr",
+      "brandName": "조이노트 펫앤가든",
+      "slogan": "반려동물 케어·펫보험·반려식물 매거진",
+      "archetype": "curation-feed",
+      "beforeRecheck": "생활정보,금융정보,방송정보,쇼핑정보,디지털정보,반려동물",
+      "after": "강아지·고양이건강,펫보험·진료비비교,반려동물동반장소,반려식물·홈가드닝",
+      "categories": ["강아지·고양이건강", "펫보험·진료비비교", "반려동물동반장소", "반려식물·홈가드닝"],
+      "menuVerified": true,
+      "missing": []
+    }
+  ]
+}

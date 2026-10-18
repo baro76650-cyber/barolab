@@ -1,0 +1,368 @@
+{
+  "google_credentials": null,
+  "sites": {
+    "must-pick.com": {
+      "indexnow_key": "bc17d036729087a7f30a7e8946e74153f20c78157a44b8f9db6d3e3199d88c8d",
+      "indexnow_key_location": "https://www.must-pick.com/bc17d036729087a7f30a7e8946e74153f20c78157a44b8f9db6d3e3199d88c8d.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "545137532",
+      "search_property": "sc-domain:must-pick.com",
+      "gsc_api_verified_property": "sc-domain:must-pick.com",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:32:21.724941+00:00"
+    },
+    "baronote.kr": {
+      "indexnow_key": "80b77d716539444ea1e50cf4464d92b4",
+      "indexnow_key_location": "https://www.baronote.kr/80b77d716539444ea1e50cf4464d92b4.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.baronote.kr/",
+      "gsc_property": "https://www.baronote.kr/",
+      "bing_property": "https://baronote.kr/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.baronote.kr/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:31:07.921860+00:00"
+    },
+    "daynote.kr": {
+      "indexnow_key": "79b8bc9d53568cceecd0b68978bcf4f8",
+      "indexnow_key_location": "https://www.daynote.kr/79b8bc9d53568cceecd0b68978bcf4f8.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.daynote.kr/",
+      "gsc_property": "https://www.daynote.kr/",
+      "bing_property": "https://daynote.kr/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.daynote.kr/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:31:16.498212+00:00"
+    },
+    "healthcox.com": {
+      "indexnow_key": "b27698b397947a7ba2b9defee594c3fcbbc7fbf58b405e7b",
+      "indexnow_key_location": "https://www.healthcox.com/b27698b397947a7ba2b9defee594c3fcbbc7fbf58b405e7b.txt",
+      "analytics_reader": "mustbiz06",
+      "ga4_property": "523619765",
+      "search_property": "https://www.healthcox.com/",
+      "gsc_browser_account": "sj",
+      "gsc_access": {
+        "account": "sj",
+        "email": "sj@must.biz",
+        "permission": "FULL",
+        "property": "https://www.healthcox.com/",
+        "verifiedAt": "2026-10-13T17:08:45.936788+00:00",
+        "originalOwner": "mustbiz06",
+        "originalOwnerRetained": true
+      },
+      "gsc_api_verified_property": "https://www.healthcox.com/",
+      "gsc_api_verified_reader": "mustbiz06",
+      "gsc_api_verified_at": "2026-10-15T05:31:24.368565+00:00"
+    },
+    "joynote.kr": {
+      "indexnow_key": "80b77d716539444ea1e50cf4464d92b4",
+      "indexnow_key_location": "https://www.joynote.kr/80b77d716539444ea1e50cf4464d92b4.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.joynote.kr/",
+      "gsc_property": "https://www.joynote.kr/",
+      "bing_property": "https://joynote.kr/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.joynote.kr/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:31:32.683247+00:00"
+    },
+    "justinfo.co.kr": {
+      "indexnow_key": "1b58a87e67221aab8adc7d326c83593a",
+      "indexnow_key_location": "https://www.justinfo.co.kr/1b58a87e67221aab8adc7d326c83593a.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.justinfo.co.kr/",
+      "gsc_property": "https://www.justinfo.co.kr/",
+      "bing_property": "https://www.justinfo.co.kr/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.justinfo.co.kr/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:31:40.864609+00:00"
+    },
+    "maxnote.kr": {
+      "indexnow_key": "80b77d716539444ea1e50cf4464d92b4",
+      "indexnow_key_location": "https://www.maxnote.kr/80b77d716539444ea1e50cf4464d92b4.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.maxnote.kr/",
+      "gsc_property": "https://www.maxnote.kr/",
+      "bing_property": "https://www.maxnote.kr/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.maxnote.kr/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:31:48.691418+00:00"
+    },
+    "must-good.com": {
+      "indexnow_key": "6ba86784bd678ecf904fdc1072b702b3",
+      "indexnow_key_location": "https://www.must-good.com/6ba86784bd678ecf904fdc1072b702b3.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.must-good.com/",
+      "gsc_property": "https://www.must-good.com/",
+      "bing_property": "https://must-good.com/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.must-good.com/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:32:04.539885+00:00"
+    },
+    "must-joy.com": {
+      "indexnow_key": "a2e0978159b673b7343787322ebacfe1c3469b31ff3f8479",
+      "indexnow_key_location": "https://www.must-joy.com/a2e0978159b673b7343787322ebacfe1c3469b31ff3f8479.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.must-joy.com/",
+      "gsc_property": "https://www.must-joy.com/",
+      "bing_property": "https://must-joy.com/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.must-joy.com/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:32:12.984134+00:00"
+    },
+    "smilenote.kr": {
+      "indexnow_key": "80b77d716539444ea1e50cf4464d92b4",
+      "indexnow_key_location": "https://www.smilenote.kr/80b77d716539444ea1e50cf4464d92b4.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.smilenote.kr/",
+      "gsc_property": "https://www.smilenote.kr/",
+      "bing_property": "https://smilenote.kr/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.smilenote.kr/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:32:38.181014+00:00"
+    },
+    "soulnote.kr": {
+      "indexnow_key": "80b77d716539444ea1e50cf4464d92b4",
+      "indexnow_key_location": "https://www.soulnote.kr/80b77d716539444ea1e50cf4464d92b4.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.soulnote.kr/",
+      "gsc_property": "https://www.soulnote.kr/",
+      "bing_property": "https://www.soulnote.kr/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.soulnote.kr/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:32:46.303812+00:00"
+    },
+    "topnote.kr": {
+      "indexnow_key": "80b77d716539444ea1e50cf4464d92b4",
+      "indexnow_key_location": "https://www.topnote.kr/80b77d716539444ea1e50cf4464d92b4.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.topnote.kr/",
+      "gsc_property": "https://www.topnote.kr/",
+      "bing_property": "https://topnote.kr/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.topnote.kr/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:32:54.631250+00:00"
+    },
+    "tripmarvel.com": {
+      "indexnow_key": "5e2db9b439e2c84162543338daf7fd83f55e5894bd5e9a37",
+      "indexnow_key_location": "https://www.tripmarvel.com/5e2db9b439e2c84162543338daf7fd83f55e5894bd5e9a37.txt",
+      "analytics_reader": "mustbiz06",
+      "ga4_property": "494211832",
+      "search_property": "https://www.tripmarvel.com/",
+      "gsc_browser_account": "sj",
+      "gsc_access": {
+        "account": "sj",
+        "email": "sj@must.biz",
+        "permission": "FULL",
+        "property": "https://www.tripmarvel.com/",
+        "verifiedAt": "2026-10-13T17:08:51.258212+00:00",
+        "originalOwner": "mustbiz06",
+        "originalOwnerRetained": true
+      },
+      "gsc_api_verified_property": "https://www.tripmarvel.com/",
+      "gsc_api_verified_reader": "mustbiz06",
+      "gsc_api_verified_at": "2026-10-15T05:33:05.806186+00:00"
+    },
+    "woorinote.kr": {
+      "indexnow_key": "ef61e8fed80a10ac7d3917f7f49ca6e2",
+      "indexnow_key_location": "https://www.woorinote.kr/ef61e8fed80a10ac7d3917f7f49ca6e2.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.woorinote.kr/",
+      "gsc_property": "https://www.woorinote.kr/",
+      "bing_property": "https://woorinote.kr/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.woorinote.kr/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:33:14.114779+00:00"
+    },
+    "meganote.kr": {
+      "indexnow_key": "9280e006735560c6100553c6a2ffeb92",
+      "indexnow_key_location": "https://www.meganote.kr/9280e006735560c6100553c6a2ffeb92.txt",
+      "analytics_reader": "sj",
+      "ga4_property": "556127526",
+      "search_property": "https://www.meganote.kr/",
+      "gsc_property": "https://www.meganote.kr/",
+      "bing_property": "https://meganote.kr/",
+      "bing_property_verified": true,
+      "gsc_api_verified_property": "https://www.meganote.kr/",
+      "gsc_api_verified_reader": "sj",
+      "gsc_api_verified_at": "2026-10-15T05:31:56.697406+00:00"
+    },
+    "nolplace.com": {
+      "analytics_reader": "aaa10291028",
+      "ga4_property": "556141438",
+      "search_property": "https://www.nolplace.com/",
+      "gsc_api_verified_property": "https://www.nolplace.com/",
+      "gsc_api_verified_reader": "aaa10291028",
+      "gsc_api_verified_at": "2026-10-15T05:32:30.045423+00:00"
+    }
+  },
+  "gsc_accounts": {
+    "sj": {
+      "email": "sj@must.biz",
+      "cdp": 9226,
+      "sites": [
+        "must-pick.com",
+        "baronote.kr",
+        "daynote.kr",
+        "joynote.kr",
+        "justinfo.co.kr",
+        "maxnote.kr",
+        "meganote.kr",
+        "must-good.com",
+        "must-joy.com",
+        "smilenote.kr",
+        "soulnote.kr",
+        "topnote.kr",
+        "woorinote.kr",
+        "healthcox.com",
+        "tripmarvel.com"
+      ]
+    },
+    "mustbiz06": {
+      "email": "mustbiz06@gmail.com",
+      "cdp": 9270,
+      "expected_ip": "121.126.56.190",
+      "sites": [],
+      "retained_owner_sites": [
+        "healthcox.com",
+        "tripmarvel.com"
+      ]
+    },
+    "aaa10291028": {
+      "email": "aaa10291028@gmail.com",
+      "cdp": 9260,
+      "expected_ip": "121.126.56.190",
+      "sites": [
+        "nolplace.com"
+      ]
+    }
+  },
+  "analytics_readers": {
+    "sj": {
+      "file": "Y:/70_개발프로젝트/secrets/google/ts2-sj@indexing-431805.iam.gserviceaccount.com.json",
+      "email": "ts2-sj@indexing-431805.iam.gserviceaccount.com"
+    },
+    "mustbiz06": {
+      "file": "Y:/70_개발프로젝트/naver_deki_1/data/secure/mustbiz06-jarvis-cf-reader.json",
+      "email": "jarvis-cf-reader@fresh-rope-474911-j4.iam.gserviceaccount.com"
+    },
+    "aaa10291028": {
+      "file": "Y:/70_개발프로젝트/naver_deki_1/data/secure/aaa10291028-jarvis-cf-reader.json",
+      "email": "jarvis-cf-reader@gen-lang-client-0742794601.iam.gserviceaccount.com"
+    }
+  },
+  "naver_search": {
+    "account": "soultin",
+    "cdp": 9334,
+    "status": "ui_verified_manual_import",
+    "reason": "정상 계정 UI 확인 · 보고서 7개 수동 검증 · www 미등록 9개 · 자동 지속 UI 수집 미검증",
+    "loginAccount": "mustpickinfo"
+  },
+  "adsense_accounts": {
+    "sj": {
+      "email": "sj@must.biz",
+      "env_prefix": "SJ_GOOGLE_ADSENSE",
+      "sites": [
+        "must-pick.com",
+        "baronote.kr",
+        "daynote.kr",
+        "joynote.kr",
+        "justinfo.co.kr",
+        "maxnote.kr",
+        "meganote.kr",
+        "must-good.com",
+        "must-joy.com",
+        "smilenote.kr",
+        "soulnote.kr",
+        "topnote.kr",
+        "woorinote.kr",
+        "healthcox.com",
+        "tripmarvel.com"
+      ],
+      "site_status": {
+        "must-pick.com": "READY",
+        "baronote.kr": "READY",
+        "daynote.kr": "READY",
+        "joynote.kr": "READY",
+        "justinfo.co.kr": "READY",
+        "maxnote.kr": "READY",
+        "meganote.kr": "READY",
+        "must-good.com": "READY",
+        "must-joy.com": "READY",
+        "smilenote.kr": "READY",
+        "soulnote.kr": "READY",
+        "topnote.kr": "READY",
+        "woorinote.kr": "READY",
+        "healthcox.com": "GETTING_READY",
+        "tripmarvel.com": "GETTING_READY"
+      },
+      "registered_sites": [
+        "must-pick.com",
+        "baronote.kr",
+        "daynote.kr",
+        "joynote.kr",
+        "justinfo.co.kr",
+        "maxnote.kr",
+        "meganote.kr",
+        "must-good.com",
+        "must-joy.com",
+        "smilenote.kr",
+        "soulnote.kr",
+        "topnote.kr",
+        "woorinote.kr",
+        "healthcox.com",
+        "tripmarvel.com"
+      ],
+      "pending_sites": [
+        "healthcox.com",
+        "tripmarvel.com"
+      ],
+      "pending_reason": "헬스콕스·트립마블 SJ 심사 중 · 승인 전"
+    },
+    "aaa10291028": {
+      "email": "aaa10291028@gmail.com",
+      "env_prefix": "AAA10291028_GOOGLE_ADSENSE",
+      "sites": [
+        "nolplace.com"
+      ],
+      "relationship": "family",
+      "site_status": {
+        "nolplace.com": "registration_unverified"
+      }
+    }
+  },
+  "url_inspection": {
+    "browser_accounts": [
+      "sj"
+    ],
+    "ui_limit": 36,
+    "ui_budget_seconds": 420,
+    "refresh_hours": 24,
+    "fresh_hours": 26,
+    "mode": "read_only_owner_ui"
+  },
+  "bing_search": {
+    "account": "sj",
+    "api_key_file": "C:\\Users\\baro7\\.barolab\\credentials\\bing-sj-api-key.txt"
+  }
+}

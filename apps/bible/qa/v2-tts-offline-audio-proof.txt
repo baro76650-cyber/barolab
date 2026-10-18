@@ -1,0 +1,4 @@
+10-14 07:36:08:554 AudioHardening background playback would be muted for com.google.android.tts (10150), level: full
+  AudioPlaybackConfiguration piid:87 deviceIds:[2] type:android.media.AudioTrack u/pid:10150/2276 state:started attr:AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_SPEECH flags=0xA00 tags= bundle=null sessionId:121 mutedState:none  FormatInfo{isSpatialized=false, channelMask=0x1, sampleRate=24000}
+10-14 07:36:08:529 new player piid:87 uid/pid:10150/2276 package:com.google.android.tts type:android.media.AudioTrack attr:AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_SPEECH flags=0xA00 tags= bundle=null session:121
+	AudioAttributes: usage=USAGE_ASSISTANT content=CONTENT_TYPE_SPEECH flags=0x800 tags= bundle=null forVolume: true stream: STREAM_ASSISTANT(11)

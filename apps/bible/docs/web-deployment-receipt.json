@@ -1,0 +1,341 @@
+{
+  "project": "haru-malsseum",
+  "hosting": "Cloudflare Pages direct upload; static only",
+  "productionUrl": "https://haru-malsseum.pages.dev/",
+  "privacyUrl": "https://haru-malsseum.pages.dev/privacy",
+  "deploymentUrl": "https://96d037d3.haru-malsseum.pages.dev",
+  "publisherId": "pub-7642010403138987",
+  "package": "com.barolab.harubible",
+  "supportEmail": "baro76650@gmail.com",
+  "publicAppStatus": "v4 0.4.0-internal-preview available to registered internal testers 2026-10-14 19:13 KST; unreviewed; not public production; test ads only",
+  "existingPortfolioDomainsChanged": false,
+  "sdkPolicyStatus": "Google SDK data disclosure reviewed; actual app-store/UMP consent configuration separately verified",
+  "checks": [
+    {
+      "requestedUrl": "https://haru-malsseum.pages.dev/app-ads.txt",
+      "url": "https://haru-malsseum.pages.dev/app-ads.txt",
+      "status": 200,
+      "sha256": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T10:17:36.678842+00:00"
+    },
+    {
+      "requestedUrl": "https://haru-malsseum.pages.dev/",
+      "url": "https://haru-malsseum.pages.dev/",
+      "status": 200,
+      "sha256": "25c36b97b82770e0f421477d9a18a6f2adca5fb0c7dd32650ee4db34ee5c4944",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T10:17:39.219123+00:00"
+    },
+    {
+      "requestedUrl": "https://haru-malsseum.pages.dev/privacy",
+      "url": "https://haru-malsseum.pages.dev/privacy",
+      "status": 200,
+      "sha256": "54faf1c477dda1b0e6c669660342263b370390971377455cfd96394aa6c3beaf",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T10:17:39.717544+00:00"
+    },
+    {
+      "requestedUrl": "https://haru-malsseum.pages.dev/robots.txt",
+      "url": "https://haru-malsseum.pages.dev/robots.txt",
+      "status": 200,
+      "sha256": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T10:17:39.797412+00:00"
+    },
+    {
+      "requestedUrl": "https://haru-malsseum.pages.dev/style.css",
+      "url": "https://haru-malsseum.pages.dev/style.css",
+      "status": 200,
+      "sha256": "ab2dcff6c880dd516cb930f631b58054cef601580dd85069b05b1341bc624d9e",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T10:17:39.872386+00:00"
+    }
+  ],
+  "requestedPrivacyUrl": "https://haru-malsseum.pages.dev/privacy.html",
+  "deploymentId": "96d037d3-630d-4339-ae98-7acf2eafd1d0",
+  "deploymentEnvironment": "production",
+  "deploymentStage": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-10-14T08:12:20.269297Z",
+    "status": "success"
+  },
+  "sourceFiles": {
+    "app-ads.txt": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+    "index.html": "25c36b97b82770e0f421477d9a18a6f2adca5fb0c7dd32650ee4db34ee5c4944",
+    "privacy.html": "54faf1c477dda1b0e6c669660342263b370390971377455cfd96394aa6c3beaf",
+    "robots.txt": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+    "style.css": "ab2dcff6c880dd516cb930f631b58054cef601580dd85069b05b1341bc624d9e",
+    "_headers": "4f3e95b55d598ea7bb4a54afe2e7170a9005bdb4714b7123b5c676d08039edb5"
+  },
+  "previousDeployments": [
+    {
+      "deploymentId": "c6937bdd-ba85-4250-b931-69fdc64b20bf",
+      "deploymentUrl": "https://c6937bdd.haru-malsseum.pages.dev",
+      "deploymentStage": {
+        "name": "deploy",
+        "started_on": null,
+        "ended_on": "2026-10-14T06:02:20.728183Z",
+        "status": "success"
+      },
+      "checks": [
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/",
+          "url": "https://haru-malsseum.pages.dev/",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "sha256": "fdf5df2303622851ad78c999b711e78d032b253d292d9d56052cdcbb4359b9e9",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T06:03:51.433695+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/privacy.html",
+          "url": "https://haru-malsseum.pages.dev/privacy",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "sha256": "ca2f5f38967c141cf2984bd1e215fea6c83cb2707398165bd3f0b65b14dddcd8",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T06:03:51.831581+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/privacy/",
+          "url": "https://haru-malsseum.pages.dev/privacy",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "sha256": "ca2f5f38967c141cf2984bd1e215fea6c83cb2707398165bd3f0b65b14dddcd8",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T06:03:51.927567+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/app-ads.txt",
+          "url": "https://haru-malsseum.pages.dev/app-ads.txt",
+          "status": 200,
+          "contentType": "text/plain; charset=utf-8",
+          "sha256": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T06:03:52.425971+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/robots.txt",
+          "url": "https://haru-malsseum.pages.dev/robots.txt",
+          "status": 200,
+          "contentType": "text/plain; charset=utf-8",
+          "sha256": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T06:03:52.827074+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/style.css",
+          "url": "https://haru-malsseum.pages.dev/style.css",
+          "status": 200,
+          "contentType": "text/css; charset=utf-8",
+          "sha256": "ab2dcff6c880dd516cb930f631b58054cef601580dd85069b05b1341bc624d9e",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T06:03:53.348628+00:00"
+        }
+      ],
+      "sourceFiles": {
+        "app-ads.txt": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+        "index.html": "fdf5df2303622851ad78c999b711e78d032b253d292d9d56052cdcbb4359b9e9",
+        "privacy.html": "ca2f5f38967c141cf2984bd1e215fea6c83cb2707398165bd3f0b65b14dddcd8",
+        "robots.txt": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+        "style.css": "ab2dcff6c880dd516cb930f631b58054cef601580dd85069b05b1341bc624d9e",
+        "_headers": "4f3e95b55d598ea7bb4a54afe2e7170a9005bdb4714b7123b5c676d08039edb5"
+      }
+    },
+    {
+      "deploymentId": "11b45c14-d907-46ee-bf17-ebbb9a66f7bf",
+      "deploymentUrl": "https://11b45c14.haru-malsseum.pages.dev",
+      "deploymentStage": {
+        "name": "deploy",
+        "started_on": null,
+        "ended_on": "2026-10-14T06:50:18.169846Z",
+        "status": "success"
+      },
+      "checks": [
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/",
+          "url": "https://haru-malsseum.pages.dev/",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "sha256": "451c13560e867ae0a82ec2fa4c6e973bf8c8400904aff1815fdb8f3f113eab00",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T06:51:20.038023+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+          "url": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "sha256": "6ed6f89bde2157e0d427c73e4dc053e61397f571e170e0a856c43f301e14f2ec",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T06:51:20.579155+00:00",
+          "deletionAnchorPresent": true,
+          "clearRequestSteps": 4,
+          "mailSubjectVerified": true,
+          "contactAddressVerified": true
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/app-ads.txt",
+          "url": "https://haru-malsseum.pages.dev/app-ads.txt",
+          "status": 200,
+          "contentType": "text/plain; charset=utf-8",
+          "sha256": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T06:51:20.680768+00:00"
+        }
+      ],
+      "sourceFiles": {
+        "app-ads.txt": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+        "index.html": "451c13560e867ae0a82ec2fa4c6e973bf8c8400904aff1815fdb8f3f113eab00",
+        "privacy.html": "6ed6f89bde2157e0d427c73e4dc053e61397f571e170e0a856c43f301e14f2ec",
+        "robots.txt": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+        "style.css": "ab2dcff6c880dd516cb930f631b58054cef601580dd85069b05b1341bc624d9e",
+        "_headers": "4f3e95b55d598ea7bb4a54afe2e7170a9005bdb4714b7123b5c676d08039edb5"
+      }
+    },
+    {
+      "deploymentId": "1610b8e0-5d07-49f9-a060-fa2ed034513e",
+      "deploymentUrl": "https://1610b8e0.haru-malsseum.pages.dev",
+      "deploymentStage": {
+        "name": "deploy",
+        "started_on": null,
+        "ended_on": "2026-10-14T07:55:18.075451Z",
+        "status": "success"
+      },
+      "checks": [
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/",
+          "url": "https://haru-malsseum.pages.dev/",
+          "status": 200,
+          "sha256": "e3abc4649e8319a79cb95c389c7766df2082e3f7929f053027cf5f0fd1a75c21",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T07:55:35.317528+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+          "url": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+          "status": 200,
+          "sha256": "440f5ee63cb96a76ddcf435fa1f27d21151df7287befcb024cf89ac4154b85c4",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T07:55:35.882670+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/app-ads.txt",
+          "url": "https://haru-malsseum.pages.dev/app-ads.txt",
+          "status": 200,
+          "sha256": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T07:55:35.953588+00:00"
+        }
+      ],
+      "sourceFiles": {
+        "app-ads.txt": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+        "index.html": "e3abc4649e8319a79cb95c389c7766df2082e3f7929f053027cf5f0fd1a75c21",
+        "privacy.html": "440f5ee63cb96a76ddcf435fa1f27d21151df7287befcb024cf89ac4154b85c4",
+        "robots.txt": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+        "style.css": "ab2dcff6c880dd516cb930f631b58054cef601580dd85069b05b1341bc624d9e",
+        "_headers": "4f3e95b55d598ea7bb4a54afe2e7170a9005bdb4714b7123b5c676d08039edb5"
+      }
+    },
+    {
+      "deploymentId": "365ef329-e2ed-4daf-99e9-12cc89174acf",
+      "deploymentUrl": "https://365ef329.haru-malsseum.pages.dev",
+      "deploymentStage": {
+        "name": "deploy",
+        "started_on": null,
+        "ended_on": "2026-10-14T08:11:22.089236Z",
+        "status": "success"
+      },
+      "checks": [
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/",
+          "url": "https://haru-malsseum.pages.dev/",
+          "status": 200,
+          "sha256": "1ba8f2e8a66bf262fe8ea114fb5bd9b8368e693c1ef88c67d66c130febaaa902",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:11:22.350863+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+          "url": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+          "status": 200,
+          "sha256": "440f5ee63cb96a76ddcf435fa1f27d21151df7287befcb024cf89ac4154b85c4",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:11:22.420947+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/app-ads.txt",
+          "url": "https://haru-malsseum.pages.dev/app-ads.txt",
+          "status": 200,
+          "sha256": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:11:22.506415+00:00"
+        }
+      ],
+      "sourceFiles": {
+        "app-ads.txt": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+        "index.html": "1ba8f2e8a66bf262fe8ea114fb5bd9b8368e693c1ef88c67d66c130febaaa902",
+        "privacy.html": "440f5ee63cb96a76ddcf435fa1f27d21151df7287befcb024cf89ac4154b85c4",
+        "robots.txt": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+        "style.css": "ab2dcff6c880dd516cb930f631b58054cef601580dd85069b05b1341bc624d9e",
+        "_headers": "4f3e95b55d598ea7bb4a54afe2e7170a9005bdb4714b7123b5c676d08039edb5"
+      }
+    },
+    {
+      "deploymentId": "8b9d5bfa-7cb2-47b1-8030-f230c207447c",
+      "deploymentUrl": "https://8b9d5bfa.haru-malsseum.pages.dev",
+      "checks": [
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/",
+          "url": "https://haru-malsseum.pages.dev/",
+          "status": 200,
+          "sha256": "1ba8f2e8a66bf262fe8ea114fb5bd9b8368e693c1ef88c67d66c130febaaa902",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:12:19.923952+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+          "url": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+          "status": 200,
+          "sha256": "e70615f0eb7c0e9aba17d4ccec72c2a37fb2222e5102f3a066fe1f7a59d7b0ac",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:12:20.378096+00:00"
+        },
+        {
+          "requestedUrl": "https://haru-malsseum.pages.dev/app-ads.txt",
+          "url": "https://haru-malsseum.pages.dev/app-ads.txt",
+          "status": 200,
+          "sha256": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:12:20.461039+00:00"
+        }
+      ],
+      "sourceFiles": {
+        "app-ads.txt": "604cfe1c1b872fbe51f9ac492d039ff53b9d7add274258e4f2eee4d87514cbe0",
+        "index.html": "1ba8f2e8a66bf262fe8ea114fb5bd9b8368e693c1ef88c67d66c130febaaa902",
+        "privacy.html": "e70615f0eb7c0e9aba17d4ccec72c2a37fb2222e5102f3a066fe1f7a59d7b0ac",
+        "robots.txt": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+        "style.css": "ab2dcff6c880dd516cb930f631b58054cef601580dd85069b05b1341bc624d9e",
+        "_headers": "4f3e95b55d598ea7bb4a54afe2e7170a9005bdb4714b7123b5c676d08039edb5"
+      },
+      "publicAppStatus": "v3 0.3.0-internal-preview available to internal testers at 2026-10-14 17:10 KST; unreviewed; not production; test ads only"
+    }
+  ],
+  "deletionRequestUrl": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+  "deletionPolicyScope": "Visible email request steps and local/operator-mail/third-party deletion and retention distinctions; no invented fixed deadline or automatic deletion",
+  "stage": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-10-14T10:17:37.322117Z",
+    "status": "success"
+  },
+  "browserVerification": {
+    "checkedAt": "2026-10-14T10:18:57.508630+00:00",
+    "browser": "Chrome",
+    "scope": "greeting current features/internal-only join text + screenshot; Bible v4/30-passage scope/internal-only join text via accessibility tree",
+    "passed": true,
+    "newAppScreenshotsAddedToWebsite": false
+  }
+}

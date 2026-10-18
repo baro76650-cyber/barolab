@@ -1,0 +1,43 @@
+{
+  "schema": "naver-kin-automation-v2",
+  "enabled": true,
+  "continuousMode": true,
+  "timezone": "Asia/Seoul",
+  "startDate": "2026-10-15",
+  "endDate": "2026-10-21",
+  "measurementEndDate": "2026-10-24",
+  "model": "gpt-6.1-sol",
+  "provider": "authenticated-codex-subscription",
+  "mode": "alternating_interval",
+  "intervalMinutes": 20,
+  "intervalJitterMinutes": [18, 22],
+  "pollMinutes": 5,
+  "operationDailyCap": 20,
+  "operationAccountDailyCap": 10,
+  "globalDailyCap": 20,
+  "accountDailyCap": 10,
+  "articleCatalog": [
+    {
+      "url": "https://www.must-good.com/national-museum-korea-reservation-backpack-photo-guide",
+      "title": "국립중앙박물관 예약 물품보관함 가방 보관 및 사진 촬영 규정 총정리",
+      "domain": "must-good.com",
+      "keywords": [
+        "국립중앙박물관 셀카봉",
+        "국립중앙박물관 가방 보관",
+        "국립중앙박물관 사진 촬영"
+      ]
+    },
+    {
+      "url": "https://www.must-good.com/washing-machine-drain-filter-cleaning",
+      "title": "세탁기 배수필터 청소 방법 및 잔수 제거 점검 순서 가이드",
+      "domain": "must-good.com",
+      "keywords": [
+        "세탁기 배수필터 청소 방법",
+        "세탁기 잔수 제거"
+      ]
+    }
+  ],
+  "createdAt": "2026-10-15T12:12:41.529315+00:00",
+  "taskName": "BaroLab-Kin-Seven-Day-Pilot",
+  "registeredAt": "2026-10-17T12:40:00+00:00"
+}

@@ -1,0 +1,9 @@
+<resources>
+    <style name="LensTheme" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#FFCB60</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowBackground">#101C30</item>
+        <item name="android:colorControlHighlight">#445E7699</item>
+    </style>
+</resources>

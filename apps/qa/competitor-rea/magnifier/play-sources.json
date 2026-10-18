@@ -1,0 +1,38 @@
+[
+  {
+    "appId": "com.rvappstudios.magnifyingglass",
+    "url": "https://play.google.com/store/apps/details?id=com.rvappstudios.magnifyingglass&hl=en",
+    "checkedAt": "2026-10-14T09:20:20.687152+00:00",
+    "screenshots": [
+      {
+        "url": "https://play-lh.googleusercontent.com/wRkqkLUbFcCUS2C4Z7iJN1jiwOnhPqQGDz15YZZrwH4hYsQvzf9cI079oGkDcq2-dSVjfGKiv4vLl5pqjJNz=w526-h296",
+        "file": "daily_apps/qa/competitor-rea/magnifier/rv-play-screenshot-1.webp",
+        "sha256": "0a728b8d78252f2dfd30fd2d2690daffd37fb4269a01b6e1a5ced79158cd54c2"
+      },
+      {
+        "url": "https://play-lh.googleusercontent.com/NQE2qzPmV-gd6j1_vUIycufO0DsmYVozHu1UAmnz46QCJXEOXn4Ct7lyD73bik9loPL3vWV10rJ1Aq4BRopnWps=w526-h296",
+        "file": "daily_apps/qa/competitor-rea/magnifier/rv-play-screenshot-2.webp",
+        "sha256": "8737ee0038eeef4cf6c0dd049c04c14015aaa828896c74a936d16759838fc552"
+      }
+    ],
+    "scope": "Official Play listing artwork, not executed UI. Reviews sampled from official public listing; not representative survey."
+  },
+  {
+    "appId": "com.sunfire.magnifyingglass",
+    "url": "https://play.google.com/store/apps/details?id=com.sunfire.magnifyingglass&hl=en",
+    "checkedAt": "2026-10-14T09:20:22.520610+00:00",
+    "screenshots": [
+      {
+        "url": "https://play-lh.googleusercontent.com/DWMDieVsBEmKvzHayOBnXha7mD8BMT-wkxa4CAD00TWQq9PzCMI0DlmIlOz3275YtCJxwpYQFAy01-Oqcmahyw=w526-h296",
+        "file": "daily_apps/qa/competitor-rea/magnifier/sunfire-play-screenshot-1.webp",
+        "sha256": "1c19e72099b4c45a7080946e5a225e41e881586e97bc203b046f37ceb27bd129"
+      },
+      {
+        "url": "https://play-lh.googleusercontent.com/5nVSXPcikZmuoa_h8rNhlj2QzeX9Gi0VE16G7Ka87FzdNX8kGBDfa61YL8nUs9FDElUINmsVywF2gV3bT6UM9w=w526-h296",
+        "file": "daily_apps/qa/competitor-rea/magnifier/sunfire-play-screenshot-2.webp",
+        "sha256": "5d2854998d7f50549d4ed2f942d4c420ac37dedee7fd6e6edadf2911861a7287"
+      }
+    ],
+    "scope": "Official Play listing artwork, not executed UI. Reviews sampled from official public listing; not representative survey."
+  }
+]

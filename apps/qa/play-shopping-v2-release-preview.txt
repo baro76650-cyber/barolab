@@ -1,0 +1,171 @@
+Google Play Console 로드 중
+notifications_unread
+읽지 않은 알림
+말로 장보기 - 음성 장보기 메모
+keyboard_backspace
+모든 앱
+dashboard
+대시보드
+bar_chart
+통계
+overview
+게시 개요
+shield
+Google Play로 보호됨
+rocket_launch
+테스트 및 출시
+최신 버전 및 번들
+프로덕션
+테스트
+expand_less
+공개 테스트
+비공개 테스트
+내부 테스트
+사전 출시 보고서
+expand_more
+내부 앱 공유
+사전 등록
+앱 무결성
+고급 설정
+vital_signs
+모니터링 및 개선
+finance_mode
+사용자 늘리기
+sell
+Play를 통한 수익 창출
+내부 테스트 버전 만들기
+warning
+버전에 문제가 있습니다.
+check
+새 버전 출시하기
+2
+미리보기 및 확인
+임시 출시 삭제
+오류, 경고 및 메시지
+warning
+경고 1개
+간략히
+expand_less
+버전 코드 2 메시지 1개
+warning
+경고
+
+이 App Bundle 유형과 연결된 가독화 파일이 없습니다. 난독화된 코드(R8/proguard)를 사용하는 경우 가독화 파일을 업로드하면 비정상 종료 및 ANR을 더 쉽게 분석하고 디버그할 수 있습니다. R8/proguard를 사용하면 앱 크기를 줄이는 데 도움이 됩니다. 자세히 알아보기
+
+지원 기기 변경사항
+지원 기기가 변경된 이유는 매니페스트가 변경되었거나 App Bundle이 누락되었기 때문일 수 있습니다. 기기 카탈로그에서 제외된 기기는 여기에 표시되지 않습니다.
+폼 팩터
+마지막 출시에서 지원하는 기기 수
+help_outline
+더 이상 지원되지 않는 기기
+help_outline
+새롭게 지원되는 기기
+help_outline
+이 출시에서 지원하는 총 기기 수
+help_outline
+전화
+11,338
+0
+0
+11,338
+태블릿
+6,444
+0
+0
+6,444
+TV
+5
+0
+0
+5
+웨어러블
+0
+0
+0
+0
+차량
+27
+0
+0
+27
+Chromebook
+77
+0
+0
+77
+Android XR
+1
+0
+0
+1
+출시 버전 제공
+신규 설치 크기
+5.75MB
+arrow_right_alt
+3.92KB
+(이전 출시 버전 대비)
+다운로드 시간
+3초
+0초
+(이전 출시 버전 대비)
+업데이트 크기
+5.66MB
+새 App Bundle
+파일 형식
+버전
+API 수준
+타겟 SDK
+화면 레이아웃
+ABI
+필수 기능
+App bundle
+info
+고급
+2 (0.2.0-internal-preview)
+26 이상
+36
+4
+전체
+2
+arrow_right_alt
+이전 버전
+포함됨
+slow_motion_video
+
+이번 버전에 포함되는 이전 버전의 App Bundle이 없습니다
+
+포함되지 않음
+이전 버전의 다음과 같은 아티팩트 버전이 이번 버전에 포함되지 않습니다.
+파일 형식
+버전
+API 수준
+타겟 SDK
+화면 레이아웃
+ABI
+필수 기능
+App bundle
+info
+고급
+1 (0.1.0-internal-preview)
+26 이상
+36
+4
+전체
+2
+arrow_right_alt
+출시 노트
+기본 언어 - ko-KR
+장볼 것과 담은 것을 구분하고 체크 후 목록 위치를 유지합니다.
+입력 내용을 확인한 뒤 추가하는 흐름과 중복 추가 방지를 개선했습니다.
+이전 목록에서 필요한 품목만 골라 다시 사용할 수 있습니다.
+내부 테스트 버전이며 테스트 광고가 표시됩니다.
+변경사항이 Google Play에 즉시 게시됩니다.
+뒤로
+저장 및 출시
+제품 업데이트
+상태 대시보드
+도움말
+© 2026 Google
+개인 정보 보호
+개발자 배포 계약
+서비스 약관

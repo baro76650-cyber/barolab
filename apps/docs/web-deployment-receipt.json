@@ -1,0 +1,415 @@
+{
+  "project": "barolab-daily-apps",
+  "productionUrl": "https://barolab-daily-apps.pages.dev/",
+  "deploymentId": "4c9ee0da-5a51-4ccb-9b3f-1fca73ff8396",
+  "deploymentUrl": "https://4c9ee0da.barolab-daily-apps.pages.dev",
+  "stage": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-10-14T11:10:52.126954Z",
+    "status": "success"
+  },
+  "supportEmail": "baro76650@gmail.com",
+  "publicAppStatus": "v2 0.2.0-internal-preview available to registered internal testers 2026-10-14 19:10/19:15 KST; unreviewed; not public production; test ads only",
+  "existingBibleSiteChanged": false,
+  "existingPortfolioDomainsChanged": false,
+  "checks": [
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/app-ads.txt",
+      "url": "https://barolab-daily-apps.pages.dev/app-ads.txt",
+      "status": 200,
+      "sha256": "51f11e9daf196f9e6c5cec56aeace157ca6566436e0d5449b64af615a2b1fe64",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:51.953057+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/",
+      "url": "https://barolab-daily-apps.pages.dev/",
+      "status": 200,
+      "sha256": "264811422585d03b8e51a0e461a7acb03c43d7fc37e2d0143b3e819084a79069",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:52.044819+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/robots.txt",
+      "url": "https://barolab-daily-apps.pages.dev/robots.txt",
+      "status": 200,
+      "sha256": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:52.120897+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/style.css",
+      "url": "https://barolab-daily-apps.pages.dev/style.css",
+      "status": 200,
+      "sha256": "24a86222e8d6dfd7c405db48d4bf4c58f8a3d9e3cfed8dd04fa4e5bbc46ede83",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:52.285022+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/greeting/",
+      "url": "https://barolab-daily-apps.pages.dev/greeting/",
+      "status": 200,
+      "sha256": "c30b9e1cde6dc9363175d44df03e4d1183d4023d2ac164692fbe96c1f0e9eef8",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:52.378197+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/greeting/privacy",
+      "url": "https://barolab-daily-apps.pages.dev/greeting/privacy",
+      "status": 200,
+      "sha256": "9784180a015c26c3d64142eb9c5e444b2d8b3ebab11899b1184eed6a438016dc",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:52.446242+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/magnifier/",
+      "url": "https://barolab-daily-apps.pages.dev/magnifier/",
+      "status": 200,
+      "sha256": "86fb7917262c9832fa837f2e221c0c49ddf150112d571474cb0e5cae6a3f59fb",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:52.515914+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/magnifier/privacy",
+      "url": "https://barolab-daily-apps.pages.dev/magnifier/privacy",
+      "status": 200,
+      "sha256": "9f246e764115817be29680e452ce4573f3bbe15b0ff4815f65121aabcc5740b8",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:52.584835+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/shopping/",
+      "url": "https://barolab-daily-apps.pages.dev/shopping/",
+      "status": 200,
+      "sha256": "1e3a190af0efb4d9293d00f6cf176b3f3e5a5d52cee89a4a596668214066c13f",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:52.665259+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/shopping/privacy",
+      "url": "https://barolab-daily-apps.pages.dev/shopping/privacy",
+      "status": 200,
+      "sha256": "a243bbd4dd93ee5ff571e8f3ea645cf8c581a0afa0a3e77c80000b1eee0eeaff",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:52.751759+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/testers/",
+      "url": "https://barolab-daily-apps.pages.dev/testers/",
+      "status": 200,
+      "sha256": "31c102dcc139642bf0d8baff9ac21f48309e9369d71321199c7435473ba5dcf8",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:55.381621+00:00"
+    },
+    {
+      "requestedUrl": "https://barolab-daily-apps.pages.dev/testers/testers.css",
+      "url": "https://barolab-daily-apps.pages.dev/testers/testers.css",
+      "status": 200,
+      "sha256": "e8f0d135e3978575f5c90d5ecc02d2ba07fd79ce511a6b7de5a1c0b856cfcc97",
+      "matchesLocal": true,
+      "checkedAt": "2026-10-14T11:10:55.863086+00:00"
+    }
+  ],
+  "sourceFiles": {
+    "app-ads.txt": "51f11e9daf196f9e6c5cec56aeace157ca6566436e0d5449b64af615a2b1fe64",
+    "index.html": "264811422585d03b8e51a0e461a7acb03c43d7fc37e2d0143b3e819084a79069",
+    "robots.txt": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+    "style.css": "24a86222e8d6dfd7c405db48d4bf4c58f8a3d9e3cfed8dd04fa4e5bbc46ede83",
+    "_headers": "a3d870bfee80e2ab306742b57bc363f5b6f26ad19b66372fde40f79ebdea9267",
+    "greeting/index.html": "c30b9e1cde6dc9363175d44df03e4d1183d4023d2ac164692fbe96c1f0e9eef8",
+    "greeting/privacy.html": "9784180a015c26c3d64142eb9c5e444b2d8b3ebab11899b1184eed6a438016dc",
+    "magnifier/index.html": "86fb7917262c9832fa837f2e221c0c49ddf150112d571474cb0e5cae6a3f59fb",
+    "magnifier/privacy.html": "9f246e764115817be29680e452ce4573f3bbe15b0ff4815f65121aabcc5740b8",
+    "shopping/index.html": "1e3a190af0efb4d9293d00f6cf176b3f3e5a5d52cee89a4a596668214066c13f",
+    "shopping/privacy.html": "a243bbd4dd93ee5ff571e8f3ea645cf8c581a0afa0a3e77c80000b1eee0eeaff",
+    "testers/index.html": "31c102dcc139642bf0d8baff9ac21f48309e9369d71321199c7435473ba5dcf8",
+    "testers/testers.css": "e8f0d135e3978575f5c90d5ecc02d2ba07fd79ce511a6b7de5a1c0b856cfcc97"
+  },
+  "previousDeployments": [
+    {
+      "deploymentId": "82d87371-4404-4081-bfd8-c335ea2a0b78",
+      "deploymentUrl": "https://82d87371.barolab-daily-apps.pages.dev",
+      "checks": [
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/",
+          "url": "https://barolab-daily-apps.pages.dev/",
+          "status": 200,
+          "sha256": "9295b5491d43918c5076eefe451ae5f1ad89b5a92176291147cbc833ed19d1e0",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:33:57.791967+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/greeting/",
+          "url": "https://barolab-daily-apps.pages.dev/greeting/",
+          "status": 200,
+          "sha256": "822a73b5774be42915bedf2ef48406d7db2c03c1bd8b7871068b32cf5fb9498a",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:34:00.366231+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/greeting/privacy",
+          "url": "https://barolab-daily-apps.pages.dev/greeting/privacy",
+          "status": 200,
+          "sha256": "4606fa654fc9c34f7ac2242e69910ab96ddd4cd16b9cf5b7a17ab56f8078b2d2",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:34:00.800634+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/magnifier/privacy",
+          "url": "https://barolab-daily-apps.pages.dev/magnifier/privacy",
+          "status": 200,
+          "sha256": "33407a45d1aeb11be4cb4eb2467d669613cd25d07414e2ec5d541df348532324",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:34:01.318532+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/shopping/privacy",
+          "url": "https://barolab-daily-apps.pages.dev/shopping/privacy",
+          "status": 200,
+          "sha256": "65a7372713909481ae2dcaee8e48dbc5c7f8886ff7adab4fafb7e4c957d938a0",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:34:02.086480+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/app-ads.txt",
+          "url": "https://barolab-daily-apps.pages.dev/app-ads.txt",
+          "status": 200,
+          "sha256": "51f11e9daf196f9e6c5cec56aeace157ca6566436e0d5449b64af615a2b1fe64",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T08:34:02.538347+00:00"
+        }
+      ],
+      "sourceFiles": {
+        "app-ads.txt": "51f11e9daf196f9e6c5cec56aeace157ca6566436e0d5449b64af615a2b1fe64",
+        "index.html": "9295b5491d43918c5076eefe451ae5f1ad89b5a92176291147cbc833ed19d1e0",
+        "robots.txt": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+        "style.css": "24a86222e8d6dfd7c405db48d4bf4c58f8a3d9e3cfed8dd04fa4e5bbc46ede83",
+        "_headers": "a3d870bfee80e2ab306742b57bc363f5b6f26ad19b66372fde40f79ebdea9267",
+        "greeting/index.html": "822a73b5774be42915bedf2ef48406d7db2c03c1bd8b7871068b32cf5fb9498a",
+        "greeting/privacy.html": "4606fa654fc9c34f7ac2242e69910ab96ddd4cd16b9cf5b7a17ab56f8078b2d2",
+        "magnifier/index.html": "f2360706a1424e1d4726706ce7db1ba10e3d858d68d26cc9f349c5e64b1bb123",
+        "magnifier/privacy.html": "33407a45d1aeb11be4cb4eb2467d669613cd25d07414e2ec5d541df348532324",
+        "shopping/index.html": "fa18256237db49e30c901d0212fa9f91d30291f235489ff40e65f4d9956d64c9",
+        "shopping/privacy.html": "65a7372713909481ae2dcaee8e48dbc5c7f8886ff7adab4fafb7e4c957d938a0"
+      },
+      "publicAppStatus": "development/internal testing preparation; no public installation links; Google test ads only"
+    },
+    {
+      "deploymentId": "1bb2ce96-6604-4a0d-a10c-b31065326585",
+      "deploymentUrl": "https://1bb2ce96.barolab-daily-apps.pages.dev",
+      "checks": [
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/app-ads.txt",
+          "url": "https://barolab-daily-apps.pages.dev/app-ads.txt",
+          "status": 200,
+          "sha256": "51f11e9daf196f9e6c5cec56aeace157ca6566436e0d5449b64af615a2b1fe64",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T10:17:20.895613+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/",
+          "url": "https://barolab-daily-apps.pages.dev/",
+          "status": 200,
+          "sha256": "22c40b1020f705791087dfb069264abde908fc7548b032943683ad1aee37b2e0",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T10:17:25.793061+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/robots.txt",
+          "url": "https://barolab-daily-apps.pages.dev/robots.txt",
+          "status": 200,
+          "sha256": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T10:17:25.957560+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/style.css",
+          "url": "https://barolab-daily-apps.pages.dev/style.css",
+          "status": 200,
+          "sha256": "24a86222e8d6dfd7c405db48d4bf4c58f8a3d9e3cfed8dd04fa4e5bbc46ede83",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T10:17:26.372844+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/greeting/",
+          "url": "https://barolab-daily-apps.pages.dev/greeting/",
+          "status": 200,
+          "sha256": "c30b9e1cde6dc9363175d44df03e4d1183d4023d2ac164692fbe96c1f0e9eef8",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T10:17:26.827476+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/greeting/privacy",
+          "url": "https://barolab-daily-apps.pages.dev/greeting/privacy",
+          "status": 200,
+          "sha256": "9784180a015c26c3d64142eb9c5e444b2d8b3ebab11899b1184eed6a438016dc",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T10:17:27.309232+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/magnifier/",
+          "url": "https://barolab-daily-apps.pages.dev/magnifier/",
+          "status": 200,
+          "sha256": "86fb7917262c9832fa837f2e221c0c49ddf150112d571474cb0e5cae6a3f59fb",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T10:17:27.813011+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/magnifier/privacy",
+          "url": "https://barolab-daily-apps.pages.dev/magnifier/privacy",
+          "status": 200,
+          "sha256": "9f246e764115817be29680e452ce4573f3bbe15b0ff4815f65121aabcc5740b8",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T10:17:28.330136+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/shopping/",
+          "url": "https://barolab-daily-apps.pages.dev/shopping/",
+          "status": 200,
+          "sha256": "1e3a190af0efb4d9293d00f6cf176b3f3e5a5d52cee89a4a596668214066c13f",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T10:17:28.864657+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/shopping/privacy",
+          "url": "https://barolab-daily-apps.pages.dev/shopping/privacy",
+          "status": 200,
+          "sha256": "a243bbd4dd93ee5ff571e8f3ea645cf8c581a0afa0a3e77c80000b1eee0eeaff",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T10:17:29.304193+00:00"
+        }
+      ],
+      "sourceFiles": {
+        "app-ads.txt": "51f11e9daf196f9e6c5cec56aeace157ca6566436e0d5449b64af615a2b1fe64",
+        "index.html": "22c40b1020f705791087dfb069264abde908fc7548b032943683ad1aee37b2e0",
+        "robots.txt": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+        "style.css": "24a86222e8d6dfd7c405db48d4bf4c58f8a3d9e3cfed8dd04fa4e5bbc46ede83",
+        "_headers": "a3d870bfee80e2ab306742b57bc363f5b6f26ad19b66372fde40f79ebdea9267",
+        "greeting/index.html": "c30b9e1cde6dc9363175d44df03e4d1183d4023d2ac164692fbe96c1f0e9eef8",
+        "greeting/privacy.html": "9784180a015c26c3d64142eb9c5e444b2d8b3ebab11899b1184eed6a438016dc",
+        "magnifier/index.html": "86fb7917262c9832fa837f2e221c0c49ddf150112d571474cb0e5cae6a3f59fb",
+        "magnifier/privacy.html": "9f246e764115817be29680e452ce4573f3bbe15b0ff4815f65121aabcc5740b8",
+        "shopping/index.html": "1e3a190af0efb4d9293d00f6cf176b3f3e5a5d52cee89a4a596668214066c13f",
+        "shopping/privacy.html": "a243bbd4dd93ee5ff571e8f3ea645cf8c581a0afa0a3e77c80000b1eee0eeaff"
+      },
+      "publicAppStatus": "v2 0.2.0-internal-preview available to registered internal testers 2026-10-14 19:10/19:15 KST; unreviewed; not public production; test ads only"
+    },
+    {
+      "deploymentId": "c83e7500-ce67-4e71-a3a2-c45731d911d1",
+      "deploymentUrl": "https://c83e7500.barolab-daily-apps.pages.dev",
+      "checks": [
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/app-ads.txt",
+          "url": "https://barolab-daily-apps.pages.dev/app-ads.txt",
+          "status": 200,
+          "sha256": "51f11e9daf196f9e6c5cec56aeace157ca6566436e0d5449b64af615a2b1fe64",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:13.870335+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/",
+          "url": "https://barolab-daily-apps.pages.dev/",
+          "status": 200,
+          "sha256": "264811422585d03b8e51a0e461a7acb03c43d7fc37e2d0143b3e819084a79069",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:18.623862+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/robots.txt",
+          "url": "https://barolab-daily-apps.pages.dev/robots.txt",
+          "status": 200,
+          "sha256": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:18.724203+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/style.css",
+          "url": "https://barolab-daily-apps.pages.dev/style.css",
+          "status": 200,
+          "sha256": "24a86222e8d6dfd7c405db48d4bf4c58f8a3d9e3cfed8dd04fa4e5bbc46ede83",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:18.799705+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/greeting/",
+          "url": "https://barolab-daily-apps.pages.dev/greeting/",
+          "status": 200,
+          "sha256": "c30b9e1cde6dc9363175d44df03e4d1183d4023d2ac164692fbe96c1f0e9eef8",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:18.912389+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/greeting/privacy",
+          "url": "https://barolab-daily-apps.pages.dev/greeting/privacy",
+          "status": 200,
+          "sha256": "9784180a015c26c3d64142eb9c5e444b2d8b3ebab11899b1184eed6a438016dc",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:19.020882+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/magnifier/",
+          "url": "https://barolab-daily-apps.pages.dev/magnifier/",
+          "status": 200,
+          "sha256": "86fb7917262c9832fa837f2e221c0c49ddf150112d571474cb0e5cae6a3f59fb",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:19.112802+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/magnifier/privacy",
+          "url": "https://barolab-daily-apps.pages.dev/magnifier/privacy",
+          "status": 200,
+          "sha256": "9f246e764115817be29680e452ce4573f3bbe15b0ff4815f65121aabcc5740b8",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:19.233612+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/shopping/",
+          "url": "https://barolab-daily-apps.pages.dev/shopping/",
+          "status": 200,
+          "sha256": "1e3a190af0efb4d9293d00f6cf176b3f3e5a5d52cee89a4a596668214066c13f",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:19.315544+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/shopping/privacy",
+          "url": "https://barolab-daily-apps.pages.dev/shopping/privacy",
+          "status": 200,
+          "sha256": "a243bbd4dd93ee5ff571e8f3ea645cf8c581a0afa0a3e77c80000b1eee0eeaff",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:19.408473+00:00"
+        },
+        {
+          "requestedUrl": "https://barolab-daily-apps.pages.dev/testers/",
+          "url": "https://barolab-daily-apps.pages.dev/testers/",
+          "status": 200,
+          "sha256": "d7d39956883a0370372cfff62f00140aecbd6a7fd2c22719b8a939f6a85b02dc",
+          "matchesLocal": true,
+          "checkedAt": "2026-10-14T11:10:19.911056+00:00"
+        }
+      ],
+      "sourceFiles": {
+        "app-ads.txt": "51f11e9daf196f9e6c5cec56aeace157ca6566436e0d5449b64af615a2b1fe64",
+        "index.html": "264811422585d03b8e51a0e461a7acb03c43d7fc37e2d0143b3e819084a79069",
+        "robots.txt": "1cbdbc6504be7abe1267d01d7f565bfcfe5851ba3f6a3754d1d61c8f8a2c6aa3",
+        "style.css": "24a86222e8d6dfd7c405db48d4bf4c58f8a3d9e3cfed8dd04fa4e5bbc46ede83",
+        "_headers": "a3d870bfee80e2ab306742b57bc363f5b6f26ad19b66372fde40f79ebdea9267",
+        "greeting/index.html": "c30b9e1cde6dc9363175d44df03e4d1183d4023d2ac164692fbe96c1f0e9eef8",
+        "greeting/privacy.html": "9784180a015c26c3d64142eb9c5e444b2d8b3ebab11899b1184eed6a438016dc",
+        "magnifier/index.html": "86fb7917262c9832fa837f2e221c0c49ddf150112d571474cb0e5cae6a3f59fb",
+        "magnifier/privacy.html": "9f246e764115817be29680e452ce4573f3bbe15b0ff4815f65121aabcc5740b8",
+        "shopping/index.html": "1e3a190af0efb4d9293d00f6cf176b3f3e5a5d52cee89a4a596668214066c13f",
+        "shopping/privacy.html": "a243bbd4dd93ee5ff571e8f3ea645cf8c581a0afa0a3e77c80000b1eee0eeaff",
+        "testers/index.html": "d7d39956883a0370372cfff62f00140aecbd6a7fd2c22719b8a939f6a85b02dc"
+      },
+      "publicAppStatus": "v2 0.2.0-internal-preview available to registered internal testers 2026-10-14 19:10/19:15 KST; unreviewed; not public production; test ads only"
+    }
+  ],
+  "browserVerification": {
+    "checkedAt": "2026-10-14T10:18:57.459004+00:00",
+    "browser": "Chrome",
+    "scope": "greeting current features/internal-only join text + screenshot; Bible v4/30-passage scope/internal-only join text via accessibility tree",
+    "passed": true,
+    "newAppScreenshotsAddedToWebsite": false
+  }
+}

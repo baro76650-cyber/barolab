@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 크루 실시간 회의실 - BaroLab Master Hub</title>
+  <link rel="stylesheet" href="traffic.css">
+  <link rel="stylesheet" href="sidebar.css?v=20261018-anti-repeat">
+  <link rel="stylesheet" href="styles.css?v=20261018-anti-repeat">
+  <style>
+    /* =========================================================================
+       SPEC #3: Full Viewport Lock (100vh) & Isolated Inner Scroll
+       - Left sidebar (#barolab-sidebar) and agent crew rail (.crew-rail) stay
+         100% fixed in the viewport.
+       - ONLY the right chat message stream (.chat-messages / #room-stream)
+         scrolls vertically.
+       ========================================================================= */
+    html,
+    body.control-room {
+      height: 100vh !important;
+      max-height: 100vh !important;
+      margin: 0;
+      padding: 0;
+      overflow: hidden !important;
+    }
+    body.control-room .layout {
+      height: 100vh !important;
+      max-height: 100vh !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      display: flex !important;
+    }
+    body.control-room .sidebar {
+      height: 100vh !important;
+      max-height: 100vh !important;
+      overflow-y: auto !important;
+      flex-shrink: 0 !important;
+    }
+    body.control-room .main-wrap {
+      flex: 1 1 auto !important;
+      height: 100vh !important;
+      max-height: 100vh !important;
+      min-height: 0 !important;
+      min-width: 0 !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      padding: 12px 18px 14px !important;
+      box-sizing: border-box !important;
+      gap: 10px !important;
+    }
+    body.control-room .main-wrap > .header {
+      flex-shrink: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 10px 16px !important;
+    }
+
+    .chat-layout {
+      flex: 1 1 0% !important;
+      min-height: 0 !important;
+      height: 100% !important;
+      max-height: 100% !important;
+      display: grid;
+      grid-template-columns: 296px minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr);
+      gap: 14px;
+      overflow: hidden !important;
+    }
+    @media (max-width: 1100px) {
+      .chat-layout {
+        grid-template-columns: 240px minmax(0, 1fr);
+      }
+    }
+
+    /* Left Crew & Archive Rail (Fixed height, never stretches page) */
+    .crew-rail {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      max-height: 100%;
+      min-height: 0;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+    .rail-section-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #475569;
+      padding: 10px 14px 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    #crew-list {
+      flex-shrink: 0;
+      overflow-y: auto;
+      max-height: 54%;
+    }
+    .crew-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      cursor: pointer;
+      border-bottom: 1px solid #f1f5f9;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+    .crew-card:hover { background: #f8fafc; }
+    .crew-card.is-typing {
+      background: #eff6ff;
+      border-left: 3px solid #2563eb;
+    }
+    .crew-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .crew-live-dot {
+      position: absolute;
+      right: -2px;
+      bottom: -2px;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #10b981;
+      border: 2px solid #ffffff;
+    }
+    .crew-card.is-typing .crew-live-dot {
+      background: #f59e0b;
+      animation: pulseDot 1s infinite ease-in-out;
+    }
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.7; }
+    }
+    .crew-info { flex: 1; min-width: 0; }
+    .crew-info strong { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: #0f172a; }
+    .crew-info small {
+      display: block;
+      font-size: 11px;
+      color: #64748b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+    .crew-card.is-typing .crew-info small {
+      color: #1d4ed8;
+      font-weight: 700;
+    }
+
+    .archive-list {
+      flex: 1 1 0%;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 4px 8px 10px;
+    }
+    .archive-item {
+      padding: 7px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      border: 1px solid transparent;
+      transition: background 0.12s;
+    }
+    .archive-item:hover { background: #f8fafc; border-color: #e2e8f0; }
+    .archive-item strong { display: block; font-size: 12px; color: #1e293b; }
+    .archive-item small { font-size: 10.5px; color: #64748b; }
+
+    /* Center Room Panel (Fixed height, internal scroll on .chat-messages only) */
+    .room-panel {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      max-height: 100%;
+      min-height: 0;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+    .room-stream,
+    .chat-messages {
+      flex: 1 1 0%;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 18px 22px 24px;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+
+    /* =========================================================================
+       SPEC #4: Clean Messenger Bubbles (KakaoTalk / Slack Style)
+       - Removed cluttered gray 'Reaction Round' banners & 2-line gray tracker boxes.
+       - Clean bubble + sleek 1-line status bar (.msg-status-line) at bottom.
+       ========================================================================= */
+    .msg-row {
+      display: flex;
+      gap: 10px;
+      max-width: 84%;
+      animation: msgFadeIn 0.18s ease-out;
+      flex-shrink: 0;
+    }
+    @keyframes msgFadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .msg-row.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+    .msg-row.pinned-anchor .msg-bubble {
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.32), 0 4px 12px rgba(15, 23, 42, 0.06);
+    }
+    .msg-col {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      flex: 1;
+    }
+    .msg-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+    .msg-bubble {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 2px 14px 14px 14px;
+      padding: 11px 15px;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+      font-size: 13.5px;
+      line-height: 1.62;
+      color: #0f172a;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .msg-row.user .msg-bubble {
+      background: #2563eb;
+      border-color: #1d4ed8;
+      border-radius: 14px 2px 14px 14px;
+      color: #ffffff;
+    }
+
+    /* Compact 1-Line Footer Status Bar inside Agent Bubble */
+    .msg-status-line {
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px dashed #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+      overflow: hidden;
+      font-size: 11.5px;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .msg-status-line .st-handoff {
+      font-weight: 700;
+      color: #334155;
+      flex-shrink: 0;
+    }
+    .msg-status-line .st-state {
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .msg-status-line .st-state.processing { color: #b45309; }
+    .msg-status-line .st-state.completed { color: #059669; }
+    .msg-status-line .st-state.failed { color: #dc2626; }
+    .msg-status-line .st-link {
+      color: #2563eb;
+      font-weight: 700;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .msg-status-line .st-link:hover {
+      text-decoration: underline;
+    }
+    .msg-status-actions {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .btn-inline-memory-save {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 9px;
+      border-radius: 6px;
+      border: 1px solid #c7d2fe;
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.14s ease;
+      text-decoration: none;
+    }
+    .btn-inline-memory-save:hover {
+      background: #e0e7ff;
+      border-color: #818cf8;
+      color: #1e1b4b;
+    }
+    .btn-inline-memory-save.is-saved {
+      border-color: #a7f3d0;
+      background: #ecfdf5;
+      color: #065f46;
+    }
+
+    .artifact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      color: #1d4ed8;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .exec-tool-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 6px;
+      padding: 4px 10px;
+      background: linear-gradient(90deg, #ecfdf5 0%, #f0fdf4 100%);
+      border: 1px solid #6ee7b7;
+      border-radius: 7px;
+      color: #065f46;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.4;
+      box-shadow: 0 1px 3px rgba(5, 150, 105, 0.1);
+    }
+    .kst-clock-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: 8px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #38bdf8;
+      font-size: 11.5px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Real-Time Typing Bubble Indicator */
+    .typing-stream-zone {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 4px 22px 8px;
+      background: #f8fafc;
+      flex-shrink: 0;
+    }
+    .typing-stream-zone:empty {
+      display: none;
+      padding: 0;
+    }
+    .typing-bubble-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: msgFadeIn 0.15s ease-out;
+    }
+    .typing-bubble-card {
+      background: #ffffff;
+      border: 1px solid #93c5fd;
+      border-radius: 12px;
+      padding: 7px 13px;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+    .typing-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .typing-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: #2563eb;
+      display: inline-block;
+      animation: typingBounce 1.2s infinite ease-in-out;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    /* Smart Scroll Floating Pill */
+    .floating-new-msg-btn {
+      position: absolute;
+      bottom: 112px;
+      left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background: linear-gradient(90deg, #1d4ed8, #2563eb);
+      color: #ffffff;
+      border: 1px solid #93c5fd;
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(29, 78, 216, 0.28);
+      z-index: 30;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .floating-new-msg-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Composer Area (Fixed at bottom of room-panel) */
+    .composer-area {
+      padding: 10px 16px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      flex-shrink: 0;
+    }
+    .mention-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 7px;
+      flex-wrap: wrap;
+    }
+    .mention-pills-left {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .mention-pill {
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+    .mention-pill:hover { border-color: #2563eb; color: #2563eb; background: #eff6ff; }
+    .scroll-lock-indicator {
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .composer-row {
+      display: flex;
+      gap: 10px;
+    }
+    .composer-input {
+      flex: 1;
+      padding: 9px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-family: inherit;
+      resize: none;
+    }
+    .composer-input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+    .btn-send {
+      padding: 0 20px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+    .btn-send:hover { background: #1d4ed8; }
+    .btn-send:disabled { background: #94a3b8; cursor: not-allowed; }
+
+    .btn-patrol-trigger {
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1px solid #0d9488;
+      background: #f0fdfa;
+      color: #0f766e;
+      transition: all 0.15s;
+    }
+    .btn-patrol-trigger:hover {
+      background: #ccfbf1;
+    }
+  </style>
+</head>
+<body class="control-room">
+<div class="layout">
+  <aside id="barolab-sidebar" class="sidebar" aria-label="주요 메뉴"></aside>
+  <script src="sidebar.js?v=20261018-no-rnd"></script>
+
+  <main class="main-wrap" id="main-content">
+    <header class="header">
+      <div class="header-left">
+        <h1><span>💬 BaroLab 6인 에이전트 실시간 회의실</span></h1>
+        <p>에이전트별 독립 원장(Read) · 실무 도구(Tool Calling) 직결 · KST 시계 강제 주입 · 무환각 팩트 보고</p>
+      </div>
+      <div class="toolbar" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        <span class="kst-clock-pill" id="chat-kst-clock" title="모든 에이전트 시스템 프롬프트에 실시간 주입되는 한국 표준시(KST)">🕐 KST 동기화 중...</span>
+        <button type="button" class="btn-patrol-trigger" id="btn-trigger-doctor-patrol" title="닥터(Doctor)가 기존 발행 글 5건을 즉시 순찰·7대 검진·카테고리 자동 패치 후 회의실에 보고합니다">
+          🩺 닥터 5건 즉시 검진·수술
+        </button>
+        <button class="btn-quick" id="btn-new-meeting" style="cursor:pointer;" title="현재 회의를 진행 중으로 보관하고 새 회의 시작">새 회의 (보관)</button>
+        <button class="btn-quick" id="btn-end-meeting" style="background:#0f172a; color:#fff; border-color:#0f172a; font-weight:700; cursor:pointer;" title="회의록을 기억 그래프(memory_graph.py)에 시냅스로 연결하고 회의 종료">회의 마치기 (시냅스 적재)</button>
+      </div>
+    </header>
+
+    <div class="chat-layout">
+      <!-- Left Rail: 6 Crew Agents + Archived Meetings (Fixed height) -->
+      <aside class="crew-rail">
+        <div class="rail-section-title">
+          <span>6인 전담 AI 크루 (클릭 시 @멘션)</span>
+          <span style="font-size:10.5px; color:#10b981; font-weight:800;">● ONLINE</span>
+        </div>
+        <div id="crew-list"></div>
+
+        <div class="rail-section-title" style="margin-top:4px; border-top:1px solid #f1f5f9;">
+          <span>지난 회의 · 진행 중 보관함</span>
+          <span id="archive-count" style="font-size:11px; color:#2563eb;">0</span>
+        </div>
+        <div class="archive-list" id="archive-list"></div>
+      </aside>
+
+      <!-- Center: Messenger Chat Stream (Internal Scroll Only) -->
+      <section class="room-panel">
+        <div class="room-stream chat-messages" id="room-stream"></div>
+
+        <!-- Real-Time Typing Indicator Bubble Zone -->
+        <div class="typing-stream-zone" id="typing-stream-zone" aria-live="polite"></div>
+
+        <!-- Smart Scroll Floating Button -->
+        <button type="button" class="floating-new-msg-btn" id="btn-floating-new-msg">
+          <span>↓ 새로운 대화 도착 (클릭 시 이동)</span>
+        </button>
+
+        <div class="composer-area">
+          <div class="mention-bar">
+            <div class="mention-pills-left">
+              <button type="button" class="mention-pill" data-mention="@radar">@radar 레이더(전략·유튜브검증)</button>
+              <button type="button" class="mention-pill" data-mention="@jarvis">@jarvis 자비스(총괄)</button>
+              <button type="button" class="mention-pill" data-mention="@doctor" style="border-color:#99f6e4; background:#f0fdfa; color:#0f766e;">@doctor 닥터(감사·리모델링)</button>
+              <button type="button" class="mention-pill" data-mention="@publi">@publi 퍼블리(검수)</button>
+              <button type="button" class="mention-pill" data-mention="@trace">@trace 트레이스(분석)</button>
+              <button type="button" class="mention-pill" data-mention="@patch">@patch 패치(개발)</button>
+              <button type="button" class="mention-pill" data-mention="@all">@all</button>
+            </div>
+            <div class="scroll-lock-indicator" id="scroll-lock-status">
+              📌 스마트 스크롤 고정 활성
+            </div>
+          </div>
+          <div class="composer-row">
+            <textarea id="chat-input" class="composer-input" rows="2" placeholder="@레이더 유튜브 링크 분석, @닥터 &quot;그 글은 비공개해&quot; 등 지시를 입력하세요 (Enter 전송)"></textarea>
+            <button type="button" class="btn-send" id="btn-send">발언 전송</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script>
+(() => {
+  const AGENT_STYLE = {
+    jarvis: { name: '자비스', badge: '운영총괄', color: '#2563eb', short: 'J', icon: '🧭', title: '운영총괄 AI' },
+    doctor: { name: '닥터', badge: '콘텐츠감사', color: '#0d9488', short: 'D', icon: '🩺', title: '콘텐츠 감사·재생 전담' },
+    publi:  { name: '퍼블리', badge: '발행검수', color: '#059669', short: 'P', icon: '🤖', title: '블로그 발행·예약 검수 전문가' },
+    trace:  { name: '트레이스', badge: '성과분석', color: '#7c3aed', short: 'T', icon: '📊', title: '색인·트래픽·수익 분석 전문가' },
+    patch:  { name: '패치', badge: '자동화개발', color: '#d97706', short: 'C', icon: '⚙️', title: '대시보드·파이프라인 개발·유지보수' },
+    radar:  { name: '레이더', badge: '수익전략', color: '#e11d48', short: 'R', icon: '🎯', title: '트렌드·키워드·수익 허브 발굴' },
+  };
+
+  let resolvedApiBase = '';
+  let lastEventSeq = 0;
+  let sseSource = null;
+  const activeTypingMap = new Map();
+
+  // =========================================================================
+  // SPEC #2: Set-based Message ID Deduplication (`renderedMessageIds`)
+  // - Prevents any existing message.id from ever being appended twice!
+  // =========================================================================
+  const renderedMessageIds = new Set();
+
+  let pinnedUserRowId = null;
+  let unreadBelowCount = 0;
+  const streamEl = document.getElementById('room-stream');
+  const typingZoneEl = document.getElementById('typing-stream-zone');
+  const floatingBtnEl = document.getElementById('btn-floating-new-msg');
+  const scrollLockStatusEl = document.getElementById('scroll-lock-status');
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+  }
+
+  function formatBodyText(text) {
+    let safe = escapeHtml(text);
+    safe = safe.replace(/\*\*(\[실행 완료:[^\]]+\])\*\*/g, '<span class="exec-tool-badge">⚡ $1</span>');
+    safe = safe.replace(/(^|\n)(\[실행 완료:[^\]]+\])/g, '$1<span class="exec-tool-badge">⚡ $2</span>');
+    safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    safe = safe.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9; padding:1px 5px; border-radius:4px; font-size:12.5px; color:#0f172a;">$1</code>');
+    safe = safe.replace(/\[([^\]]+)\]\((?:&lt;)?(?:\/\/otns\/yoonlab\/10_Project\/BaroLab\/)?vault\/([^)&>]+)(?:&gt;)?\)/g,
+      '<a href="memory.html?rel=$2" class="artifact-chip">📄 $1</a>');
+    return safe;
+  }
+
+  function formatTime(ts) {
+    if (!ts) return '';
+    const d = new Date(Number(ts));
+    if (isNaN(d.getTime())) return '';
+    return d.toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+
+  function isUserNearBottom(threshold = 95) {
+    return (streamEl.scrollHeight - streamEl.scrollTop - streamEl.clientHeight) <= threshold;
+  }
+
+  function updateFloatingNewMsgButton() {
+    if (unreadBelowCount > 0) {
+      floatingBtnEl.innerHTML = `<span>↓ 새로운 대화 ${unreadBelowCount}건 도착 (클릭 시 이동)</span>`;
+      floatingBtnEl.classList.add('visible');
+    } else {
+      floatingBtnEl.classList.remove('visible');
+    }
+  }
+
+  floatingBtnEl.addEventListener('click', () => {
+    pinnedUserRowId = null;
+    unreadBelowCount = 0;
+    updateFloatingNewMsgButton();
+    scrollLockStatusEl.textContent = '📌 스마트 스크롤 고정 활성';
+    streamEl.scrollTo({ top: streamEl.scrollHeight, behavior: 'smooth' });
+  });
+
+  streamEl.addEventListener('scroll', () => {
+    if (isUserNearBottom(50)) {
+      unreadBelowCount = 0;
+      updateFloatingNewMsgButton();
+    }
+  });
+
+  function handleSmartScrollOnNewMessage(rowEl, isUserOwnMessage, wasNearBottom) {
+    if (isUserOwnMessage && rowEl) {
+      pinnedUserRowId = rowEl.dataset.msgId;
+      unreadBelowCount = 0;
+      updateFloatingNewMsgButton();
+      scrollLockStatusEl.textContent = '📌 내 질문 상단 고정 중 (답변이 아래로 쌓입니다)';
+      requestAnimationFrame(() => {
+        const targetTop = Math.max(0, rowEl.offsetTop - 18);
+        streamEl.scrollTo({ top: targetTop, behavior: 'smooth' });
+      });
+      return;
+    }
+
+    if (pinnedUserRowId) {
+      const pinnedEl = streamEl.querySelector(`[data-msg-id="${CSS.escape(pinnedUserRowId)}"]`);
+      if (pinnedEl) {
+        const anchorTop = Math.max(0, pinnedEl.offsetTop - 18);
+        const contentSpan = (rowEl ? (rowEl.offsetTop + rowEl.offsetHeight) : streamEl.scrollHeight) - anchorTop;
+        if (contentSpan <= streamEl.clientHeight - 20) {
+          streamEl.scrollTo({ top: anchorTop, behavior: 'smooth' });
+        } else {
+          unreadBelowCount += 1;
+          updateFloatingNewMsgButton();
+        }
+        return;
+      }
+    }
+
+    if (wasNearBottom) {
+      requestAnimationFrame(() => {
+        if (rowEl) {
+          const desiredTop = Math.max(0, rowEl.offsetTop + rowEl.offsetHeight - streamEl.clientHeight + 24);
+          streamEl.scrollTo({ top: desiredTop, behavior: 'smooth' });
+        }
+      });
+    } else {
+      unreadBelowCount += 1;
+      updateFloatingNewMsgButton();
+    }
+  }
+
+  // =========================================================================
+  // SPEC #4: Sleek 1-Line Status Bar inside Message Bubble (No bulky gray box)
+  // =========================================================================
+  function buildStatusLineHtml(m) {
+    const tt = m.taskTracker;
+    const artifacts = m.artifacts || [];
+    if (!tt && !artifacts.length && m.who === 'user') return '';
+
+    const handoff = (tt && tt.handoff) ? tt.handoff : '';
+    const status = (tt && tt.status) || 'completed';
+    const summary = (tt && (tt.resultSummary || tt.step)) || '응답 완료';
+    const deliverableUrl = (tt && tt.deliverableUrl) || (artifacts.length ? `memory.html?rel=${encodeURIComponent(artifacts[0])}` : '');
+    const deliverableLabel = (tt && tt.deliverableLabel) || (artifacts.length ? String(artifacts[0]).split('/').pop() : '');
+    const isSynapseSaved = Boolean((tt && tt.synapseLinked) || m.synapseSaved);
+
+    let stateText = `✅ ${escapeHtml(summary)}`;
+    if (status === 'processing') {
+      stateText = `🔄 ${escapeHtml((tt && tt.step) || '처리 중...')}`;
+    } else if (status === 'failed') {
+      stateText = `🔴 ${escapeHtml(summary)}`;
+    }
+
+    const showMemorySaveBtn = (m.who === 'radar' || artifacts.length > 0 || (m.text && m.text.length >= 90));
+    const memoryBtnHtml = showMemorySaveBtn
+      ? `<button type="button" class="btn-inline-memory-save ${isSynapseSaved ? 'is-saved' : ''}" data-save-msg-id="${escapeHtml(m.id || '')}" data-save-who="${escapeHtml(m.who || 'radar')}" title="이 분석 내용을 기억 그래프(memory.html)에 시냅스 노드로 즉시 저장합니다">${isSynapseSaved ? '[✦ 기억 그래프에 반영됨]' : '[✦ 기억 그래프에 반영]'}</button>`
+      : '';
+
+    return `
+      <div class="msg-status-line" data-tracker-for="${escapeHtml(m.id || '')}">
+        ${handoff ? `<span class="st-handoff">📋 ${escapeHtml(handoff)}</span><span>·</span>` : ''}
+        <span class="st-state ${escapeHtml(status)}">${stateText}</span>
+        <span class="msg-status-actions">
+          ${deliverableUrl ? `<a class="st-link" href="${escapeHtml(deliverableUrl)}">🔗 ${escapeHtml(deliverableLabel || '상세')}</a>` : ''}
+          ${memoryBtnHtml}
+        </span>
+      </div>
+    `;
+  }
+
+  streamEl.addEventListener('click', async e => {
+    const saveBtn = e.target.closest('.btn-inline-memory-save');
+    if (!saveBtn) return;
+    e.preventDefault();
+    const msgId = saveBtn.dataset.saveMsgId || '';
+    const who = saveBtn.dataset.saveWho || 'radar';
+    const rowEl = saveBtn.closest('.msg-row');
+    const bubbleEl = rowEl ? rowEl.querySelector('.msg-bubble') : null;
+    const rawText = bubbleEl ? bubbleEl.innerText.split('\n📋')[0].trim() : '';
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = '[✦ 기억 그래프 반영 중...]';
+    try {
+      const res = await apiFetch('/api/chat/save-to-memory', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messageId: msgId, who, text: rawText }),
+      });
+      const out = await res.json();
+      if (out && out.ok) {
+        saveBtn.classList.add('is-saved');
+        saveBtn.textContent = '[✦ 기억 그래프에 반영됨]';
+        const actionsWrap = saveBtn.closest('.msg-status-actions');
+        if (actionsWrap && out.url && !actionsWrap.querySelector('.st-link')) {
+          const linkEl = document.createElement('a');
+          linkEl.className = 'st-link';
+          linkEl.href = out.url;
+          linkEl.textContent = `🔗 ${(out.rel || '').split('/').pop() || '노트 보기'}`;
+          actionsWrap.insertBefore(linkEl, saveBtn);
+        }
+      } else {
+        saveBtn.textContent = '[✦ 기억 그래프에 반영]';
+      }
+    } catch (_) {
+      saveBtn.textContent = '[✦ 기억 그래프에 반영]';
+    } finally {
+      saveBtn.disabled = false;
+    }
+  });
+
+  function isNoiseMessage(m) {
+    if (!m || !m.text) return true;
+    const mid = String(m.id || '');
+    const who = String(m.who || '');
+    const txt = String(m.text || '');
+    if (who === 'system') return true;
+    if (mid.startsWith('auto-') || mid.startsWith('sys-')) return true;
+    if (m.capReached || m.round === 2) return true;
+    if (txt.includes('반응 라운드') || txt.includes('순차 티키타카 협업 라인업') || txt.includes('2라운드 티키타카')) return true;
+    if (who !== 'user' && (txt.includes('98.2%') || txt.includes('10월 22일') || txt.includes('10월 23일') || txt.includes('10월 27일'))) return true;
+    if (who !== 'radar' && who !== 'user' && (txt.includes('10일 만에 180만원') || txt.includes('알파남'))) return true;
+    return false;
+  }
+
+  function buildMessageRowHtml(m) {
+    const mid = escapeHtml(m.id || `msg-${m.ts}-${m.who}`);
+    if (m.who === 'user') {
+      const isPinned = (pinnedUserRowId && pinnedUserRowId === (m.id || `msg-${m.ts}-${m.who}`));
+      return `
+        <div class="msg-row user ${isPinned ? 'pinned-anchor' : ''}" data-msg-id="${mid}">
+          <div class="crew-avatar" style="background:#0f172a;">윤</div>
+          <div class="msg-col">
+            <div class="msg-head" style="justify-content:flex-end;">
+              <strong style="color:#0f172a;">윤대표-CEO</strong>
+              <span style="color:#94a3b8;">${formatTime(m.ts)}</span>
+            </div>
+            <div class="msg-bubble">${formatBodyText(m.text)}</div>
+          </div>
+        </div>
+      `;
+    }
+    const ag = AGENT_STYLE[m.who] || { name: m.who, badge: '크루', color: '#475569', short: 'A', icon: '🤖' };
+    return `
+      <div class="msg-row" data-msg-id="${mid}" data-agent="${escapeHtml(m.who)}">
+        <div class="crew-avatar" style="background:${ag.color};">${ag.short}</div>
+        <div class="msg-col">
+          <div class="msg-head">
+            <strong style="color:${ag.color};">${escapeHtml(ag.name)}</strong>
+            <span style="color:#64748b; font-weight:700;">${escapeHtml(ag.badge)}</span>
+            <span style="color:#94a3b8;">${formatTime(m.ts)}</span>
+          </div>
+          <div class="msg-bubble">${formatBodyText(m.text)}${buildStatusLineHtml(m)}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function upsertMessageToDom(m, options = {}) {
+    if (isNoiseMessage(m)) return;
+    const mid = String(m.id || `msg-${m.ts}-${m.who}`);
+    m.id = mid;
+
+    if (m.who && m.who !== 'user') {
+      activeTypingMap.delete(m.who);
+      renderTypingIndicators();
+    }
+
+    // Strict Set-based deduplication: never append an already rendered message ID!
+    if (renderedMessageIds.has(mid)) {
+      if (options.allowInPlaceUpdate) {
+        const existingEl = streamEl.querySelector(`[data-msg-id="${CSS.escape(mid)}"]`);
+        if (existingEl) {
+          const temp = document.createElement('div');
+          temp.innerHTML = buildMessageRowHtml(m).trim();
+          const newEl = temp.firstElementChild;
+          if (newEl) existingEl.replaceWith(newEl);
+        }
+      }
+      return;
+    }
+
+    renderedMessageIds.add(mid);
+    const wasNearBottom = isUserNearBottom(100);
+    const temp = document.createElement('div');
+    temp.innerHTML = buildMessageRowHtml(m).trim();
+    const rowEl = temp.firstElementChild;
+    if (!rowEl) return;
+    streamEl.appendChild(rowEl);
+
+    if (!options.initialLoad) {
+      handleSmartScrollOnNewMessage(rowEl, m.who === 'user', wasNearBottom);
+    }
+  }
+
+  function renderTypingIndicators() {
+    document.querySelectorAll('.crew-card').forEach(card => {
+      const slug = card.dataset.slug;
+      const statusTextEl = card.querySelector('.crew-live-status');
+      const tInfo = activeTypingMap.get(slug);
+      if (tInfo) {
+        card.classList.add('is-typing');
+        if (statusTextEl) statusTextEl.textContent = tInfo.typingText || '응답 작성 중...';
+      } else {
+        card.classList.remove('is-typing');
+        if (statusTextEl) statusTextEl.textContent = card.dataset.defaultTitle || '';
+      }
+    });
+
+    const entries = Array.from(activeTypingMap.values());
+    if (!entries.length) {
+      typingZoneEl.innerHTML = '';
+      return;
+    }
+
+    typingZoneEl.innerHTML = entries.map(t => {
+      const ag = AGENT_STYLE[t.who] || { name: t.name || t.who, color: t.color || '#2563eb', short: 'A', icon: '🤖' };
+      const label = t.typingText || `${ag.icon} ${ag.name}가 응답을 작성하고 있습니다...`;
+      return `
+        <div class="typing-bubble-row" data-typing-who="${escapeHtml(t.who)}">
+          <div class="crew-avatar" style="background:${ag.color}; width:28px; height:28px; font-size:11.5px;">${ag.short}</div>
+          <div class="typing-bubble-card">
+            <span>${escapeHtml(label)}</span>
+            <span class="typing-dots"><span></span><span></span><span></span></span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderCrewList(agents) {
+    const el = document.getElementById('crew-list');
+    el.innerHTML = agents.map(a => `
+      <div class="crew-card" data-mention="@${a.slug}" data-slug="${a.slug}" data-default-title="${escapeHtml(a.title)}">
+        <div class="crew-avatar" style="background:${a.color || '#2563eb'};">
+          ${a.name.slice(0, 1)}
+          <span class="crew-live-dot"></span>
+        </div>
+        <div class="crew-info">
+          <strong>
+            <span>${escapeHtml(a.name)}</span>
+            <span style="font-size:11px; color:${a.color}; font-weight:800;">@${a.slug}</span>
+          </strong>
+          <small class="crew-live-status">${escapeHtml(a.title)}</small>
+        </div>
+      </div>
+    `).join('');
+    el.querySelectorAll('.crew-card').forEach(card => {
+      card.addEventListener('click', () => insertMention(card.dataset.mention));
+    });
+  }
+
+  function renderArchiveList(items) {
+    document.getElementById('archive-count').textContent = items.length;
+    const el = document.getElementById('archive-list');
+    if (!items.length) {
+      el.innerHTML = '<div style="padding:12px; font-size:12px; color:#94a3b8;">보관된 이전 회의가 없습니다.</div>';
+      return;
+    }
+    el.innerHTML = items.map(item => `
+      <div class="archive-item" data-id="${escapeHtml(item.id)}">
+        <strong>${item.open ? '🟢 [진행중] ' : '📁 '}${escapeHtml(item.title || item.topic)}</strong>
+        <small>${formatTime(item.ts)} · 발언 ${item.count}건 · 클릭 시 복원</small>
+      </div>
+    `).join('');
+    el.querySelectorAll('.archive-item').forEach(row => {
+      row.addEventListener('click', async () => {
+        const res = await apiFetch('/api/chat/reopen', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: row.dataset.id }),
+        });
+        if (res.ok) loadRoom(true);
+      });
+    });
+  }
+
+  async function apiFetch(path, options) {
+    if (resolvedApiBase) {
+      return fetch(resolvedApiBase + path, options);
+    }
+    // Prioritize Windows Master Hub (192.168.45.248:8790 / 127.0.0.1:8790) where live CDP browsers & agent_tools run
+    const candidates = (location.hostname === '192.168.45.190')
+      ? ['http://192.168.45.248:8790', 'http://127.0.0.1:8790', 'http://192.168.45.248:8791', '']
+      : ['', 'http://127.0.0.1:8790', 'http://192.168.45.248:8790', 'http://127.0.0.1:8791', 'http://192.168.45.248:8791'];
+    for (const base of candidates) {
+      try {
+        const res = await fetch(base + path, options);
+        if (res.ok || res.status !== 404) {
+          resolvedApiBase = base;
+          return res;
+        }
+      } catch (_) {}
+    }
+    return fetch(path, options);
+  }
+
+  function updateKstClockDisplay(serverKst) {
+    const el = document.getElementById('chat-kst-clock');
+    if (!el) return;
+    if (serverKst) {
+      el.textContent = `🕐 KST ${serverKst}`;
+      return;
+    }
+    const now = new Date();
+    const kstStr = now.toLocaleString('sv-SE', { timeZone: 'Asia/Seoul' });
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const kstDay = dayNames[new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Seoul' })).getDay()];
+    el.textContent = `🕐 KST ${kstStr} (${kstDay})`;
+  }
+  setInterval(() => updateKstClockDisplay(), 1000);
+  updateKstClockDisplay();
+
+  async function loadRoom(resetScrollToBottom = false) {
+    const res = await apiFetch('/api/chat/room');
+    const data = await res.json();
+    if (data.kstNow) updateKstClockDisplay(data.kstNow);
+    renderCrewList(data.agents || []);
+    renderArchiveList(data.archivedMeetings || []);
+    if (typeof data.eventSeq === 'number') {
+      lastEventSeq = Math.max(lastEventSeq, data.eventSeq);
+    }
+
+    streamEl.innerHTML = '';
+    renderedMessageIds.clear();
+    (data.messages || []).forEach(m => upsertMessageToDom(m, { initialLoad: true }));
+
+    if (resetScrollToBottom) {
+      streamEl.scrollTop = streamEl.scrollHeight;
+    }
+    connectEventStream();
+  }
+
+  function connectEventStream() {
+    if (sseSource) {
+      try { sseSource.close(); } catch (_) {}
+    }
+    const base = resolvedApiBase || '';
+    try {
+      sseSource = new EventSource(`${base}/api/chat/events?since_seq=${lastEventSeq}`);
+      sseSource.addEventListener('typing', e => {
+        try {
+          const d = JSON.parse(e.data);
+          if (d && d.who) {
+            if (d.active === false) activeTypingMap.delete(d.who);
+            else activeTypingMap.set(d.who, d);
+            renderTypingIndicators();
+          }
+        } catch (_) {}
+      });
+      sseSource.addEventListener('message', e => {
+        try {
+          const msg = JSON.parse(e.data);
+          upsertMessageToDom(msg, { allowInPlaceUpdate: false });
+        } catch (_) {}
+      });
+      sseSource.addEventListener('task_update', e => {
+        try {
+          const msg = JSON.parse(e.data);
+          upsertMessageToDom(msg, { allowInPlaceUpdate: true });
+        } catch (_) {}
+      });
+    } catch (_) {}
+  }
+
+  function insertMention(tag) {
+    const input = document.getElementById('chat-input');
+    const cur = input.value;
+    if (!cur.includes(tag)) {
+      input.value = (tag + ' ' + cur).trim() + ' ';
+    }
+    input.focus();
+  }
+
+  document.querySelectorAll('.mention-pill').forEach(btn => {
+    btn.addEventListener('click', () => insertMention(btn.dataset.mention));
+  });
+
+  async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    const btn = document.getElementById('btn-send');
+    btn.disabled = true;
+    btn.textContent = '응답 중...';
+
+    try {
+      const res = await apiFetch('/api/chat/send-stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, includeReactionRound: false }),
+      });
+
+      if (!res.body || !res.body.getReader) {
+        const data = await res.json();
+        (data.newMessages || data.messages || []).forEach(m => upsertMessageToDom(m));
+        return;
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let buffer = '';
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const blocks = buffer.split('\n\n');
+        buffer = blocks.pop() || '';
+
+        for (const blk of blocks) {
+          const lines = blk.split('\n');
+          let evtType = 'message';
+          let dataStr = '';
+          for (const line of lines) {
+            if (line.startsWith('event:')) evtType = line.slice(6).trim();
+            else if (line.startsWith('data:')) dataStr += line.slice(5).trim();
+          }
+          if (!dataStr) continue;
+          try {
+            const payload = JSON.parse(dataStr);
+            if (evtType === 'typing' && payload.who) {
+              if (payload.active === false) activeTypingMap.delete(payload.who);
+              else activeTypingMap.set(payload.who, payload);
+              renderTypingIndicators();
+            } else if (evtType === 'message') {
+              upsertMessageToDom(payload, { allowInPlaceUpdate: false });
+            } else if (evtType === 'task_update') {
+              upsertMessageToDom(payload, { allowInPlaceUpdate: true });
+            } else if (evtType === 'done') {
+              activeTypingMap.clear();
+              renderTypingIndicators();
+            }
+          } catch (_) {}
+        }
+      }
+    } finally {
+      activeTypingMap.clear();
+      renderTypingIndicators();
+      btn.disabled = false;
+      btn.textContent = '발언 전송';
+    }
+  }
+
+  document.getElementById('btn-send').addEventListener('click', sendMessage);
+  document.getElementById('chat-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  const btnDoctorPatrol = document.getElementById('btn-trigger-doctor-patrol');
+  if (btnDoctorPatrol) {
+    btnDoctorPatrol.addEventListener('click', async () => {
+      btnDoctorPatrol.disabled = true;
+      btnDoctorPatrol.textContent = '🩺 5건 정밀 검진·수술 중...';
+      pinnedUserRowId = null;
+      scrollLockStatusEl.textContent = '🩺 닥터 7대 정밀 검진 보고 수신 중';
+      try {
+        await apiFetch('/api/auditor/patrol', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ count: 5, broadcast: true }),
+        });
+      } finally {
+        btnDoctorPatrol.disabled = false;
+        btnDoctorPatrol.textContent = '🩺 닥터 5건 즉시 검진·수술';
+      }
+    });
+  }
+
+  document.getElementById('btn-end-meeting').addEventListener('click', async () => {
+    const res = await apiFetch('/api/chat/end-meeting', { method: 'POST' });
+    const out = await res.json();
+    if (out.archived) {
+      alert(`회의 결정사항이 기억 그래프(${out.journal})에 시냅스로 연결되고 회의실이 초기화되었습니다.`);
+      loadRoom(true);
+    } else {
+      alert(out.detail || '보관할 대화가 없습니다.');
+    }
+  });
+
+  document.getElementById('btn-new-meeting').addEventListener('click', async () => {
+    const res = await apiFetch('/api/chat/new-meeting', { method: 'POST' });
+    await res.json();
+    loadRoom(true);
+  });
+
+  loadRoom(true);
+})();
+</script>
+</body>
+</html>

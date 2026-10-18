@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CF 블로그 운영 대시보드 - JARVIS Hub</title>
+  <style>
+    :root {
+      --blue: #0872ff;
+      --blue-hover: #005ce6;
+      --blue-light: #eff6ff;
+      --blue-border: #dbeafe;
+      --green: #00bb65;
+      --green-light: #ddfaec;
+      --orange: #f59e0b;
+      --orange-light: #fef3c7;
+      --red: #ef4444;
+      --red-light: #fee2e2;
+      --bg: #f1f5f9;
+      --panel: #ffffff;
+      --sidebar-bg: #0f172a;
+      --sidebar-nav-hover: #1e293b;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Layout */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: var(--sidebar-bg);
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      user-select: none;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+    }
+
+    .brand {
+      height: 64px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .brand-badge {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #0872ff, #00d2ff);
+      color: white;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 19px;
+      box-shadow: 0 2px 8px rgba(8, 114, 255, 0.4);
+    }
+    .brand-text strong {
+      font-size: 15px;
+      color: #fff;
+      display: block;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+    }
+    .brand-text span {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .nav {
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .nav-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #64748b;
+      padding: 10px 10px 4px;
+      letter-spacing: 0.5px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .nav-item:hover {
+      background: var(--sidebar-nav-hover);
+      color: #e2e8f0;
+    }
+    .nav-item.active {
+      background: var(--blue);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(8, 114, 255, 0.35);
+    }
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .nav-item small {
+      font-size: 10px;
+      color: inherit;
+      opacity: 0.8;
+      display: block;
+    }
+    .badge-count {
+      margin-left: auto;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.15);
+      font-weight: 700;
+    }
+
+    .sidebar-assistant {
+      margin: 10px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+    .assistant-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      color: #38bdf8;
+      font-weight: 700;
+    }
+    .assistant-quote {
+      color: #94a3b8;
+    }
+
+    .sidebar-footer {
+      padding: 12px 18px;
+      font-size: 11px;
+      color: #64748b;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Main Area */
+    .main-wrap {
+      margin-left: 240px;
+      width: calc(100% - 240px);
+      padding: 16px 20px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--panel);
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+    .header-left h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-left p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .header-badge {
+      background: #ecfdf5;
+      color: #059669;
+      border: 1px solid #a7f3d0;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .date-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      text-align: right;
+    }
+    .date-box .clock {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      font-variant-numeric: tabular-nums;
+    }
+    .date-box .tz {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .live-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #047857;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .btn-refresh {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.15s;
+    }
+    .btn-refresh:hover { background: var(--blue-hover); }
+
+    /* Notice Banner */
+    .notice-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 12px;
+      color: #166534;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Simulation & Selection Bar */
+    .sim-bar {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+    }
+    .sim-bar-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #334155;
+    }
+    .sim-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-sim {
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: white;
+      color: #334155;
+      transition: all 0.15s;
+    }
+    .btn-sim:hover { background: #f1f5f9; }
+    .btn-sim.active {
+      background: #0872ff;
+      color: white;
+      border-color: #0872ff;
+    }
+
+    .summary-source { font-size:10px; color:#64748b; line-height:1.5; margin-top:6px; }
+    .summary-periods { display:grid; gap:5px; margin:10px 0; font-size:12px; color:#64748b; }
+    .summary-periods span { display:flex; justify-content:space-between; gap:8px; }
+    .summary-periods strong { color:#0f172a; font-variant-numeric:tabular-nums; }
+    /* Top Summary Cards */
+    .summary-cards-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .kpi-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .kpi-card-brand {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .kpi-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .kpi-card-val {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.1;
+      margin: 8px 0 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .kpi-card-subline {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .kpi-growth {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* Main Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+    .col-left, .col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    /* Panels */
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+    .panel-head h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.3px;
+    }
+    .panel-sub {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    /* Pills */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .pill-green { background: #dcfce7; color: #15803d; }
+    .pill-blue { background: #dbeafe; color: #1d4ed8; }
+    .pill-yellow { background: #fef3c7; color: #b45309; }
+    .pill-gray { background: #f1f5f9; color: #475569; }
+    .pill-red { background: #fee2e2; color: #b91c1c; }
+
+    /* Table Styles */
+    .table-container {
+      width: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 11.5px;
+      text-align: left;
+    }
+    th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 600;
+      padding: 7px 5px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+      font-size: 11px;
+    }
+    td {
+      padding: 7px 5px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 11px;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background-color: #f8fafc; }
+
+    .site-brand-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .site-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .site-brand-info strong {
+      font-size: 12px;
+      color: #0f172a;
+      display: block;
+      line-height: 1.2;
+    }
+    .site-brand-info small {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .link-proof {
+      color: #047857;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 11px;
+      padding: 4px 8px;
+      background: #dcfff0;
+      border: 1px solid #a7f3d0;
+      border-radius: 4px;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .link-proof:hover {
+      background: #bbf7d0;
+      border-color: #86efac;
+    }
+
+    /* Filter Wrap */
+    .filter-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-filter {
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: #475569;
+      padding: 5px 9px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-filter:hover { background: #e2e8f0; }
+    .btn-filter.active {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+      font-weight: 600;
+    }
+    .search-box input {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 11px;
+      outline: none;
+      width: 180px;
+    }
+    .search-box input:focus { border-color: var(--blue); }
+
+    /* Summary-adjacent horizontal workflow */
+    .wf-timeline-panel { min-width: 0; }
+    .wf-timeline-panel .panel-head { flex-wrap: wrap; }
+    .wf-timeline-selection { font-size: 12px; color: #475569; margin-bottom: 12px; overflow-wrap: anywhere; }
+    .wf-timeline-panel .wf-stages {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(145px, 1fr));
+      gap: 10px; overflow-x: auto; padding: 3px 2px 10px; margin-bottom: 0;
+    }
+    .wf-timeline-panel .wf-row {
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: 8px; align-content: start; align-items: start; padding: 12px; border-color: #e2e8f0;
+    }
+    .wf-timeline-panel .wf-dot { grid-column: 1; grid-row: 1; }
+    .wf-timeline-panel .wf-time { grid-column: 2; grid-row: 1; text-align: left; align-self: center; }
+    .wf-timeline-panel .wf-info { grid-column: 1 / -1; grid-row: 2; min-width: 0; }
+    .wf-timeline-panel .wf-info strong { line-height: 1.5; }
+    .wf-timeline-panel .wf-info span {
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+      overflow: hidden; overflow-wrap: anywhere; line-height: 1.6;
+    }
+    .wf-timeline-panel .wf-prog { grid-column: 1 / -1; grid-row: 3; text-align: left; }
+    .wf-timeline-panel .wf-row:not(:last-child)::after {
+      left: auto; right: -11px; top: 23px; bottom: auto; width: 10px; height: 2px;
+    }
+
+    .wf-timeline-panel .panel-head { flex-wrap: wrap; gap: 8px; }
+    .wf-timeline-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    #wf-retry-button { min-height: 44px; padding: 10px 16px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #0f172a; cursor: pointer; font-weight: 600; }
+    #wf-retry-button:disabled { cursor: default; opacity: 0.6; }
+    #wf-retry-message { font-size: 12px; color: #475569; overflow-wrap: anywhere; }
+    #wf-retry-message:empty { display: none; }
+
+    /* 7-Stage Timeline Pipeline */
+    .wf-stages {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .wf-row {
+      display: grid;
+      grid-template-columns: 44px 28px minmax(0, 1fr) 52px;
+      gap: 10px;
+      align-items: center;
+      padding: 6px 8px;
+      border-radius: 6px;
+      position: relative;
+      font-size: 11px;
+      background: #ffffff;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .wf-row:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 68px;
+      top: 26px;
+      bottom: -10px;
+      width: 2px;
+      background: #e2e8f0;
+      z-index: 1;
+    }
+    .wf-row.st-done:not(:last-child)::after {
+      background: var(--green);
+    }
+    .wf-row.st-active {
+      background: #eff6ff;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 1px #3b82f6;
+      animation: pulse-active 2s infinite ease-in-out;
+    }
+    @keyframes pulse-active {
+      0%, 100% { border-color: #3b82f6; background: #eff6ff; }
+      50% { border-color: #60a5fa; background: #dbeafe; }
+    }
+    .wf-row.st-active .wf-dot {
+      background: #2563eb !important;
+      color: #ffffff !important;
+      font-weight: 700;
+    }
+    .wf-row.st-wait {
+      background: #fafafa;
+      opacity: 0.88;
+    }
+    .wf-time {
+      font-size: 10px;
+      color: #64748b;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+    .wf-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #64748b;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      z-index: 2;
+    }
+    .wf-row.st-done .wf-dot {
+      background: var(--green);
+      color: white;
+    }
+    .wf-row.st-active .wf-dot {
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 0 0 4px rgba(8, 114, 255, 0.2);
+      animation: pulse 1.5s infinite;
+    }
+    .wf-row.st-wait .wf-dot {
+      background: #f1f5f9;
+      color: #94a3b8;
+      border: 1px dashed #cbd5e1;
+    }
+    .wf-info strong {
+      font-size: 12px;
+      color: #1e293b;
+      display: block;
+      line-height: 1.2;
+    }
+    .wf-info span {
+      font-size: 10px;
+      color: #64748b;
+      display: block;
+    }
+    .wf-prog {
+      text-align: right;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .wf-row.st-done .wf-prog { color: var(--green); }
+    .wf-row.st-active .wf-prog { color: var(--blue); }
+    .wf-row.st-wait .wf-prog { color: #94a3b8; }
+
+    /* Mini Charts */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .chart-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fafcff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+    }
+    .chart-box-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #334155;
+      white-space: nowrap;
+    }
+    .chart-box-head span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .chart-box-head strong {
+      font-size: 14px;
+      font-weight: 800;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+    }
+    .chart-submetrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+      font-size: 11px;
+      color: #334155;
+    }
+    .chart-submetrics .sub-chip {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 2px 6px;
+      font-weight: 600;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .cf-mini-bars {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 4px;
+      align-items: end;
+      height: 54px;
+      padding: 6px 4px 2px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .cf-mini-bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+      gap: 3px;
+      min-width: 0;
+    }
+    .cf-mini-bar-fill {
+      width: 100%;
+      max-width: 18px;
+      border-radius: 3px 3px 0 0;
+      background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+      min-height: 3px;
+      transition: height 0.25s ease;
+    }
+    .cf-mini-bar-fill.green {
+      background: linear-gradient(180deg, #22c55e, #15803d);
+    }
+    .cf-mini-bar-label {
+      font-size: 9px;
+      color: #64748b;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* Rank Rows */
+    .rank-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .rank-row {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr) 72px 84px;
+      gap: 8px;
+      align-items: center;
+      font-size: 11.5px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      background: #f8fafc;
+      border: 1px solid #f1f5f9;
+      transition: background 0.15s;
+    }
+    .rank-row:hover {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+    .rank-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #475569;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 10px;
+    }
+    .rank-row:nth-child(1) .rank-num { background: #0872ff; color: white; }
+    .rank-row:nth-child(2) .rank-num { background: #00bb65; color: white; }
+    .rank-row:nth-child(3) .rank-num { background: #f59e0b; color: white; }
+    .rank-title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: #1e293b;
+      min-width: 0;
+    }
+    .rank-title a {
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .rank-title a:hover {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+    .rank-domain-badge {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #1d4ed8;
+      background: #dbeafe;
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+    .rank-bar-bg {
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .rank-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #0872ff, #60a5fa);
+      border-radius: 3px;
+    }
+    .rank-val {
+      text-align: right;
+      font-weight: 700;
+      color: #334155;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      font-size: 11px;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 1000;
+      place-items: center;
+      backdrop-filter: blur(2px);
+    }
+    .modal-backdrop.open { display: grid; }
+    .modal-card {
+      background: white;
+      border-radius: 12px;
+      max-width: 680px;
+      width: 90%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+    .modal-head {
+      padding: 14px 18px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-head h3 { font-size: 15px; font-weight: 700; color: #0f172a; }
+    .modal-close {
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      cursor: pointer;
+      color: #64748b;
+    }
+    .modal-body {
+      padding: 16px 18px;
+      overflow-y: auto;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .modal-body h4 { margin: 12px 0 6px; color: #0f172a; font-size: 13px; }
+
+    @media (max-width: 1200px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .summary-cards-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main-wrap { margin-left: 0; width: 100%; padding: 12px; }
+      .summary-cards-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+<link rel="stylesheet" href="traffic.css">
+<link rel="stylesheet" href="sidebar.css?v=20261017-unified-2">
+<link rel="stylesheet" href="signature_deck.css?v=20261018-stepper7-v2">
+<script src="signature_deck.js?v=20261018-stepper7-v2" defer></script>
+</head>
+<body class="control-room channel-page" data-summary-platform="cf">
+
+<div class="layout">
+  <!-- Sidebar -->
+  <aside id="barolab-sidebar" class="sidebar" aria-label="주요 메뉴"></aside>
+<script src="sidebar.js?v=20261018-no-rnd"></script>
+
+  <!-- Main Wrap -->
+  <main class="main-wrap">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1>
+          CF 블로그 운영 대시보드
+          <span class="header-badge" id="header-badge-status" style="background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe;">오늘 일정 조회 중</span>
+        </h1>
+        <p>16개 Cloudflare 블로그의 실시간 워크플로우 · 타임라인 · 실제 발행 글 (공개 결과 확인)</p>
+      </div>
+      <div class="toolbar">
+        <div class="date-box">
+          <div class="clock" id="live-clock">--:--:--</div>
+          <div class="tz" id="cf-current-date">한국 날짜 확인 중 · KST</div>
+        </div>
+        <div class="live-status" id="connection-status">
+          <span class="live-dot"></span>
+          <span id="connection-label">운영 기록 조회 중</span>
+        </div>
+        <button class="btn-refresh" onclick="window.BaroLabHistory && window.BaroLabHistory.openModal()" style="font-weight:700; background:#f8fafc; border-color:#cbd5e1; color:#0f172a;" title="과거 일자별 발행 완료 내역 조회">
+          📜 지난 발행내역
+        </button>
+        <button class="btn-refresh" id="btn-manual-refresh" title="수동 새로고침">
+          ↻ 새로고침
+        </button>
+      </div>
+    </header>
+
+    <!-- Notice Box: Dynamic Polling -->
+    <div class="notice-box" id="live-notice-box" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">
+      <div>
+        <strong>오늘 발행 일정 조회 중</strong>
+        한국 날짜와 일치하는 운영 기록을 확인하고 있습니다.
+      </div>
+    </div>
+
+    <!-- Simulation & Inspector Bar -->
+    <div class="sim-bar">
+      <div class="sim-bar-title">
+        <span>🔍 블로그별 워크플로우 검사기</span>
+        <span class="pill pill-yellow" id="sim-current-tag">오늘 일정 조회 중</span>
+      </div>
+      <div class="sim-controls">
+        <button class="btn-sim" id="btn-prev-blog" disabled>◀ 이전 블로그</button>
+        <button class="btn-sim active" id="btn-next-blog" disabled>▶ 다음 블로그 선택</button>
+        <button class="btn-sim" id="btn-open-current-live" disabled style="background:#f1f5f9; color:#475569; border-color:#cbd5e1;">
+          🌐 현재 블로그 실제 글 열기 ↗
+        </button>
+      </div>
+    </div>
+
+    <!-- Top KPI Cards: publishing and measured visitors -->
+    <section class="summary-cards-row" aria-label="CF 운영 요약">
+      <div class="kpi-card">
+        <div class="kpi-card-header"><span class="kpi-card-brand">전체 CF 블로그</span><span class="kpi-card-icon" style="background:#eff6ff;color:#0872ff;">🌐</span></div>
+        <div class="kpi-card-val">16 <small style="font-size:14px;font-weight:400;">개</small></div>
+        <div class="kpi-card-subline">관리 도메인 · 계정별 상태는 아래에서 확인</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-header"><span class="kpi-card-brand">오늘 발행 완료 / 대기</span><span class="kpi-card-icon" style="background:#eff6ff;color:#2563eb;">✓</span></div>
+        <div class="kpi-card-val" style="display:flex;align-items:baseline;gap:8px;"><span id="kpi-done-count" style="color:#2563eb;">0건</span><small style="color:#94a3b8;">/</small><span id="kpi-wait-count" style="color:#d97706;">미확인</span></div>
+        <div class="kpi-card-subline" id="kpi-publication-summary">한국 시간 · 오늘 발행 현황</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-header"><span class="kpi-card-brand">오늘 방문자 합계</span><span class="kpi-card-icon" style="background:#f0fdf4;color:#16a34a;">👥</span></div>
+        <div class="kpi-card-val" id="summary-visitors-value" style="color:#16a34a;">미수집</div>
+        <div class="kpi-card-subline" id="summary-visitors-coverage">오늘 통계 조회 중</div>
+        <div class="summary-source" id="summary-visitors-note">GA4 도메인별 합계 · 도메인 간 중복 포함</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-header"><span class="kpi-card-brand">방문 통계 (어제까지)</span><span class="kpi-card-icon" style="background:#f5f3ff;color:#7c3aed;">📊</span></div>
+        <div class="summary-periods"><span>어제 <strong id="summary-stat-day">미수집</strong></span><span>최근 7일 <strong id="summary-stat-week">미수집</strong></span><span>최근 30일 <strong id="summary-stat-month">미수집</strong></span></div>
+        <div class="summary-source" id="summary-visitors-updated">원천 수집 대기</div>
+      </div>
+    </section>
+
+    <section class="panel wf-timeline-panel" aria-label="선택 블로그 워크플로우 타임라인">
+      <div class="panel-head">
+        <h2>선택 블로그 워크플로우 타임라인</h2>
+        <div class="wf-timeline-actions">
+          <span class="pill pill-yellow" id="wf-badge-status">⏳ 7단계 파이프라인 가동 대기 (0%)</span>
+          <button type="button" id="wf-retry-button" disabled>선택한 작업 다시 실행</button>
+        </div>
+      </div>
+      <p class="wf-timeline-selection" id="wf-timeline-selection"></p>
+      <p id="wf-retry-message" role="status" aria-live="polite"></p>
+      <div class="wf-stages" id="wf-stages-container" tabindex="0" role="region" aria-label="워크플로우 단계 · 가로 스크롤"></div>
+    </section>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+      <!-- Left Column: Tables -->
+      <div class="col-left">
+        <!-- Panel 1: 16 Domains Publishing Overview -->
+        <section class="panel">
+          <div class="panel-head">
+            <h2>
+              16개 CF 블로그 포스팅 관리 현황
+              <span class="panel-sub" id="table-panel-sub">(오늘 일정 조회 중)</span>
+            </h2>
+            <div class="search-box">
+              <input type="text" id="post-search" placeholder="도메인 / 글 제목 검색...">
+            </div>
+          </div>
+
+          <div class="table-container" style="max-height: none;">
+            <table id="domain-table">
+              <thead>
+                <tr>
+                  <th style="width: 36px; text-align:center;">순번</th>
+                  <th style="width: 105px;">블로그 사이트</th>
+                  <th style="width: 95px;">도메인</th>
+                  <th style="min-width: 180px;">포스팅 기획 주제</th>
+                  <th style="width: 85px; text-align:center;">발행 시각</th>
+                  <th style="width: 80px; text-align:center;">진행 상태</th>
+                  <th style="width: 68px; text-align:center;">바로가기</th>
+                </tr>
+              </thead>
+              <tbody id="domain-table-body">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Column: Traffic & Income Trends -->
+      <div class="col-right">
+        <!-- Panel 3: CF Traffic & Income Mini Charts -->
+        <section class="panel">
+          <div class="panel-head">
+            <h2>
+              16개 CF 블로그 성과 추이
+              <span class="panel-sub">최근 7일 트렌드</span>
+            </h2>
+            <span class="panel-sub">GA4 & AdSense</span>
+          </div>
+          <div class="charts-row">
+            <div class="chart-box">
+              <div class="chart-box-head">
+                <span title="CF 유입 세션 (수집된 도메인)">CF 유입 세션 (최근 7일)</span>
+                <strong id="metric-cf-sessions" style="color:#0872ff;">미수집</strong>
+              </div>
+              <div class="chart-submetrics" id="metric-cf-submetrics">
+                <span class="sub-chip">오늘 —</span>
+                <span class="sub-chip">어제 —</span>
+                <span class="sub-chip">7일 PV —</span>
+              </div>
+              <div class="cf-mini-bars" id="chart-cf-sessions" aria-label="최근 7일 GA4 일별 세션 추이"></div>
+              <p id="metric-cf-period" style="font-size:11px;color:#64748b;line-height:1.4;">GA4 원천 연결 전에는 추세를 표시하지 않습니다.</p>
+            </div>
+            <div class="chart-box">
+              <div class="chart-box-head">
+                <span title="예상 수익 (USD · AdSense)">예상 수익 (USD)</span>
+                <strong id="metric-cf-revenue" style="color:#16a34a;">미수집</strong>
+              </div>
+              <div class="chart-submetrics" id="metric-cf-revenue-sub">
+                <span class="sub-chip">오늘 —</span>
+                <span class="sub-chip">어제 —</span>
+                <span class="sub-chip">7일 —</span>
+              </div>
+              <div class="cf-mini-bars" id="chart-cf-revenue" aria-label="최근 7일 AdSense 일별 수익 추이"></div>
+              <p id="metric-cf-revenue-note" style="font-size:11px;color:#64748b;line-height:1.4;">사이트별 애드센스 보고서 확인 중</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Panel 4: Real-time Popular Posts TOP 5 -->
+        <section class="panel">
+          <div class="panel-head">
+            <h2>
+              실시간 인기 유입 게시물 TOP 5
+            </h2>
+            <div class="btn-group" id="cf-top-posts-tabs">
+              <button type="button" class="btn-filter active" data-period="recent24h" style="padding:3px 8px;font-size:10.5px;">최근 24시간</button>
+              <button type="button" class="btn-filter" data-period="week" style="padding:3px 8px;font-size:10.5px;">최근 7일</button>
+            </div>
+          </div>
+          <div id="cf-popular-posts-list" class="rank-list" style="padding:4px 2px;">
+            <p style="padding:12px;color:#64748b;font-size:12px;">GA4 게시물별 유입 순위를 불러오는 중입니다…</p>
+          </div>
+          <p id="cf-popular-posts-note" style="padding:8px 4px 0;color:#64748b;font-size:11px;"></p>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Task Details Modal -->
+<div class="modal-backdrop" id="task-modal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="modal-title">포스팅 상세 내역</h3>
+      <button class="modal-close" onclick="closeTaskModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-content">
+      <!-- Dynamic content -->
+    </div>
+  </div>
+</div>
+
+<script src="naver_schedule.js?v=20261017-live-sync"></script>
+<script src="history_manager.js?v=20261017-live-sync"></script>
+<script>
+// A schedule belongs to its own KST publication day, regardless of fetch time.
+function getCFDay(now = new Date()) {
+  return new Intl.DateTimeFormat('sv-SE', {timeZone:'Asia/Seoul'}).format(now);
+}
+function isCFPublished(site) {
+  if (site?.status !== 'published') return false;
+  try { return ['http:', 'https:'].includes(new URL(site.publicUrl).protocol); }
+  catch (_) { return false; }
+}
+function projectCFDay(schedule, state, now = new Date()) {
+  const today = getCFDay(now), sourceDate = schedule?.date || null;
+  const current = sourceDate === today && Array.isArray(schedule?.items);
+  const stateCurrent = current && (state?.date === today || state?.scheduleDate === today);
+  const activeDomain = state?.domain || state?.activeDomain || '';
+  const stateRunning = stateCurrent && ['processing', 'publishing'].includes(state?.status);
+  const stateScheduleItems = Array.isArray(state?.dailySchedule) ? state.dailySchedule : [];
+  const items = current ? schedule.items.map(site => {
+    const copy = {...site};
+    const stateItem = stateScheduleItems.find(s => s?.domain === copy.domain) || null;
+    if (stateRunning && copy.domain === activeDomain && !isCFPublished(copy)) {
+      if (stateItem) Object.assign(copy, stateItem);
+      copy.status = state.status;
+      if (state.currentStage != null) copy.currentStage = state.currentStage;
+      if (state.stageName) copy.stageName = state.stageName;
+      if (state.progressPct != null) copy.progressPct = state.progressPct;
+      if (state.detailMessage) copy.detailMessage = state.detailMessage;
+      if (state.currentModel) copy.currentModel = state.currentModel;
+      if (state.stageTimes) copy.stageTimes = state.stageTimes;
+      if (state.handoffs) copy.handoffs = state.handoffs;
+      if (state.title && (Number(state.currentStage) > 1 || Number(state.progressPct) >= 20)) copy.title = state.title;
+      if (state.summary && (Number(state.currentStage) > 1 || Number(state.progressPct) >= 20)) copy.summary = state.summary;
+    } else if (stateItem && ['processing', 'publishing'].includes(stateItem.status) && !isCFPublished(copy)) {
+      Object.assign(copy, stateItem);
+    }
+    return copy;
+  }) : [];
+  return {today, sourceDate, current, items, stateCurrent,
+    state: stateCurrent ? {...state, date:today, scheduleDate:today, dailySchedule:items}
+      : {date:today, scheduleDate:current ? today : null, dailySchedule:items,
+         status:'unknown', executionState:'unknown', sourceScheduleDate:sourceDate}};
+}
+let CF_SITES = [];
+let cfSourceSchedule = null, cfSourceState = null;
+let cfDayView = projectCFDay(null, null);
+let cfLoadError = '';
+let lastProcessingId = null;
+
+// 2. 7 Stages Pipeline Definition
+const STAGES = [
+  { key: 'keyword', label: '키워드 · 리서치', agent: 'keyword-selector / researcher', detail: '키워드 중복 대조와 실제 근거 수집' },
+  { key: 'writer', label: '원고 초안 · 이미지 계획', agent: 'writer', detail: '본문 구조와 이미지 3장 계획 검토' },
+  { key: 'image', label: '사진 제작 · Flow', agent: 'image-maker', detail: 'Flow AI 고화질 렌더링 및 메타데이터 결합 완료' },
+  { key: 'assemble', label: '원고 보완 · 본문 조립', agent: 'assembler', detail: '이미지 캡션 결합 & HTML 스마트에디터 조립 완료' },
+  { key: 'review', label: '최종 검수 (SEO)', agent: 'posting-checks / seo-guide', detail: '근거·검색 의도·독자 가치·가독성·이미지 독립 검수' },
+  { key: 'publish', label: '즉시 발행 (Cloudflare)', agent: 'cloudflare-api', detail: 'Cloudflare Pages / Workers API 배포 완료' },
+  { key: 'verify', label: '공개 확인 (Verify)', agent: 'site-verifier', detail: '정규 URL 접근 상태(HTTP 200 OK) 최종 확인' }
+];
+
+let selectedIndex = 0; // Currently inspected blog (0-indexed)
+
+// Clock updates
+function updateClock() {
+  const now = new Date();
+  const kst = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+  const hours = String(kst.getHours()).padStart(2, '0');
+  const minutes = String(kst.getMinutes()).padStart(2, '0');
+  const seconds = String(kst.getSeconds()).padStart(2, '0');
+  document.getElementById('live-clock').textContent = `${hours}:${minutes}:${seconds}`;
+  document.getElementById('cf-current-date').textContent = `${getCFDay(now)} · KST`;
+  if (cfDayView.today !== getCFDay(now)) {
+    closeTaskModal();
+    renderCFDay(now);
+  }
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// Render Main Domain Table
+function renderDomainTable() {
+  const container = document.querySelector('.table-container');
+  const prevScrollTop = container ? container.scrollTop : 0;
+
+  const tbody = document.getElementById('domain-table-body');
+  tbody.innerHTML = '';
+
+  if (!CF_SITES.length) {
+    const row = document.createElement('tr'), cell = document.createElement('td');
+    cell.colSpan = 7;
+    cell.style.cssText = 'padding:28px;text-align:center;color:#64748b';
+    cell.textContent = cfDayView.current ? '오늘 등록된 발행 작업이 없습니다.' : `${cfDayView.today} 오늘 일정 대기 · 원본 날짜 ${cfDayView.sourceDate || '미확인'}`;
+    row.appendChild(cell); tbody.appendChild(row);
+    return;
+  }
+  const searchKeyword = document.getElementById('post-search').value.toLowerCase().trim();
+
+  const filtered = CF_SITES.filter(site => {
+    if (!searchKeyword) return true;
+    return site.title.toLowerCase().includes(searchKeyword) || 
+           site.domain.toLowerCase().includes(searchKeyword) ||
+           site.name.toLowerCase().includes(searchKeyword);
+  });
+
+  filtered.forEach((site) => {
+    const realIdx = CF_SITES.indexOf(site);
+    const isSelected = realIdx === selectedIndex;
+    const isPublished = isCFPublished(site);
+    const isProcessing = ['processing','publishing'].includes(site.status);
+    const isFailed = ['failed','retry_wait','review_required','interrupted'].includes(site.status);
+    const tr = document.createElement('tr');
+    tr.style.cursor = 'pointer';
+    tr.onclick = (e) => {
+      if (!e.target.closest('a')) {
+        selectBlog(realIdx >= 0 ? realIdx : 0);
+      }
+    };
+
+    if (isSelected) {
+      tr.style.backgroundColor = isProcessing ? '#eff6ff' : '#f0fdf4';
+      tr.style.boxShadow = 'inset 3px 0 0 #16a34a';
+    }
+
+    let timeCol = `<span style="color:#d97706; font-weight:700; font-size:11px;">⏰ ${site.scheduledTime || '--:--'} 예정</span>`;
+    let statusBadge = '<span class="pill pill-yellow" style="font-size:10px; padding:2px 6px;">⏳ 대기</span>';
+    let subText = '<small style="display:block; color:#94a3b8; font-size:10px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">(스케줄 시각에 자동 발행)</small>';
+    let linkProof = `<span style="color:#94a3b8; font-size:10px;">대기</span>`;
+
+    if (isPublished) {
+      const doneTime = site.completedAt || '시각 미기록';
+      timeCol = `<span style="color:#16a34a; font-weight:700; font-size:11px;">✓ ${doneTime} 완료</span>`;
+      statusBadge = '<span class="pill pill-green" style="font-size:10px; padding:2px 6px; font-weight:700;">✓ 200 OK</span>';
+      subText = '<small style="display:block; color:#16a34a; font-size:10px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">(신규 배포 완료 · 200 OK)</small>';
+      linkProof = `<a href="${site.publicUrl}" target="_blank" rel="noopener noreferrer" class="link-proof" title="실제 발행 글 확인" style="background:#ecfdf5; color:#047857; border-color:#86efac; font-weight:700; padding:2px 6px; font-size:10px; white-space:nowrap;">글 보기 ↗</a>`;
+    } else if (isProcessing) {
+      timeCol = `<span style="color:#2563eb; font-weight:700; font-size:11px;">⚡ 실시간 발행</span>`;
+      statusBadge = `<span class="pill pill-blue" style="background:#dbeafe; color:#1d4ed8; border:1px solid #93c5fd; font-weight:700; font-size:10px; padding:2px 6px;">⚡ 진행중 (${site.progressPct || 10}%)</span>`;
+      subText = `<small style="display:block; color:#2563eb; font-size:10px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">⚡ ${site.stageName || '실시간 생성 중'}${site.detailMessage ? ' · ' + site.detailMessage : ''}</small>`;
+      linkProof = `<span class="link-proof" style="background:#eff6ff; color:#2563eb; border-color:#bfdbfe; font-weight:600; padding:2px 6px; font-size:10px; white-space:nowrap;">생성 중 ⚙️</span>`;
+    } else if (isFailed) {
+      statusBadge='<span class="pill" style="background:#fff1e7;color:#9a470c;">'+(site.status==='review_required'?'검수 보류':'실패 · 재시도 대기')+'</span>';
+      subText='<small>실패 사유와 재시도 시각은 작업 상세에서 확인</small>';
+      linkProof='<span style="color:#9a470c;font-size:12px;">완료 미확인</span>';
+    }
+
+    const orderNum = site.order || site.id;
+
+    tr.innerHTML = `
+      <td style="text-align:center; font-weight:700; color:#64748b;">${orderNum}</td>
+      <td>
+        <div class="site-brand-cell" style="gap:6px;">
+          <div class="site-logo" style="background: ${site.color}; width:20px; height:20px; font-size:10px; border-radius:4px;">${site.icon}</div>
+          <div class="site-brand-info" style="min-width:0; overflow:hidden;">
+            <strong style="font-size:11.5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${site.name}</strong>
+            <small style="font-size:9.5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${site.category}</small>
+          </div>
+        </div>
+      </td>
+      <td><code style="font-size:10.5px; color:#475569; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${site.domain}</code></td>
+      <td style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${site.title}">
+        <strong style="color: ${site.title.includes('실시간 AI') ? '#4338ca' : '#0f172a'}; font-size:11.5px; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+          ${site.title.includes('실시간 AI') ? '<span style="background:#e0e7ff; color:#3730a3; padding:1px 5px; border-radius:4px; font-size:10px; font-weight:700; margin-right:4px; border:1px solid #c7d2fe;">⚡ AI 기획 대기</span> ' + site.title.replace('⚡ [실시간 AI 기획 대기] ', '') : site.title}
+        </strong>
+        ${subText}
+      </td>
+      <td style="text-align:center;">${timeCol}</td>
+      <td style="text-align:center;">${statusBadge}</td>
+      <td style="text-align:center;">${linkProof}</td>
+    `;
+    const attempts=document.createElement('small');attempts.className='wf-attempt-note';
+    attempts.textContent=`총 ${site.totalAttempts ?? site.attemptCount ?? 0}회 시도`;
+    tr.children[5].appendChild(attempts);
+    if(site.lastError) tr.children[5].title=site.lastError;
+    tbody.appendChild(tr);
+  });
+
+  // 스크롤 위치 복원
+  if (container) {
+    container.scrollTop = prevScrollTop;
+  }
+}
+
+// Select Blog and Render Workflow Timeline
+function selectBlog(index) {
+  selectedIndex = index;
+  renderDomainTable();
+  renderWorkflowTimeline();
+}
+
+// Render Workflow Timeline
+function renderWorkflowTimeline() {
+  const publicSite = CF_SITES[selectedIndex];
+  for (const id of ['btn-prev-blog','btn-next-blog']) document.getElementById(id).disabled = !publicSite;
+  if (!publicSite) {
+    document.getElementById('sim-current-tag').textContent = '오늘 선택 가능한 작업 없음';
+    document.getElementById('wf-timeline-selection').textContent = `${cfDayView.today} · ${cfDayView.current ? '오늘 등록된 작업 없음' : '오늘 일정 대기'}`;
+    document.getElementById('wf-stages-container').innerHTML = '';
+    document.getElementById('btn-open-current-live').disabled = true;
+    document.getElementById('btn-open-current-live').onclick = null;
+    document.getElementById('wf-retry-button').disabled = true;
+    document.getElementById('wf-retry-message').textContent = '';
+    return;
+  }
+  const site = publicSite.revision && publicSite.revision.status !== 'published' ? {...publicSite, ...publicSite.revision, publicUrl:publicSite.publicUrl} : publicSite;
+
+  const isPublished = isCFPublished(site);
+  const isProcessing = ['processing','publishing'].includes(site.status);
+  const isFailed = ['failed','retry_wait','review_required','interrupted'].includes(site.status);
+
+  const orderNum = site.order || site.id;
+  // Selected Blog Tag
+  let tagText = `선택 블로그: ${orderNum}번 [${site.name}] (${site.domain}) · 발행 대기 (⏰ ${site.scheduledTime || '--:--'} 예정)`;
+
+  if (isPublished) {
+    const doneTime = site.completedAt || '완료 시각 미기록';
+    tagText = `선택 블로그: ${orderNum}번 [${site.name}] (${site.domain}) · 발행 완료 (200 OK · ${doneTime})`;
+  } else if (isProcessing) {
+    tagText = `선택 블로그: ${orderNum}번 [${site.name}] (${site.domain}) · ⚡ ${site.stageName || '작업 진행 중'} (${site.progressPct || 10}%)`;
+  } else if (isFailed) {
+    tagText=`선택 블로그: ${orderNum}번 [${site.name}] (${site.domain}) · ${site.status==='review_required'?'검수 보류':'실패 · 재시도 대기'}`;
+  } else if (site.title && site.title.includes('실시간 AI')) {
+    tagText = `선택 블로그: ${orderNum}번 [${site.name}] (${site.domain}) · ⚡ 실시간 AI 자율 기획 대기 (⏰ ${site.scheduledTime || '--:--'} 예정)`;
+  }
+
+  document.getElementById('sim-current-tag').textContent = tagText;
+  const pipelineDomain = document.getElementById('kpi-current-domain');
+  if (pipelineDomain) pipelineDomain.textContent = site.domain;
+  document.getElementById('wf-timeline-selection').textContent = `${site.name} · ${site.domain} · ${site.title}`;
+  document.getElementById('btn-open-current-live').disabled = !isCFPublished(publicSite);
+  document.getElementById('btn-open-current-live').onclick = () => { if(cfDayView.today === getCFDay() && cfDayView.current && isCFPublished(publicSite)) window.open(publicSite.publicUrl, '_blank'); };
+
+  // Render 7 Stages
+  const container = document.getElementById('wf-stages-container');
+  container.innerHTML = '';
+
+  const doneTimes = STAGES.map((_,idx)=>{
+    const key = String(idx+1);
+    const raw = site.stageTimes?.[key] || (isPublished ? (site.stageTimes?.['6'] || site.stageTimes?.['7'] || site.publishedAt) : null);
+    if (raw) return new Date(raw).toLocaleTimeString('ko-KR',{timeZone:'Asia/Seoul',hour12:false,hour:'2-digit',minute:'2-digit'});
+    return (isPublished && site.completedAt && String(site.completedAt).includes(':')) ? String(site.completedAt).slice(0,5) : '--:--';
+  });
+  const curStage = isPublished ? 8 : (site.currentStage || 0);
+
+  STAGES.forEach((stage, idx) => {
+    const stageNum = idx + 1;
+    const row = document.createElement('div');
+
+    const stageAgents = [['keyword-selector','researcher'],['writer'],['image-maker'],['assembler'],['reviewer']][idx];
+    const evidence = stageNum >= 6
+      ? (isPublished || Boolean(site.stageTimes?.[String(stageNum)] || site.postId || site.publicUrl))
+      : (isPublished || (site.artifactAvailability !== 'missing' && stageAgents && stageAgents.every(agent => (site.handoffs || []).some(row => row.agent === agent && row.status === 'accepted'))));
+    if (((stageNum === 6 || stageNum === 7) && isPublished) || (stageNum < curStage && evidence)) {
+      row.className = 'wf-row st-done';
+      row.innerHTML = `
+        <span class="wf-time">${doneTimes[idx] || '완료'}</span>
+        <span class="wf-dot" style="background:#16a34a; color:#fff;">✓</span>
+        <div class="wf-info">
+          <strong>${stage.label}</strong>
+          <span>${stage.agent} · ${stage.detail}</span>
+        </div>
+        <span class="wf-prog" style="color:#16a34a; font-weight:700;">완료</span>
+      `;
+    } else if (isProcessing && stageNum === curStage) {
+      row.className = 'wf-row st-active';
+      row.innerHTML = `
+        <span class="wf-time" style="color:#2563eb; font-weight:700;">실시간</span>
+        <span class="wf-dot">⚡</span>
+        <div class="wf-info">
+          <strong style="color:#1d4ed8;">${stage.label} (실시간 실행 중)</strong>
+          <span style="color:#2563eb; font-weight:600;">${stage.agent} · ${site.detailMessage || stage.detail}</span>
+        </div>
+        <span class="wf-prog" style="color:#2563eb; font-weight:700;">진행중</span>
+      `;
+    } else if(isFailed && stageNum===curStage) {
+      row.className='wf-row st-failed';
+      row.innerHTML='<span class="wf-time">실패</span><span class="wf-dot">!</span><div class="wf-info"><strong></strong><span></span></div><span class="wf-prog">확인 필요</span>';
+      row.querySelector('strong').textContent=site.stageName || stage.label;
+      row.querySelector('.wf-info span').textContent='상세 사유는 마지막 실패에서 확인하세요.';
+    } else {
+      row.className = 'wf-row st-wait';
+      row.innerHTML = `
+        <span class="wf-time">--:--</span>
+        <span class="wf-dot">${stageNum}</span>
+        <div class="wf-info">
+          <strong>${stage.label}</strong>
+          <span>${stage.agent} · ${stage.detail} (가동 대기)</span>
+        </div>
+        <span class="wf-prog">대기</span>
+      `;
+    }
+    container.appendChild(row);
+  });
+}
+
+// Dynamic Real-time Counter and KPI Updater
+function updateDynamicCounters() {
+  const set = (id, value) => { const el=document.getElementById(id); if (el) el.textContent=value; };
+  const seen = new Set();
+  const publishedSites = CF_SITES.filter(site => {
+    if (!isCFPublished(site) || seen.has(site.publicUrl)) return false;
+    seen.add(site.publicUrl); return true;
+  });
+  const waitingSites = CF_SITES.filter(site => !isCFPublished(site));
+  const processingSite = CF_SITES.find(site => ['processing', 'publishing'].includes(site.status));
+  const doneCount = publishedSites.length, waitCount = waitingSites.length, total = CF_SITES.length;
+  const dateNote = `${cfDayView.today} KST · 원본 날짜 ${cfDayView.sourceDate || '미확인'}`;
+  const liveTag = processingSite ? ` · ⚡ ${processingSite.domain} (${processingSite.stageName || '진행중'} ${processingSite.progressPct || 10}%)` : '';
+  set('kpi-done-count', `${doneCount}건`);
+  set('kpi-wait-count', cfDayView.current ? `${waitCount}건` : '미확인');
+  set('kpi-publication-summary', cfDayView.current ? `${dateNote} · 완료 ${doneCount}건 / 대기 ${waitCount}건${liveTag}` : `${dateNote} · 오늘 확인된 발행 0건 · 예정 건수 미확인`);
+  set('header-badge-status', cfDayView.current ? (processingSite ? `⚡ ${processingSite.domain} 진행중 (${doneCount}/${total} 완료)` : `오늘 ${doneCount}/${total}건 공개 확인`) : '오늘 일정 대기 · 발행 완료 0건');
+  const badge=document.getElementById('header-badge-status');
+  badge.style.cssText='background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe';
+  set('live-notice-box', cfDayView.current
+    ? `${dateNote} · 공개 확인 ${doneCount}건 / 완료 미확인 ${waitCount}건${processingSite ? ` · ⚡ 실시간 실행: [${processingSite.name}] ${processingSite.stageName || '작업 중'} (${processingSite.progressPct || 10}%) — ${processingSite.detailMessage || ''}` : ''}`
+    : `${dateNote} · 오늘 일정이 아직 확인되지 않았습니다. 이전 날짜의 발행 내역은 오늘 집계에서 제외합니다.`);
+  set('table-panel-sub', cfDayView.current ? `(오늘 완료 ${doneCount}건 / 대기 ${waitCount}건${liveTag})` : '(오늘 일정 대기 · 예정 건수 미확인)');
+  set('kpi-done-subline', `오늘 공개 확인 ${doneCount}건`);
+  set('kpi-wait-subline', cfDayView.current ? `오늘 완료 미확인 ${waitCount}건` : '오늘 예정 건수 미확인');
+  set('kpi-current-domain', cfDayView.current ? ((processingSite || waitingSites[0])?.domain || '오늘 대기 작업 없음') : '오늘 일정 대기');
+}
+
+function renderCFDay(now = new Date()) {
+  const selectedDomain = CF_SITES[selectedIndex]?.domain;
+  cfDayView = projectCFDay(cfSourceSchedule, cfSourceState, now);
+  CF_SITES = cfDayView.items;
+  selectedIndex = Math.max(0, CF_SITES.findIndex(site => site.domain === selectedDomain));
+  const ps = cfDayView.state;
+  window.__PIPELINE_STATUS__ = ps;
+  const activeDomain = ps.activeDomain || ps.domain;
+  const activeIndex = CF_SITES.findIndex(site => site.domain === activeDomain);
+  const running = cfDayView.stateCurrent && ['processing','publishing'].includes(ps.status) && ps.executionState !== 'stopped';
+  if (running && activeIndex >= 0 && lastProcessingId !== activeDomain) {
+    selectedIndex = activeIndex; lastProcessingId = activeDomain;
+  } else if (!running) lastProcessingId = null;
+  updateDynamicCounters(); renderDomainTable(); renderWorkflowTimeline();
+  const next = CF_SITES.find(site => !isCFPublished(site));
+  const step = document.getElementById('kpi-current-step') || document.getElementById('kpi-pipeline-step');
+  if (step) step.textContent = !cfDayView.current ? '오늘 일정 대기'
+    : !cfDayView.stateCurrent ? '오늘 실행 상태 미확인'
+    : running && activeIndex >= 0 ? `${CF_SITES[activeIndex].order}번 ${activeDomain} · ${ps.stageName || '진행 중'}`
+    : ps.executionState === 'stopped' ? `자동 발행 중단 · ${next ? next.order+'번 '+next.domain+'부터 확인 필요' : '오늘 대기 작업 없음'}`
+    : next ? `${next.order}번 ${next.domain} · 완료 미확인` : '오늘 대기 작업 없음';
+  const sourceNote = `기준 ${cfDayView.today} KST · 원본 ${cfDayView.sourceDate || '미확인'}`;
+  document.getElementById('connection-status').textContent = sourceNote + (cfLoadError ? ` · ${cfLoadError}` : !cfDayView.current ? ' · 오늘 일정 대기' : ` · 기록 ${ps.updatedAt || '시각 미기록'}`);
+  document.getElementById('wf-badge-status').textContent = !cfDayView.current ? '오늘 일정 대기' : !cfDayView.stateCurrent ? '오늘 실행 상태 미확인' : running ? '작업 실행 중' : ps.executionState === 'stopped' ? '자동 발행 중단' : '실행 대기';
+}
+
+// Live Status Poller from data/pipeline_status.js
+let statusRefreshRunning = false;
+async function pollPipelineStatus() {
+  // Recheck the day even while an earlier request is pending or has failed.
+  if (cfDayView.today !== getCFDay()) renderCFDay();
+  if (statusRefreshRunning) return;
+  statusRefreshRunning = true;
+  try {
+    const root = window.location.protocol.startsWith('http') ? '/cf_posting/data/' : '../cf_posting/data/';
+    const get = async name => { const response = await fetch(root + name + '?t=' + Date.now(), {cache:'no-store'}); if (!response.ok) throw new Error('운영 상태 조회 실패: ' + response.status); return response.json(); };
+    const [schedule, state] = await Promise.all([get('daily_schedule.json'), get('pipeline_state.json')]);
+    if (!Array.isArray(schedule.items)) throw new Error('발행 일정 확인 불가');
+    cfSourceSchedule = schedule; cfSourceState = state; cfLoadError = '';
+  } catch (error) {
+    cfLoadError = error.message + ' · 마지막 수신 기록 기준';
+  } finally {
+    statusRefreshRunning = false;
+    renderCFDay();
+  }
+}
+setInterval(pollPipelineStatus, 3000);
+pollPipelineStatus();
+// Open Task Detail Modal
+function openTaskModal(index) {
+  const site = CF_SITES[index];
+  if (!site) return;
+
+  const isPublished = isCFPublished(site);
+  const modal = document.getElementById('task-modal');
+  const title = document.getElementById('modal-title');
+  const content = document.getElementById('modal-content');
+
+  title.textContent = `[${site.id}] ${site.name} (${site.domain}) 포스팅 상세 내역`;
+  content.innerHTML = `
+    <div style="background:#f8fafc; padding:12px; border-radius:6px; margin-bottom:12px; border:1px solid #e2e8f0;">
+      <h3 style="font-size:14px; color:#0f172a; margin-bottom:4px;">${isPublished ? '[발행 완료]' : '[예정]'} ${site.title}</h3>
+      <div style="font-size:11px; color:#64748b;">
+        <span>카테고리: <strong>${site.category}</strong></span> | 
+        <span>순번: <strong>${site.id}번</strong></span> | 
+        <span>상태: ${isPublished ? '<strong style="color:#16a34a;">✓ 발행 완료 (200 OK)</strong>' : '<strong style="color:#d97706;">⏳ 발행 대기 중 (0/1)</strong>'}</span>
+      </div>
+    </div>
+
+    <h4>1. 7단계 파이프라인 진행 상태</h4>
+    <table style="margin-bottom:12px;">
+      <thead>
+        <tr><th>단계</th><th>담당 에이전트</th><th>현재 상태</th></tr>
+      </thead>
+      <tbody>
+        ${STAGES.map((s, idx) => `<tr>
+          <td><strong>${idx + 1}. ${s.label}</strong></td>
+          <td>${s.agent}</td>
+          <td>${isPublished ? '<span class="pill pill-green">✓ 완료</span>' : '<span class="pill pill-yellow">⏳ 가동 대기</span>'}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+
+    <h4>2. 기획 분석 및 상세 내용</h4>
+    <p style="background:#fff; border:1px solid #e2e8f0; padding:10px; border-radius:6px; color:#334155; margin-bottom:14px; line-height:1.6;">
+      ${site.summary}
+    </p>
+
+    <h4>3. 라이브 사이트 URL (HTTP 200 OK)</h4>
+    <p style="margin-top:6px;">
+      <a href="${site.publicUrl}" target="_blank" rel="noopener noreferrer" class="link-proof" style="font-size:12px; padding:6px 12px; background:#ecfdf5; color:#047857; border-color:#86efac; font-weight:700;">
+        ${site.publicUrl} 바로가기 ↗
+      </a>
+    </p>
+  `;
+
+  modal.classList.add('open');
+}
+
+function closeTaskModal() {
+  document.getElementById('task-modal').classList.remove('open');
+}
+
+// Event Listeners
+document.getElementById('post-search').addEventListener('input', () => {
+  renderDomainTable();
+});
+
+document.getElementById('btn-manual-refresh').addEventListener('click', () => {
+  renderDomainTable();
+  renderWorkflowTimeline();
+  pollPipelineStatus();
+});
+
+document.getElementById('btn-next-blog').addEventListener('click', () => {
+  if (!CF_SITES.length) return;
+  selectedIndex = (selectedIndex + 1) % CF_SITES.length;
+  selectBlog(selectedIndex);
+});
+
+document.getElementById('btn-prev-blog').addEventListener('click', () => {
+  if (!CF_SITES.length) return;
+  selectedIndex = (selectedIndex - 1 + CF_SITES.length) % CF_SITES.length;
+  selectBlog(selectedIndex);
+});
+
+// Initial Run
+renderCFDay();
+</script>
+<script src="metrics.js?v=20261017-cf-trends"></script>
+<script src="/workflow-actions.js?v=20261016-kst-rollover"></script>
+</body>
+</html>

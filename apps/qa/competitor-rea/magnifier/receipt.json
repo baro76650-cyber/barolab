@@ -1,0 +1,131 @@
+{
+  "checkedAt": "2026-10-14T09:21:25.755262+00:00",
+  "reaVersion": "6.4.0",
+  "provider": "JADX headless 0.7.1",
+  "javaVersion": "21.0.12.1",
+  "apkSha256": "eb24b40953d2e393f89acbee49d00253a93292b9fdc6e356d4e746d8d07df9ba",
+  "commands": [
+    [
+      "npx.cmd",
+      "--yes",
+      "rea-agents@6.4.0",
+      "inspect-android-package",
+      "\\\\otns\\yoonlab\\10_Project\\BaroLab\\daily_apps\\qa\\competitor-rea\\magnifier\\cvzi-mag2-v1.1.apk",
+      "--format",
+      "json"
+    ],
+    [
+      "npx.cmd",
+      "--yes",
+      "rea-agents@6.4.0",
+      "search-android-classes",
+      "\\\\otns\\yoonlab\\10_Project\\BaroLab\\daily_apps\\qa\\competitor-rea\\magnifier\\cvzi-mag2-v1.1.apk",
+      "visor",
+      "--format",
+      "json"
+    ],
+    [
+      "npx.cmd",
+      "--yes",
+      "rea-agents@6.4.0",
+      "inspect-android-class",
+      "\\\\otns\\yoonlab\\10_Project\\BaroLab\\daily_apps\\qa\\competitor-rea\\magnifier\\cvzi-mag2-v1.1.apk",
+      "magnifying.glass.VisorActivity",
+      "--format",
+      "json"
+    ],
+    [
+      "npx.cmd",
+      "--yes",
+      "rea-agents@6.4.0",
+      "inspect-android-method",
+      "\\\\otns\\yoonlab\\10_Project\\BaroLab\\daily_apps\\qa\\competitor-rea\\magnifier\\cvzi-mag2-v1.1.apk",
+      "magnifying.glass.VisorActivity",
+      "onCreate",
+      "--format",
+      "json"
+    ],
+    [
+      "npx.cmd",
+      "--yes",
+      "rea-agents@6.4.0",
+      "inspect-android-method",
+      "\\\\otns\\yoonlab\\10_Project\\BaroLab\\daily_apps\\qa\\competitor-rea\\magnifier\\cvzi-mag2-v1.1.apk",
+      "magnifying.glass.VisorActivity",
+      "onPause",
+      "--format",
+      "json"
+    ],
+    [
+      "npx.cmd",
+      "--yes",
+      "rea-agents@6.4.0",
+      "inspect-android-method",
+      "\\\\otns\\yoonlab\\10_Project\\BaroLab\\daily_apps\\qa\\competitor-rea\\magnifier\\cvzi-mag2-v1.1.apk",
+      "defpackage.dp",
+      "onClick",
+      "--format",
+      "json"
+    ]
+  ],
+  "evidenceFiles": {
+    "cvzi-package.json": {
+      "sha256": "235f68312e4396f2fd3c1eeecf0e18385e9cb4ad6b85285a93d1815fa3d4033f",
+      "evidenceId": "ev_6f67eb607299892026c379b900a0b745c553d74687e9682b3e66bd96266dd9cb",
+      "operation": "inspect_android_package"
+    },
+    "cvzi-classes.json": {
+      "sha256": "1b4f83f76f5e179d02c11125ebf85085446ef72928cdfdd366f3459df2aac11e",
+      "evidenceId": "ev_3279cdd9dc99688beb8f9ef384e2587e23520a0e881349308cda73235f65a975",
+      "operation": "search_android_classes"
+    },
+    "cvzi-visor-class.json": {
+      "sha256": "b94bd8129511df17f6bf8610b9c220e626f2bed5f7fb52f8848e8a070fc30058",
+      "evidenceId": "ev_518772225f1015caf71744547d62880e4c21133892ebba151f9b5c30ee74ed38",
+      "operation": "inspect_android_class"
+    },
+    "cvzi-visor-onCreate.json": {
+      "sha256": "1aaba8dbe35d53c188077df13d1c61ad27fb3d87098f0a897af09b32f7fcc5a6",
+      "evidenceId": "ev_556e4d7a2f4bb3333ba91b419166f80039006aa02f894767fcba0d84f13e13b3",
+      "operation": "inspect_android_method"
+    },
+    "cvzi-visor-onPause.json": {
+      "sha256": "a41da12cbcd96f2bc01ab1b666d3c88da51b8a91b03b823f5d2e9aea868dd87a",
+      "evidenceId": "ev_d59247971c6e9d7e9edbc96040a205e05cc92805a4cfa3de4bcccbaf155a42e3",
+      "operation": "inspect_android_method"
+    },
+    "cvzi-click.json": {
+      "sha256": "d563cbb55162f7746a151817a5e62e0fc6a84ac43a0338fb4ddc21205dae1e43",
+      "evidenceId": "ev_88d701d4160f698d9c574d150cee92be1d1f5e76823c9c4cccac5c75b0ba2cce",
+      "operation": "inspect_android_method"
+    }
+  },
+  "findings": {
+    "onCreate": "zoom_slider and pause/color/flash handlers attached; landscape orientation requested.",
+    "onClickCase2": "preview stop/start state, frozen bitmap overlay, hides live zoom slider and exposes play icon",
+    "onClickCase1": "cycles camera color mode",
+    "onClickCase4": "torch gated by preview state; no runtime assurance"
+  },
+  "limits": [
+    "Static only; app not installed or executed.",
+    "Official open-source technical comparator, not popularity or commercial UI execution evidence.",
+    "OnPause brightness restore alone does not prove camera release; surface lifecycle not exhaustively traced.",
+    "Constructor token <init> failed at Windows cmd argument parsing; no constructor evidence claimed.",
+    "No screenshot asset or decompiled implementation copied into our app."
+  ],
+  "draftRouting": {
+    "provider": "freellm",
+    "requested_model": "auto",
+    "returned_model": "openai/gpt-oss-20b",
+    "status": "ok",
+    "attempt": 1,
+    "latency_ms": 1776,
+    "time_utc": "2026-10-14T09:20:50Z",
+    "usage": {
+      "prompt_tokens": 382,
+      "completion_tokens": 1092,
+      "total_tokens": 1474
+    }
+  },
+  "draftReview": "Rejected fabricated percentages/device models/latency promises and autofocus on frozen image. Reviewed recommendations independently below; no generated code executed."
+}

@@ -1,0 +1,89 @@
+{
+  "schema": "naver-kin-automation-state-v1",
+  "checkedAt": "2026-10-18T08:05:02.658549+00:00",
+  "startDate": "2026-10-15",
+  "endDate": "2026-10-21",
+  "enabled": true,
+  "continuousMode": true,
+  "mode": "alternating_interval",
+  "intervalMinutes": 18,
+  "intervalJitterMinutes": [
+    18,
+    22
+  ],
+  "pollMinutes": 5,
+  "globalDailyCap": 20,
+  "accountDailyCap": 10,
+  "runs": [
+    {
+      "runId": "2026-10-18_64984c1724a6_stone0747_1705",
+      "account": "stone0747",
+      "state": "blocked",
+      "reason": "operation_RuntimeError",
+      "discovered": 0
+    }
+  ],
+  "state": "completed_cycle",
+  "measurementStatus": "collected",
+  "dryRun": false,
+  "runId": "2026-10-18_64984c1724a6_stone0747_1705",
+  "account": "stone0747",
+  "lastRunAt": "2026-10-18T15:55:02.502261+09:00",
+  "lastAccount": "adinfo0905",
+  "nextEligibleAt": "2026-10-18T16:13:02.502261+09:00",
+  "nextAccount": "stone0747",
+  "activeRunId": null,
+  "activeAccount": null,
+  "activeStartedAt": null,
+  "cadenceState": "waiting",
+  "operationCounts": {
+    "adinfo0905": 1,
+    "stone0747": 2
+  },
+  "submissionCounts": {
+    "adinfo0905": 1,
+    "stone0747": 2
+  },
+  "globalRemainingRuns": 17,
+  "byAccountRemainingRuns": {
+    "adinfo0905": 9,
+    "stone0747": 8
+  },
+  "measurementComplete": true,
+  "registeredTasks": {
+    "status": "observed",
+    "checkedAt": "2026-10-18T08:06:49.527352+00:00",
+    "tasks": [
+      {
+        "taskName": "BaroLab-Kin-Seven-Day-Pilot",
+        "registered": true,
+        "enabled": true,
+        "state": "Running",
+        "nextRunAt": "2026-10-18T17:10:00.0000000+09:00",
+        "lastRunAt": "2026-10-18T17:05:01.0000000+09:00",
+        "lastResult": 267009,
+        "actions": [
+          {
+            "Execute": "C:\\Users\\baro7\\AppData\\Local\\Programs\\Python\\Python314\\pythonw.exe",
+            "Arguments": "-u -B -X utf8 \"\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_kin\\scheduler.py\" --tick --scheduled"
+          }
+        ]
+      },
+      {
+        "taskName": "BaroLab-Kin-Seven-Day-Pilot-Measurement",
+        "registered": true,
+        "enabled": true,
+        "state": "Ready",
+        "nextRunAt": "2026-10-18T20:30:00.0000000+09:00",
+        "lastRunAt": "2026-10-17T20:30:01.0000000+09:00",
+        "lastResult": 0,
+        "actions": [
+          {
+            "Execute": "C:\\Users\\baro7\\AppData\\Local\\Programs\\Python\\Python314\\pythonw.exe",
+            "Arguments": "-u -B -X utf8 \"\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_kin\\scheduler.py\" --measure --scheduled"
+          }
+        ]
+      }
+    ]
+  }
+}

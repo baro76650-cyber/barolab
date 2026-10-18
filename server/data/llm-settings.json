@@ -1,0 +1,23 @@
+{
+  "active": "agy",
+  "providers": {
+    "gemini": {
+      "model": ""
+    },
+    "deepseek": {
+      "model": ""
+    },
+    "openai": {
+      "model": ""
+    },
+    "claude": {
+      "model": ""
+    },
+    "agy": {
+      "model": "gemini-3.8-flash-medium"
+    },
+    "codex": {
+      "model": "gpt-6-luna"
+    }
+  }
+}

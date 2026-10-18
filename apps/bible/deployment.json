@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-14T06:02:11.759958+00:00",
+  "packageName": "com.barolab.harubible",
+  "supportEmail": "baro76650@gmail.com",
+  "admob": {
+    "appId": "ca-app-pub-7642010403138987~3426234878",
+    "bannerAdUnitId": "ca-app-pub-7642010403138987/9298253515",
+    "bannerName": "today_reading_banner",
+    "registrationVerified": true,
+    "appReadinessVerified": false,
+    "revenueCollected": false,
+    "url": "https://admob.google.com/v2/apps/3426234878/overview",
+    "ump": {
+      "published": true,
+      "verifiedAt": "2026-10-14T06:13:13.181299+00:00",
+      "messageName": "하루말씀 - 유럽 이용자 동의",
+      "apps": [
+        "ca-app-pub-7642010403138987~3426234878"
+      ],
+      "region": "EEA, UK, Switzerland",
+      "language": "en",
+      "rejectButtonEnabledAllRegions": true,
+      "privacyUrl": "https://haru-malsseum.pages.dev/privacy",
+      "runtimeProductionConsentVerified": false
+    }
+  },
+  "googlePlay": {
+    "appId": "4975007773224005878",
+    "developerAccount": "YoonLab",
+    "draftCreated": true,
+    "internalReleaseVerified": true,
+    "productionReleased": false,
+    "requiredClosedTesters": 12,
+    "requiredClosedTestDays": 14,
+    "optedInClosedTestersObserved": 0,
+    "url": "https://play.google.com/console/u/0/developers/7752283694845461925/app/4975007773224005878/app-dashboard",
+    "bundle": {
+      "versionCode": 4,
+      "versionName": "0.4.0-internal-preview",
+      "sha256": "1a4001bc7d7144e995f85f68fa9fd21adb0fa28cefa2cbef0716b10485c0b99c",
+      "uploaded": true,
+      "targetSdk": 36,
+      "minSdk": 26,
+      "testAdsOnly": true,
+      "bytes": 5564425,
+      "path": "apps/bible/app/build/outputs/bundle/internal/app-internal.aab",
+      "qaEvidence": "apps/bible/qa/v4-build-verification.json"
+    },
+    "internalReleaseVerifiedAt": "2026-10-14T10:17:11.433164+00:00",
+    "storeSetupStatus": "saved_awaiting_review_submission",
+    "internalRelease": {
+      "status": "active",
+      "releasedAt": "2026-10-14T19:13:00+09:00",
+      "releasedAtPrecision": "minute",
+      "versionCode": 4,
+      "versionName": "0.4.0-internal-preview",
+      "testAdsOnly": true,
+      "providedToInternalTesters": true,
+      "reviewedByGoogle": false,
+      "evidence": "apps/bible/qa/play-v4-internal-release.txt"
+    },
+    "internalTesters": {
+      "listedCount": 1,
+      "emails": [
+        "baro76650@gmail.com"
+      ],
+      "joinUrl": "https://play.google.com/apps/internaltest/4700464139727332365",
+      "joinUrlActive": true,
+      "optedInCount": null,
+      "installedCount": null,
+      "evidence": "apps/bible/qa/play-v4-testers.json"
+    },
+    "storeSetup": {
+      "savedAt": "2026-10-14T08:15:15.133480+00:00",
+      "reviewSubmitted": false,
+      "targetAge": "18+",
+      "category": "Books and Reference",
+      "containsAds": true,
+      "loginRequired": false,
+      "healthFeatures": false,
+      "governmentApp": false,
+      "financialFeatures": false,
+      "screenshots": 4,
+      "privacyUrl": "https://haru-malsseum.pages.dev/privacy",
+      "deletionRequestUrl": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+      "dataTypes": [
+        "Approximate location",
+        "App interactions",
+        "Diagnostics",
+        "Device or other IDs"
+      ],
+      "dataCollectedAndShared": true,
+      "transitEncrypted": true,
+      "aiLabeledAssets": [
+        "store-icon-512.png",
+        "feature-graphic-v3-1024x500.png"
+      ],
+      "evidence": [
+        "apps/bible/qa/play-store-listing.txt",
+        "apps/bible/qa/play-content-rating.txt",
+        "apps/bible/qa/play-data-safety.txt",
+        "apps/bible/qa/play-publishing.txt",
+        "apps/bible/qa/play-app-setup.txt",
+        "apps/bible/qa/play-v3-store-listing.txt",
+        "apps/bible/qa/play-v3-store-ai-labels.txt"
+      ],
+      "title": "오늘의 성경말씀 - 큰글씨·듣기·공유",
+      "shortDescriptionSaved": true,
+      "fullDescriptionSaved": true,
+      "screenshotFiles": [
+        "v3-01-today-1080x1920.png",
+        "v3-02-collection-1080x1920.png",
+        "v3-03-settings-1080x1920.png",
+        "v3-04-reading-font-1080x1920.png"
+      ],
+      "featureGraphic": "feature-graphic-v3-1024x500.png",
+      "realScreenshotsAiLabeled": false,
+      "aiLabelEvidence": "apps/bible/qa/play-v3-store-ai-labels.txt"
+    },
+    "physicalDeviceFeedback": {
+      "source": "user_reported",
+      "recordedAt": "2026-10-14T07:40:36.140701+00:00",
+      "deviceFamily": "Samsung Galaxy",
+      "model": null,
+      "installed": true,
+      "voiceButtonResponse": "한국어 음성 설치·설정 안내가 나온다",
+      "voicePlaybackVerified": false,
+      "storeInstalledCountMeasured": false,
+      "reportAppliesTo": "previous installed build; exact version not confirmed",
+      "pendingVersionCode": 4,
+      "latestVersionInstalledVerified": false,
+      "latestVersionVoicePlaybackVerified": false
+    },
+    "storeSetupUpdate": {
+      "status": "saved",
+      "savedAt": "2026-10-14T08:15:15.133480+00:00",
+      "title": "오늘의 성경말씀 - 큰글씨·듣기·공유",
+      "shortDescriptionSaved": true,
+      "fullDescriptionSaved": true,
+      "screenshots": 4,
+      "reviewSubmitted": false,
+      "publicProductionReleased": false,
+      "evidence": "apps/bible/qa/play-v3-store-listing.txt"
+    },
+    "storeTitle": "오늘의 성경말씀 - 큰글씨·듣기·공유"
+  },
+  "dashboard": {
+    "deployed": true,
+    "url": "http://192.168.45.190:8790/index.html#app-projects",
+    "evidence": "server/DOCKER.md"
+  },
+  "privacyWebsite": {
+    "home": "https://haru-malsseum.pages.dev/",
+    "privacy": "https://haru-malsseum.pages.dev/privacy",
+    "appAdsTxt": "https://haru-malsseum.pages.dev/app-ads.txt",
+    "httpVerified": true,
+    "evidence": "apps/bible/docs/web-deployment-receipt.json",
+    "deletionRequest": "https://haru-malsseum.pages.dev/privacy#data-deletion",
+    "deploymentUrl": "https://8b9d5bfa.haru-malsseum.pages.dev"
+  },
+  "updatedAt": "2026-10-14T10:17:11.433164+00:00",
+  "appName": "오늘의 성경말씀",
+  "requestedStoreTitle": "오늘의 성경말씀 - 큰글씨·듣기·공유",
+  "productionAdsEnabled": false,
+  "qaEvidence": "apps/bible/qa/v4-build-verification.json"
+}

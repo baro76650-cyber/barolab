@@ -1,0 +1,102 @@
+# ==============================================================================
+# BaroLab Live Mirror — Strict Security & Artifact Exclusion (.gitignore)
+# ==============================================================================
+
+# 1. Secrets, Credentials, Tokens & Environment Files (NEVER COMMIT)
+.env
+.env*
+**/.env
+**/.env*
+*secret*
+*Secret*
+*SECRET*
+*token*
+*Token*
+*TOKEN*
+*credential*
+*Credential*
+*CREDENTIAL*
+**/secure/
+**/cf_blog_keys.json
+*.pem
+*.key
+*.keystore
+*.jks
+*.p12
+*.pfx
+
+# 2. Browsers, Cookies & Session Profiles
+browsers/
+**/browsers/
+cookies/
+**/cookies/
+*cookie*
+*Cookie*
+User Data/
+**/User Data/
+
+# 3. Databases & Binary Stores
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+*. sqlite3-journal
+*.db
+*.db-shm
+*.db-wal
+
+# 4. Pipeline Run Outputs, Scratch & Build Artifacts
+runs/
+**/runs/
+rework*/
+**/rework*/
+output/
+**/output/
+artifacts/
+**/artifacts/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+node_modules/
+**/node_modules/
+.venv/
+venv/
+**/build/
+**/.gradle/
+**/release/
+**/debug/
+
+# 5. Media, Images, Videos & Archives
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.ico
+*.mp4
+*.webm
+*.mov
+*.zip
+*.tar
+*.gz
+*.7z
+*.aab
+*.apk
+*.jar
+*.exe
+*.dll
+
+# 6. Runtime Locks, Temp Files, Heavy Logs & Legacy Backups
+*.lock
+*.tmp
+.*.*.tmp
+*.log
+*.jsonl
+server/data/legacy_argo_backup/
+server/data/chats/
+server/data/maintenance-backups/
+server/data/tmp_sanitized/
+server/data/control-jobs/
+server/data/kin-drafts/
+server/data/threads-drafts/
+skills/ui-ux-pro-max/

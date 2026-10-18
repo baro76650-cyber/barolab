@@ -1,0 +1,16 @@
+**
+!server/
+server/**
+!server/*.py
+!server/requirements.txt
+!server/Dockerfile
+!common/
+common/**
+!common/*.py
+!dashboard/
+dashboard/**
+!dashboard/*.html
+!dashboard/*.js
+!dashboard/*.css
+!dashboard/*.json
+!dashboard/*.py

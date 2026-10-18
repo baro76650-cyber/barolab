@@ -1,0 +1,106 @@
+import groovy.json.JsonSlurper
+
+plugins { id 'com.android.application' }
+
+def privateConfig = new Properties()
+def configFile = rootProject.file('release.properties')
+if (configFile.exists()) configFile.withInputStream { privateConfig.load(it) }
+def setting = { key -> providers.gradleProperty(key).orElse(privateConfig.getProperty(key, '')).get() }
+def realAppId = setting('bibleAdmobAppId')
+def realBannerId = setting('bibleBannerAdUnitId')
+def signing = new Properties()
+def signingFile = new File(System.getenv('BIBLE_SIGNING_PROPERTIES') ?: new File(System.getProperty('user.home'), '.codex/secure/harubible/signing.properties').path)
+if (signingFile.exists()) signingFile.withInputStream { signing.load(it) }
+
+android {
+    namespace 'com.barolab.harubible'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'com.barolab.harubible'
+        minSdk 26
+        targetSdk 36
+        versionCode 4
+        versionName '0.4.0'
+        manifestPlaceholders = [admobAppId: 'UNCONFIGURED']
+        buildConfigField 'String', 'BANNER_AD_UNIT_ID', '"UNCONFIGURED"'
+        buildConfigField 'boolean', 'IS_PREVIEW', 'false'
+    }
+    signingConfigs {
+        upload {
+            if (signingFile.exists()) {
+                storeFile file(signing.getProperty('storeFile'))
+                storePassword signing.getProperty('storePassword')
+                keyAlias signing.getProperty('keyAlias')
+                keyPassword signing.getProperty('keyPassword')
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-preview'
+            manifestPlaceholders.admobAppId = 'ca-app-pub-3940256099942544~3347511713'
+            buildConfigField 'String', 'BANNER_AD_UNIT_ID', '"ca-app-pub-3940256099942544/6300978111"'
+            buildConfigField 'boolean', 'IS_PREVIEW', 'true'
+        }
+        internal {
+            initWith debug
+            applicationIdSuffix = null
+            versionNameSuffix '-internal-preview'
+            debuggable false
+            signingConfig signingConfigs.upload
+            matchingFallbacks = ['debug']
+        }
+        release {
+            minifyEnabled false
+            manifestPlaceholders.admobAppId = realAppId ?: 'UNCONFIGURED'
+            buildConfigField 'String', 'BANNER_AD_UNIT_ID', '"' + (realBannerId ?: 'UNCONFIGURED') + '"'
+            signingConfig signingConfigs.upload
+        }
+    }
+    buildFeatures { buildConfig true }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    sourceSets.main.assets.srcDir(layout.buildDirectory.dir('generated/bibleAssets'))
+}
+
+tasks.register('syncBibleContent', Sync) {
+    from(rootProject.file('content/verses.json'))
+    into(layout.buildDirectory.dir('generated/bibleAssets'))
+    doFirst {
+        def file = rootProject.file('content/verses.json')
+        if (!file.exists()) throw new GradleException('Reviewed content/verses.json is required; no invented fallback text.')
+        def data = new JsonSlurper().parse(file, 'UTF-8')
+        if (data.schemaVersion != 1 || !(data.verses instanceof List) || data.verses.isEmpty()) throw new GradleException('Invalid offline verse collection.')
+        def ids = new HashSet()
+        data.verses.each { verse ->
+            if (!verse.id || !verse.reference || !verse.text || !ids.add(verse.id)) throw new GradleException('Missing or duplicate verse identity/text.')
+        }
+    }
+}
+tasks.named('preBuild').configure { dependsOn 'syncBibleContent' }
+
+tasks.register('verifyInternalReadiness') {
+    doLast {
+        def data = new JsonSlurper().parse(rootProject.file('content/verses.json'), 'UTF-8')
+        if (data.translation.rightsConfirmed != true) throw new GradleException('Internal preview also requires confirmed content rights.')
+        if (!signingFile.exists() || !new File(signing.getProperty('storeFile', '')).isFile()) throw new GradleException('Durable upload signing key is missing; keep it outside the project.')
+    }
+}
+tasks.matching { it.name == 'preInternalBuild' }.configureEach { dependsOn 'verifyInternalReadiness' }
+
+tasks.register('verifyReleaseReadiness') {
+    doLast {
+        def data = new JsonSlurper().parse(rootProject.file('content/verses.json'), 'UTF-8')
+        if (data.translation.rightsConfirmed != true || !data.translation.sourceUrl || !data.translation.copyrightNotice) throw new GradleException('Content rights/source have not been confirmed.')
+        if (!(realAppId ==~ /ca-app-pub-\d{16}~\d{10}/) || !(realBannerId ==~ /ca-app-pub-\d{16}\/\d{10}/) || realAppId.contains('3940256099942544') || realBannerId.contains('3940256099942544')) throw new GradleException('New Bible-specific production AdMob App ID and banner unit are required. Debug test IDs cannot ship.')
+        if (realAppId.split('~')[0] != realBannerId.split('/')[0]) throw new GradleException('AdMob publisher mismatch.')
+        if (setting('bibleProductionAdsConfirmed') != 'true' || setting('biblePrivacyReviewed') != 'true' || setting('bibleContentReviewed') != 'true') throw new GradleException('Bible-specific ad identity, privacy/UMP and content release review must be recorded.')
+    }
+}
+tasks.matching { it.name == 'preReleaseBuild' }.configureEach { dependsOn 'verifyReleaseReadiness' }
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-ads:25.5.0'
+    implementation 'com.google.android.ump:user-messaging-platform:4.0.0'
+    testImplementation 'junit:junit:4.13.2'
+}

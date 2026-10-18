@@ -1,0 +1,51 @@
+{
+  "runtime": {
+    "status": "waiting",
+    "stage": "audit",
+    "reason": "CF 신규 발행 실행 중 · 발행 우선",
+    "checkedAt": "2026-10-18T06:24:34.019648+00:00",
+    "lastAuditAt": "2026-10-18T06:24:33.843962+00:00",
+    "lastAuditCount": 3,
+    "auditCoverage": "rotating_never_then_oldest_domain_balanced",
+    "lastAuditStopReason": "CF 신규 발행 실행 중 · 발행 우선",
+    "providerBackoff": {
+      "provider": "shared_agent_router",
+      "checkedAt": "2026-10-15T20:01:50.068755+00:00",
+      "routingAttempts": [
+        {
+          "provider": "freellm",
+          "requested_model": "auto",
+          "returned_model": "unknown",
+          "status": "failed",
+          "attempt": 1,
+          "latency_ms": 2069
+        },
+        {
+          "provider": "agy",
+          "requested_model": "gemini-3.8-flash-medium",
+          "returned_model": "unknown",
+          "status": "failed",
+          "attempt": 1,
+          "latency_ms": 65103
+        }
+      ],
+      "elapsedMs": 67605,
+      "instructionSha256": "c8b45395f6463b64a3011d7d3a6923998aaf782f20fdc80286cb4cbfc0068925",
+      "contentQualitySha256": "ae8d7b4b8ebd3c19c79c94aa3776153d287b5c0d6b1304ea7225ed9aa30f2978",
+      "promptSha256": "cafda1775f92505e2872e6063453fcb8a632efbb7a2cc96abe6fd6de2f41b7d6",
+      "requestedModel": "auto",
+      "httpStatus": null,
+      "errorCode": "shared_routing_unavailable",
+      "nextRetryAt": "2026-10-15T20:31:50.074693+00:00"
+    },
+    "nextRetryAt": "2026-10-15T20:31:50.074693+00:00",
+    "providerStatus": "ready",
+    "lastLaunchedAt": "2026-10-18T06:23:14.165687+00:00",
+    "launcher": "existing_cf_cleaner_idle_hook",
+    "helperPid": 33780,
+    "lastAttemptAt": "2026-10-17T16:36:34.633643+00:00",
+    "activeJob": null,
+    "lastDomain": "tripmarvel.com",
+    "publishingPriorityWait": true
+  }
+}

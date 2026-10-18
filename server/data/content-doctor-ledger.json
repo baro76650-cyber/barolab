@@ -1,0 +1,2883 @@
+{
+  "schema": "content-doctor-ledger-v1",
+  "totalInventory": 1984,
+  "dailyQuotaTarget": 20,
+  "dailyDGradePerDomainCap": 2,
+  "updatedAt": "2026-10-18T16:00:23.231133+09:00",
+  "auditedPosts": {
+    "https://www.must-good.com/iron-family-kbs2-drama-broadcast-guide-2024": {
+      "url": "https://www.must-good.com/iron-family-kbs2-drama-broadcast-guide-2024",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 428,
+      "slug": "iron-family-kbs2-drama-broadcast-guide-2024",
+      "title": "다리미 패밀리 첫방송 9월 28일, 36부작 편성·등장인물과 OTT 다시보기",
+      "auditedAt": "2026-10-17T19:23:39.049407+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "D",
+      "gradeBadge": "🔴 D등급 (주제 이탈 · 안전 이관/Noindex 권고)",
+      "actionCode": "safe_migrate_or_noindex",
+      "prescription": "도메인 정체성(머스트굿 정책브리프)과 주제 불일치 ➔ 일괄 삭제 금지(검색 페널티 방지) · '머스트조이 방송·맛집(must-joy.com)' 이관 또는 Noindex 안전 처리 (오늘 must-good.com 1/2건)",
+      "remodeled": false,
+      "remodelStatus": "safe_hold",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": false,
+          "alignmentLevel": "off_topic",
+          "ownScore": 0,
+          "bestCategory": "청년·장년복지",
+          "currentCategory": "방송정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-joy.com",
+          "recommendedDomainBrand": "머스트조이 방송·맛집",
+          "reason": "현재 도메인(머스트굿 정책브리프) 주제 이탈 · '머스트조이 방송·맛집(must-joy.com)' 적합도(5점) 우세"
+        },
+        "3_categoryRemap": {
+          "patched": false,
+          "oldCategory": "방송정보",
+          "newCategory": "방송정보"
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "suitability": "good",
+          "issue": null,
+          "passed": true
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 3878,
+          "h2Count": 18,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "다리미 패밀리 첫방송 9월 28일, 36부작 편성·등장인물과 OTT 다시보기"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "not_indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Crawled - currently not indexed"
+        },
+        "7_finalGrade": {
+          "grade": "D",
+          "gradeBadge": "🔴 D등급 (주제 이탈 · 안전 이관/Noindex 권고)",
+          "prescription": "도메인 정체성(머스트굿 정책브리프)과 주제 불일치 ➔ 일괄 삭제 금지(검색 페널티 방지) · '머스트조이 방송·맛집(must-joy.com)' 이관 또는 Noindex 안전 처리 (오늘 must-good.com 1/2건)"
+        }
+      }
+    },
+    "https://www.must-good.com/ancestor-land-inquiry-kgeo-online-guide-2026": {
+      "url": "https://www.must-good.com/ancestor-land-inquiry-kgeo-online-guide-2026",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 427,
+      "slug": "ancestor-land-inquiry-kgeo-online-guide-2026",
+      "title": "조상땅 찾기 온라인 신청 2026, 서류 없는 K-Geo 플랫폼 조회와 3일 확인법",
+      "auditedAt": "2026-10-17T19:23:47.760614+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "A",
+      "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "must-good.com 도메인의 「조상땅 찾기 온라인 신청 2026, 서류 없는 K-Geo 플랫폼 조회와 3일 확인법」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15 Pro, `ancestor-land-inquiry-kgeo-application-01.jpg`) 이미지로 교체했습니다.",
+      "remodeled": true,
+      "remodelStatus": "healthy",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 5,
+          "bestCategory": "민원·서류발급",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "도메인 전문 분야(정부지원금·복지·민원·세금환급)와 주제 일치 (정합 점수 5점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "민원·서류발급",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": true,
+          "hasAiDisclaimer": false,
+          "suitability": "fake_person_or_broken_text_ai",
+          "issue": "🔴 [이미지 교체 대상] must-good.com 도메인의 「조상땅 찾기 온라인 신청 2026, 서류 없는 K-Geo 플랫폼 조회와 3일 확인법」 글에서 3인칭 가짜 인물 사진·깨진 한글 서류 및 AI 워터마크(✦)/메타데이터 오염 적발 ➔ 실제 캡처·정자체 요약 화면 및 클린 EXIF(iPhone 15 Pro, `ancestor-land-inquiry-kgeo-application-01.jpg`) 이미지로 교체",
+          "passed": false,
+          "hasFakePersonOrBrokenTextAi": true,
+          "remediation": {
+            "remediated": true,
+            "replacedCount": 3,
+            "replacedUrls": [
+              "https://www.must-good.com/media/1792237095264-34a9a53b.jpg",
+              "https://www.must-good.com/media/1792237099817-cc829ec8.jpg",
+              "https://www.must-good.com/media/1792237105091-c97bb708.jpg"
+            ],
+            "seoFilenames": [
+              "ancestor-land-inquiry-kgeo-application-01.jpg",
+              "ancestor-land-inquiry-kgeo-application-02.jpg",
+              "ancestor-land-inquiry-kgeo-application-03.jpg"
+            ],
+            "deviceLabel": "iPhone 15 Pro",
+            "replacedFakePersonWithDiagram": true,
+            "httpStatus": 200
+          },
+          "verdictBadge": "🔴 이미지 교체 대상 (3인칭 가짜 인물 / 깨진 한글 / AI 워터마크·EXIF 적발)",
+          "hasWatermarkOrExifContamination": true,
+          "targetDeviceProfile": "iPhone 15 Pro"
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 4833,
+          "h2Count": 16,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "조상땅 찾기 온라인 신청 2026, 서류 없는 K-Geo 플랫폼 조회와 3일 확인법"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "A",
+          "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+          "prescription": "must-good.com 도메인의 「조상땅 찾기 온라인 신청 2026, 서류 없는 K-Geo 플랫폼 조회와 3일 확인법」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15 Pro, `ancestor-land-inquiry-kgeo-application-01.jpg`) 이미지로 교체했습니다."
+        }
+      }
+    },
+    "https://www.must-good.com/waste-home-appliances-free-collection-guide-2026": {
+      "url": "https://www.must-good.com/waste-home-appliances-free-collection-guide-2026",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 425,
+      "slug": "waste-home-appliances-free-collection-guide-2026",
+      "title": "폐가전 무료수거 신청 2026, 대형 1개·소형 5개 기준과 1599-0903 배출법",
+      "auditedAt": "2026-10-17T19:23:53.347149+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "A",
+      "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "must-good.com 도메인의 「폐가전 무료수거 신청 2026, 대형 1개·소형 5개 기준과 1599-0903 배출법」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15 Pro, `waste-home-appliances-free-appliance-01.jpg`) 이미지로 교체했습니다.",
+      "remodeled": true,
+      "remodelStatus": "healthy",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 3,
+          "bestCategory": "정부지원금",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "데이노트 살림레시피",
+          "reason": "도메인 전문 분야(정부지원금·복지·민원·세금환급)와 주제 일치 (정합 점수 3점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "정부지원금",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": true,
+          "hasAiDisclaimer": false,
+          "suitability": "fake_person_or_broken_text_ai",
+          "issue": "🔴 [이미지 교체 대상] must-good.com 도메인의 「폐가전 무료수거 신청 2026, 대형 1개·소형 5개 기준과 1599-0903 배출법」 글에서 3인칭 가짜 인물 사진·깨진 한글 서류 및 AI 워터마크(✦)/메타데이터 오염 적발 ➔ 실제 캡처·정자체 요약 화면 및 클린 EXIF(iPhone 15 Pro, `waste-home-appliances-free-appliance-01.jpg`) 이미지로 교체",
+          "passed": false,
+          "hasFakePersonOrBrokenTextAi": true,
+          "remediation": {
+            "remediated": true,
+            "replacedCount": 3,
+            "replacedUrls": [
+              "https://www.must-good.com/media/1792237111350-a36d5885.jpg",
+              "https://www.must-good.com/media/1792237114549-fabbfd5f.jpg",
+              "https://www.must-good.com/media/1792237117862-e4f8d97a.jpg"
+            ],
+            "seoFilenames": [
+              "waste-home-appliances-free-appliance-01.jpg",
+              "waste-home-appliances-free-appliance-02.jpg",
+              "waste-home-appliances-free-appliance-03.jpg"
+            ],
+            "deviceLabel": "iPhone 15 Pro",
+            "replacedFakePersonWithDiagram": true,
+            "httpStatus": 200
+          },
+          "verdictBadge": "🔴 이미지 교체 대상 (3인칭 가짜 인물 / 깨진 한글 / AI 워터마크·EXIF 적발)",
+          "hasWatermarkOrExifContamination": true,
+          "targetDeviceProfile": "iPhone 15 Pro"
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 4558,
+          "h2Count": 17,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "폐가전 무료수거 신청 2026, 대형 1개·소형 5개 기준과 1599-0903 배출법"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "A",
+          "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+          "prescription": "must-good.com 도메인의 「폐가전 무료수거 신청 2026, 대형 1개·소형 5개 기준과 1599-0903 배출법」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15 Pro, `waste-home-appliances-free-appliance-01.jpg`) 이미지로 교체했습니다."
+        }
+      }
+    },
+    "https://www.must-good.com/2026-flu-free-vaccination-schedule-guide": {
+      "url": "https://www.must-good.com/2026-flu-free-vaccination-schedule-guide",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 424,
+      "slug": "2026-flu-free-vaccination-schedule-guide",
+      "title": "2026 독감 무료접종 14세 확대와 9월 21일 시작 일정 및 병원 확인법",
+      "auditedAt": "2026-10-17T19:23:59.595025+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "B",
+      "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+      "actionCode": "category_patched",
+      "prescription": "본문 품질 양호(100점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '청년·장년복지' 즉시 API 자동 패치 완료 (HTTP 200)",
+      "remodeled": true,
+      "remodelStatus": "completed_patch",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 1,
+          "bestCategory": "청년·장년복지",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "헬스콕스 메디컬랩",
+          "reason": "도메인 전문 분야(정부지원금·복지·민원·세금환급)와 주제 일치 (정합 점수 1점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "청년·장년복지",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "suitability": "good",
+          "issue": null,
+          "passed": true
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 5588,
+          "h2Count": 16,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "2026 독감 무료접종 14세 확대와 9월 21일 시작 일정 및 병원 확인법"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "B",
+          "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+          "prescription": "본문 품질 양호(100점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '청년·장년복지' 즉시 API 자동 패치 완료 (HTTP 200)"
+        }
+      }
+    },
+    "https://www.must-good.com/tuide-hybe-debut-2026-08": {
+      "url": "https://www.must-good.com/tuide-hybe-debut-2026-08",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 423,
+      "slug": "tuide-hybe-debut-2026-08",
+      "title": "튜이드 멤버 7인, 하이브 신인 걸그룹 소울트로닉 데뷔",
+      "auditedAt": "2026-10-17T19:24:06.912960+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "B",
+      "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+      "actionCode": "category_patched",
+      "prescription": "본문 품질 양호(100점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '정부지원금' 즉시 API 자동 패치 완료 (HTTP 200)",
+      "remodeled": true,
+      "remodelStatus": "completed_patch",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "borderline",
+          "ownScore": 0,
+          "bestCategory": "정부지원금",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "소울노트 라이프",
+          "reason": "도메인 인접 생활·실용 주제 (정합 0점 · '정부지원금' 카테고리로 흡수 가능)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "정부지원금",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 3,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "suitability": "good",
+          "issue": null,
+          "passed": true
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 2902,
+          "h2Count": 7,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "튜이드 멤버 7인, 하이브 신인 걸그룹 소울트로닉 데뷔"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "B",
+          "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+          "prescription": "본문 품질 양호(100점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '정부지원금' 즉시 API 자동 패치 완료 (HTTP 200)"
+        }
+      }
+    },
+    "https://www.must-good.com/gv90-2027-포토-제원-정리": {
+      "url": "https://www.must-good.com/gv90-2027-포토-제원-정리",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 422,
+      "slug": "gv90-2027-포토-제원-정리",
+      "title": "2027 GV90 공식 포토와 제원, 네오룬 디자인 실현 완전 정리",
+      "auditedAt": "2026-10-17T19:25:02.112740+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "B",
+      "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+      "actionCode": "category_patched",
+      "prescription": "본문 품질 양호(87점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '정부지원금' 즉시 API 자동 패치 완료 (HTTP 200)",
+      "remodeled": true,
+      "remodelStatus": "completed_patch",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "borderline",
+          "ownScore": 0,
+          "bestCategory": "정부지원금",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "우리노트 부동산·계약",
+          "reason": "도메인 인접 생활·실용 주제 (정합 0점 · '정부지원금' 카테고리로 흡수 가능)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "정부지원금",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 3,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "suitability": "good",
+          "issue": null,
+          "passed": true
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 87,
+          "charCount": 1629,
+          "h2Count": 4,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": false,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "2027 GV90 공식 포토와 제원, 네오룬 디자인 실현 완전 정리"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "top",
+          "impressions": 23,
+          "clicks": 0,
+          "position": 9.434782608695652,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "B",
+          "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+          "prescription": "본문 품질 양호(87점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '정부지원금' 즉시 API 자동 패치 완료 (HTTP 200)"
+        }
+      }
+    },
+    "https://www.must-good.com/1811-8401-메리츠화재-차단-방법": {
+      "url": "https://www.must-good.com/1811-8401-메리츠화재-차단-방법",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 421,
+      "slug": "1811-8401-메리츠화재-차단-방법",
+      "title": "1811-8401 번호 정체 확인법: 공식 확인과 금융권 두낫콜",
+      "auditedAt": "2026-10-17T19:25:05.297032+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "B",
+      "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+      "actionCode": "category_patched",
+      "prescription": "본문 품질 양호(73점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '정부지원금' 즉시 API 자동 패치 완료 (HTTP 200)",
+      "remodeled": true,
+      "remodelStatus": "completed_patch",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 1,
+          "bestCategory": "정부지원금",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "바로노트 핀테크랩",
+          "reason": "도메인 전문 분야(정부지원금·복지·민원·세금환급)와 주제 일치 (정합 점수 1점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "정부지원금",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 2,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "suitability": "good",
+          "issue": null,
+          "passed": true
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 73,
+          "charCount": 1291,
+          "h2Count": 4,
+          "tableCount": 0,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": false,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "1811-8401 번호 정체 확인법: 공식 확인과 금융권 두낫콜"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "top",
+          "impressions": 157,
+          "clicks": 1,
+          "position": 4.840764331210191,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "B",
+          "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+          "prescription": "본문 품질 양호(73점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '정부지원금' 즉시 API 자동 패치 완료 (HTTP 200)"
+        }
+      }
+    },
+    "https://www.must-good.com/로베르토-모레노-한국축구-임시감독-선임-2026": {
+      "url": "https://www.must-good.com/로베르토-모레노-한국축구-임시감독-선임-2026",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 420,
+      "slug": "로베르토-모레노-한국축구-임시감독-선임-2026",
+      "title": "로베르토 모레노, 한국 축구 임시감독 선임 절차와 평가",
+      "auditedAt": "2026-10-17T19:25:08.697569+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "B",
+      "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+      "actionCode": "category_patched",
+      "prescription": "본문 품질 양호(98점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '민원·서류발급' 즉시 API 자동 패치 완료 (HTTP 200)",
+      "remodeled": true,
+      "remodelStatus": "completed_patch",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "borderline",
+          "ownScore": 0,
+          "bestCategory": "민원·서류발급",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "도메인 인접 생활·실용 주제 (정합 0점 · '민원·서류발급' 카테고리로 흡수 가능)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "민원·서류발급",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 3,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "suitability": "good",
+          "issue": null,
+          "passed": true
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 98,
+          "charCount": 3311,
+          "h2Count": 7,
+          "tableCount": 0,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "로베르토 모레노, 한국 축구 임시감독 선임 절차와 평가"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "top",
+          "impressions": 8,
+          "clicks": 0,
+          "position": 7.25,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "B",
+          "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+          "prescription": "본문 품질 양호(98점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '민원·서류발급' 즉시 API 자동 패치 완료 (HTTP 200)"
+        }
+      }
+    },
+    "https://www.must-good.com/신혼부부-건강검진-지원-2026": {
+      "url": "https://www.must-good.com/신혼부부-건강검진-지원-2026",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 419,
+      "slug": "신혼부부-건강검진-지원-2026",
+      "title": "신혼부부·예비부부 건강검진 지원, 2026년 국비·지역 지원과 신청 절차",
+      "auditedAt": "2026-10-17T19:25:10.571758+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "C",
+      "gradeBadge": "🔴 이미지 교체 대상 · 🟡 C등급 (3인칭 인물/깨진 한글/워터마크 세탁)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "must-good.com 도메인의 「신혼부부·예비부부 건강검진 지원, 2026년 국비·지역 지원과 신청 절차」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15 Pro, `health-checkup-application-guide-01.jpg`) 이미지로 교체했습니다.",
+      "remodeled": false,
+      "remodelStatus": "queued_for_publi",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 8,
+          "bestCategory": "정부지원금",
+          "currentCategory": "방송정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "도메인 전문 분야(정부지원금·복지·민원·세금환급)와 주제 일치 (정합 점수 8점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "방송정보",
+          "newCategory": "정부지원금",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 0,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": true,
+          "hasAiDisclaimer": false,
+          "suitability": "fake_person_or_broken_text_ai",
+          "issue": "🔴 [이미지 교체 대상] must-good.com 도메인의 「신혼부부·예비부부 건강검진 지원, 2026년 국비·지역 지원과 신청 절차」 글에서 3인칭 가짜 인물 사진·깨진 한글 서류 및 AI 워터마크(✦)/메타데이터 오염 적발 ➔ 실제 캡처·정자체 요약 화면 및 클린 EXIF(iPhone 15 Pro, `health-checkup-application-guide-01.jpg`) 이미지로 교체",
+          "passed": false,
+          "hasFakePersonOrBrokenTextAi": true,
+          "verdictBadge": "🔴 이미지 교체 대상 (3인칭 가짜 인물 / 깨진 한글 / AI 워터마크·EXIF 적발)",
+          "hasWatermarkOrExifContamination": true,
+          "targetDeviceProfile": "iPhone 15 Pro"
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 90,
+          "charCount": 2669,
+          "h2Count": 9,
+          "tableCount": 0,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "신혼부부·예비부부 건강검진 지원, 2026년 국비·지역 지원과 신청 절차"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "opportunity",
+          "impressions": 8,
+          "clicks": 0,
+          "position": 12,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "C",
+          "gradeBadge": "🔴 이미지 교체 대상 · 🟡 C등급 (3인칭 인물/깨진 한글/워터마크 세탁)",
+          "prescription": "must-good.com 도메인의 「신혼부부·예비부부 건강검진 지원, 2026년 국비·지역 지원과 신청 절차」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15 Pro, `health-checkup-application-guide-01.jpg`) 이미지로 교체했습니다."
+        }
+      }
+    },
+    "https://www.must-good.com/휴면예금-찾아줌-조회-지급신청": {
+      "url": "https://www.must-good.com/휴면예금-찾아줌-조회-지급신청",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 416,
+      "slug": "휴면예금-찾아줌-조회-지급신청",
+      "title": "휴면예금 찾아줌 조회 지급신청, 공식 경로와 주의점",
+      "auditedAt": "2026-10-17T19:25:18.188772+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "C",
+      "gradeBadge": "🔴 이미지 교체 대상 · 🟡 C등급 (3인칭 인물/깨진 한글/워터마크 세탁)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "must-good.com 도메인의 「휴면예금 찾아줌 조회 지급신청, 공식 경로와 주의점」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15 Pro, `savings-rate-application-guide-01.jpg`) 이미지로 교체했습니다.",
+      "remodeled": false,
+      "remodelStatus": "queued_for_publi",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 6,
+          "bestCategory": "민원·서류발급",
+          "currentCategory": "금융정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "도메인 전문 분야(정부지원금·복지·민원·세금환급)와 주제 일치 (정합 점수 6점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "금융정보",
+          "newCategory": "민원·서류발급",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 3,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": true,
+          "hasAiDisclaimer": false,
+          "suitability": "fake_person_or_broken_text_ai",
+          "issue": "🔴 [이미지 교체 대상] must-good.com 도메인의 「휴면예금 찾아줌 조회 지급신청, 공식 경로와 주의점」 글에서 3인칭 가짜 인물 사진·깨진 한글 서류 및 AI 워터마크(✦)/메타데이터 오염 적발 ➔ 실제 캡처·정자체 요약 화면 및 클린 EXIF(iPhone 15 Pro, `savings-rate-application-guide-01.jpg`) 이미지로 교체",
+          "passed": false,
+          "hasFakePersonOrBrokenTextAi": true,
+          "verdictBadge": "🔴 이미지 교체 대상 (3인칭 가짜 인물 / 깨진 한글 / AI 워터마크·EXIF 적발)",
+          "hasWatermarkOrExifContamination": true,
+          "targetDeviceProfile": "iPhone 15 Pro"
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 2835,
+          "h2Count": 5,
+          "tableCount": 2,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": false,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "휴면예금 찾아줌 조회 지급신청, 공식 경로와 주의점"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "unknown",
+          "performanceBucket": "opportunity",
+          "impressions": 6,
+          "clicks": 0,
+          "position": 28.5,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "C",
+          "gradeBadge": "🔴 이미지 교체 대상 · 🟡 C등급 (3인칭 인물/깨진 한글/워터마크 세탁)",
+          "prescription": "must-good.com 도메인의 「휴면예금 찾아줌 조회 지급신청, 공식 경로와 주의점」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15 Pro, `savings-rate-application-guide-01.jpg`) 이미지로 교체했습니다."
+        }
+      }
+    },
+    "https://www.must-good.com/incheon-airport-emergency-passport-guide": {
+      "url": "https://www.must-good.com/incheon-airport-emergency-passport-guide",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 433,
+      "slug": "incheon-airport-emergency-passport-guide",
+      "title": "인천공항 긴급여권 발급 위치와 준비물, T1·T2 운영시간과 수수료 5만원 체크",
+      "auditedAt": "2026-10-17T19:25:56.041876+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "C",
+      "gradeBadge": "🔴 이미지 교체 대상 · 🟡 C등급 (3인칭 인물/깨진 한글/워터마크 세탁)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "must-good.com 도메인의 「인천공항 긴급여권 발급 위치와 준비물, T1·T2 운영시간과 수수료 5만원 체크」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15 Pro, `incheon-airport-emergency-passport-guide-01.jpg`) 이미지로 교체했습니다.",
+      "remodeled": false,
+      "remodelStatus": "queued_for_publi",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 9,
+          "bestCategory": "민원·서류발급",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "정부지원금",
+            "청년·장년복지",
+            "민원·서류발급",
+            "세금·환급"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "도메인 전문 분야(정부지원금·복지·민원·세금환급)와 주제 일치 (정합 점수 9점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "민원·서류발급",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 2,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": true,
+          "hasAiDisclaimer": false,
+          "suitability": "fake_person_or_broken_text_ai",
+          "issue": "🔴 [이미지 교체 대상] must-good.com 도메인의 「인천공항 긴급여권 발급 위치와 준비물, T1·T2 운영시간과 수수료 5만원 체크」 글에서 3인칭 가짜 인물 사진·깨진 한글 서류 및 AI 워터마크(✦)/메타데이터 오염 적발 ➔ 실제 캡처·정자체 요약 화면 및 클린 EXIF(iPhone 15 Pro, `incheon-airport-emergency-passport-guide-01.jpg`) 이미지로 교체",
+          "passed": false,
+          "hasFakePersonOrBrokenTextAi": true,
+          "verdictBadge": "🔴 이미지 교체 대상 (3인칭 가짜 인물 / 깨진 한글 / AI 워터마크·EXIF 적발)",
+          "hasWatermarkOrExifContamination": true,
+          "targetDeviceProfile": "iPhone 15 Pro"
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 98,
+          "charCount": 1878,
+          "h2Count": 5,
+          "tableCount": 0,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "인천공항 긴급여권 발급 위치와 준비물, T1·T2 운영시간과 수수료 5만원 체크"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "C",
+          "gradeBadge": "🔴 이미지 교체 대상 · 🟡 C등급 (3인칭 인물/깨진 한글/워터마크 세탁)",
+          "prescription": "must-good.com 도메인의 「인천공항 긴급여권 발급 위치와 준비물, T1·T2 운영시간과 수수료 5만원 체크」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15 Pro, `incheon-airport-emergency-passport-guide-01.jpg`) 이미지로 교체했습니다."
+        }
+      }
+    },
+    "https://www.baronote.kr/september-2026-new-drama-schedule": {
+      "url": "https://www.baronote.kr/september-2026-new-drama-schedule",
+      "domain": "baronote.kr",
+      "brandName": "바로노트 핀테크랩",
+      "platform": "cf",
+      "postId": 299,
+      "slug": "september-2026-new-drama-schedule",
+      "title": "2026년 9월 신작 드라마 일정, 9월 9일 시작 5편 채널·OTT·몇부작",
+      "auditedAt": "2026-10-17T19:26:09.457094+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "D",
+      "gradeBadge": "🔴 D등급 (주제 이탈 · 안전 이관/Noindex 권고)",
+      "actionCode": "safe_migrate_or_noindex",
+      "prescription": "도메인 정체성(바로노트 핀테크랩)과 주제 불일치 ➔ 일괄 삭제 금지(검색 페널티 방지) · '머스트조이 방송·맛집(must-joy.com)' 이관 또는 Noindex 안전 처리 (오늘 baronote.kr 1/2건)",
+      "remodeled": false,
+      "remodelStatus": "safe_hold",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": false,
+          "alignmentLevel": "off_topic",
+          "ownScore": 0,
+          "bestCategory": "국민·기초연금",
+          "currentCategory": "방송정보",
+          "validCategories": [
+            "국민·기초연금",
+            "대출·금리비교",
+            "신용·카드혜택",
+            "보험·절세전략"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-joy.com",
+          "recommendedDomainBrand": "머스트조이 방송·맛집",
+          "reason": "현재 도메인(바로노트 핀테크랩) 주제 이탈 · '머스트조이 방송·맛집(must-joy.com)' 적합도(9점) 우세"
+        },
+        "3_categoryRemap": {
+          "patched": false,
+          "oldCategory": "방송정보",
+          "newCategory": "방송정보"
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "suitability": "good",
+          "issue": null,
+          "passed": true
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 4584,
+          "h2Count": 17,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "2026년 9월 신작 드라마 일정, 9월 9일 시작 5편 채널·OTT·몇부작"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "not_indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "URL is unknown to Google"
+        },
+        "7_finalGrade": {
+          "grade": "D",
+          "gradeBadge": "🔴 D등급 (주제 이탈 · 안전 이관/Noindex 권고)",
+          "prescription": "도메인 정체성(바로노트 핀테크랩)과 주제 불일치 ➔ 일괄 삭제 금지(검색 페널티 방지) · '머스트조이 방송·맛집(must-joy.com)' 이관 또는 Noindex 안전 처리 (오늘 baronote.kr 1/2건)"
+        }
+      }
+    },
+    "https://www.woorinote.kr/청년-자격증-응시료-지원-2026-지자체-신청": {
+      "url": "https://www.woorinote.kr/청년-자격증-응시료-지원-2026-지자체-신청",
+      "domain": "woorinote.kr",
+      "brandName": "우리노트 부동산·계약",
+      "platform": "cf",
+      "postId": 181,
+      "slug": "청년-자격증-응시료-지원-2026-지자체-신청",
+      "title": "청년 자격증 응시료 지원 2026, 지자체별 신청처 및 지원 규모",
+      "auditedAt": "2026-10-17T19:26:23.945513+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "C",
+      "gradeBadge": "🔴 이미지 교체 대상 · 🟡 C등급 (3인칭 인물/깨진 한글/워터마크 세탁)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "woorinote.kr 도메인의 「청년 자격증 응시료 지원 2026, 지자체별 신청처 및 지원 규모」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15, `youth-support-application-guide-01.jpg`) 이미지로 교체했습니다.",
+      "remodeled": false,
+      "remodelStatus": "queued_for_publi",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "borderline",
+          "ownScore": 1,
+          "bestCategory": "청약·분양가이드",
+          "currentCategory": "금융정보",
+          "validCategories": [
+            "청약·분양가이드",
+            "전월세·계약체크",
+            "주거복지·대출",
+            "부동산세금"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "woorinote.kr",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "도메인 인접 생활·실용 주제 (정합 1점 · '청약·분양가이드' 카테고리로 흡수 가능)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "금융정보",
+          "newCategory": "청약·분양가이드",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 3,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": true,
+          "hasAiDisclaimer": false,
+          "suitability": "fake_person_or_broken_text_ai",
+          "issue": "🔴 [이미지 교체 대상] woorinote.kr 도메인의 「청년 자격증 응시료 지원 2026, 지자체별 신청처 및 지원 규모」 글에서 3인칭 가짜 인물 사진·깨진 한글 서류 및 AI 워터마크(✦)/메타데이터 오염 적발 ➔ 실제 캡처·정자체 요약 화면 및 클린 EXIF(iPhone 15, `youth-support-application-guide-01.jpg`) 이미지로 교체",
+          "passed": false,
+          "hasFakePersonOrBrokenTextAi": true,
+          "verdictBadge": "🔴 이미지 교체 대상 (3인칭 가짜 인물 / 깨진 한글 / AI 워터마크·EXIF 적발)",
+          "hasWatermarkOrExifContamination": true,
+          "targetDeviceProfile": "iPhone 15"
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 3152,
+          "h2Count": 6,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "청년 자격증 응시료 지원 2026, 지자체별 신청처 및 지원 규모"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "C",
+          "gradeBadge": "🔴 이미지 교체 대상 · 🟡 C등급 (3인칭 인물/깨진 한글/워터마크 세탁)",
+          "prescription": "woorinote.kr 도메인의 「청년 자격증 응시료 지원 2026, 지자체별 신청처 및 지원 규모」 글에서 3인칭 가짜 인물 사진과 AI 워터마크(✦)·메타데이터 오염을 발견해 실제 캡처 화면·정자체 요약표 및 클린 EXIF(iPhone 15, `youth-support-application-guide-01.jpg`) 이미지로 교체했습니다."
+        }
+      }
+    },
+    "https://www.justinfo.co.kr/열혈농구단2-심판-오심-공격권-판정-기준": {
+      "url": "https://www.justinfo.co.kr/열혈농구단2-심판-오심-공격권-판정-기준",
+      "domain": "justinfo.co.kr",
+      "brandName": "저스트인포 노동·법률",
+      "platform": "cf",
+      "postId": 431,
+      "slug": "열혈농구단2-심판-오심-공격권-판정-기준",
+      "title": "심판 오심, 농구 공격권 판정 기준과 판정 번복 절차",
+      "auditedAt": "2026-10-17T19:26:42.107363+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "B",
+      "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+      "actionCode": "category_patched",
+      "prescription": "본문 품질 양호(80점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '생활법률·권리' 즉시 API 자동 패치 완료 (HTTP 200)",
+      "remodeled": true,
+      "remodelStatus": "completed_patch",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "borderline",
+          "ownScore": 0,
+          "bestCategory": "생활법률·권리",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "생활법률·권리",
+            "소비자피해·환불",
+            "교통·과태료",
+            "근로·실업급여"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "justinfo.co.kr",
+          "recommendedDomainBrand": "탑노트 디지털랩",
+          "reason": "도메인 인접 생활·실용 주제 (정합 0점 · '생활법률·권리' 카테고리로 흡수 가능)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "생활법률·권리",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "suitability": "good",
+          "issue": null,
+          "passed": true
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 80,
+          "charCount": 3220,
+          "h2Count": 8,
+          "tableCount": 0,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": false,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "심판 오심, 농구 공격권 판정 기준과 판정 번복 절차"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "unknown",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": null
+        },
+        "7_finalGrade": {
+          "grade": "B",
+          "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+          "prescription": "본문 품질 양호(80점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '생활법률·권리' 즉시 API 자동 패치 완료 (HTTP 200)"
+        }
+      }
+    },
+    "https://www.topnote.kr/flu-vaccine-free-support-2026-schedule": {
+      "url": "https://www.topnote.kr/flu-vaccine-free-support-2026-schedule",
+      "domain": "topnote.kr",
+      "brandName": "탑노트 디지털랩",
+      "platform": "cf",
+      "postId": 164,
+      "slug": "flu-vaccine-free-support-2026-schedule",
+      "title": "2026 독감 무료접종 14세 확대, 9월 21일 대상별 일정과 지정병원 확인법",
+      "auditedAt": "2026-10-17T19:26:57.486482+09:00",
+      "auditDate": "2026-10-17",
+      "grade": "B",
+      "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+      "actionCode": "category_patched",
+      "prescription": "본문 품질 양호(100점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '윈도우·맥 설정' 즉시 API 자동 패치 완료 (HTTP 200)",
+      "remodeled": true,
+      "remodelStatus": "completed_patch",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 1,
+          "bestCategory": "윈도우·맥 설정",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "윈도우·맥 설정",
+            "스마트폰·통신",
+            "구글·오피스팁",
+            "보안·계정복구"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "topnote.kr",
+          "recommendedDomainBrand": "헬스콕스 메디컬랩",
+          "reason": "도메인 전문 분야(스마트폰·카톡·생성형AI·PC트러블슈팅)와 주제 일치 (정합 점수 1점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "윈도우·맥 설정",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "suitability": "good",
+          "issue": null,
+          "passed": true
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 5174,
+          "h2Count": 18,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "2026 독감 무료접종 14세 확대, 9월 21일 대상별 일정과 지정병원 확인법"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "not_indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "URL is unknown to Google"
+        },
+        "7_finalGrade": {
+          "grade": "B",
+          "gradeBadge": "🔵 B등급 (카테고리/서식 즉시 교정 완료)",
+          "prescription": "본문 품질 양호(100점) · 구버전 카테고리 '생활정보' ➔ 신규 전문 카테고리 '윈도우·맥 설정' 즉시 API 자동 패치 완료 (HTTP 200)"
+        }
+      }
+    },
+    "https://www.daynote.kr/flu-vaccine-free-eligibility-schedule-2026": {
+      "url": "https://www.daynote.kr/flu-vaccine-free-eligibility-schedule-2026",
+      "domain": "daynote.kr",
+      "brandName": "데이노트 살림레시피",
+      "platform": "cf",
+      "postId": 166,
+      "slug": "flu-vaccine-free-eligibility-schedule-2026",
+      "title": "2026 독감 무료 예방접종 14세 확대, 대상별 9월 21일 시작 일정 정리",
+      "auditedAt": "2026-10-18T15:56:24.308133+09:00",
+      "auditDate": "2026-10-18",
+      "grade": "C",
+      "gradeBadge": "🔴 이미지 세탁 대상 · 🟡 C등급 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "daynote.kr의 「2026 독감 무료 예방접종 14세 확대, 대상별 9월 21일 시작 일정 정리」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 16, `flu-vaccine-free-eligibility-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)",
+      "remodeled": false,
+      "remodelStatus": "queued_for_publi",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 1,
+          "bestCategory": "생활·살림속보",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "생활·살림속보",
+            "물가·절약이슈",
+            "주방·리빙기획",
+            "트렌드팩트체크"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "daynote.kr",
+          "recommendedDomainBrand": "데이노트 살림레시피",
+          "reason": "도메인 전문 분야(집밥레시피·식재료보관·주방청소·살림템)와 주제 일치 (정합 점수 1점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "생활·살림속보",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 3,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "hasFakePersonOrBrokenTextAi": false,
+          "thirdPersonPortraitDetected": false,
+          "brokenKoreanTextDetected": false,
+          "hasWatermarkOrExifContamination": true,
+          "exifContaminatedCount": 3,
+          "watermarkSuspectCount": 0,
+          "genericFilenameCount": 0,
+          "targetDeviceProfile": "iPhone 16",
+          "forensics": [
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.daynote.kr/media/1788862027074-0544cce5.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.daynote.kr/media/1788862030475-a3f1530e.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.daynote.kr/media/1788862031169-bf7d3c93.jpg"
+            }
+          ],
+          "suitability": "watermark_or_exif_contaminated",
+          "verdictBadge": "🔴 이미지 세탁 대상 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "issue": "AI 워터마크(✦) 잔존 또는 AI 메타데이터 미제거(3장) 적발 ➔ image_sanitizer.py로 워터마크 크롭 및 iPhone 16 클린 EXIF 주입·SEO 파일명 변환 후 재업로드",
+          "passed": false,
+          "remediation": {
+            "remediated": true,
+            "replacedCount": 3,
+            "replacedUrls": [
+              "https://www.daynote.kr/media/1792306578153-81f081de.jpg",
+              "https://www.daynote.kr/media/1792306579081-4e31be8a.jpg",
+              "https://www.daynote.kr/media/1792306584449-3c020699.jpg"
+            ],
+            "seoFilenames": [
+              "flu-vaccine-free-eligibility-01.jpg",
+              "flu-vaccine-free-eligibility-02.jpg",
+              "flu-vaccine-free-eligibility-03.jpg"
+            ],
+            "deviceLabel": "iPhone 16",
+            "replacedFakePersonWithDiagram": false,
+            "httpStatus": 200
+          }
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 3980,
+          "h2Count": 15,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "2026 독감 무료 예방접종 14세 확대, 대상별 9월 21일 시작 일정 정리"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "not_indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Discovered - currently not indexed"
+        },
+        "7_finalGrade": {
+          "grade": "C",
+          "gradeBadge": "🔴 이미지 세탁 대상 · 🟡 C등급 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "prescription": "daynote.kr의 「2026 독감 무료 예방접종 14세 확대, 대상별 9월 21일 시작 일정 정리」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 16, `flu-vaccine-free-eligibility-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)"
+        }
+      }
+    },
+    "https://www.must-good.com/mobile-id-card-issuance-ic-qr-2026": {
+      "url": "https://www.must-good.com/mobile-id-card-issuance-ic-qr-2026",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 432,
+      "slug": "mobile-id-card-issuance-ic-qr-2026",
+      "title": "모바일 주민등록증 발급 2026, IC 1만원·QR 무료 차이와 신청 순서",
+      "auditedAt": "2026-10-18T15:56:42.298990+09:00",
+      "auditDate": "2026-10-18",
+      "grade": "A",
+      "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "must-good.com의 「모바일 주민등록증 발급 2026, IC 1만원·QR 무료 차이와 신청 순서」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15 Pro, `mobile-id-card-issuance-application-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)",
+      "remodeled": false,
+      "remodelStatus": "healthy",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 8,
+          "bestCategory": "청년·장년복지",
+          "currentCategory": "디지털정보",
+          "validCategories": [
+            "정부지원금속보",
+            "청년·장년복지",
+            "민원·행정기획",
+            "세금·환급이슈"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "도메인 전문 분야(정부지원금·복지·민원·세금환급)와 주제 일치 (정합 점수 8점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "디지털정보",
+          "newCategory": "청년·장년복지",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": true,
+          "hasAiDisclaimer": false,
+          "hasFakePersonOrBrokenTextAi": false,
+          "thirdPersonPortraitDetected": false,
+          "brokenKoreanTextDetected": false,
+          "hasWatermarkOrExifContamination": true,
+          "exifContaminatedCount": 4,
+          "watermarkSuspectCount": 1,
+          "genericFilenameCount": 0,
+          "targetDeviceProfile": "iPhone 15 Pro",
+          "forensics": [
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": true,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.must-good.com/media/1789455361494-82b7d512.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.must-good.com/media/1789455364171-24c7de0f.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.must-good.com/media/1789455367456-f187b2f6.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.must-good.com/media/1789455368601-b84fa835.jpg"
+            }
+          ],
+          "suitability": "watermark_or_exif_contaminated",
+          "verdictBadge": "🔴 이미지 세탁 대상 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "issue": "AI 워터마크(✦) 잔존 또는 AI 메타데이터 미제거(4장) 적발 ➔ image_sanitizer.py로 워터마크 크롭 및 iPhone 15 Pro 클린 EXIF 주입·SEO 파일명 변환 후 재업로드",
+          "passed": false,
+          "remediation": {
+            "remediated": true,
+            "replacedCount": 3,
+            "replacedUrls": [
+              "https://www.must-good.com/media/1792306599187-4f2bc9e5.jpg",
+              "https://www.must-good.com/media/1792306600526-679aa304.jpg",
+              "https://www.must-good.com/media/1792306601631-5f40a480.jpg"
+            ],
+            "seoFilenames": [
+              "mobile-id-card-issuance-application-01.jpg",
+              "mobile-id-card-issuance-application-02.jpg",
+              "mobile-id-card-issuance-application-03.jpg"
+            ],
+            "deviceLabel": "iPhone 15 Pro",
+            "replacedFakePersonWithDiagram": false,
+            "httpStatus": 200
+          }
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 7605,
+          "h2Count": 18,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "모바일 주민등록증 발급 2026, IC 1만원·QR 무료 차이와 신청 순서"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "top",
+          "impressions": 8,
+          "clicks": 0,
+          "position": 8.625,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "A",
+          "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+          "prescription": "must-good.com의 「모바일 주민등록증 발급 2026, IC 1만원·QR 무료 차이와 신청 순서」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15 Pro, `mobile-id-card-issuance-application-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)"
+        }
+      }
+    },
+    "https://www.woorinote.kr/공공근로사업-2026-하반기": {
+      "url": "https://www.woorinote.kr/공공근로사업-2026-하반기",
+      "domain": "woorinote.kr",
+      "brandName": "우리노트 부동산·계약",
+      "platform": "cf",
+      "postId": 180,
+      "slug": "공공근로사업-2026-하반기",
+      "title": "공공근로사업 2026년 하반기, 신청 자격·기간·급여 총정리",
+      "auditedAt": "2026-10-18T15:56:54.356995+09:00",
+      "auditDate": "2026-10-18",
+      "grade": "D",
+      "gradeBadge": "🔴 D등급 (주제 이탈 · 안전 이관/Noindex 권고)",
+      "actionCode": "safe_migrate_or_noindex",
+      "prescription": "도메인 정체성(우리노트 부동산·계약)과 주제 불일치 ➔ 일괄 삭제 금지(검색 페널티 방지) · '머스트굿 정책브리프(must-good.com)' 이관 또는 Noindex 안전 처리 (오늘 woorinote.kr 1/2건)",
+      "remodeled": false,
+      "remodelStatus": "safe_hold",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": false,
+          "alignmentLevel": "off_topic",
+          "ownScore": 0,
+          "bestCategory": "청약·분양자문",
+          "currentCategory": "방송정보",
+          "validCategories": [
+            "청약·분양자문",
+            "전월세·계약법률",
+            "주거복지·대출",
+            "부동산등기·세법"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "현재 도메인(우리노트 부동산·계약) 주제 이탈 · '머스트굿 정책브리프(must-good.com)' 적합도(10점) 우세"
+        },
+        "3_categoryRemap": {
+          "patched": false,
+          "oldCategory": "방송정보",
+          "newCategory": "방송정보"
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": true,
+          "hasAiDisclaimer": false,
+          "hasFakePersonOrBrokenTextAi": false,
+          "thirdPersonPortraitDetected": false,
+          "brokenKoreanTextDetected": false,
+          "hasWatermarkOrExifContamination": true,
+          "exifContaminatedCount": 4,
+          "watermarkSuspectCount": 0,
+          "genericFilenameCount": 0,
+          "targetDeviceProfile": "iPhone 15",
+          "forensics": [
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://woorinote.kr/media/1787653195630-651cadeb.webp"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://woorinote.kr/media/1787653198217-49690970.webp"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://woorinote.kr/media/1787653201345-16bcbb05.webp"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://woorinote.kr/media/1787653203813-17a1290c.webp"
+            }
+          ],
+          "suitability": "watermark_or_exif_contaminated",
+          "verdictBadge": "🔴 이미지 세탁 대상 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "issue": "AI 워터마크(✦) 잔존 또는 AI 메타데이터 미제거(4장) 적발 ➔ image_sanitizer.py로 워터마크 크롭 및 iPhone 15 클린 EXIF 주입·SEO 파일명 변환 후 재업로드",
+          "passed": false
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 98,
+          "charCount": 3298,
+          "h2Count": 9,
+          "tableCount": 0,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "공공근로사업 2026년 하반기, 신청 자격·기간·급여 총정리"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "D",
+          "gradeBadge": "🔴 D등급 (주제 이탈 · 안전 이관/Noindex 권고)",
+          "prescription": "도메인 정체성(우리노트 부동산·계약)과 주제 불일치 ➔ 일괄 삭제 금지(검색 페널티 방지) · '머스트굿 정책브리프(must-good.com)' 이관 또는 Noindex 안전 처리 (오늘 woorinote.kr 1/2건)"
+        }
+      }
+    },
+    "https://www.justinfo.co.kr/2026-flu-shot-free-target-expansion-schedule": {
+      "url": "https://www.justinfo.co.kr/2026-flu-shot-free-target-expansion-schedule",
+      "domain": "justinfo.co.kr",
+      "brandName": "저스트인포 노동·법률",
+      "platform": "cf",
+      "postId": 432,
+      "slug": "2026-flu-shot-free-target-expansion-schedule",
+      "title": "2026 독감 예방접종 무료 대상 14세 확대, 9월 21일 시작 일정",
+      "auditedAt": "2026-10-18T15:57:20.502499+09:00",
+      "auditDate": "2026-10-18",
+      "grade": "C",
+      "gradeBadge": "🔴 이미지 세탁 대상 · 🟡 C등급 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "justinfo.co.kr의 「2026 독감 예방접종 무료 대상 14세 확대, 9월 21일 시작 일정」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15, `flu-free-target-expansion-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)",
+      "remodeled": false,
+      "remodelStatus": "queued_for_publi",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "borderline",
+          "ownScore": 0,
+          "bestCategory": "세무·절세칼럼",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "세무·절세칼럼",
+            "근로·실업급여노무",
+            "소비자환불·분쟁",
+            "생활법률·과태료"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "justinfo.co.kr",
+          "recommendedDomainBrand": "우리노트 부동산·계약",
+          "reason": "도메인 인접 생활·실용 주제 (정합 0점 · '세무·절세칼럼' 카테고리로 흡수 가능)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "세무·절세칼럼",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "hasFakePersonOrBrokenTextAi": false,
+          "thirdPersonPortraitDetected": false,
+          "brokenKoreanTextDetected": false,
+          "hasWatermarkOrExifContamination": true,
+          "exifContaminatedCount": 4,
+          "watermarkSuspectCount": 0,
+          "genericFilenameCount": 0,
+          "targetDeviceProfile": "iPhone 15",
+          "forensics": [
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.justinfo.co.kr/media/1788865867588-8e2d815a.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.justinfo.co.kr/media/1788865870337-048f2a9f.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.justinfo.co.kr/media/1788865873869-d1d18b49.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.justinfo.co.kr/media/1788865876887-559602fe.jpg"
+            }
+          ],
+          "suitability": "watermark_or_exif_contaminated",
+          "verdictBadge": "🔴 이미지 세탁 대상 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "issue": "AI 워터마크(✦) 잔존 또는 AI 메타데이터 미제거(4장) 적발 ➔ image_sanitizer.py로 워터마크 크롭 및 iPhone 15 클린 EXIF 주입·SEO 파일명 변환 후 재업로드",
+          "passed": false,
+          "remediation": {
+            "remediated": true,
+            "replacedCount": 3,
+            "replacedUrls": [
+              "https://www.justinfo.co.kr/media/1792306634005-5d1f4459.jpg",
+              "https://www.justinfo.co.kr/media/1792306636685-8f72a743.jpg",
+              "https://www.justinfo.co.kr/media/1792306639989-7503c0af.jpg"
+            ],
+            "seoFilenames": [
+              "flu-free-target-expansion-01.jpg",
+              "flu-free-target-expansion-02.jpg",
+              "flu-free-target-expansion-03.jpg"
+            ],
+            "deviceLabel": "iPhone 15",
+            "replacedFakePersonWithDiagram": false,
+            "httpStatus": 200
+          }
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 4671,
+          "h2Count": 16,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "2026 독감 예방접종 무료 대상 14세 확대, 9월 21일 시작 일정"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "not_indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Discovered - currently not indexed"
+        },
+        "7_finalGrade": {
+          "grade": "C",
+          "gradeBadge": "🔴 이미지 세탁 대상 · 🟡 C등급 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "prescription": "justinfo.co.kr의 「2026 독감 예방접종 무료 대상 14세 확대, 9월 21일 시작 일정」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15, `flu-free-target-expansion-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)"
+        }
+      }
+    },
+    "https://www.meganote.kr/nhis-voluntary-continuation-qualification-deadline-guide": {
+      "url": "https://www.meganote.kr/nhis-voluntary-continuation-qualification-deadline-guide",
+      "domain": "meganote.kr",
+      "brandName": "메가노트 경제이슈",
+      "platform": "cf",
+      "postId": 217,
+      "slug": "nhis-voluntary-continuation-qualification-deadline-guide",
+      "title": "건강보험 임의계속가입 신청 자격, 통산 1년 직장 조건과 납부기한 2개월 마감",
+      "auditedAt": "2026-10-18T15:57:26.705348+09:00",
+      "auditDate": "2026-10-18",
+      "grade": "D",
+      "gradeBadge": "🔴 D등급 (주제 이탈 · 안전 이관/Noindex 권고)",
+      "actionCode": "safe_migrate_or_noindex",
+      "prescription": "도메인 정체성(메가노트 경제이슈)과 주제 불일치 ➔ 일괄 삭제 금지(검색 페널티 방지) · '머스트굿 정책브리프(must-good.com)' 이관 또는 Noindex 안전 처리 (오늘 meganote.kr 1/2건)",
+      "remodeled": false,
+      "remodelStatus": "safe_hold",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": false,
+          "alignmentLevel": "off_topic",
+          "ownScore": 0,
+          "bestCategory": "부동산·청약피드",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "부동산·청약피드",
+            "자동차·전기차보조금",
+            "다이렉트보험·특약",
+            "생활금융·절약팁"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "현재 도메인(메가노트 경제이슈) 주제 이탈 · '머스트굿 정책브리프(must-good.com)' 적합도(7점) 우세"
+        },
+        "3_categoryRemap": {
+          "patched": false,
+          "oldCategory": "생활정보",
+          "newCategory": "생활정보"
+        },
+        "4_imageSuitability": {
+          "totalImages": 3,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": true,
+          "hasAiDisclaimer": false,
+          "hasFakePersonOrBrokenTextAi": false,
+          "thirdPersonPortraitDetected": false,
+          "brokenKoreanTextDetected": false,
+          "hasWatermarkOrExifContamination": true,
+          "exifContaminatedCount": 3,
+          "watermarkSuspectCount": 0,
+          "genericFilenameCount": 0,
+          "targetDeviceProfile": "iPhone 15",
+          "forensics": [
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.meganote.kr/media/1789637127064-98333b75.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.meganote.kr/media/1789637127929-1238d554.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.meganote.kr/media/1789637130569-c670f563.jpg"
+            }
+          ],
+          "suitability": "watermark_or_exif_contaminated",
+          "verdictBadge": "🔴 이미지 세탁 대상 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "issue": "AI 워터마크(✦) 잔존 또는 AI 메타데이터 미제거(3장) 적발 ➔ image_sanitizer.py로 워터마크 크롭 및 iPhone 15 클린 EXIF 주입·SEO 파일명 변환 후 재업로드",
+          "passed": false
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 90,
+          "charCount": 2573,
+          "h2Count": 6,
+          "tableCount": 0,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "건강보험 임의계속가입 신청 자격, 통산 1년 직장 조건과 납부기한 2개월 마감"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "top",
+          "impressions": 1,
+          "clicks": 0,
+          "position": 6,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "D",
+          "gradeBadge": "🔴 D등급 (주제 이탈 · 안전 이관/Noindex 권고)",
+          "prescription": "도메인 정체성(메가노트 경제이슈)과 주제 불일치 ➔ 일괄 삭제 금지(검색 페널티 방지) · '머스트굿 정책브리프(must-good.com)' 이관 또는 Noindex 안전 처리 (오늘 meganote.kr 1/2건)"
+        }
+      }
+    },
+    "https://www.daynote.kr/kim-soo-hyun-return-photo-2026-08": {
+      "url": "https://www.daynote.kr/kim-soo-hyun-return-photo-2026-08",
+      "domain": "daynote.kr",
+      "brandName": "데이노트 살림레시피",
+      "platform": "cf",
+      "postId": 165,
+      "slug": "kim-soo-hyun-return-photo-2026-08",
+      "title": "김수현 복귀 현장, 법적 공방 종료 후 1년 5개월 만의 글로벌 무대",
+      "auditedAt": "2026-10-18T15:58:59.308804+09:00",
+      "auditDate": "2026-10-18",
+      "grade": "A",
+      "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "daynote.kr의 「김수현 복귀 현장, 법적 공방 종료 후 1년 5개월 만의 글로벌 무대」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 16, `kim-soo-hyun-return-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)",
+      "remodeled": false,
+      "remodelStatus": "healthy",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "borderline",
+          "ownScore": 0,
+          "bestCategory": "생활·살림속보",
+          "currentCategory": "생활정보",
+          "validCategories": [
+            "생활·살림속보",
+            "물가·절약이슈",
+            "주방·리빙기획",
+            "트렌드팩트체크"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "daynote.kr",
+          "recommendedDomainBrand": "머스트조이 방송·맛집",
+          "reason": "도메인 인접 생활·실용 주제 (정합 0점 · '생활·살림속보' 카테고리로 흡수 가능)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "생활정보",
+          "newCategory": "생활·살림속보",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 3,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "hasFakePersonOrBrokenTextAi": false,
+          "thirdPersonPortraitDetected": false,
+          "brokenKoreanTextDetected": false,
+          "hasWatermarkOrExifContamination": true,
+          "exifContaminatedCount": 3,
+          "watermarkSuspectCount": 0,
+          "genericFilenameCount": 0,
+          "targetDeviceProfile": "iPhone 16",
+          "forensics": [
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://daynote.kr/media/1787771064114-98436893.webp"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://daynote.kr/media/1787771066472-5fc36667.webp"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://daynote.kr/media/1787771069034-338c0cd4.webp"
+            }
+          ],
+          "suitability": "watermark_or_exif_contaminated",
+          "verdictBadge": "🔴 이미지 세탁 대상 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "issue": "AI 워터마크(✦) 잔존 또는 AI 메타데이터 미제거(3장) 적발 ➔ image_sanitizer.py로 워터마크 크롭 및 iPhone 16 클린 EXIF 주입·SEO 파일명 변환 후 재업로드",
+          "passed": false,
+          "remediation": {
+            "remediated": true,
+            "replacedCount": 3,
+            "replacedUrls": [
+              "https://www.daynote.kr/media/1792306733740-f13afae7.jpg",
+              "https://www.daynote.kr/media/1792306737132-63507f0a.jpg",
+              "https://www.daynote.kr/media/1792306738974-a0ccab7a.jpg"
+            ],
+            "seoFilenames": [
+              "kim-soo-hyun-return-01.jpg",
+              "kim-soo-hyun-return-02.jpg",
+              "kim-soo-hyun-return-03.jpg"
+            ],
+            "deviceLabel": "iPhone 16",
+            "replacedFakePersonWithDiagram": false,
+            "httpStatus": 200
+          }
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 98,
+          "charCount": 2288,
+          "h2Count": 5,
+          "tableCount": 0,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "김수현 복귀 현장, 법적 공방 종료 후 1년 5개월 만의 글로벌 무대"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "A",
+          "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+          "prescription": "daynote.kr의 「김수현 복귀 현장, 법적 공방 종료 후 1년 5개월 만의 글로벌 무대」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 16, `kim-soo-hyun-return-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)"
+        }
+      }
+    },
+    "https://www.must-good.com/coupang-chuseok-festa-2026-discounts": {
+      "url": "https://www.must-good.com/coupang-chuseok-festa-2026-discounts",
+      "domain": "must-good.com",
+      "brandName": "머스트굿 정책브리프",
+      "platform": "cf",
+      "postId": 431,
+      "slug": "coupang-chuseok-festa-2026-discounts",
+      "title": "쿠팡 추석 페스타 2026 할인, 27일까지 8만개 특가와 23일 브랜드데이",
+      "auditedAt": "2026-10-18T15:59:20.600229+09:00",
+      "auditDate": "2026-10-18",
+      "grade": "A",
+      "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "must-good.com의 「쿠팡 추석 페스타 2026 할인, 27일까지 8만개 특가와 23일 브랜드데이」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15 Pro, `coupang-chuseok-festa-discounts-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)",
+      "remodeled": false,
+      "remodelStatus": "healthy",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "borderline",
+          "ownScore": 1,
+          "bestCategory": "정부지원금속보",
+          "currentCategory": "쇼핑정보",
+          "validCategories": [
+            "정부지원금속보",
+            "청년·장년복지",
+            "민원·행정기획",
+            "세금·환급이슈"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "must-good.com",
+          "recommendedDomainBrand": "메가노트 경제이슈",
+          "reason": "도메인 인접 생활·실용 주제 (정합 1점 · '정부지원금속보' 카테고리로 흡수 가능)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "쇼핑정보",
+          "newCategory": "정부지원금속보",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "hasFakePersonOrBrokenTextAi": false,
+          "thirdPersonPortraitDetected": false,
+          "brokenKoreanTextDetected": false,
+          "hasWatermarkOrExifContamination": true,
+          "exifContaminatedCount": 4,
+          "watermarkSuspectCount": 0,
+          "genericFilenameCount": 0,
+          "targetDeviceProfile": "iPhone 15 Pro",
+          "forensics": [
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.must-good.com/media/1789191144697-63d86ed6.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.must-good.com/media/1789191145891-8e8edf94.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.must-good.com/media/1789191148241-32da89e9.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.must-good.com/media/1789191149121-8ca07dee.jpg"
+            }
+          ],
+          "suitability": "watermark_or_exif_contaminated",
+          "verdictBadge": "🔴 이미지 세탁 대상 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "issue": "AI 워터마크(✦) 잔존 또는 AI 메타데이터 미제거(4장) 적발 ➔ image_sanitizer.py로 워터마크 크롭 및 iPhone 15 Pro 클린 EXIF 주입·SEO 파일명 변환 후 재업로드",
+          "passed": false,
+          "remediation": {
+            "remediated": true,
+            "replacedCount": 3,
+            "replacedUrls": [
+              "https://www.must-good.com/media/1792306752261-ec54ab0f.jpg",
+              "https://www.must-good.com/media/1792306756842-a14a8fee.jpg",
+              "https://www.must-good.com/media/1792306758167-bf45b4eb.jpg"
+            ],
+            "seoFilenames": [
+              "coupang-chuseok-festa-discounts-01.jpg",
+              "coupang-chuseok-festa-discounts-02.jpg",
+              "coupang-chuseok-festa-discounts-03.jpg"
+            ],
+            "deviceLabel": "iPhone 15 Pro",
+            "replacedFakePersonWithDiagram": false,
+            "httpStatus": 200
+          }
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 4353,
+          "h2Count": 17,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "쿠팡 추석 페스타 2026 할인, 27일까지 8만개 특가와 23일 브랜드데이"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "A",
+          "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+          "prescription": "must-good.com의 「쿠팡 추석 페스타 2026 할인, 27일까지 8만개 특가와 23일 브랜드데이」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15 Pro, `coupang-chuseok-festa-discounts-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)"
+        }
+      }
+    },
+    "https://www.woorinote.kr/공동육아나눔터-운영-확인법": {
+      "url": "https://www.woorinote.kr/공동육아나눔터-운영-확인법",
+      "domain": "woorinote.kr",
+      "brandName": "우리노트 부동산·계약",
+      "platform": "cf",
+      "postId": 179,
+      "slug": "공동육아나눔터-운영-확인법",
+      "title": "공동육아나눔터는 무료인가, 전국 430개 시설의 지역별 이용 조건",
+      "auditedAt": "2026-10-18T15:59:45.976535+09:00",
+      "auditDate": "2026-10-18",
+      "grade": "C",
+      "gradeBadge": "🔴 이미지 세탁 대상 · 🟡 C등급 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "woorinote.kr의 「공동육아나눔터는 무료인가, 전국 430개 시설의 지역별 이용 조건」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15, `430-detail-view-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)",
+      "remodeled": false,
+      "remodelStatus": "queued_for_publi",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "borderline",
+          "ownScore": 0,
+          "bestCategory": "청약·분양자문",
+          "currentCategory": "방송정보",
+          "validCategories": [
+            "청약·분양자문",
+            "전월세·계약법률",
+            "주거복지·대출",
+            "부동산등기·세법"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "woorinote.kr",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "도메인 인접 생활·실용 주제 (정합 0점 · '청약·분양자문' 카테고리로 흡수 가능)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "방송정보",
+          "newCategory": "청약·분양자문",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "hasFakePersonOrBrokenTextAi": false,
+          "thirdPersonPortraitDetected": false,
+          "brokenKoreanTextDetected": false,
+          "hasWatermarkOrExifContamination": true,
+          "exifContaminatedCount": 4,
+          "watermarkSuspectCount": 0,
+          "genericFilenameCount": 0,
+          "targetDeviceProfile": "iPhone 15",
+          "forensics": [
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://woorinote.kr/media/1787524708702-483fd714.webp"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://woorinote.kr/media/1787524710799-67885aec.webp"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://woorinote.kr/media/1787524713450-d21974c1.webp"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://woorinote.kr/media/1787524714394-87718d2f.webp"
+            }
+          ],
+          "suitability": "watermark_or_exif_contaminated",
+          "verdictBadge": "🔴 이미지 세탁 대상 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "issue": "AI 워터마크(✦) 잔존 또는 AI 메타데이터 미제거(4장) 적발 ➔ image_sanitizer.py로 워터마크 크롭 및 iPhone 15 클린 EXIF 주입·SEO 파일명 변환 후 재업로드",
+          "passed": false,
+          "remediation": {
+            "remediated": true,
+            "replacedCount": 3,
+            "replacedUrls": [
+              "https://www.woorinote.kr/media/1792306778458-1313be2e.jpg",
+              "https://www.woorinote.kr/media/1792306782057-bc7e6e8a.jpg",
+              "https://www.woorinote.kr/media/1792306785564-386b1627.jpg"
+            ],
+            "seoFilenames": [
+              "430-detail-view-01.jpg",
+              "430-detail-view-02.jpg",
+              "430-detail-view-03.jpg"
+            ],
+            "deviceLabel": "iPhone 15",
+            "replacedFakePersonWithDiagram": false,
+            "httpStatus": 200
+          }
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 88,
+          "charCount": 2687,
+          "h2Count": 7,
+          "tableCount": 0,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": false,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "공동육아나눔터는 무료인가, 전국 430개 시설의 지역별 이용 조건"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "C",
+          "gradeBadge": "🔴 이미지 세탁 대상 · 🟡 C등급 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "prescription": "woorinote.kr의 「공동육아나눔터는 무료인가, 전국 430개 시설의 지역별 이용 조건」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15, `430-detail-view-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)"
+        }
+      }
+    },
+    "https://www.justinfo.co.kr/lee-taehan-special-prosecutor-profile": {
+      "url": "https://www.justinfo.co.kr/lee-taehan-special-prosecutor-profile",
+      "domain": "justinfo.co.kr",
+      "brandName": "저스트인포 노동·법률",
+      "platform": "cf",
+      "postId": 430,
+      "slug": "lee-taehan-special-prosecutor-profile",
+      "title": "이태한 특검 임명, 투표용지 부족에서 170일 수사 일정까지",
+      "auditedAt": "2026-10-18T16:00:05.558863+09:00",
+      "auditDate": "2026-10-18",
+      "grade": "A",
+      "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "justinfo.co.kr의 「이태한 특검 임명, 투표용지 부족에서 170일 수사 일정까지」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15, `lee-taehan-special-prosecutor-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)",
+      "remodeled": false,
+      "remodelStatus": "healthy",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "borderline",
+          "ownScore": 0,
+          "bestCategory": "세무·절세칼럼",
+          "currentCategory": "금융정보",
+          "validCategories": [
+            "세무·절세칼럼",
+            "근로·실업급여노무",
+            "소비자환불·분쟁",
+            "생활법률·과태료"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "justinfo.co.kr",
+          "recommendedDomainBrand": "우리노트 부동산·계약",
+          "reason": "도메인 인접 생활·실용 주제 (정합 0점 · '세무·절세칼럼' 카테고리로 흡수 가능)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "금융정보",
+          "newCategory": "세무·절세칼럼",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 3,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": false,
+          "hasAiDisclaimer": false,
+          "hasFakePersonOrBrokenTextAi": false,
+          "thirdPersonPortraitDetected": false,
+          "brokenKoreanTextDetected": false,
+          "hasWatermarkOrExifContamination": true,
+          "exifContaminatedCount": 3,
+          "watermarkSuspectCount": 0,
+          "genericFilenameCount": 0,
+          "targetDeviceProfile": "iPhone 15",
+          "forensics": [
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://justinfo.co.kr/media/1787510036990-d49011b3.webp"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://justinfo.co.kr/media/1787510040205-070d3473.webp"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://justinfo.co.kr/media/1787510043175-2e59ee44.webp"
+            }
+          ],
+          "suitability": "watermark_or_exif_contaminated",
+          "verdictBadge": "🔴 이미지 세탁 대상 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "issue": "AI 워터마크(✦) 잔존 또는 AI 메타데이터 미제거(3장) 적발 ➔ image_sanitizer.py로 워터마크 크롭 및 iPhone 15 클린 EXIF 주입·SEO 파일명 변환 후 재업로드",
+          "passed": false,
+          "remediation": {
+            "remediated": true,
+            "replacedCount": 3,
+            "replacedUrls": [
+              "https://www.justinfo.co.kr/media/1792306799735-9d8cac92.jpg",
+              "https://www.justinfo.co.kr/media/1792306803650-be821461.jpg",
+              "https://www.justinfo.co.kr/media/1792306805155-5de89ac3.jpg"
+            ],
+            "seoFilenames": [
+              "lee-taehan-special-prosecutor-01.jpg",
+              "lee-taehan-special-prosecutor-02.jpg",
+              "lee-taehan-special-prosecutor-03.jpg"
+            ],
+            "deviceLabel": "iPhone 15",
+            "replacedFakePersonWithDiagram": false,
+            "httpStatus": 200
+          }
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 98,
+          "charCount": 2745,
+          "h2Count": 6,
+          "tableCount": 0,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "이태한 특검 임명, 투표용지 부족에서 170일 수사 일정까지"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Submitted and indexed"
+        },
+        "7_finalGrade": {
+          "grade": "A",
+          "gradeBadge": "🟢 A등급 (정상 유지 · 클린 EXIF·카테고리 검진 완료)",
+          "prescription": "justinfo.co.kr의 「이태한 특검 임명, 투표용지 부족에서 170일 수사 일정까지」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15, `lee-taehan-special-prosecutor-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)"
+        }
+      }
+    },
+    "https://www.meganote.kr/kepco-energy-efficiency-appliance-refund-2026": {
+      "url": "https://www.meganote.kr/kepco-energy-efficiency-appliance-refund-2026",
+      "domain": "meganote.kr",
+      "brandName": "메가노트 경제이슈",
+      "platform": "cf",
+      "postId": 216,
+      "slug": "kepco-energy-efficiency-appliance-refund-2026",
+      "title": "한전 고효율 가전 환급 2026, 11개 품목 1등급·최대 30만원 신청서류 5종",
+      "auditedAt": "2026-10-18T16:00:23.229146+09:00",
+      "auditDate": "2026-10-18",
+      "grade": "C",
+      "gradeBadge": "🔴 이미지 세탁 대상 · 🟡 C등급 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+      "actionCode": "queue_remodel_publi",
+      "prescription": "meganote.kr의 「한전 고효율 가전 환급 2026, 11개 품목 1등급·최대 30만원 신청서류 5종」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15, `kepco-energy-efficiency-appliance-tax-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)",
+      "remodeled": false,
+      "remodelStatus": "queued_for_publi",
+      "checklist": {
+        "1_render": {
+          "httpStatus": 200,
+          "renderOk": true,
+          "adSlotPresent": true,
+          "note": "HTTP 200 OK · 본문 렌더링 정상 · 애드센스 슬롯 확인"
+        },
+        "2_domainAlignment": {
+          "aligned": true,
+          "alignmentLevel": "aligned",
+          "ownScore": 2,
+          "bestCategory": "부동산·청약피드",
+          "currentCategory": "쇼핑정보",
+          "validCategories": [
+            "부동산·청약피드",
+            "자동차·전기차보조금",
+            "다이렉트보험·특약",
+            "생활금융·절약팁"
+          ],
+          "needsCategoryRemap": true,
+          "recommendedDomain": "meganote.kr",
+          "recommendedDomainBrand": "머스트굿 정책브리프",
+          "reason": "도메인 전문 분야(물가·장보기·공공요금·소비트렌드·체크리스트)와 주제 일치 (정합 점수 2점)"
+        },
+        "3_categoryRemap": {
+          "patched": true,
+          "oldCategory": "쇼핑정보",
+          "newCategory": "부동산·청약피드",
+          "httpStatus": 200
+        },
+        "4_imageSuitability": {
+          "totalImages": 4,
+          "brokenCount": 0,
+          "brokenUrls": [],
+          "needsRealCapture": true,
+          "hasAiDisclaimer": false,
+          "hasFakePersonOrBrokenTextAi": false,
+          "thirdPersonPortraitDetected": false,
+          "brokenKoreanTextDetected": false,
+          "hasWatermarkOrExifContamination": true,
+          "exifContaminatedCount": 4,
+          "watermarkSuspectCount": 0,
+          "genericFilenameCount": 0,
+          "targetDeviceProfile": "iPhone 15",
+          "forensics": [
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.meganote.kr/media/1789454069473-95a19ec5.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.meganote.kr/media/1789454071688-73a4ee88.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.meganote.kr/media/1789454072278-8bdf5e66.jpg"
+            },
+            {
+              "hasAiMetadataTrace": false,
+              "aiMetadataHits": [],
+              "hasCleanSmartphoneExif": false,
+              "deviceMake": "",
+              "deviceModel": "",
+              "dateTimeOriginal": "",
+              "hasCornerWatermarkSuspect": false,
+              "isGenericFilename": false,
+              "needsSanitization": true,
+              "url": "https://www.meganote.kr/media/1789454074805-e3e874e2.jpg"
+            }
+          ],
+          "suitability": "watermark_or_exif_contaminated",
+          "verdictBadge": "🔴 이미지 세탁 대상 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "issue": "AI 워터마크(✦) 잔존 또는 AI 메타데이터 미제거(4장) 적발 ➔ image_sanitizer.py로 워터마크 크롭 및 iPhone 15 클린 EXIF 주입·SEO 파일명 변환 후 재업로드",
+          "passed": false,
+          "remediation": {
+            "remediated": true,
+            "replacedCount": 3,
+            "replacedUrls": [
+              "https://www.meganote.kr/media/1792306819332-e63c8967.jpg",
+              "https://www.meganote.kr/media/1792306821914-f6a2c974.jpg",
+              "https://www.meganote.kr/media/1792306823050-22241ad0.jpg"
+            ],
+            "seoFilenames": [
+              "kepco-energy-efficiency-appliance-tax-01.jpg",
+              "kepco-energy-efficiency-appliance-tax-02.jpg",
+              "kepco-energy-efficiency-appliance-tax-03.jpg"
+            ],
+            "deviceLabel": "iPhone 15",
+            "replacedFakePersonWithDiagram": false,
+            "httpStatus": 200
+          }
+        },
+        "5_titleAndBodyQuality": {
+          "qualityScore": 100,
+          "charCount": 7590,
+          "h2Count": 21,
+          "tableCount": 1,
+          "isMechanicalTitle": false,
+          "hasConcreteNumbers": true,
+          "IndirectExperiencePassed": true,
+          "suggestedRemodelTitle": "한전 고효율 가전 환급 2026, 11개 품목 1등급·최대 30만원 신청서류 5종"
+        },
+        "6_indexAndPotential": {
+          "indexStatus": "not_indexed",
+          "performanceBucket": "unknown",
+          "impressions": 0,
+          "clicks": 0,
+          "position": null,
+          "coverageState": "Discovered - currently not indexed"
+        },
+        "7_finalGrade": {
+          "grade": "C",
+          "gradeBadge": "🔴 이미지 세탁 대상 · 🟡 C등급 (AI 워터마크 ✦ / EXIF 메타데이터 오염 적발)",
+          "prescription": "meganote.kr의 「한전 고효율 가전 환급 2026, 11개 품목 1등급·최대 30만원 신청서류 5종」 글에서 3인칭 가짜 인물/깨진 한글 사진 및 AI 워터마크(✦)·메타데이터 오염을 발견해 정자체 요약표·캡처 화면 및 클린 EXIF(iPhone 15, `kepco-energy-efficiency-appliance-tax-01.jpg`) 이미지로 즉시 세탁·재업로드 완료 (+ @퍼블리 본문 보강 큐 등록)"
+        }
+      }
+    }
+  },
+  "dailyHistory": {
+    "2026-10-17": {
+      "audited": 15,
+      "remodeled": 13,
+      "bPatched": 13,
+      "cQueued": 5,
+      "dCapped": 2,
+      "dByDomain": {
+        "must-good.com": 1,
+        "baronote.kr": 1
+      }
+    },
+    "2026-10-18": {
+      "audited": 10,
+      "remodeled": 8,
+      "bPatched": 8,
+      "cQueued": 8,
+      "dCapped": 2,
+      "dByDomain": {
+        "woorinote.kr": 1,
+        "meganote.kr": 1
+      }
+    }
+  },
+  "recentPatrolLogs": [
+    {
+      "patrolId": "patrol-1792306823",
+      "at": "2026-10-18T16:00:23.231121+09:00",
+      "count": 5,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 5,
+        "D": 0
+      },
+      "urls": [
+        "https://www.daynote.kr/kim-soo-hyun-return-photo-2026-08",
+        "https://www.must-good.com/coupang-chuseok-festa-2026-discounts",
+        "https://www.woorinote.kr/공동육아나눔터-운영-확인법",
+        "https://www.justinfo.co.kr/lee-taehan-special-prosecutor-profile",
+        "https://www.meganote.kr/kepco-energy-efficiency-appliance-refund-2026"
+      ]
+    },
+    {
+      "patrolId": "patrol-1792306646",
+      "at": "2026-10-18T15:57:26.706634+09:00",
+      "count": 5,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 3,
+        "D": 2
+      },
+      "urls": [
+        "https://www.daynote.kr/flu-vaccine-free-eligibility-schedule-2026",
+        "https://www.must-good.com/mobile-id-card-issuance-ic-qr-2026",
+        "https://www.woorinote.kr/공공근로사업-2026-하반기",
+        "https://www.justinfo.co.kr/2026-flu-shot-free-target-expansion-schedule",
+        "https://www.meganote.kr/nhis-voluntary-continuation-qualification-deadline-guide"
+      ]
+    },
+    {
+      "patrolId": "patrol-1792232817",
+      "at": "2026-10-17T19:26:57.487958+09:00",
+      "count": 5,
+      "grades": {
+        "A": 0,
+        "B": 3,
+        "C": 1,
+        "D": 1
+      },
+      "urls": [
+        "https://www.must-good.com/incheon-airport-emergency-passport-guide",
+        "https://www.baronote.kr/september-2026-new-drama-schedule",
+        "https://www.woorinote.kr/청년-자격증-응시료-지원-2026-지자체-신청",
+        "https://www.justinfo.co.kr/열혈농구단2-심판-오심-공격권-판정-기준",
+        "https://www.topnote.kr/flu-vaccine-free-support-2026-schedule"
+      ]
+    },
+    {
+      "patrolId": "patrol-1792232718",
+      "at": "2026-10-17T19:25:18.190937+09:00",
+      "count": 5,
+      "grades": {
+        "A": 0,
+        "B": 3,
+        "C": 2,
+        "D": 0
+      },
+      "urls": [
+        "https://www.must-good.com/gv90-2027-포토-제원-정리",
+        "https://www.must-good.com/1811-8401-메리츠화재-차단-방법",
+        "https://www.must-good.com/로베르토-모레노-한국축구-임시감독-선임-2026",
+        "https://www.must-good.com/신혼부부-건강검진-지원-2026",
+        "https://www.must-good.com/휴면예금-찾아줌-조회-지급신청"
+      ]
+    },
+    {
+      "patrolId": "patrol-1792232646",
+      "at": "2026-10-17T19:24:06.914460+09:00",
+      "count": 5,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 2,
+        "D": 1
+      },
+      "urls": [
+        "https://www.must-good.com/iron-family-kbs2-drama-broadcast-guide-2024",
+        "https://www.must-good.com/ancestor-land-inquiry-kgeo-online-guide-2026",
+        "https://www.must-good.com/waste-home-appliances-free-collection-guide-2026",
+        "https://www.must-good.com/2026-flu-free-vaccination-schedule-guide",
+        "https://www.must-good.com/tuide-hybe-debut-2026-08"
+      ]
+    }
+  ],
+  "userOverrides": []
+}

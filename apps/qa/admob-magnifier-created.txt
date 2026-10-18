@@ -1,0 +1,22 @@
+ObservedAt: 2026-10-14T08:52:04.326091+00:00
+Target: BAD076C08E10EDF82A30278A039628E8 (existing SJ AdMob tab)
+App: 큰글씨 돋보기 - 확대·손전등
+Platform: Android; supported store listed: No
+Banner: magnifier_help_banner
+Scope: app+one banner created; not approval or revenue readiness. No ads clicked/email sent.
+
+메인 콘텐츠로 건너뛰기
+check_circle
+광고 단위 생성됨
+새 광고 단위에서 광고 게재를 시작하는 데 최대 1시간이 걸릴 수 있습니다. 기다리는 동안 샘플 광고 단위를 테스트해 보세요.
+그런 다음 앱에 광고 단위 배치
+다음 안내를 따르세요.
+다음 앱 ID를 사용하여 Google 모바일 광고 SDK 가이드의 안내를 따르세요.
+ca-app-pub-7642010403138987~5789333475
+SDK를 통합하려면 배너 구현 가이드를 따르세요. 다음 광고 단위 ID를 사용하여 코드를 통합할 때 광고 유형, 크기, 게재위치를 지정합니다.
+ca-app-pub-7642010403138987/4744854277
+구현이 AdMob 정책을 준수하는지 검토하세요.
+이메일 도움말
+완료
+다른 광고 단위 생성
+© 2026 Google 개인정보처리방침 약관

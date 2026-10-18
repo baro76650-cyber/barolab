@@ -1,0 +1,327 @@
+/* BaroLab Signature Hybrid Deck Sidebar — Unified across all dashboard pages */
+#barolab-sidebar, #barolab-sidebar * {
+  box-sizing: border-box !important;
+}
+body.control-room .layout,
+body.control-room:has(> #barolab-sidebar) {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  min-height: 100vh !important;
+  position: relative !important;
+}
+#barolab-sidebar {
+  width: 228px !important;
+  min-width: 228px !important;
+  max-width: 228px !important;
+  flex: 0 0 228px !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  align-self: stretch !important;
+  background: linear-gradient(180deg, #0b1120 0%, #0f172a 100%) !important;
+  color: #cbd5e1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 100 !important;
+  user-select: none !important;
+  border-right: 1px solid #1e293b !important;
+  box-shadow: 4px 0 16px rgba(2, 6, 23, 0.18) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin;
+  scrollbar-color: #334155 #0b1120;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif !important;
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em !important;
+}
+#barolab-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+#barolab-sidebar::-webkit-scrollbar-track {
+  background: #0b1120;
+}
+#barolab-sidebar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+#barolab-sidebar .brand {
+  height: 54px !important;
+  min-height: 54px !important;
+  max-height: 54px !important;
+  padding: 0 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  border-bottom: 1px solid #1e293b !important;
+  background: rgba(15, 23, 42, 0.65) !important;
+  flex-shrink: 0 !important;
+}
+#barolab-sidebar .brand-badge {
+  width: 30px !important;
+  height: 30px !important;
+  background: linear-gradient(135deg, #2563eb, #10b981) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 8px !important;
+  display: grid !important;
+  place-items: center !important;
+  font-weight: 900 !important;
+  font-size: 15px !important;
+  flex-shrink: 0 !important;
+}
+#barolab-sidebar .brand-text {
+  min-width: 0 !important;
+  flex: 1 !important;
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: space-between !important;
+  gap: 6px !important;
+}
+#barolab-sidebar .brand-text strong {
+  font-size: 13.5px !important;
+  font-weight: 800 !important;
+  color: #f8fafc !important;
+  display: inline-block !important;
+  line-height: 1.1 !important;
+  letter-spacing: 0.02em !important;
+  white-space: nowrap !important;
+}
+#barolab-sidebar .brand-text span {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #38bdf8 !important;
+  background: rgba(56, 189, 248, 0.12) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  padding: 1px 6px !important;
+  border-radius: 999px !important;
+  white-space: nowrap !important;
+}
+#barolab-sidebar .nav {
+  padding: 10px 8px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  flex: 0 0 auto !important;
+  overflow: visible !important;
+}
+#barolab-sidebar .nav-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 9.5px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  color: #64748b !important;
+  padding: 10px 8px 3px !important;
+  letter-spacing: 0.06em !important;
+  white-space: nowrap !important;
+}
+#barolab-sidebar .nav-label::after {
+  content: "" !important;
+  flex: 1 !important;
+  height: 1px !important;
+  background: rgba(51, 65, 85, 0.55) !important;
+}
+#barolab-sidebar .nav-item {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 0 10px !important;
+  border-radius: 7px !important;
+  border: 1px solid transparent !important;
+  color: #94a3b8 !important;
+  text-decoration: none !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  text-align: left !important;
+  transition: all 0.14s ease !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+#barolab-sidebar .nav-item > div {
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+}
+#barolab-sidebar .nav-item:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(148, 163, 184, 0.14) !important;
+  color: #f1f5f9 !important;
+}
+#barolab-sidebar .nav-item.active {
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.22) 0%, rgba(16, 185, 129, 0.10) 100%) !important;
+  border-color: rgba(59, 130, 246, 0.45) !important;
+  border-left: 3px solid #38bdf8 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
+}
+#barolab-sidebar .nav-icon {
+  width: 18px !important;
+  height: 18px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 13px !important;
+  flex-shrink: 0 !important;
+}
+#barolab-sidebar .nav-item strong {
+  display: block !important;
+  font-size: 12px !important;
+  font-weight: inherit !important;
+  letter-spacing: -0.02em !important;
+  color: inherit !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+/* Clean 1-line menu: hide verbose 2nd-line descriptions */
+#barolab-sidebar .nav-item small {
+  display: none !important;
+}
+#barolab-sidebar .badge-count {
+  margin-left: auto !important;
+  font-size: 10px !important;
+  padding: 2px 6px !important;
+  border-radius: 6px !important;
+  background: rgba(30, 41, 59, 0.9) !important;
+  border: 1px solid rgba(148, 163, 184, 0.22) !important;
+  color: #cbd5e1 !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  line-height: 1.15 !important;
+}
+#barolab-sidebar .nav-item.active .badge-count {
+  background: rgba(56, 189, 248, 0.18) !important;
+  border-color: rgba(56, 189, 248, 0.4) !important;
+  color: #f8fafc !important;
+}
+#barolab-sidebar .badge-count.st-green {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: rgba(16, 185, 129, 0.35) !important;
+  color: #6ee7b7 !important;
+}
+#barolab-sidebar .badge-count.st-blue {
+  background: rgba(59, 130, 246, 0.16) !important;
+  border-color: rgba(96, 165, 250, 0.38) !important;
+  color: #93c5fd !important;
+}
+#barolab-sidebar .badge-count.st-amber {
+  background: rgba(245, 158, 11, 0.15) !important;
+  border-color: rgba(251, 191, 36, 0.35) !important;
+  color: #fcd34d !important;
+}
+#barolab-sidebar .nav-item[aria-disabled="true"] {
+  cursor: default !important;
+  opacity: 0.48 !important;
+}
+#barolab-sidebar .nav-item[aria-disabled="true"]:hover {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #94a3b8 !important;
+}
+#barolab-sidebar .nav-item:focus-visible {
+  outline: 2px solid #38bdf8 !important;
+  outline-offset: 2px !important;
+}
+#barolab-sidebar .sidebar-assistant {
+  margin: 6px 8px !important;
+  padding: 8px 10px !important;
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid rgba(51, 65, 85, 0.7) !important;
+  border-radius: 8px !important;
+  font-size: 10.5px !important;
+  line-height: 1.35 !important;
+  flex-shrink: 0 !important;
+}
+#barolab-sidebar .assistant-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 6px !important;
+  margin-bottom: 3px !important;
+  color: #38bdf8 !important;
+  font-weight: 800 !important;
+  font-size: 10px !important;
+  white-space: nowrap !important;
+}
+#barolab-sidebar .assistant-quote {
+  color: #94a3b8 !important;
+  margin: 0 !important;
+  font-size: 10px !important;
+  line-height: 1.35 !important;
+}
+#barolab-sidebar .sidebar-settings {
+  display: flex !important;
+  margin: 2px 8px 8px !important;
+  flex-shrink: 0 !important;
+}
+#barolab-sidebar .sidebar-footer {
+  padding: 9px 14px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #64748b !important;
+  border-top: 1px solid #1e293b !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+body.control-room .main-wrap,
+body.control-room .growth-main {
+  margin-left: 0 !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  width: calc(100% - 228px) !important;
+}
+body:has(> #barolab-sidebar) > main:not(.growth-main) {
+  margin-left: 0 !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+}
+@media (max-width: 760px) {
+  #barolab-sidebar {
+    position: static !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  #barolab-sidebar .nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    flex: none !important;
+  }
+  #barolab-sidebar .nav-label {
+    grid-column: 1 / -1 !important;
+  }
+  #barolab-sidebar .sidebar-assistant {
+    display: none !important;
+  }
+  body.control-room .main-wrap,
+  body.control-room .growth-main,
+  body:has(> #barolab-sidebar) > main:not(.growth-main) {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}

@@ -1,0 +1,7 @@
+.gradle/
+**/build/
+local.properties
+release.properties
+.agent-routing/
+*.jks
+*.p12

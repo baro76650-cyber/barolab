@@ -1,0 +1,151 @@
+ObservedAt: 2026-10-14T09:01:57.039416+00:00
+Message: BaroLab 생활 앱 - 유럽 이용자 동의
+Selected apps only: greeting ~7847239341; magnifier ~5789333475; shopping ~6881642030. UI lists unique names and ID dash; IDs cross-matched to creation receipts. Bible/timer unchecked.
+Privacy URLs: https://barolab-daily-apps.pages.dev/{greeting,magnifier,shopping}/privacy (each HTTP200 before save)
+Language: English en; Korean not present in offered additional language list.
+Consent, Manage options, Do not consent enabled; global reject enabled. Close-without-consent disabled. No feature-gating code changes.
+EEA runtime form test and real ad approval not verified.
+
+BEFORE PUBLISH
+메인 콘텐츠로 건너뛰기
+menu
+search
+앱, 광고 단위, 미디에이션 그룹, 보고서, 캠페인 검색
+home
+홈
+apps
+앱
+assessment
+보고서
+미디에이션
+campaign
+캠페인
+verified_user
+정책 센터
+개인 정보 보호 및 메시지
+badge
+게시자 데이터
+베타
+block
+차단 관리
+지급
+history
+변경 내역
+베타
+settings
+설정
+stream_science
+실험실
+help_outline
+도움말
+feedback
+의견
+arrow_back
+help_outline
+임시저장
+게시
+tablet
+smartphone
+언어
+translate
+영어(en)
+arrow_drop_down
+현재 표시 중
+visibility
+동의(1/3)
+arrow_drop_down
+%%APP_NAME%% asks for your consent to use your personal data for the following purposes:
+Personalised advertising and content, advertising and content measurement, audience research and services development
+Store and/or access information on a device
+Learn more
+
+Your personal data will be processed and information from your device (cookies, unique identifiers, and other device data) may be stored by, accessed by and shared with 211 partners, or used specifically by this app. We and our partners may use precise geolocation data. List of partners.
+
+Some vendors may process your personal data on the basis of legitimate interest, which you can object to by managing your options below. Look for a link or button in the app menu to manage or withdraw consent in privacy and cookie settings.
+
+Consent
+
+Do not consent
+
+Manage options
+
+settings
+설정
+palette
+스타일 지정
+my_location
+타겟팅
+일반 설정
+내 앱
+앱 3개
+edit
+기본 언어
+help_outline
+영어(en)
+arrow_drop_down
+추가 언어
+언어 0개 선택됨
+arrow_drop_down
+사용자 선택사항
+help_outline
+동의
+사용
+옵션 관리
+사용
+동의하지 않음
+사용
+arrow_drop_down
+닫기(동의하지 않음)
+사용 안함
+arrow_drop_down
+계정 설정
+help_outline
+
+expand_less
+© 2026 Google 개인정보처리방침 약관
+
+AFTER PUBLISH 2026-10-14T09:04:04.531005+00:00
+MessageId: ad138182540a545e
+개인 정보 보호 및 메시지
+keyboard_arrow_right
+유럽 규정
+유럽 규정
+school
+유럽 규정 시작하기
+Google 메시지 도구를 사용하면 EEA, 영국, 스위스 사용자의 동의를 수집할 때 Google의 EU 사용자 동의 정책 요구사항을 충족할 수 있습니다 유럽 규정 자세히 알아보기launch
+메시지
+설정
+표시된 메시지 수
+
+0
+동의 비율
+
+0%
+보고서 다운로드
+메시지 만들기
+이름
+arrow_upward
+	언어	앱	
+최종 수정일
+arrow_upward
+내림차순으로 정렬되었습니다.
+	상태	게시	
+
+BaroLab 생활 앱 - 유럽 이용자 동의
+my_location
+영어(en)	
+앱 3개
+	2026. 10. 14.	게시됨	
+	
+more_vert
+옵션 더보기
+
+
+하루말씀 - 유럽 이용자 동의
+my_location
+영어(en)	
+하루말씀 - 큰 글씨 성경·말씀 카드
+	2026. 10. 14.	게시됨	
+	
+more_vert
+옵션 더보기

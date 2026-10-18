@@ -1,0 +1,39 @@
+{
+  "schema": "naver-kin-measurement-v1",
+  "checkedAt": "2026-10-15T08:01:24.664568+00:00",
+  "source": "GA4 Data API",
+  "timezone": "Asia/Seoul",
+  "startDate": "2026-10-08",
+  "endDate": "2026-10-14",
+  "scope": "owned approved hosts; exact sessionSource=naver_kin, sessionMedium=referral, sessionManualCampaignName=cf_bridge",
+  "provisional": true,
+  "lagNote": "최근 48시간은 GA4 처리 지연으로 변할 수 있습니다. 미측정·동의 거부·차단 방문은 포함되지 않습니다.",
+  "causalityNote": "UTM 세션 귀속이며 실제 사람·증분 효과·수익 발생을 단독 증명하지 않습니다.",
+  "sites": [
+    {
+      "host": "www.must-good.com",
+      "status": "collected",
+      "sessions": 0,
+      "engagedSessions": 0,
+      "pageViews": 0
+    },
+    {
+      "host": "www.must-pick.com",
+      "status": "collected",
+      "sessions": 0,
+      "engagedSessions": 0,
+      "pageViews": 0
+    }
+  ],
+  "sessions": 0,
+  "engagedSessions": 0,
+  "pageViews": 0,
+  "publisherRevenue": null,
+  "revenueStatus": "unverified_publisher_link",
+  "revenueReason": "GA4 게시자 광고 수익 연결과 답변별 수익 범위를 검증하지 못했습니다. AdSense 전체 수익을 배분하지 않습니다.",
+  "rows": [],
+  "complete": true,
+  "status": "collected",
+  "matchedSessions": 0,
+  "unmatchedSessions": 0
+}

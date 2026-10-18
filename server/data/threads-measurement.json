@@ -1,0 +1,126 @@
+{
+  "schema": "threads-measurement-v1",
+  "status": "partial",
+  "complete": false,
+  "collected_at": "2026-10-18T05:38:42.220748+00:00",
+  "scope": "@mustpickinfo published parts only; platform lifetime checkpoint metrics and exact-UTM GA4 calendar-day acquisition; no causal lift",
+  "windows": {
+    "24h": {
+      "status": "partial",
+      "due_parts": 1,
+      "captured_parts": 0
+    },
+    "72h": {
+      "status": "not_due",
+      "due_parts": 0,
+      "captured_parts": 0
+    },
+    "7d": {
+      "status": "not_due",
+      "due_parts": 0,
+      "captured_parts": 0
+    }
+  },
+  "posts": [
+    {
+      "part_id": "788037b3194a4ebe88bbbe11e080fc59-0",
+      "attempt_id": "788037b3194a4ebe88bbbe11e080fc59",
+      "platform_id": "18116224709093806",
+      "permalink": "https://www.threads.com/@mustpickinfo/post/Deg1dRSH3zL",
+      "format": "unclassified",
+      "topic": "unclassified",
+      "published_at": "2026-10-15T11:19:43+00:00",
+      "publication_time_basis": "api_timestamp",
+      "snapshots": {
+        "24h": {
+          "target_hours": 24,
+          "captured_at": "2026-10-16T11:23:40.530570+00:00",
+          "actual_age_hours": 24.066,
+          "capture_lag_hours": 0.066,
+          "platform": {
+            "status": "collected",
+            "scope": "platform_reported_lifetime_post_metrics",
+            "metrics": {
+              "views": 0,
+              "likes": 0,
+              "replies": 0,
+              "reposts": 0,
+              "quotes": 0,
+              "shares": 0
+            },
+            "collected_at": "2026-10-16T11:23:43.131288+00:00"
+          },
+          "ga4": {
+            "status": "collection_error",
+            "complete": false,
+            "sessions": null,
+            "engaged_sessions": null,
+            "page_views": null,
+            "source": "GA4 Data API",
+            "timezone": "Asia/Seoul",
+            "scope": "exact Threads UTM; publication date through yesterday; calendar-day cohort, not exact 24h/72h/7d",
+            "provisional": true,
+            "reason": "ga4_ValueError",
+            "start_date": "2026-10-15",
+            "end_date": "2026-10-17"
+          }
+        }
+      }
+    },
+    {
+      "part_id": "1a73685cf2cf40338e287d1125042733-0",
+      "attempt_id": "1a73685cf2cf40338e287d1125042733",
+      "platform_id": "18156215599555424",
+      "permalink": "https://www.threads.com/@mustpickinfo/post/DemIJCYHwNU",
+      "format": "unclassified",
+      "topic": "unclassified",
+      "published_at": "2026-10-17T12:38:53+00:00",
+      "publication_time_basis": "api_timestamp",
+      "snapshots": {}
+    },
+    {
+      "part_id": "90932c6617524805b315740cc8a4cd44-0",
+      "attempt_id": "90932c6617524805b315740cc8a4cd44",
+      "platform_id": "18466027636138474",
+      "permalink": "https://www.threads.com/@mustpickinfo/post/DenQO_7k-yd",
+      "format": "unclassified",
+      "topic": "unclassified",
+      "published_at": "2026-10-17T23:08:50+00:00",
+      "publication_time_basis": "api_timestamp",
+      "snapshots": {}
+    },
+    {
+      "part_id": "61e09cb555154abbb5f17baac4bfaa57-0",
+      "attempt_id": "61e09cb555154abbb5f17baac4bfaa57",
+      "platform_id": "17911179447500368",
+      "permalink": "https://www.threads.com/@mustpickinfo/post/DenvIa5HxtW",
+      "format": "unclassified",
+      "topic": "unclassified",
+      "published_at": "2026-10-18T03:38:48+00:00",
+      "publication_time_basis": "api_timestamp",
+      "snapshots": {}
+    }
+  ],
+  "account_metrics": {
+    "status": "collected",
+    "clicks": 0,
+    "scope": "account_link_clicks_all_links_in_requested_period; not per-post clicks or unique visits",
+    "requested_since": "2026-10-15T11:19:14.891210+00:00",
+    "requested_until": "2026-10-18T05:38:42.220748+00:00",
+    "collected_at": "2026-10-18T05:38:44.175361+00:00"
+  },
+  "revenue": null,
+  "revenue_status": "publisher_attribution_unverified",
+  "feedback": {
+    "status": "insufficient_data",
+    "computedAt": "2026-10-18T05:38:42.220748+00:00",
+    "checkpoint": null,
+    "comparablePosts": 0,
+    "evidence": [],
+    "recommendations": [
+      "동일 체크포인트의 비교 가능한 게시물 3개 이상을 기다립니다. 미수집을 성과 0으로 해석하지 않습니다."
+    ],
+    "authoringHints": [],
+    "policy": "diagnostic heuristics, not platform ranking rules or causal lift; no automatic frequency increase"
+  }
+}

@@ -1,0 +1,12 @@
+.kin-counts { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:18px 0; }
+.kin-counts > div,.kin-account { padding:16px; background:#f8fafc; border:1px solid var(--border); border-radius:10px; }
+.kin-counts span { display:block; color:#526277; font-size:12px; }
+.kin-counts strong { display:block; font-size:28px; margin-top:8px; color:#183153; }
+.kin-accounts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:16px; }
+.kin-account p { margin-top:8px!important; font-size:12px; color:#526277; line-height:1.6; white-space:pre-wrap; }
+.kin-warning { padding:12px; background:#fffbeb; border:1px solid #fde68a; border-radius:8px; color:#92400e; font-size:13px; white-space:pre-wrap; }
+#kin-schedule,#kin-measurement-scope,#kin-operations { white-space:pre-line; }
+.kin-page .traffic-table td { max-width:420px; overflow-wrap:anywhere; white-space:pre-wrap; line-height:1.7; }
+.kin-page .traffic-table th { white-space:nowrap; }
+@media(max-width:900px) { .kin-counts { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:540px) { .kin-accounts { grid-template-columns:1fr; } }

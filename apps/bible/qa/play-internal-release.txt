@@ -1,0 +1,99 @@
+- text: Google Play Console 로드 중
+- banner:
+  - link "Google Play Console 로고":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+    - button "Google Play Console 로고"
+  - button "읽지 않은 알림 알림 센터 열기": 읽지 않은 알림
+  - button "하루말씀 - 큰 글씨 성경·말씀 카드"
+  - button "개발자 계정 전환":
+    - img "개발자 계정 전환"
+- navigation:
+  - link "모든 앱":
+    - /url: /console/u/0/developers/7752283694845461925/app-list
+  - list:
+    - listitem "대시보드":
+      - button "대시보드"
+    - listitem "통계":
+      - button "통계"
+    - listitem "게시 개요":
+      - button "게시 개요"
+    - listitem "Google Play로 보호됨":
+      - button "Google Play로 보호됨"
+    - listitem "테스트 및 출시":
+      - button "테스트 및 출시"
+      - list:
+        - listitem "최신 버전 및 번들":
+          - button "최신 버전 및 번들"
+        - listitem "프로덕션":
+          - button "프로덕션"
+        - listitem "테스트":
+          - button "테스트"
+          - list:
+            - listitem "공개 테스트":
+              - button "공개 테스트"
+            - listitem "비공개 테스트":
+              - button "비공개 테스트"
+            - listitem "내부 테스트":
+              - button "내부 테스트"
+            - listitem "사전 출시 보고서":
+              - button "사전 출시 보고서"
+            - listitem "내부 앱 공유":
+              - button "내부 앱 공유"
+        - listitem "사전 등록":
+          - button "사전 등록"
+        - listitem "앱 무결성":
+          - button "앱 무결성"
+        - listitem "고급 설정":
+          - button "고급 설정"
+    - listitem "모니터링 및 개선":
+      - button "모니터링 및 개선"
+    - listitem "사용자 늘리기":
+      - button "사용자 늘리기"
+    - listitem "Play를 통한 수익 창출":
+      - button "Play를 통한 수익 창출"
+- heading "내부 테스트" [level=1]
+- button "휴대전화, 태블릿, Desktop (Googlebook OS, ChromeOS), Android XR 폼 팩터를 선택합니다.": 휴대전화, 태블릿, Desktop (Googlebook OS, ChromeOS), Android XR
+- button "새 버전 만들기"
+- text: 내부 테스트 버전을 생성 및 관리하여 앱을 최대 100명의 내부 테스터에게 공개하세요.
+- link "내부 테스트 자세히 알아보기(새 탭에서 열림)":
+  - /url: https://play.google.com/console/about/internal-testing
+  - text: 자세히 알아보기
+- 'heading "앱의 임시 이름: ''com.barolab.harubible (unreviewed)''" [level=2]'
+- text: 앱 설정이 완료되고 앱 검토가 끝날 때까지 내부 테스터가 앱을 다운로드할 때 앱의 임시 이름이 표시됩니다.
+- link "자세히 알아보기":
+  - /url: https://support.google.com/googleplay/android-developer/answer/9845334#internal_test
+- 'button "\"앱의 임시 이름: ''com.barolab.harubible (unreviewed)''\" 메시지 닫기"': 닫기
+- heading "휴대전화, 태블릿, Desktop, Android XR 트랙 요약" [level=4]
+- button "트랙 일시중지"
+- list:
+  - listitem: 활성
+  - listitem: "최신 출시 버전: 0.1.0-internal-preview (테스트 광고)"
+  - listitem:
+    - text: "앱의 임시 이름: 'com.barolab.harubible (unreviewed)'"
+    - button "자세히"
+- tablist:
+  - tab "출시" [selected]
+  - tab "테스터"
+- heading "출시" [level=2]
+- 'heading "버전: 0.1.0-internal-preview (테스트 광고)" [level=3]': 0.1.0-internal-preview (테스트 광고)
+- link "버전 0.1.0-internal-preview (테스트 광고) 관리":
+  - /url: /console/u/0/developers/7752283694845461925/app/4975007773224005878/tracks/4700464139727332365/releases/1/details
+  - text: 출시 관리
+- button "버전 승급"
+- paragraph: "내부 테스터에게 제공됨 버전 코드 1개 게시일: 10월 14일 오후 3:26 검토되지 않음"
+- button "0.1.0-internal-preview (테스트 광고) 요약 표시": 요약 표시
+- heading "출시 내역" [level=2]
+- 'button "콘텐츠 표시: 출시 내역"': 표시
+- link "제품 업데이트":
+  - /url: https://play.google.com/console/about/whats-new/
+- link "상태 대시보드":
+  - /url: https://status.play.google.com/
+- link "도움말":
+  - /url: /console/u/0/developers/7752283694845461925/help-and-support?app=4975007773224005878
+- text: © 2026 Google
+- link "개인 정보 보호":
+  - /url: https://www.google.com/policies/privacy/
+- link "개발자 배포 계약":
+  - /url: https://play.google.com/about/developer-distribution-agreement.html
+- link "서비스 약관":
+  - /url: https://play.google.com/about/console/terms-of-service/

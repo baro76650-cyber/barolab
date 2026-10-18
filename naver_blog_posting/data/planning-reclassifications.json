@@ -1,0 +1,28 @@
+{
+  "schema": "naver-planning-reclassifications-v1",
+  "entries": [
+    {
+      "schema": "naver-planning-reclassification-v1",
+      "attemptSha256": "ca92ab13043045341e5b1973b19b66547a6b9d2ec743579cd5885873d7171145",
+      "identity": {
+        "account": "adinfo0905",
+        "workerId": "528ef4340fef4f1682b5f346d11e75b0",
+        "startedAt": "2026-10-16T08:40:37.331130+09:00",
+        "publicationDate": "2026-10-16",
+        "scheduledSlot": "11:00",
+        "reserveTime": "2026-10-16 11:00",
+        "artifactFolder": "\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_blog_posting\\output\\adinfo0905\\구글-스프레드시트-20261016-7910cf2d64"
+      },
+      "artifactHashes": {
+        "answer-brief.json": "9007c66540675b1c086ba0003088befa0478baf30803e3915987ffd5df34c213",
+        "answer-brief-inputs.json": "0def4e9c0fe40a327d7aab99f9730bfe4cc9cc6fc0d464970ef8c8769cfcf92d",
+        "answer-brief-review.json": "a0268ee4dd77af80befde14acd50af72ad35d3dab0bed3dc1962fb97649fcea7",
+        "required-materials.json": "762a55b1106b6111d38abd6170d0d8a460739506ea422333339a2c8583c9cb07"
+      },
+      "checkedAt": "2026-10-16T08:56:40.011270+09:00",
+      "originalPhase": "material_required",
+      "effectivePhase": "failed",
+      "failureCategory": "planning_required"
+    }
+  ]
+}

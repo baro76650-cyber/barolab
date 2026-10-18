@@ -1,0 +1,11 @@
+{
+  "adinfo0905": {
+    "account": "adinfo0905",
+    "attemptStartedAt": "2026-10-16T14:17:13.791733+09:00",
+    "checkedAt": "2026-10-16T14:41:42.644550+09:00",
+    "status": "confirmation_required",
+    "retryAfter": "2026-10-16T14:56:42.644550+09:00",
+    "reason": "CDP 포트 9231 열림 확인 실패! (C:\\99_포터블브라우저\\CentBrowserPotable_adinfo0905\\adinfo0905_start_cdp.bat)",
+    "nextAction": "실제 예약 목록·제출 흔적 확인 필요; 미확인 상태를 임의 해제하지 않음"
+  }
+}

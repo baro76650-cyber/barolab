@@ -1,0 +1,37 @@
+{
+  "schema": "naver-publication-holds-v1",
+  "entries": [
+    {
+      "account": "adinfo0905",
+      "writerSha256": "04ae8b3199f13ec24bb9db195441467feff6e8ad7f51f9cca678b5531e9dd719",
+      "reviewPath": "\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_blog_posting\\output\\recovery-20261016\\adinfo-first-draft-823d1cf977-review.json",
+      "reviewSha256": "dfb106612e5f82354c3d2825724501031a6af0d7190ddcb56e3aa63411add048",
+      "recordedAt": "2026-10-16T09:30:56.402126+09:00",
+      "reason": "Independent unchanged-first-draft reader review; root explicitly disallowed reservation of these exact bytes"
+    },
+    {
+      "account": "adinfo0905",
+      "writerSha256": "fbd2cd8b600e754101478b41d8a42d684465526299139b66300b3b6797a6f167",
+      "reviewPath": "\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_blog_posting\\output\\recovery-20261016\\adinfo-first-draft-7f7239f848-review.json",
+      "reviewSha256": "fd765542f628a70b04646fc7525ea72ac8e568981c1bb07ef1aa441093b7ec0e",
+      "recordedAt": "2026-10-16T09:30:56.402126+09:00",
+      "reason": "Independent unchanged-first-draft reader review; root explicitly disallowed reservation of these exact bytes"
+    },
+    {
+      "account": "adinfo0905",
+      "writerSha256": "13781d5c233a4b0c8b06f9c7483aa6d387cd30a0ebdc16bb984bdcd3c23d9914",
+      "reviewPath": "\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_blog_posting\\output\\recovery-20261016\\adinfo-first-draft-72f856cf0b-review.json",
+      "reviewSha256": "bf50f8162259ca9a07d4164ca4cb6fea02aa5b9b42466fff9d89c868f15eda3f",
+      "recordedAt": "2026-10-16T10:03:19.856192+09:00",
+      "reason": "Supervisor-directed hold after independent actual reader review; exact current writer only"
+    },
+    {
+      "account": "adinfo0905",
+      "writerSha256": "c35e13152d251b93548177a54f9dbe8b102e97677c3dc66ea5c22d4932fb7989",
+      "reviewPath": "\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_blog_posting\\output\\recovery-20261016\\adinfo-first-draft-5c5daff3ea-review.json",
+      "reviewSha256": "f2b6294918cc0e9439bf0685ccd2ac07d19ff012e6e67f3d134458a031956e8a",
+      "recordedAt": "2026-10-16T10:14:01.572866+09:00",
+      "reason": "Supervisor directly reviewed this exact draft and forbids submission; last intended morning attempt"
+    }
+  ]
+}

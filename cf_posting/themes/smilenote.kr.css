@@ -1,0 +1,384 @@
+/* ==========================================================================
+   smilenote.kr (스마일노트 연금·시니어) — 8-Architecture Independent DOM Skeleton
+   Architecture: arch3-toss | Variant: toss-emerald-senior
+   Primary: #00875A | Secondary: #3182F6 | Accent: #F59E0B | Bg: #F2F4F6
+   ========================================================================== */
+:root {
+  --pri: #00875A !important;
+  --sec: #3182F6 !important;
+  --acc: #F59E0B !important;
+  --bg: #F2F4F6 !important;
+  --bg2: #ECFDF5 !important;
+  --surface: #FFFFFF !important;
+  --txt: #191F28 !important;
+  --muted: #4E5968 !important;
+  --line: #E5E8EB !important;
+  --reading-max: 720px;
+  --card-radius: 20px;
+  --card-shadow: 0 8px 24px rgba(25, 31, 40, 0.05);
+}
+
+/* ==========================================================================
+   CLEAN PUBLIC VIEW: 100% HIDE LEGACY DUPLICATE HEADER & ADMIN BUTTONS
+   ========================================================================== */
+[data-admin],
+.admin-tools,
+.admin-only,
+.write-btn,
+.visit-strip,
+.gov-bar,
+.ov,
+.drawer,
+.mtoggle,
+.sidebar > .profile,
+.header .nav a[href="/admin"],
+header.hd .nav a[href="/admin"],
+#topActions,
+.wrap > .top,
+.wrap > .actions,
+.wrap > hr,
+main.page > .top,
+main.page > .actions,
+main.page > hr,
+#mobileOverlay,
+#mobileMenu,
+.mobile-overlay,
+.mobile-menu,
+.menu-toggle,
+.side-section,
+.side-search,
+#sideSearch,
+.sidebar .side-cat,
+.google-auto-placed,
+ins.adsbygoogle.adsbygoogle-noablate,
+ins.adsbygoogle[data-anchor-status],
+ins.adsbygoogle[data-anchor-shown],
+.google-anno-skip,
+.google-anno-sc,
+.google-aiuf,
+.goog-rentry,
+#postGrid .card ins.adsbygoogle {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+body {
+  background: var(--bg) !important;
+  color: var(--txt) !important;
+  font-family: 'Pretendard', -apple-system, sans-serif !important;
+  line-height: 1.86 !important;
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0 !important;
+}
+
+
+/* === ARCH 3: TOSS FEED / FINTECH STICKY TOC & SPLIT BLOCK CARDS (toss-emerald-senior) === */
+body[data-shell-family="arch3-toss"] {
+  background: #F2F4F6 !important;
+}
+.toss-pill-header-wrap {
+  position: sticky;
+  top: 14px;
+  z-index: 120;
+  padding: 0 16px;
+  margin: 14px auto 24px;
+  max-width: 1120px;
+}
+.toss-pill-header {
+  background: rgba(255, 255, 255, 0.86) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(25, 31, 40, 0.08) !important;
+  border-radius: 999px !important;
+  padding: 12px 24px !important;
+  box-shadow: 0 8px 28px rgba(25, 31, 40, 0.07) !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.toss-nav-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.toss-nav-pill {
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4E5968 !important;
+  text-decoration: none;
+  background: transparent;
+  transition: all 0.15s;
+}
+.toss-nav-pill.active, .toss-nav-pill:hover {
+  background: #3182F6;
+  color: #FFFFFF !important;
+}
+body[data-shell-family="arch3-toss"][data-page-type="article"] .layout {
+  max-width: 1080px !important;
+  margin: 0 auto 60px !important;
+  padding: 0 20px !important;
+  display: grid !important;
+  grid-template-columns: 220px minmax(0, 1fr) !important;
+  gap: 28px !important;
+  align-items: start !important;
+}
+body[data-shell-family="arch3-toss"][data-page-type="article"] .main > .wrap {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.toss-scrollspy-aside {
+  position: sticky;
+  top: 96px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 20px 16px;
+  box-shadow: 0 4px 20px rgba(25, 31, 40, 0.05);
+  border: 1px solid #E5E8EB;
+}
+.toss-scrollspy-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #8B95A1;
+  margin-bottom: 12px;
+  padding-left: 8px;
+}
+.toss-toc-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4E5968 !important;
+  text-decoration: none !important;
+  margin-bottom: 4px;
+  transition: all 0.15s;
+}
+.toss-toc-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #D1D6DB;
+  flex-shrink: 0;
+}
+.toss-toc-link.active {
+  background: #E8F3FF;
+  color: #3182F6 !important;
+  font-weight: 800;
+}
+.toss-toc-link.active .toss-toc-dot {
+  background: #3182F6;
+  box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.22);
+}
+.toss-hero-card,
+.toss-section-card {
+  background: #FFFFFF !important;
+  border-radius: 20px !important;
+  padding: 28px !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 4px 20px rgba(25, 31, 40, 0.04) !important;
+  border: 1px solid #E5E8EB !important;
+}
+.toss-step-chip {
+  display: inline-block;
+  background: #E8F3FF;
+  color: #3182F6;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.toss-section-card h2 {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 0 14px !important;
+  font-size: 1.35rem !important;
+  color: #191F28 !important;
+}
+
+
+/* Post Card Grid Defaults on Home */
+#postGrid.grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 20px !important;
+}
+#postGrid .card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: var(--surface) !important;
+  border: 1px solid #E5E8EB !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 24px rgba(25, 31, 40, 0.05) !important;
+  overflow: hidden !important;
+}
+#postGrid .card .thumb-empty {
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(135deg, var(--pri) 0%, var(--sec) 100%) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  padding: 18px 20px !important;
+  box-sizing: border-box !important;
+}
+
+/* Article Typography & Subheadings */
+.content, article.gs-article, article.content {
+  max-width: var(--reading-max);
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  line-height: 1.86;
+  color: var(--txt);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.main h1, article h1, main.page h1 {
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif !important;
+  color: var(--txt) !important;
+  letter-spacing: -0.025em;
+  line-height: 1.34 !important;
+}
+.content h2, article h2 {
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+  color: var(--pri);
+  border-left: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 0 20px 20px 0;
+  margin: 34px 0 14px !important;
+  font-size: 1.32rem !important;
+  line-height: 1.45 !important;
+}
+.content h3, article h3 {
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+  color: var(--txt);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 6px;
+  margin: 24px 0 10px !important;
+}
+
+/* AdSense 5 High-CPC Slots Integration */
+.adsense-slot {
+  position: relative;
+  width: 100%;
+  margin: 18px 0;
+  padding: 8px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-align: center;
+  overflow: hidden;
+  clear: both;
+}
+.adsense-slot--hero-below {
+  min-height: 0 !important;
+  max-height: 250px !important;
+  margin: 14px 0 22px !important;
+}
+.adsense-slot--in-article,
+.content .ad {
+  margin: 26px 0 !important;
+  min-height: 0 !important;
+  max-height: 250px !important;
+  padding: 10px !important;
+  border-top: 2px solid var(--sec) !important;
+  border-bottom: 1px solid var(--line) !important;
+  background: var(--bg) !important;
+}
+.adsense-slot--sticky-rail {
+  position: sticky !important;
+  top: 88px !important;
+  width: 100% !important;
+  max-width: 300px !important;
+  min-height: 250px !important;
+  max-height: 600px !important;
+  margin: 0 auto !important;
+  padding: 12px 10px !important;
+  background: var(--surface) !important;
+  border: 1px solid #E5E8EB !important;
+  border-top: 3px solid var(--pri) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--card-shadow) !important;
+}
+.adsense-slot--multiplex-bottom {
+  margin: 28px 0 18px !important;
+  min-height: 0 !important;
+  max-height: 260px !important;
+  padding: 12px !important;
+  border: 1px solid var(--line) !important;
+  border-top: 3px solid var(--acc) !important;
+  background: var(--surface) !important;
+}
+
+/* Indirect Experience Capture Images (`.guide-capture-img`) */
+figure.post-image {
+  margin: 26px 0 !important;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+}
+img.guide-capture-img,
+figure.post-image a[aria-label*="원본 화면 크게 보기"] img {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  border: 2px solid #1646b7 !important;
+  border-radius: 8px !important;
+}
+.brand-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 52px;
+  margin: 22px 0;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, var(--pri) 0%, var(--sec) 100%);
+  color: #ffffff !important;
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  text-decoration: none !important;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 1060px) {
+  body[data-shell-family] .layout {
+    grid-template-columns: 1fr !important;
+  }
+  .wt-share-col, .wt-ranking-col, .toss-scrollspy-aside, .msdocs-tree-sidebar, .msdocs-minimap-aside, .med-clinical-sidebar {
+    display: none !important;
+  }
+  .lp-quick-info-grid, .dpg-scoreboard-box, .dpg-pros-cons-grid, .th-related-3col-grid {
+    grid-template-columns: 1fr !important;
+  }
+  body, footer {
+    padding-bottom: 70px !important;
+  }
+}

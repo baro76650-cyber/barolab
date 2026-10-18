@@ -1,0 +1,495 @@
+{
+  "schema": "naver-kin-pilot-v1",
+  "checkedAt": "2026-10-18T08:06:49.754532+00:00",
+  "accounts": [
+    "adinfo0905",
+    "stone0747"
+  ],
+  "counts": {
+    "published_verified": 3,
+    "submitted_unverified": 1,
+    "discovered": 2
+  },
+  "recent": [
+    {
+      "account": "stone0747",
+      "state": "submitted_unverified",
+      "answer_url": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=495469443&answerNo=1&qb=7Lqg7ZWRIOuCnOuhnA==",
+      "updated_at": "2026-10-18T06:42:11.230977+00:00",
+      "send_day": "2026-10-18",
+      "title": "캠핑 난로 처음 써보는데, 안전 팁 있을까요?",
+      "question_url": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=495469443&answerNo=1&qb=7Lqg7ZWRIOuCnOuhnA==",
+      "track": "track_a_latest",
+      "target_domain": "must-pick.com"
+    },
+    {
+      "account": "adinfo0905",
+      "state": "published_verified",
+      "answer_url": "https://kin.naver.com/qna/detail.naver?dirId=901&docId=495595158&answerNo=1&qb=7ZmU64u07IiyIOyYiOyVvQ==#answer2",
+      "updated_at": "2026-10-18T06:16:33.381972+00:00",
+      "send_day": "2026-10-18",
+      "title": "화담숲 문의입니다",
+      "question_url": "https://kin.naver.com/qna/detail.naver?dirId=901&docId=495595158&answerNo=1&qb=7ZmU64u07IiyIOyYiOyVvQ==",
+      "track": "track_b_search_top",
+      "target_domain": "nolplace.com"
+    },
+    {
+      "account": "stone0747",
+      "state": "published_verified",
+      "answer_url": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=495470800#answer5",
+      "updated_at": "2026-10-18T06:03:31.822468+00:00",
+      "send_day": "2026-10-18",
+      "title": "전세보증보험 가입 가능한 금액인지 궁금해서 질문 드립니다",
+      "question_url": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=495470800&answerNo=2&qb=7KCE7IS467O07Kad67O07ZeY",
+      "track": "track_a_latest",
+      "target_domain": "justinfo.co.kr"
+    },
+    {
+      "account": "stone0747",
+      "state": "discovered",
+      "answer_url": null,
+      "updated_at": "2026-10-15T08:46:57.934835+00:00",
+      "title": "국립중앙박물관 상설전시관 방문 시 유의사항은?",
+      "question_url": "https://kin.naver.com/qna/detail.naver?dirId=901&docId=486320125&answerNo=2&qb=6rWt66a97KSR7JWZ67CV66y86rSAIOyFgOy5tOu0iQ==",
+      "track": "track_b_search_top",
+      "target_domain": ""
+    },
+    {
+      "account": "adinfo0905",
+      "state": "published_verified",
+      "answer_url": "https://kin.naver.com/qna/detail.naver?dirId=90105&docId=486346632#answer4",
+      "updated_at": "2026-10-15T07:41:54.956969+00:00",
+      "send_day": "2026-10-15",
+      "title": "국립중앙박물관 상설전시관 관람 시 유의사항은?",
+      "question_url": "https://kin.naver.com/qna/detail.naver?dirId=90105&docId=486346632",
+      "track": "track_b_search_top",
+      "target_domain": "must-good.com"
+    },
+    {
+      "account": "adinfo0905",
+      "state": "discovered",
+      "answer_url": null,
+      "updated_at": "2026-10-15T07:36:44.875624+00:00",
+      "title": "엘지 트롬 세탁기 배수필터가 안열려요",
+      "question_url": "https://kin.naver.com/qna/detail.naver?dirId=80903&docId=495533378",
+      "track": "track_b_search_top",
+      "target_domain": ""
+    }
+  ],
+  "trackCounts": {
+    "track_a_latest": 2,
+    "track_b_search_top": 2
+  },
+  "inboundSessions": null,
+  "attributedRevenue": null,
+  "measurementStatus": "unmeasured",
+  "complete": false,
+  "blockedReason": "stone0747: operation_RuntimeError",
+  "byAccount": {
+    "adinfo0905": {
+      "published_verified": 2,
+      "discovered": 1
+    },
+    "stone0747": {
+      "published_verified": 1,
+      "submitted_unverified": 1,
+      "discovered": 1
+    }
+  },
+  "accountBlockedReasons": {
+    "stone0747": "operation_RuntimeError"
+  },
+  "daily": {
+    "date": "2026-10-18",
+    "attempted": 3,
+    "publishedVerified": 2,
+    "globalCap": 20,
+    "accountCap": 10,
+    "byAccount": {
+      "adinfo0905": {
+        "attempted": 1,
+        "publishedVerified": 1
+      },
+      "stone0747": {
+        "attempted": 2,
+        "publishedVerified": 1
+      }
+    }
+  },
+  "measurement": {
+    "schema": "naver-kin-measurement-v1",
+    "checkedAt": "2026-10-18T17:06:44.943821+09:00",
+    "source": "GA4 Data API",
+    "timezone": "Asia/Seoul",
+    "startDate": "2026-10-15",
+    "endDate": "2026-10-17",
+    "trialStartDate": "2026-10-15",
+    "trialEndDate": "2026-10-21",
+    "finalCollectionDate": "2026-10-24",
+    "baselineStartDate": "2026-10-08",
+    "baselineEndDate": "2026-10-14",
+    "periodKind": "trial_to_yesterday",
+    "trialCollectionPending": false,
+    "trackingValidationStatus": "unverified_stream_binding",
+    "trackingValidationNote": "GA4 조회 성공 · 두 사이트 기존 호스트 방문 확인 · 기사 UTM 도착 쿼리 보존 확인. GA 태그 ID와 조회 속성의 직접 일치는 Admin 권한 부족으로 미검증입니다. 조회 성공만으로 지식iN 유입 성과를 판정하지 않습니다.",
+    "scope": "owned approved hosts; exact sessionSource=naver_kin, sessionMedium=referral, sessionManualCampaignName=cf_bridge",
+    "provisional": true,
+    "lagNote": "최근 48시간은 GA4 처리 지연으로 변할 수 있습니다. 미측정·동의 거부·차단 방문은 포함되지 않습니다.",
+    "causalityNote": "UTM 세션 귀속이며 실제 사람·증분 효과·수익 발생을 단독 증명하지 않습니다.",
+    "sites": [
+      {
+        "host": "www.must-good.com",
+        "status": "collected",
+        "sessions": 0,
+        "engagedSessions": 0,
+        "pageViews": 0,
+        "reportMetadata": {
+          "timeZone": "Asia/Seoul",
+          "currencyCode": "USD",
+          "subjectToThresholding": null,
+          "samplingMetadatas": null,
+          "dataLossFromOtherRow": null,
+          "rowCount": 0,
+          "returnedRows": 0
+        }
+      },
+      {
+        "host": "www.must-pick.com",
+        "status": "collected",
+        "sessions": 0,
+        "engagedSessions": 0,
+        "pageViews": 0,
+        "reportMetadata": {
+          "timeZone": "Asia/Seoul",
+          "currencyCode": "KRW",
+          "subjectToThresholding": null,
+          "samplingMetadatas": null,
+          "dataLossFromOtherRow": null,
+          "rowCount": 0,
+          "returnedRows": 0
+        }
+      }
+    ],
+    "sessions": 0,
+    "engagedSessions": 0,
+    "pageViews": 0,
+    "publisherRevenue": null,
+    "revenueStatus": "unverified_publisher_link",
+    "revenueReason": "GA4 게시자 광고 수익 연결과 답변별 수익 범위를 검증하지 못했습니다. AdSense 전체 수익을 배분하지 않습니다.",
+    "rows": [],
+    "dailyFunnel": [
+      {
+        "day": "2026-10-18",
+        "discovered": 3,
+        "drafted": 3,
+        "attempted": 3,
+        "published_verified": 2
+      },
+      {
+        "day": "2026-10-17",
+        "discovered": 0,
+        "drafted": 0,
+        "attempted": 0,
+        "published_verified": 0
+      },
+      {
+        "day": "2026-10-16",
+        "discovered": 0,
+        "drafted": 0,
+        "attempted": 0,
+        "published_verified": 0
+      },
+      {
+        "day": "2026-10-15",
+        "discovered": 3,
+        "drafted": 1,
+        "attempted": 1,
+        "published_verified": 1
+      }
+    ],
+    "funnelStartDate": "2026-10-15",
+    "funnelEndDate": "2026-10-18",
+    "funnelTodayProvisional": true,
+    "funnelPeriodKind": "trial",
+    "funnelScope": "발굴·초안은 생성일, 제출·공개검증은 제출일 코호트의 현재 상태; 오늘은 미실행 슬롯 포함 잠정 집계; 전이 이벤트 수 아님",
+    "complete": true,
+    "status": "collected",
+    "trackingValidation": {
+      "checkedAt": "2026-10-15T08:06:02.589399+00:00",
+      "method": "read-only HTTP HTML + authenticated GA4 host report; JavaScript not executed; no synthetic pageview",
+      "startDate": "2026-10-08",
+      "endDate": "2026-10-14",
+      "streamBindingStatus": "unverified_admin_403",
+      "sites": [
+        {
+          "host": "www.must-good.com",
+          "property": "556127526",
+          "existingSessions": 26,
+          "tag": "G-QHHS9W3H61",
+          "articleUrl": "https://www.must-good.com/national-museum-korea-reservation-backpack-photo-guide",
+          "utmHTTPStatus": 200,
+          "queryPreserved": true,
+          "redirectCount": 0
+        },
+        {
+          "host": "www.must-pick.com",
+          "property": "545137532",
+          "existingSessions": 37,
+          "tag": "G-4ZJC2D7R2W",
+          "articleUrl": "https://www.must-pick.com/robot-vacuum-consumables-replacement-compatibility",
+          "utmHTTPStatus": 200,
+          "queryPreserved": true,
+          "redirectCount": 0
+        }
+      ]
+    },
+    "matchedSessions": 0,
+    "unmatchedSessions": 0
+  },
+  "schedule": {
+    "schema": "naver-kin-automation-state-v1",
+    "checkedAt": "2026-10-18T08:05:02.658549+00:00",
+    "startDate": "2026-10-15",
+    "endDate": "2026-10-21",
+    "enabled": true,
+    "continuousMode": true,
+    "mode": "alternating_interval",
+    "intervalMinutes": 18,
+    "intervalJitterMinutes": [
+      18,
+      22
+    ],
+    "pollMinutes": 5,
+    "globalDailyCap": 20,
+    "accountDailyCap": 10,
+    "runs": [
+      {
+        "runId": "2026-10-18_64984c1724a6_stone0747_1705",
+        "account": "stone0747",
+        "state": "blocked",
+        "reason": "operation_RuntimeError",
+        "discovered": 0
+      }
+    ],
+    "state": "completed_cycle",
+    "measurementStatus": "collected",
+    "dryRun": false,
+    "runId": "2026-10-18_64984c1724a6_stone0747_1705",
+    "account": "stone0747",
+    "lastRunAt": "2026-10-18T15:55:02.502261+09:00",
+    "lastAccount": "adinfo0905",
+    "nextEligibleAt": "2026-10-18T16:13:02.502261+09:00",
+    "nextAccount": "stone0747",
+    "activeRunId": null,
+    "activeAccount": null,
+    "activeStartedAt": null,
+    "cadenceState": "waiting",
+    "operationCounts": {
+      "adinfo0905": 1,
+      "stone0747": 2
+    },
+    "submissionCounts": {
+      "adinfo0905": 1,
+      "stone0747": 2
+    },
+    "globalRemainingRuns": 17,
+    "byAccountRemainingRuns": {
+      "adinfo0905": 9,
+      "stone0747": 8
+    },
+    "measurementComplete": true,
+    "registeredTasks": {
+      "status": "observed",
+      "checkedAt": "2026-10-18T08:06:49.527352+00:00",
+      "tasks": [
+        {
+          "taskName": "BaroLab-Kin-Seven-Day-Pilot",
+          "registered": true,
+          "enabled": true,
+          "state": "Running",
+          "nextRunAt": "2026-10-18T17:10:00.0000000+09:00",
+          "lastRunAt": "2026-10-18T17:05:01.0000000+09:00",
+          "lastResult": 267009,
+          "actions": [
+            {
+              "Execute": "C:\\Users\\baro7\\AppData\\Local\\Programs\\Python\\Python314\\pythonw.exe",
+              "Arguments": "-u -B -X utf8 \"\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_kin\\scheduler.py\" --tick --scheduled"
+            }
+          ]
+        },
+        {
+          "taskName": "BaroLab-Kin-Seven-Day-Pilot-Measurement",
+          "registered": true,
+          "enabled": true,
+          "state": "Ready",
+          "nextRunAt": "2026-10-18T20:30:00.0000000+09:00",
+          "lastRunAt": "2026-10-17T20:30:01.0000000+09:00",
+          "lastResult": 0,
+          "actions": [
+            {
+              "Execute": "C:\\Users\\baro7\\AppData\\Local\\Programs\\Python\\Python314\\pythonw.exe",
+              "Arguments": "-u -B -X utf8 \"\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_kin\\scheduler.py\" --measure --scheduled"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "retention": {
+    "checkedAt": "2026-10-17T11:30:07.930751+00:00",
+    "scope": "up_to_100_initially_verified_pilot_and_trial_answers",
+    "complete": true,
+    "initiallyVerified": 1,
+    "attemptedChecks": 1,
+    "checks": [
+      {
+        "account": "adinfo0905",
+        "answerUrl": "https://kin.naver.com/qna/detail.naver?dirId=90105&docId=486346632#answer4",
+        "state": "unknown",
+        "reason": "public_check_unavailable",
+        "checkedAt": "2026-10-17T11:30:07.923229+00:00"
+      }
+    ],
+    "firstVerificationHistoryPreserved": true
+  },
+  "automation": {
+    "enabled": true,
+    "startDate": "2026-10-15",
+    "endDate": "2026-10-21",
+    "measurementEndDate": "2026-10-24",
+    "mode": "alternating_interval",
+    "intervalMinutes": 20,
+    "intervalJitterMinutes": [
+      18,
+      22
+    ],
+    "continuousMode": true,
+    "pollMinutes": 5,
+    "globalDailyCap": 20,
+    "accountDailyCap": 10,
+    "model": "gpt-6.1-sol",
+    "provider": "authenticated-codex-subscription",
+    "scheduleDescription": "작업 종료 후 18~22분 지터(평균 20분) 계정 교대 · 개별 계정 40~45분 안전 텀 · 하루 20건(계정당 10건)",
+    "lastRun": {
+      "schema": "naver-kin-automation-state-v1",
+      "checkedAt": "2026-10-18T08:05:02.658549+00:00",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-21",
+      "enabled": true,
+      "continuousMode": true,
+      "mode": "alternating_interval",
+      "intervalMinutes": 18,
+      "intervalJitterMinutes": [
+        18,
+        22
+      ],
+      "pollMinutes": 5,
+      "globalDailyCap": 20,
+      "accountDailyCap": 10,
+      "runs": [
+        {
+          "runId": "2026-10-18_64984c1724a6_stone0747_1705",
+          "account": "stone0747",
+          "state": "blocked",
+          "reason": "operation_RuntimeError",
+          "discovered": 0
+        }
+      ],
+      "state": "completed_cycle",
+      "measurementStatus": "collected",
+      "dryRun": false,
+      "runId": "2026-10-18_64984c1724a6_stone0747_1705",
+      "account": "stone0747",
+      "lastRunAt": "2026-10-18T15:55:02.502261+09:00",
+      "lastAccount": "adinfo0905",
+      "nextEligibleAt": "2026-10-18T16:13:02.502261+09:00",
+      "nextAccount": "stone0747",
+      "activeRunId": null,
+      "activeAccount": null,
+      "activeStartedAt": null,
+      "cadenceState": "waiting",
+      "operationCounts": {
+        "adinfo0905": 1,
+        "stone0747": 2
+      },
+      "submissionCounts": {
+        "adinfo0905": 1,
+        "stone0747": 2
+      },
+      "globalRemainingRuns": 17,
+      "byAccountRemainingRuns": {
+        "adinfo0905": 9,
+        "stone0747": 8
+      },
+      "measurementComplete": true,
+      "registeredTasks": {
+        "status": "observed",
+        "checkedAt": "2026-10-18T08:06:49.527352+00:00",
+        "tasks": [
+          {
+            "taskName": "BaroLab-Kin-Seven-Day-Pilot",
+            "registered": true,
+            "enabled": true,
+            "state": "Running",
+            "nextRunAt": "2026-10-18T17:10:00.0000000+09:00",
+            "lastRunAt": "2026-10-18T17:05:01.0000000+09:00",
+            "lastResult": 267009,
+            "actions": [
+              {
+                "Execute": "C:\\Users\\baro7\\AppData\\Local\\Programs\\Python\\Python314\\pythonw.exe",
+                "Arguments": "-u -B -X utf8 \"\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_kin\\scheduler.py\" --tick --scheduled"
+              }
+            ]
+          },
+          {
+            "taskName": "BaroLab-Kin-Seven-Day-Pilot-Measurement",
+            "registered": true,
+            "enabled": true,
+            "state": "Ready",
+            "nextRunAt": "2026-10-18T20:30:00.0000000+09:00",
+            "lastRunAt": "2026-10-17T20:30:01.0000000+09:00",
+            "lastResult": 0,
+            "actions": [
+              {
+                "Execute": "C:\\Users\\baro7\\AppData\\Local\\Programs\\Python\\Python314\\pythonw.exe",
+                "Arguments": "-u -B -X utf8 \"\\\\otns\\yoonlab\\10_Project\\BaroLab\\naver_kin\\scheduler.py\" --measure --scheduled"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "lastRunAt": "2026-10-18T15:55:02.502261+09:00",
+    "nextEligibleAt": "2026-10-18T16:13:02.502261+09:00",
+    "nextAccount": "stone0747",
+    "activeRunId": null,
+    "activeAccount": null,
+    "activeStartedAt": null,
+    "cadenceState": "waiting",
+    "globalRemainingRuns": 17,
+    "byAccountRemainingRuns": {
+      "adinfo0905": 9,
+      "stone0747": 8
+    },
+    "operationCounts": {
+      "adinfo0905": 1,
+      "stone0747": 2
+    },
+    "submissionCounts": {
+      "adinfo0905": 1,
+      "stone0747": 2
+    },
+    "checkedAt": "2026-10-18T08:05:02.658549+00:00",
+    "state": "completed_cycle",
+    "lastOperation": {
+      "account": "stone0747",
+      "state": "blocked",
+      "reason": "operation_RuntimeError",
+      "updatedAt": "2026-10-18T08:06:44.795435+00:00",
+      "questionId": null,
+      "questionState": null,
+      "submissionAttempted": false,
+      "submitted": false
+    }
+  }
+}

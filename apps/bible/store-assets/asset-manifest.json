@@ -1,0 +1,85 @@
+{
+  "createdAt": "2026-10-14T06:15:26.152315+00:00",
+  "package": "com.barolab.harubible",
+  "artworkSource": "Original existing app/src/main/res/drawable/ic_bible.xml book geometry; no raster photo/image generation or fabricated UI",
+  "icon": {
+    "file": "bible_app/store-assets/store-icon-512.png",
+    "width": 512,
+    "height": 512,
+    "bitDepth": 8,
+    "colorType": 6,
+    "bytes": 8921,
+    "sha256": "89eaa47cd0b30641a89f02db173bafc793209715729d886f34c1342850a915f9"
+  },
+  "featureGraphic": {
+    "file": "bible_app/store-assets/feature-graphic-v3-1024x500.png",
+    "source": "bible_app/store-assets/feature-graphic-v3-1024x500.svg",
+    "width": 1024,
+    "height": 500,
+    "bitDepth": 8,
+    "colorType": 2,
+    "bytes": 30490,
+    "sha256": "b6999f610291a196500ae214dc53ed68d0c58da3d324848bb4ff7a1c99f4871a"
+  },
+  "renderer": {
+    "svgRenderer": "@resvg/resvg-js 2.6.2",
+    "pngEncoding": "pngjs7.0.0 RGB export for feature; iconRGBA",
+    "font": "Windows installed Malgun Gothic regular/bold; referenced for raster export only; font binaries not redistributed"
+  },
+  "visualQa": {
+    "inspectedBothRasterFiles": true,
+    "koreanGlyphsReadable": true,
+    "croppingOrTextOverlap": false,
+    "creamGreenContrastRatio": 7.138,
+    "headline": "오늘의 성경말씀",
+    "supportingCopy": "큰 글씨로 읽고, 소리로 듣고, 카드로 나눠요",
+    "cycleDisclosure": "30개 구절을 하루 하나씩 순환합니다",
+    "fakeUiScreenshots": false,
+    "v3FeatureInspected": true
+  },
+  "actualScreenshotSources": [
+    {
+      "file": "bible_app/qa/screenshots/01-today.png",
+      "width": 1080,
+      "height": 2400,
+      "bitDepth": 8,
+      "colorType": 6,
+      "bytes": 270197,
+      "sha256": "099849531e717177e471f9b5fe1e5b05d5381b242dd53520cb8487c8518d4032",
+      "source": "actual Android API36 emulator runtime; confirmed by app implementation agent and visually inspected",
+      "altered": false,
+      "containsDevelopmentPreviewOrTestAds": true,
+      "releaseRepresentation": "internal preview evidence; final store upload suitability requires publisher review"
+    },
+    {
+      "file": "bible_app/qa/screenshots/02-favorites.png",
+      "width": 1080,
+      "height": 2400,
+      "bitDepth": 8,
+      "colorType": 6,
+      "bytes": 125489,
+      "sha256": "755c9d5342a5d2d044cc830f63b4d1d8011f4c7e257cef83110698f177aa4c7d",
+      "source": "actual Android API36 emulator runtime; confirmed by app implementation agent and visually inspected",
+      "altered": false,
+      "containsDevelopmentPreviewOrTestAds": true,
+      "releaseRepresentation": "internal preview evidence; final store upload suitability requires publisher review"
+    }
+  ],
+  "googleSpecification": "https://support.google.com/googleplay/android-developer/answer/9866151?hl=en",
+  "workerDraft": {
+    "freellm": "auto request failed after12030ms; no fabricated success",
+    "fallback": "agy gemini-3.8-flash-low requested; actual returned model unknown; succeeded16593ms; reported13767total tokens",
+    "review": "Candidate reviewed manually; SVG implemented by agent; no generated code executed"
+  },
+  "previousFeatureGraphics": [
+    {
+      "file": "bible_app/store-assets/feature-graphic-1024x500.png",
+      "width": 1024,
+      "height": 500,
+      "bitDepth": 8,
+      "colorType": 2,
+      "bytes": 27589,
+      "sha256": "6b601986eea9a65a061d3a31b77318f876ed517a14382ee3a0ff3325b1e2a167"
+    }
+  ]
+}

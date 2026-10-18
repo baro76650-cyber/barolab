@@ -1,0 +1,67 @@
+{
+  "recordedAt": "2026-10-14T08:06:50.211169+00:00",
+  "artifact": {
+    "path": "\\\\otns\\yoonlab\\10_Project\\BaroLab\\bible_app\\app\\build\\outputs\\bundle\\internal\\app-internal.aab",
+    "bytes": 5561765,
+    "sha256": "08ef408e9ecb4bafa2f743f98e63bb712b71b0b31d4aa90a6b6ffc24460e013e",
+    "versionCode": 3,
+    "versionName": "0.3.0-internal-preview",
+    "package": "com.barolab.harubible",
+    "applicationLabelVerifiedByAapt2": "오늘의 성경말씀",
+    "signature": "jarsigner verified",
+    "googleTestAdAppIdVerified": true,
+    "canonicalAssetExactMatch": true
+  },
+  "sourceHashes": {
+    "MainActivity.java": "fab0b122e5d8a0d4aea0caa9921880306251b94b4d5f9087c121720d3451afb5",
+    "OfflineTtsController.java": "8ac875b6e73e370357cc33e95a69f1b98f1374e86f55fb061eb4a7c5fb9e6b8d",
+    "VerseCard.java": "33f98c53a948cecd580e03cf750050e7269130a453ba9f962d9b3c945b2e0637",
+    "ReminderReceiver.java": "4b2d67670c6f6211b8f872c2956664189a42718da96a71f32337e41726b9eb13"
+  },
+  "canonicalVerseSha256": "eec5f7281ceadc4d6b96051780ce0a944ee5be81946e1b6752451db31d83cffc",
+  "build": "build.ps1 -Mode internal: BUILD SUCCESSFUL in56s",
+  "tests": {
+    "com.barolab.harubible.DailyReadingTest": 6,
+    "com.barolab.harubible.OfflineVoicePolicyTest": 6
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": [
+      "AndroidGradlePluginVersion",
+      "SetTextI18n"
+    ]
+  },
+  "runtime": {
+    "environment": "Dedicated Android36 Google APIs x86_64 emulator-5556 only; no physical Galaxy",
+    "upgrade": "Actual v2 to v3 install -r; saved Isaiah41:10 count1 and42sp preserved",
+    "library": "Shows all30; scrolled to final Psalm23:4; opened last verse and verified UI body equals canonical text",
+    "search": "ASCII41:10 returns1 with Isaiah41:10; zzzz404 returns0; clear restores30; query41:10 preserved across actual landscape configuration change",
+    "font": "42checked in reading dialog; select30 updates reading button, settings current30 and today30; change back42 confirmed; no broad claim of exact scrollY preservation",
+    "compact": "1920x1080/420dpi, system font1.3/app42: real body scroll exists, footer reachable, stop remains accessible while speaking; trueportrait1080x1920 also captured",
+    "share": "Actual Android share sheet opened, no recipient chosen; generated PNG read from own test AVD cache unmodified and visually checked; new app brand/body/reference/source do not overlap",
+    "voiceRegression": "READY plus real speak/stop during compact check; unchanged controller; full v2 engine setup tests not repeated",
+    "deviceCleanup": "Test AVD adb temporarily root only to read generated share PNG, restored nonroot; final display/font/radio/rotation restoration and normal emulator shutdown performed after captures"
+  },
+  "evidence": {
+    "buildLog": "qa/v3-build-internal.log",
+    "screenshots": [
+      "store-assets/screenshots/v3-01-today-1080x1920.png",
+      "store-assets/screenshots/v3-02-collection-1080x1920.png",
+      "store-assets/screenshots/v3-03-settings-1080x1920.png",
+      "store-assets/screenshots/v3-04-reading-font-1080x1920.png"
+    ],
+    "searchMatch": "qa/screenshots/v3-02-search-exact.png",
+    "searchNoResults": "qa/screenshots/v3-03-search-no-results.png",
+    "lastVerse": "qa/screenshots/v3-04-library-last-item.png",
+    "compact": "qa/screenshots/v3-06-landscape42-font130-stop.png",
+    "portrait130": "qa/screenshots/v3-07-portrait42-font130.png",
+    "sharedCard": "qa/v3-shared-card.png"
+  },
+  "limitations": [
+    "Korean keyboard input not entered via adb; runtime ASCII reference/noresult/clear searches verified; UI worker independently checked Korean/Unicode normalization boundaries",
+    "Exact nonzero reading scrollY retention after quick font change was not quantified; reading remains accessible",
+    "Physical Samsung offline speech/setup and human audio listening still pending",
+    "No new timed notification delivery, production UMP/ad fill/revenue verification",
+    "No public production release claim; supervisor performs separate internal-track upload/verification"
+  ]
+}

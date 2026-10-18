@@ -1,0 +1,370 @@
+/* ==========================================================================
+   tripmarvel.com (트립마블 여행 매거진) — 8-Architecture Independent DOM Skeleton
+   Architecture: arch5-lonelyplanet | Variant: lonelyplanet-forest-serif
+   Primary: #1B4332 | Secondary: #2D6A4F | Accent: #C85A32 | Bg: #FAF7F0
+   ========================================================================== */
+:root {
+  --pri: #1B4332 !important;
+  --sec: #2D6A4F !important;
+  --acc: #C85A32 !important;
+  --bg: #FAF7F0 !important;
+  --bg2: #EFECE4 !important;
+  --surface: #FFFFFF !important;
+  --txt: #1C2826 !important;
+  --muted: #586860 !important;
+  --line: #D8D2C5 !important;
+  --reading-max: 720px;
+  --card-radius: 14px;
+  --card-shadow: 0 8px 26px rgba(27, 67, 50, 0.08);
+}
+
+/* ==========================================================================
+   CLEAN PUBLIC VIEW: 100% HIDE LEGACY DUPLICATE HEADER & ADMIN BUTTONS
+   ========================================================================== */
+[data-admin],
+.admin-tools,
+.admin-only,
+.write-btn,
+.visit-strip,
+.gov-bar,
+.ov,
+.drawer,
+.mtoggle,
+.sidebar > .profile,
+.header .nav a[href="/admin"],
+header.hd .nav a[href="/admin"],
+#topActions,
+.wrap > .top,
+.wrap > .actions,
+.wrap > hr,
+main.page > .top,
+main.page > .actions,
+main.page > hr,
+#mobileOverlay,
+#mobileMenu,
+.mobile-overlay,
+.mobile-menu,
+.menu-toggle,
+.side-section,
+.side-search,
+#sideSearch,
+.sidebar .side-cat,
+.google-auto-placed,
+ins.adsbygoogle.adsbygoogle-noablate,
+ins.adsbygoogle[data-anchor-status],
+ins.adsbygoogle[data-anchor-shown],
+.google-anno-skip,
+.google-anno-sc,
+.google-aiuf,
+.goog-rentry,
+#postGrid .card ins.adsbygoogle {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+body {
+  background: var(--bg) !important;
+  color: var(--txt) !important;
+  font-family: 'Pretendard', -apple-system, sans-serif !important;
+  line-height: 1.88 !important;
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0 !important;
+}
+
+
+/* === ARCH 5: LONELY PLANET / BRUNCH FULL-WIDE COVER & COURSE TIMELINE (lonelyplanet-forest-serif) === */
+body[data-shell-family="arch5-lonelyplanet"] .layout {
+  max-width: 980px !important;
+  margin: 0 auto 60px !important;
+  padding: 0 20px !important;
+  display: block !important;
+}
+.lp-header-shell {
+  background: #FFFFFF;
+  border-bottom: 1px solid #D8D2C5;
+}
+.lp-cover-hero {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 32px;
+}
+.lp-cover-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,23,42,0.18) 0%, rgba(15,23,42,0.78) 100%);
+}
+.lp-cover-content {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 44px 28px;
+  color: #FFFFFF;
+}
+.lp-cover-kicker {
+  display: inline-block;
+  background: #C85A32;
+  color: #FFFFFF;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+.lp-cover-content h1 {
+  font-family: 'Nanum Myeongjo', 'Noto Serif KR', Georgia, serif !important;
+  font-size: clamp(1.85rem, 3.5vw, 2.65rem) !important;
+  line-height: 1.34 !important;
+  color: #FFFFFF !important;
+  margin: 0 0 12px !important;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.45);
+}
+.lp-quick-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0 0 30px;
+}
+.lp-quick-info-cell {
+  background: #FAF7F0;
+  border: 1px solid #D8D2C5;
+  border-top: 3px solid #1B4332;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.lp-quick-info-cell strong {
+  display: block;
+  font-size: 12.5px;
+  color: #1B4332;
+  margin-bottom: 4px;
+}
+.lp-quick-info-cell span {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1C2826;
+}
+/* Vertical Course Dotted Timeline */
+body[data-shell-family="arch5-lonelyplanet"] .content {
+  position: relative;
+  padding-left: 28px;
+  border-left: 2px dashed #C85A32;
+  margin-left: 10px;
+}
+.lp-course-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1B4332;
+  color: #FFFFFF;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 4px 11px;
+  border-radius: 999px;
+  margin-right: 10px;
+  position: relative;
+}
+body[data-shell-family="arch5-lonelyplanet"] .content h2 {
+  position: relative;
+  background: #FAF7F0 !important;
+  border: 1px solid #D8D2C5 !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+}
+body[data-shell-family="arch5-lonelyplanet"] .content h2::before {
+  content: "";
+  position: absolute;
+  left: -36px;
+  top: 18px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #C85A32;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 0 0 2px #C85A32;
+}
+
+
+/* Post Card Grid Defaults on Home */
+#postGrid.grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 20px !important;
+}
+#postGrid .card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: var(--surface) !important;
+  border: 1px solid #D8D2C5 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 26px rgba(27, 67, 50, 0.08) !important;
+  overflow: hidden !important;
+}
+#postGrid .card .thumb-empty {
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(135deg, var(--pri) 0%, var(--sec) 100%) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  padding: 18px 20px !important;
+  box-sizing: border-box !important;
+}
+
+/* Article Typography & Subheadings */
+.content, article.gs-article, article.content {
+  max-width: var(--reading-max);
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  line-height: 1.88;
+  color: var(--txt);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.main h1, article h1, main.page h1 {
+  font-family: 'Nanum Myeongjo', 'Noto Serif KR', Georgia, serif !important;
+  color: var(--txt) !important;
+  letter-spacing: -0.025em;
+  line-height: 1.34 !important;
+}
+.content h2, article h2 {
+  font-family: 'Nanum Myeongjo', 'Noto Serif KR', Georgia, serif;
+  color: var(--pri);
+  border-left: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 0 14px 14px 0;
+  margin: 34px 0 14px !important;
+  font-size: 1.32rem !important;
+  line-height: 1.45 !important;
+}
+.content h3, article h3 {
+  font-family: 'Nanum Myeongjo', 'Noto Serif KR', Georgia, serif;
+  color: var(--txt);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 6px;
+  margin: 24px 0 10px !important;
+}
+
+/* AdSense 5 High-CPC Slots Integration */
+.adsense-slot {
+  position: relative;
+  width: 100%;
+  margin: 18px 0;
+  padding: 8px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-align: center;
+  overflow: hidden;
+  clear: both;
+}
+.adsense-slot--hero-below {
+  min-height: 0 !important;
+  max-height: 250px !important;
+  margin: 14px 0 22px !important;
+}
+.adsense-slot--in-article,
+.content .ad {
+  margin: 26px 0 !important;
+  min-height: 0 !important;
+  max-height: 250px !important;
+  padding: 10px !important;
+  border-top: 2px solid var(--sec) !important;
+  border-bottom: 1px solid var(--line) !important;
+  background: var(--bg) !important;
+}
+.adsense-slot--sticky-rail {
+  position: sticky !important;
+  top: 88px !important;
+  width: 100% !important;
+  max-width: 300px !important;
+  min-height: 250px !important;
+  max-height: 600px !important;
+  margin: 0 auto !important;
+  padding: 12px 10px !important;
+  background: var(--surface) !important;
+  border: 1px solid #D8D2C5 !important;
+  border-top: 3px solid var(--pri) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--card-shadow) !important;
+}
+.adsense-slot--multiplex-bottom {
+  margin: 28px 0 18px !important;
+  min-height: 0 !important;
+  max-height: 260px !important;
+  padding: 12px !important;
+  border: 1px solid var(--line) !important;
+  border-top: 3px solid var(--acc) !important;
+  background: var(--surface) !important;
+}
+
+/* Indirect Experience Capture Images (`.guide-capture-img`) */
+figure.post-image {
+  margin: 26px 0 !important;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+}
+img.guide-capture-img,
+figure.post-image a[aria-label*="원본 화면 크게 보기"] img {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  border: 2px solid #1646b7 !important;
+  border-radius: 8px !important;
+}
+.brand-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 52px;
+  margin: 22px 0;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, var(--pri) 0%, var(--sec) 100%);
+  color: #ffffff !important;
+  font-family: 'Nanum Myeongjo', 'Noto Serif KR', Georgia, serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  text-decoration: none !important;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 1060px) {
+  body[data-shell-family] .layout {
+    grid-template-columns: 1fr !important;
+  }
+  .wt-share-col, .wt-ranking-col, .toss-scrollspy-aside, .msdocs-tree-sidebar, .msdocs-minimap-aside, .med-clinical-sidebar {
+    display: none !important;
+  }
+  .lp-quick-info-grid, .dpg-scoreboard-box, .dpg-pros-cons-grid, .th-related-3col-grid {
+    grid-template-columns: 1fr !important;
+  }
+  body, footer {
+    padding-bottom: 70px !important;
+  }
+}

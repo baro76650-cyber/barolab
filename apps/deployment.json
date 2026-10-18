@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "apps": {
+    "greeting": {
+      "name": "오늘의 안부",
+      "packageName": "com.barolab.morningcard",
+      "playAppId": "4973731498485355571",
+      "internalTrack": "internal",
+      "releaseStatus": "internal_preview_available",
+      "internalReleaseVerified": true,
+      "productionReleased": false,
+      "publicUrl": "https://barolab-daily-apps.pages.dev/greeting/",
+      "admob": {
+        "appId": "ca-app-pub-7642010403138987~7847239341",
+        "bannerId": "ca-app-pub-7642010403138987/8940829169",
+        "bannerName": "greeting_lists_banner",
+        "registrationStatus": "created",
+        "servingReady": false,
+        "umpStatus": "published",
+        "evidence": "apps/qa/admob-greeting-created.txt",
+        "umpMessageId": "ad138182540a545e",
+        "umpMessageName": "BaroLab 생활 앱 - 유럽 이용자 동의",
+        "umpLanguage": "en",
+        "umpKoreanSupportedInCurrentUi": false,
+        "umpEvidence": "apps/qa/ump-daily-apps.txt",
+        "umpRuntimeVerified": false
+      },
+      "evidence": {
+        "playApp": "apps/qa/play-greeting-created.txt",
+        "uploadedPreview": "apps/qa/play-greeting-v2-release-preview.txt",
+        "testers": "apps/qa/play-greeting-v2-testers.json",
+        "internalRelease": "apps/qa/play-greeting-v2-internal-release.txt"
+      },
+      "webCheck": {
+        "url": "https://barolab-daily-apps.pages.dev/greeting/",
+        "status": 200,
+        "sha256": "822a73b5774be42915bedf2ef48406d7db2c03c1bd8b7871068b32cf5fb9498a",
+        "checkedAt": "2026-10-14T08:54:57.801729+00:00"
+      },
+      "internalJoinUrl": "https://play.google.com/apps/internaltest/4701400802151181455",
+      "releaseName": "0.2.0-internal-preview",
+      "publishedAtLocal": "2026-10-14T19:10:00+09:00",
+      "build": {
+        "versionCode": 2,
+        "versionName": "0.2.0-internal-preview",
+        "aabSha256": "54615bb43ea9f09d4868c289b15c1c737692a4a547820951249fb7be22d71a51",
+        "unitTestsPassed": 6,
+        "lintErrors": 0,
+        "lintWarnings": 0,
+        "evidence": "apps/qa/v2-build-verification.json",
+        "aabBytes": 11840975,
+        "unitTestVariant": "debug",
+        "lintVariant": "debug"
+      },
+      "deviceValidation": {
+        "emulatorVerified": true,
+        "physicalDeviceVerified": false,
+        "evidence": "apps/qa/v2-build-verification.json"
+      },
+      "closedTesting": {
+        "completed": false,
+        "scope": "필요한 비공개 테스트 요건 미완료"
+      },
+      "versionCode": 2,
+      "testAdsOnly": true,
+      "internalTesterListVerifiedAt": "2026-10-14T19:12:25.741056+09:00"
+    },
+    "magnifier": {
+      "name": "큰글씨 돋보기",
+      "packageName": "com.barolab.biglens",
+      "playAppId": "4972819523776643880",
+      "internalTrack": "internal",
+      "releaseStatus": "internal_preview_available",
+      "internalReleaseVerified": true,
+      "productionReleased": false,
+      "publicUrl": "https://barolab-daily-apps.pages.dev/magnifier/",
+      "admob": {
+        "appId": "ca-app-pub-7642010403138987~5789333475",
+        "bannerId": "ca-app-pub-7642010403138987/4744854277",
+        "bannerName": "magnifier_help_banner",
+        "registrationStatus": "created",
+        "servingReady": false,
+        "umpStatus": "published",
+        "evidence": "apps/qa/admob-magnifier-created.txt",
+        "umpMessageId": "ad138182540a545e",
+        "umpMessageName": "BaroLab 생활 앱 - 유럽 이용자 동의",
+        "umpLanguage": "en",
+        "umpKoreanSupportedInCurrentUi": false,
+        "umpEvidence": "apps/qa/ump-daily-apps.txt",
+        "umpRuntimeVerified": false
+      },
+      "evidence": {
+        "playApp": "apps/qa/play-magnifier-created.txt",
+        "uploadedPreview": "apps/qa/play-magnifier-v2-release-preview.txt",
+        "testers": "apps/qa/play-magnifier-v2-testers.json",
+        "internalRelease": "apps/qa/play-magnifier-v2-internal-release.txt"
+      },
+      "webCheck": {
+        "url": "https://barolab-daily-apps.pages.dev/magnifier/",
+        "status": 200,
+        "sha256": "f2360706a1424e1d4726706ce7db1ba10e3d858d68d26cc9f349c5e64b1bb123",
+        "checkedAt": "2026-10-14T08:54:57.801729+00:00"
+      },
+      "internalJoinUrl": "https://play.google.com/apps/internaltest/4701703053640983596",
+      "releaseName": "0.2.0-internal-preview",
+      "publishedAtLocal": "2026-10-14T19:15:00+09:00",
+      "build": {
+        "versionCode": 2,
+        "versionName": "0.2.0-internal-preview",
+        "aabSha256": "c6f3755cbcabc18593e9378aaa4af61c3334668183ca94615b663722bcd3577e",
+        "unitTestsPassed": 9,
+        "lintErrors": 0,
+        "lintWarnings": 2,
+        "evidence": "apps/qa/v2-build-verification.json",
+        "aabBytes": 8329856,
+        "unitTestVariant": "debug",
+        "lintVariant": "debug"
+      },
+      "deviceValidation": {
+        "emulatorVerified": true,
+        "physicalDeviceVerified": false,
+        "evidence": "apps/qa/v2-build-verification.json"
+      },
+      "closedTesting": {
+        "completed": false,
+        "scope": "필요한 비공개 테스트 요건 미완료"
+      },
+      "versionCode": 2,
+      "testAdsOnly": true,
+      "internalTesterListVerifiedAt": "2026-10-14T19:16:54.207296+09:00"
+    },
+    "shopping": {
+      "name": "말로 장보기",
+      "packageName": "com.barolab.voicebasket",
+      "playAppId": "4972748430542309887",
+      "internalTrack": "internal",
+      "releaseStatus": "internal_preview_available",
+      "internalReleaseVerified": true,
+      "productionReleased": false,
+      "publicUrl": "https://barolab-daily-apps.pages.dev/shopping/",
+      "admob": {
+        "appId": "ca-app-pub-7642010403138987~6881642030",
+        "bannerId": "ca-app-pub-7642010403138987/2730644038",
+        "bannerName": "shopping_lists_banner",
+        "registrationStatus": "created",
+        "servingReady": false,
+        "umpStatus": "published",
+        "evidence": "apps/qa/admob-shopping-created.txt",
+        "umpMessageId": "ad138182540a545e",
+        "umpMessageName": "BaroLab 생활 앱 - 유럽 이용자 동의",
+        "umpLanguage": "en",
+        "umpKoreanSupportedInCurrentUi": false,
+        "umpEvidence": "apps/qa/ump-daily-apps.txt",
+        "umpRuntimeVerified": false
+      },
+      "evidence": {
+        "playApp": "apps/qa/play-shopping-created.txt",
+        "uploadedPreview": "apps/qa/play-shopping-v2-release-preview.txt",
+        "testers": "apps/qa/play-shopping-v2-testers.json",
+        "internalRelease": "apps/qa/play-shopping-v2-internal-release.txt"
+      },
+      "webCheck": {
+        "url": "https://barolab-daily-apps.pages.dev/shopping/",
+        "status": 200,
+        "sha256": "fa18256237db49e30c901d0212fa9f91d30291f235489ff40e65f4d9956d64c9",
+        "checkedAt": "2026-10-14T08:54:57.801729+00:00"
+      },
+      "internalJoinUrl": "https://play.google.com/apps/internaltest/4701721871486482124",
+      "releaseName": "0.2.0-internal-preview",
+      "publishedAtLocal": "2026-10-14T19:10:00+09:00",
+      "build": {
+        "versionCode": 2,
+        "versionName": "0.2.0-internal-preview",
+        "aabSha256": "7940daf974e87ad5ccda8384a8726fb4cd943396b250d8da6d2a4f076b434955",
+        "unitTestsPassed": 9,
+        "lintErrors": 0,
+        "lintWarnings": 6,
+        "evidence": "apps/qa/v2-build-verification.json",
+        "aabBytes": 5914075,
+        "unitTestVariant": "debug",
+        "lintVariant": "debug"
+      },
+      "deviceValidation": {
+        "emulatorVerified": true,
+        "physicalDeviceVerified": false,
+        "evidence": "apps/qa/v2-build-verification.json"
+      },
+      "closedTesting": {
+        "completed": false,
+        "scope": "필요한 비공개 테스트 요건 미완료"
+      },
+      "versionCode": 2,
+      "testAdsOnly": true,
+      "internalTesterListVerifiedAt": "2026-10-14T19:12:25.834784+09:00"
+    }
+  },
+  "updatedAt": "2026-10-14T10:17:11.433164+00:00",
+  "scope": "Three daily apps; preview test ads; no public production release or ad-serving approval claimed."
+}

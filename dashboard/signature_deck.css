@@ -1,0 +1,835 @@
+/* ==========================================================================
+   BaroLab Signature Hybrid 3-Tier Deck (Shared by naver, cf, kin, threads, apps)
+   Combines BaroLab Status Colors (🟢Public / 🔵Reserved / 🟡Waiting)
+   with ARGO Deck Precision Instrument Details (Tick Rings, Segmented Bars, LEDs)
+   ========================================================================== */
+
+body.control-room .main-wrap,
+body.control-room .growth-main {
+  max-width: 1600px !important;
+  margin-left: 0 !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  width: calc(100% - 228px) !important;
+  padding: 10px 18px 24px !important;
+  box-sizing: border-box !important;
+}
+
+/* Unified Dark Cockpit Header across all 5 detail pages */
+body.control-room .header,
+body.control-room .growth-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 8px 14px !important;
+  margin-bottom: 10px !important;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+  color: #f8fafc !important;
+  border: 1px solid #334155 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12) !important;
+}
+body.control-room .header h1,
+body.control-room .growth-header h1 {
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  white-space: nowrap !important;
+}
+body.control-room .header p,
+body.control-room .growth-header p {
+  font-size: 11px !important;
+  color: #94a3b8 !important;
+  margin: 2px 0 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+body.control-room .header .refresh-status {
+  display: none !important;
+}
+body.control-room .header-badge {
+  font-size: 10.5px !important;
+  font-weight: 800 !important;
+  padding: 2px 8px !important;
+  border-radius: 999px !important;
+  background: rgba(56, 189, 248, 0.16) !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+  color: #bae6fd !important;
+  white-space: nowrap !important;
+}
+body.control-room .toolbar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+body.control-room .toolbar .date-box {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 4px 10px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 8px !important;
+  color: #f8fafc !important;
+}
+body.control-room .toolbar .date-box .clock {
+  font-size: 12.5px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  font-variant-numeric: tabular-nums !important;
+}
+body.control-room .toolbar .date-box .tz {
+  font-size: 10px !important;
+  color: #94a3b8 !important;
+}
+body.control-room .toolbar .live-status {
+  background: rgba(16, 185, 129, 0.14) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  color: #a7f3d0 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 9px !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+}
+body.control-room .toolbar button,
+body.control-room .toolbar a.overview-button {
+  padding: 5px 10px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #f8fafc !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+body.control-room .toolbar button:hover,
+body.control-room .toolbar a.overview-button:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Hide legacy bulky top summaries so the 3-Tier Signature Deck is clean */
+body.sig-deck-enabled .summary-cards-row,
+body.sig-deck-enabled .pillar-row,
+body.sig-deck-enabled .rotator-banner,
+body.sig-deck-enabled .notice-box,
+body.sig-deck-enabled .sim-bar,
+body.sig-deck-enabled [data-kin-summary="compact"],
+body.sig-deck-enabled [data-threads-summary="compact"] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   3-Tier Signature Hybrid Container
+   ========================================================================== */
+.sig-deck-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+/* [TIER 1] Top Slim Gauge & Status Summary Cards (85px compact 4-column grid) */
+.sig-tier1-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.sig-slim-card {
+  height: 86px;
+  min-height: 86px;
+  max-height: 86px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 9px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.035);
+  overflow: hidden;
+}
+.sig-slim-card.dark-accent {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-color: #334155;
+  color: #f8fafc;
+}
+.sig-gauge-ring-box {
+  width: 64px;
+  height: 64px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sig-gauge-ring-box svg {
+  width: 64px;
+  height: 64px;
+  transform: rotate(-90deg);
+}
+.sig-tick-circle {
+  fill: none;
+  stroke: #cbd5e1;
+  stroke-width: 1.8;
+  stroke-dasharray: 1.3 3.6;
+}
+.sig-ring-bg {
+  fill: none;
+  stroke: #e2e8f0;
+  stroke-width: 6;
+}
+.sig-ring-fg {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease;
+}
+.sig-gauge-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+  color: #0f172a;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.sig-gauge-center small {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #64748b;
+  margin-top: 2px;
+}
+.sig-card-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+.sig-card-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  white-space: nowrap;
+}
+.dark-accent .sig-card-label {
+  color: #94a3b8;
+}
+.sig-card-main-val {
+  font-size: 17px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  line-height: 1.15;
+}
+.dark-accent .sig-card-main-val {
+  color: #ffffff;
+}
+.sig-seg-track {
+  width: 100%;
+  height: 6px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+.sig-seg-track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent calc(20% - 1.5px),
+    rgba(255, 255, 255, 0.7) calc(20% - 1.5px),
+    rgba(255, 255, 255, 0.7) 20%
+  );
+  pointer-events: none;
+}
+.sig-seg-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  transition: width 0.45s ease;
+}
+
+/* Status 3-Color Pills inside Tier 1 Card 2 */
+.sig-status-trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  width: 100%;
+}
+.sig-st-box {
+  padding: 5px 6px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  white-space: nowrap;
+}
+.sig-st-box.st-green {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #047857;
+}
+.sig-st-box.st-blue {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+.sig-st-box.st-amber {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #b45309;
+}
+.sig-st-box span {
+  font-size: 9.5px;
+  font-weight: 800;
+}
+.sig-st-box strong {
+  font-size: 13.5px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Action Buttons inside Tier 1 Card 4 */
+.sig-quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+.sig-action-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sig-btn {
+  flex: 1;
+  padding: 6px 9px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  white-space: nowrap;
+  transition: all 0.14s ease;
+  text-decoration: none;
+}
+.sig-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.sig-btn.primary {
+  background: linear-gradient(135deg, #2563eb, #10b981);
+  border-color: rgba(52, 211, 153, 0.5);
+}
+
+/* ==========================================================================
+   [TIER 2] Live Pipeline 5-Step Stepper Bar (실시간 워크플로우 타임라인 바)
+   ========================================================================== */
+.sig-tier2-stepper-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sig-tier2-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sig-tier2-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #0f172a;
+  white-space: nowrap;
+}
+.sig-tier2-active-pill {
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+  white-space: nowrap;
+}
+.sig-tier2-active-pill.pill-running {
+  background: #eff6ff;
+  border-color: #60a5fa;
+  color: #1d4ed8;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.16);
+}
+.sig-tier2-active-pill.pill-overdue {
+  background: #fff7ed;
+  border-color: #fb923c;
+  color: #c2410c;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.16);
+}
+.sig-stepper-track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+.sig-stepper-track.steps-7 {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+@keyframes sigStepPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 1.5px rgba(37, 99, 235, 0.35), 0 2px 8px rgba(37, 99, 235, 0.12);
+    border-color: #2563eb;
+  }
+  50% {
+    box-shadow: 0 0 0 3.5px rgba(59, 130, 246, 0.28), 0 4px 12px rgba(37, 99, 235, 0.22);
+    border-color: #3b82f6;
+  }
+}
+.sig-step-node {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  padding: 7px 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  transition: all 0.18s ease;
+  min-width: 0;
+}
+.sig-step-node.st-done {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+.sig-step-node.st-active {
+  background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
+  border-color: #2563eb;
+  animation: sigStepPulse 1.8s infinite ease-in-out;
+}
+.sig-step-node.st-error {
+  background: #fff7ed;
+  border-color: #fb923c;
+  box-shadow: 0 0 0 1.5px rgba(249, 115, 22, 0.28);
+}
+.sig-step-node.st-wait {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #64748b;
+  opacity: 0.82;
+}
+.sig-step-node.st-wait .sig-step-name {
+  color: #64748b;
+}
+.sig-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  white-space: nowrap;
+}
+.sig-step-name {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sig-step-badge {
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: #e2e8f0;
+  color: #475569;
+  white-space: nowrap;
+}
+.sig-step-node.st-done .sig-step-badge {
+  background: #dcfce7;
+  color: #15803d;
+}
+.sig-step-node.st-active .sig-step-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+.sig-step-node.st-error .sig-step-badge {
+  background: #ffedd5;
+  color: #c2410c;
+}
+.sig-step-desc {
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sig-work-table tbody tr.sig-row-selected {
+  background: #eff6ff !important;
+  outline: 1.5px solid #60a5fa;
+  outline-offset: -1.5px;
+}
+
+/* ==========================================================================
+   [TIER 3] Date Tabs + Color Filter + 10-Row Paginated Table & 14-Day LED Chart
+   ========================================================================== */
+.sig-tier3-board {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.035);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sig-tier3-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.sig-tabs-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sig-btn-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: #f1f5f9;
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+.sig-tab-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.14s ease;
+}
+.sig-tab-btn.active {
+  background: #0f172a;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.16);
+}
+.sig-date-input {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 3px 7px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0f172a;
+  background: #ffffff;
+}
+.sig-search-input {
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #0f172a;
+  width: 170px;
+}
+
+/* ARGO 14-Day Vertical LED Dot Matrix Mini Chart */
+.sig-led-chart-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 4px 10px;
+  color: #f8fafc;
+}
+.sig-led-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: #93c5fd;
+  white-space: nowrap;
+}
+.sig-led-columns {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 24px;
+}
+.sig-led-col {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1.5px;
+}
+.sig-led-dot {
+  width: 4.5px;
+  height: 3.5px;
+  border-radius: 1px;
+  background: rgba(148, 163, 184, 0.22);
+}
+.sig-led-dot.on-green {
+  background: #10b981;
+  box-shadow: 0 0 3px rgba(16, 185, 129, 0.7);
+}
+.sig-led-dot.on-blue {
+  background: #3b82f6;
+  box-shadow: 0 0 3px rgba(59, 130, 246, 0.7);
+}
+
+/* Clean 10-Row Table */
+.sig-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+.sig-work-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+}
+.sig-work-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-align: left;
+  padding: 7px 10px;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+.sig-work-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.sig-work-table tbody tr {
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.sig-work-table tbody tr:hover {
+  background: #eff6ff;
+}
+.sig-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.sig-status-pill.st-public {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+}
+.sig-status-pill.st-reserved {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+}
+.sig-status-pill.st-waiting {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #b45309;
+}
+.sig-status-pill.st-overdue {
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+  color: #c2410c;
+}
+.sig-open-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  background: #ecfdf5;
+  border: 1px solid #86efac;
+  color: #047857;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.sig-open-link:hover {
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff;
+}
+.sig-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ea580c, #d97706);
+  border: 1px solid #fdba74;
+  color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(234, 88, 12, 0.25);
+}
+.sig-retry-btn:hover {
+  background: linear-gradient(135deg, #c2410c, #b45309);
+}
+.sig-retry-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.sig-action-muted {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+.sig-action-muted.processing {
+  color: #1d4ed8;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-weight: 800;
+}
+
+/* Pagination Bar (1 2 3 4 5) */
+.sig-pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+}
+.sig-page-btns {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.sig-page-btn {
+  min-width: 26px;
+  height: 26px;
+  padding: 0 7px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sig-page-btn.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+.sig-page-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Collapsible Legacy Deep-Dive Drawer */
+.sig-legacy-drawer-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #334155;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.sig-legacy-drawer-toggle:hover {
+  background: #f1f5f9;
+}
+body.sig-legacy-collapsed .sig-legacy-section {
+  display: none !important;
+}
+
+@media (max-width: 1200px) {
+  .sig-tier1-grid { grid-template-columns: repeat(2, 1fr); }
+  .sig-stepper-track { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 760px) {
+  body.control-room .main-wrap,
+  body.control-room .growth-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  .sig-tier1-grid { grid-template-columns: 1fr; }
+  .sig-stepper-track { grid-template-columns: 1fr; }
+}

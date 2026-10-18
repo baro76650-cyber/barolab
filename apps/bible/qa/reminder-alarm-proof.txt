@@ -1,0 +1,4 @@
+    RTC_WAKEUP #12: Alarm{c6c7daa type 0 origWhen 1791964800000 whenElapsed 6813249 com.barolab.harubible}
+      tag=*walarm*:com.barolab.harubible.DAILY_REMINDER
+      operation=PendingIntent{3f77d9b: PendingIntentRecord{987e538 com.barolab.harubible broadcastIntent}}
+          type=RTC_WAKEUP tag=*walarm*:com.barolab.harubible.DAILY_REMINDER 

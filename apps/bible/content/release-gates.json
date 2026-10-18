@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-14T05:53:52.511088+00:00",
+  "contentReady": true,
+  "gates": {
+    "textRights": {
+      "status": "provider_evidence_confirmed",
+      "translationId": "ebible-kor1910",
+      "scope": "30 selected source-matched provider-declared Public Domain text verses; commercial app inclusion and sharing",
+      "rightsConfirmedMeaning": "text source reuse evidence only; not blanket legal or app-store approval"
+    },
+    "sourceIntegrity": {
+      "status": "passed",
+      "selectedVerseCount": 30,
+      "sourceHtmlMatches": 30,
+      "wholeBibleCompleteness": "not_claimed"
+    },
+    "editionNaming": {
+      "status": "provider_label_preserved",
+      "displayName": "한국어 성경 — Korean Bible 1910 (eBible KOROLD)",
+      "doNotClaim": [
+        "개역한글1961",
+        "개역개정1998",
+        "대한성서공회공식앱",
+        "역사적판본동일성독립감정완료"
+      ]
+    },
+    "reflection": {
+      "status": "not_included",
+      "aiDraftIncluded": false,
+      "humanApprovedReflection": false,
+      "enableOnlyAfterHumanReview": true
+    },
+    "tts": {
+      "textRights": "provider_public_domain_recitation_adaptation_basis",
+      "voiceEngineRights": "separate_not_verified",
+      "recordedBibleAudio": "not_used"
+    },
+    "releaseOperations": {
+      "status": "owned_by_release_supervisor",
+      "remaining": [
+        "actual Android readability, notification, share and TTS checks",
+        "AdMob/app-store/privacy release requirements and production IDs",
+        "selected voice engine policy where applicable"
+      ]
+    }
+  },
+  "publicReleaseVerified": false
+}

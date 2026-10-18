@@ -1,0 +1,402 @@
+/* ==========================================================================
+   topnote.kr (탑노트 IT·가전 매뉴얼) — 8-Architecture Independent DOM Skeleton
+   Architecture: arch4-mslearn | Variant: mslearn-slate-manual
+   Primary: #2563EB | Secondary: #1D4ED8 | Accent: #06B6D4 | Bg: #F8FAFC
+   ========================================================================== */
+:root {
+  --pri: #2563EB !important;
+  --sec: #1D4ED8 !important;
+  --acc: #06B6D4 !important;
+  --bg: #F8FAFC !important;
+  --bg2: #EFF6FF !important;
+  --surface: #FFFFFF !important;
+  --txt: #0F172A !important;
+  --muted: #475569 !important;
+  --line: #CBD5E1 !important;
+  --reading-max: 720px;
+  --card-radius: 8px;
+  --card-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+/* ==========================================================================
+   CLEAN PUBLIC VIEW: 100% HIDE LEGACY DUPLICATE HEADER & ADMIN BUTTONS
+   ========================================================================== */
+[data-admin],
+.admin-tools,
+.admin-only,
+.write-btn,
+.visit-strip,
+.gov-bar,
+.ov,
+.drawer,
+.mtoggle,
+.sidebar > .profile,
+.header .nav a[href="/admin"],
+header.hd .nav a[href="/admin"],
+#topActions,
+.wrap > .top,
+.wrap > .actions,
+.wrap > hr,
+main.page > .top,
+main.page > .actions,
+main.page > hr,
+#mobileOverlay,
+#mobileMenu,
+.mobile-overlay,
+.mobile-menu,
+.menu-toggle,
+.side-section,
+.side-search,
+#sideSearch,
+.sidebar .side-cat,
+.google-auto-placed,
+ins.adsbygoogle.adsbygoogle-noablate,
+ins.adsbygoogle[data-anchor-status],
+ins.adsbygoogle[data-anchor-shown],
+.google-anno-skip,
+.google-anno-sc,
+.google-aiuf,
+.goog-rentry,
+#postGrid .card ins.adsbygoogle {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+body {
+  background: var(--bg) !important;
+  color: var(--txt) !important;
+  font-family: 'Pretendard', -apple-system, sans-serif !important;
+  line-height: 1.80 !important;
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0 !important;
+}
+
+
+/* === ARCH 4: MS LEARN / APPLE DOCS 3-COL TECHNICAL MANUAL (mslearn-slate-manual) === */
+.msdocs-header {
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+  border-bottom: 1px solid #334155;
+  padding: 12px 24px;
+}
+.msdocs-header-in {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.msdocs-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: #CBD5E1;
+  font-size: 12.5px;
+  min-width: 240px;
+}
+.msdocs-ver-badge {
+  background: rgba(37, 99, 235, 0.25);
+  border: 1px solid #60A5FA;
+  color: #93C5FD;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+body[data-shell-family="arch4-mslearn"] .layout {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  display: grid !important;
+  grid-template-columns: 250px minmax(0, 1fr) 250px !important;
+  gap: 0 !important;
+  align-items: start !important;
+  min-height: calc(100vh - 56px);
+}
+.msdocs-tree-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: #F8FAFC;
+  border-right: 1px solid #CBD5E1;
+  padding: 20px 14px;
+  font-size: 13px;
+}
+.msdocs-tree-group {
+  margin-bottom: 16px;
+}
+.msdocs-tree-folder {
+  font-weight: 800;
+  color: #0F172A;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.msdocs-tree-item {
+  display: block;
+  padding: 6px 10px 6px 24px;
+  color: #475569 !important;
+  text-decoration: none !important;
+  border-left: 2px solid #E2E8F0;
+  margin-left: 10px;
+  font-size: 12.5px;
+}
+.msdocs-tree-item.active, .msdocs-tree-item:hover {
+  border-left-color: #2563EB;
+  color: #2563EB !important;
+  font-weight: 800;
+  background: #EFF6FF;
+}
+.msdocs-minimap-aside {
+  position: sticky;
+  top: 20px;
+  padding: 20px 16px;
+  border-left: 1px solid #E2E8F0;
+}
+.msdocs-step-box {
+  border: 1px solid #CBD5E1;
+  border-left: 4px solid #2563EB;
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin: 24px 0;
+  box-shadow: 0 2px 6px rgba(15,23,42,0.03);
+}
+.msdocs-step-num {
+  display: inline-block;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 11px;
+  font-weight: 800;
+  background: #2563EB;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+kbd, .msdocs-kbd {
+  display: inline-block;
+  padding: 2px 7px;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #0F172A;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
+  border: 1px solid #94A3B8;
+  border-bottom-width: 3px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  margin: 0 2px;
+}
+.msdocs-feedback-box {
+  margin: 36px 0 20px;
+  padding: 20px 24px;
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.msdocs-fb-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #CBD5E1;
+  background: #FFFFFF;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+.msdocs-fb-btn:hover {
+  border-color: #2563EB;
+  color: #2563EB;
+}
+
+
+/* Post Card Grid Defaults on Home */
+#postGrid.grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 20px !important;
+}
+#postGrid .card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: var(--surface) !important;
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+  overflow: hidden !important;
+}
+#postGrid .card .thumb-empty {
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(135deg, var(--pri) 0%, var(--sec) 100%) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  padding: 18px 20px !important;
+  box-sizing: border-box !important;
+}
+
+/* Article Typography & Subheadings */
+.content, article.gs-article, article.content {
+  max-width: var(--reading-max);
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  line-height: 1.80;
+  color: var(--txt);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.main h1, article h1, main.page h1 {
+  font-family: 'Wanted Sans Variable', 'Pretendard', -apple-system, sans-serif !important;
+  color: var(--txt) !important;
+  letter-spacing: -0.025em;
+  line-height: 1.34 !important;
+}
+.content h2, article h2 {
+  font-family: 'Wanted Sans Variable', 'Pretendard', -apple-system, sans-serif;
+  color: var(--pri);
+  border-left: 4px solid #2563EB;
+  background: #F1F5F9;
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  margin: 34px 0 14px !important;
+  font-size: 1.32rem !important;
+  line-height: 1.45 !important;
+}
+.content h3, article h3 {
+  font-family: 'Wanted Sans Variable', 'Pretendard', -apple-system, sans-serif;
+  color: var(--txt);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 6px;
+  margin: 24px 0 10px !important;
+}
+
+/* AdSense 5 High-CPC Slots Integration */
+.adsense-slot {
+  position: relative;
+  width: 100%;
+  margin: 18px 0;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-align: center;
+  overflow: hidden;
+  clear: both;
+}
+.adsense-slot--hero-below {
+  min-height: 0 !important;
+  max-height: 250px !important;
+  margin: 14px 0 22px !important;
+}
+.adsense-slot--in-article,
+.content .ad {
+  margin: 26px 0 !important;
+  min-height: 0 !important;
+  max-height: 250px !important;
+  padding: 10px !important;
+  border-top: 2px solid var(--sec) !important;
+  border-bottom: 1px solid var(--line) !important;
+  background: var(--bg) !important;
+}
+.adsense-slot--sticky-rail {
+  position: sticky !important;
+  top: 88px !important;
+  width: 100% !important;
+  max-width: 300px !important;
+  min-height: 250px !important;
+  max-height: 600px !important;
+  margin: 0 auto !important;
+  padding: 12px 10px !important;
+  background: var(--surface) !important;
+  border: 1px solid #CBD5E1 !important;
+  border-top: 3px solid var(--pri) !important;
+  border-radius: 8px !important;
+  box-shadow: var(--card-shadow) !important;
+}
+.adsense-slot--multiplex-bottom {
+  margin: 28px 0 18px !important;
+  min-height: 0 !important;
+  max-height: 260px !important;
+  padding: 12px !important;
+  border: 1px solid var(--line) !important;
+  border-top: 3px solid var(--acc) !important;
+  background: var(--surface) !important;
+}
+
+/* Indirect Experience Capture Images (`.guide-capture-img`) */
+figure.post-image {
+  margin: 26px 0 !important;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+}
+img.guide-capture-img,
+figure.post-image a[aria-label*="원본 화면 크게 보기"] img {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  border: 2px solid #1646b7 !important;
+  border-radius: 8px !important;
+}
+.brand-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 52px;
+  margin: 22px 0;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, var(--pri) 0%, var(--sec) 100%);
+  color: #ffffff !important;
+  font-family: 'Wanted Sans Variable', 'Pretendard', -apple-system, sans-serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  text-decoration: none !important;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 1060px) {
+  body[data-shell-family] .layout {
+    grid-template-columns: 1fr !important;
+  }
+  .wt-share-col, .wt-ranking-col, .toss-scrollspy-aside, .msdocs-tree-sidebar, .msdocs-minimap-aside, .med-clinical-sidebar {
+    display: none !important;
+  }
+  .lp-quick-info-grid, .dpg-scoreboard-box, .dpg-pros-cons-grid, .th-related-3col-grid {
+    grid-template-columns: 1fr !important;
+  }
+  body, footer {
+    padding-bottom: 70px !important;
+  }
+}

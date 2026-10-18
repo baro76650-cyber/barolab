@@ -1,0 +1,66 @@
+/* ==========================================================================
+   BaroLab Master Hub — Global Layout & Full-Page Capture Anti-Repeat Styles
+   - Eliminates `position: fixed` on `#barolab-sidebar` / `.sidebar` so that
+     full-page scroll captures render the left sidebar menu ONLY ONCE instead
+     of repeating 6 times vertically.
+   - Separates sidebar and main content container height / overflow cleanly.
+   ========================================================================== */
+
+body.control-room .layout,
+body.control-room:has(> #barolab-sidebar) {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  min-height: 100vh !important;
+  position: relative !important;
+}
+
+#barolab-sidebar,
+body.control-room .sidebar {
+  position: relative !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  flex: 0 0 228px !important;
+  width: 228px !important;
+  min-width: 228px !important;
+  max-width: 228px !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  align-self: stretch !important;
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+}
+
+#barolab-sidebar .nav {
+  flex: 0 0 auto !important;
+}
+
+body.control-room .main-wrap,
+body.control-room .growth-main,
+body:has(> #barolab-sidebar) > main:not(.growth-main) {
+  margin-left: 0 !important;
+  flex: 1 1 0% !important;
+  width: calc(100% - 228px) !important;
+  min-width: 0 !important;
+}
+
+@media (max-width: 760px) {
+  body.control-room .layout,
+  body.control-room:has(> #barolab-sidebar) {
+    flex-direction: column !important;
+  }
+  #barolab-sidebar,
+  body.control-room .sidebar {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+  }
+  body.control-room .main-wrap,
+  body.control-room .growth-main,
+  body:has(> #barolab-sidebar) > main:not(.growth-main) {
+    width: 100% !important;
+  }
+}

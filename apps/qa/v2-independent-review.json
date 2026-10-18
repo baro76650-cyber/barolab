@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-10-14T10:15:22.297904+00:00",
+  "status": "passed",
+  "scope": "Independent read-only cross-check; no new test execution",
+  "receiptFiles": [
+    "daily_apps/qa/v2-build-verification.json",
+    "bible_app/qa/v4-build-verification.json"
+  ],
+  "checks": [
+    "Actual four internal AAB/APK SHA-256 and AAB sizes match",
+    "All listed source hashes match current files",
+    "All listed screenshot hashes match files",
+    "testDebugUnitTest XML totals match receipts and have zero failures/errors",
+    "lintDebug XML severity counts match receipts; zero errors/fatal",
+    "Signature proof files report jar verified",
+    "Generated internal BuildConfig and merged manifests use Google official test app/banner IDs; production release guards retained"
+  ],
+  "unitTests": {
+    "greeting": 6,
+    "magnifier": 9,
+    "shopping": 9,
+    "bible": 12
+  },
+  "lintWarnings": {
+    "greeting": 0,
+    "magnifier": 2,
+    "shopping": 6,
+    "bible": 3
+  },
+  "visualReviewed": [
+    "bible_app/qa/screenshots/v4-final-04-font200-responsive.png",
+    "daily_apps/qa/screenshots/v2-magnifier-final-04-font200-responsive.png"
+  ],
+  "limits": [
+    "Read-only review does not reproduce runtime interactions independently",
+    "Physical Samsung camera/focus/flash/audio/recognition and target-age usability remain unverified",
+    "Engine-missing/setup-return regression not fully repeated in final QA",
+    "EEA consent form and production ad serving not verified",
+    "Play actual availability metadata requires release evidence from coordinator"
+  ]
+}

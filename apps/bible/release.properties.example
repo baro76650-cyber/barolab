@@ -1,0 +1,7 @@
+# Public identifiers of the newly registered Bible app; never substitute another app's IDs.
+bibleAdmobAppId=ca-app-pub-7642010403138987~3426234878
+bibleBannerAdUnitId=ca-app-pub-7642010403138987/9298253515
+bibleProductionAdsConfirmed=true
+# Record these only after an actual release review. Internal preview does not bypass production review.
+biblePrivacyReviewed=false
+bibleContentReviewed=false

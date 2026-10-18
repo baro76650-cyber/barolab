@@ -1,0 +1,7 @@
+.gradle/
+.agent-routing/
+**/build/
+local.properties
+release.properties
+*.jks
+*.keystore

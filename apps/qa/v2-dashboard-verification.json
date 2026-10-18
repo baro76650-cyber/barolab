@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-10-14T10:17:55.097359+00:00",
+  "endpoint": "http://192.168.45.190:8790/api/projects",
+  "httpStatus": 200,
+  "status": "collected",
+  "projectCount": 4,
+  "projects": [
+    {
+      "id": "bible_app",
+      "stage": "0.4 내부 테스트 제공 중 · 갤럭시 v4 듣기·실기기 검증 대기",
+      "status": "preview",
+      "revenue": null,
+      "activeUsers": null
+    },
+    {
+      "id": "greeting",
+      "stage": "0.2 내부 테스트 제공 중 · 실기기 검증 대기 · 실광고 미승인",
+      "status": "preview",
+      "revenue": null,
+      "activeUsers": null
+    },
+    {
+      "id": "magnifier",
+      "stage": "0.2 내부 테스트 제공 중 · 실기기 검증 대기 · 실광고 미승인",
+      "status": "preview",
+      "revenue": null,
+      "activeUsers": null
+    },
+    {
+      "id": "shopping",
+      "stage": "0.2 내부 테스트 제공 중 · 실기기 검증 대기 · 실광고 미승인",
+      "status": "preview",
+      "revenue": null,
+      "activeUsers": null
+    }
+  ],
+  "metadataWrites": "In-place, file identities preserved; no container recreation",
+  "scope": "Internal tester availability only. Physical-device QA, production release, closed test completion and real ad serving not verified.",
+  "evidence": "daily_apps/qa/v2-independent-review.json"
+}

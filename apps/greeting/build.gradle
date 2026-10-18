@@ -1,0 +1,13 @@
+plugins { id 'com.android.application' }
+apply from: rootProject.file('gradle/app-conventions.gradle')
+
+tasks.register('verifyGreetingContent') { doLast {
+ def data=new groovy.json.JsonSlurper().parse(file('src/main/assets/messages.json'),'UTF-8')
+ if(data.reviewed!=true || data.messages.size()<60) throw new GradleException('At least60 manually reviewed original greeting messages required.')
+ def ids=new HashSet(),texts=new HashSet(),categories=new HashSet()
+ data.messages.each { m -> if(!m.id || !m.text || m.text.length()>300 || !m.category || !ids.add(m.id) || !texts.add(m.text)) throw new GradleException('Duplicate/missing/oversized greeting content.'); categories.add(m.category) }
+ if(!categories.containsAll(['morning','gratitude','health_check_in','encouragement','seasonal','weather_free','evening'])) throw new GradleException('Every weekday recommendation needs a nonempty reviewed category.')
+} }
+tasks.named('preBuild').configure { dependsOn 'verifyGreetingContent' }
+
+dependencies { implementation "androidx.activity:activity:1.13.0" }

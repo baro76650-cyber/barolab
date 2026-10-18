@@ -1,0 +1,62 @@
+{
+  "yoon_master|2026-10-14 20:30": {
+    "checkedAt": "2026-10-16T13:13:37.068241+09:00",
+    "reason": "ValueError"
+  },
+  "soul5373|2026-10-14 20:00": {
+    "checkedAt": "2026-10-16T13:13:37.068241+09:00",
+    "reason": "ValueError"
+  },
+  "soultin|2026-10-14 19:30": {
+    "checkedAt": "2026-10-16T13:13:37.068241+09:00",
+    "reason": "ValueError"
+  },
+  "adinfo0905|2026-10-14 19:00": {
+    "checkedAt": "2026-10-16T13:13:37.068241+09:00",
+    "reason": "ValueError"
+  },
+  "stone0747|2026-10-14 19:00": {
+    "checkedAt": "2026-10-16T13:13:37.068241+09:00",
+    "reason": "ValueError"
+  },
+  "stone0747|2026-10-14 13:00": {
+    "checkedAt": "2026-10-15T22:08:02.682859+09:00",
+    "reason": "verified"
+  },
+  "stone0747|2026-10-13 23:40": {
+    "checkedAt": "2026-10-16T13:13:37.068241+09:00",
+    "reason": "ValueError"
+  },
+  "adinfo0905|2026-10-13 23:30": {
+    "checkedAt": "2026-10-16T13:17:46.340418+09:00",
+    "reason": "ValueError"
+  },
+  "stone0747|2026-10-13 22:40": {
+    "checkedAt": "2026-10-15T22:08:02.682859+09:00",
+    "reason": "verified"
+  },
+  "adinfo0905|2026-10-13 22:40": {
+    "checkedAt": "2026-10-16T13:17:46.340418+09:00",
+    "reason": "ValueError"
+  },
+  "soul5373|2026-10-13 22:30": {
+    "checkedAt": "2026-10-15T22:12:48.974844+09:00",
+    "reason": "verified"
+  },
+  "yoon_master|2026-10-13 22:10": {
+    "checkedAt": "2026-10-16T13:17:46.340418+09:00",
+    "reason": "ValueError"
+  },
+  "soultin|2026-10-13 19:30": {
+    "checkedAt": "2026-10-16T13:17:46.340418+09:00",
+    "reason": "FileNotFoundError"
+  },
+  "yoon_master|2026-10-11 20:30": {
+    "checkedAt": "2026-10-16T13:17:46.340418+09:00",
+    "reason": "FileNotFoundError"
+  },
+  "stone0747|2026-10-16 11:00": {
+    "checkedAt": "2026-10-16T13:13:37.068241+09:00",
+    "reason": "ValueError"
+  }
+}

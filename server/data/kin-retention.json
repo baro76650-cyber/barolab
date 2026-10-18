@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-10-17T11:30:07.930751+00:00",
+  "scope": "up_to_100_initially_verified_pilot_and_trial_answers",
+  "complete": true,
+  "initiallyVerified": 1,
+  "attemptedChecks": 1,
+  "checks": [
+    {
+      "account": "adinfo0905",
+      "answerUrl": "https://kin.naver.com/qna/detail.naver?dirId=90105&docId=486346632#answer4",
+      "state": "unknown",
+      "reason": "public_check_unavailable",
+      "checkedAt": "2026-10-17T11:30:07.923229+00:00"
+    }
+  ],
+  "firstVerificationHistoryPreserved": true
+}

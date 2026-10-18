@@ -1,0 +1,30 @@
+{
+  "purpose": "Korean listing screenshots only; seed in own emulator local preferences, not voice or Korean typing evidence",
+  "preservedActualUiTestLists": 2,
+  "template": {
+    "id": "afcbbd76-07d6-4ba9-b2b2-6b904303da86",
+    "title": "주말 장보기 기본",
+    "archived": false,
+    "template": true,
+    "items": [
+      {
+        "id": "ab5a478a-5811-45c3-bc50-c50956e01636",
+        "name": "우유",
+        "quantity": "1",
+        "checked": false
+      },
+      {
+        "id": "b0527ca3-3245-44f0-91e2-bf575db47aa7",
+        "name": "달걀",
+        "quantity": "1",
+        "checked": false
+      },
+      {
+        "id": "2528f897-55db-46d6-bd8b-0e01da47d8b2",
+        "name": "두부",
+        "quantity": "1",
+        "checked": false
+      }
+    ]
+  }
+}

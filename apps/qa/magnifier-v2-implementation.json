@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-10-14T09:46:54.956637+00:00",
+  "status": "integrated_build_and_emulator_qa_complete_physical_device_pending",
+  "routing": [
+    {
+      "provider": "freellm",
+      "requested_model": "auto",
+      "returned_model": "unknown",
+      "status": "failed",
+      "attempt": 1,
+      "latency_ms": 2053,
+      "time_utc": "2026-10-14T09:40:28Z",
+      "usage": {}
+    },
+    {
+      "provider": "agy",
+      "requested_model": "gemini-3.8-flash-medium",
+      "returned_model": "unknown",
+      "status": "ok",
+      "attempt": 1,
+      "latency_ms": 24625,
+      "time_utc": "2026-10-14T09:40:53Z",
+      "usage": {
+        "input_tokens": 13019,
+        "output_tokens": 2134,
+        "total_tokens": 15153
+      }
+    }
+  ],
+  "manualReview": "Reviewed actual bounded draft; manually integrated. No model shell or candidate patch auto-execution. Magnifier retained configuration state replaces draft ViewModel; existing vertical landscape scroll retained, no horizontal dependency. Bible utterance ID plus engine generation fences retained; no unsupported OEM engine assumptions; source-char reading anchor replaces pixel-only restore.",
+  "sources": {
+    "daily_apps/magnifier/src/main/java/com/barolab/biglens/MainActivity.java": "96acd0abe9498ab3f3fd23a6bcca58e5855f1ffe4b901ce90e0a8461afe91840",
+    "daily_apps/magnifier/src/main/java/com/barolab/biglens/FrozenImageView.java": "7dfa3d61100bb649815593020a0ff089cef78ccb4299209916da7c4dd4f33619",
+    "daily_apps/magnifier/src/main/java/com/barolab/biglens/PhotoViewport.java": "c6b6b360d2119a74168e5606e8261674a5569f8346e92855bb521f784a52204e",
+    "daily_apps/magnifier/src/main/java/com/barolab/biglens/HelpActivity.java": "84823fa0497f5d3a1d3557290d0bcd7db806c2b63de45021615525531e302eb6"
+  },
+  "limits": [
+    "Physical Samsung audio/camera validation pending",
+    "No production advertising or public-release readiness assertion",
+    "Build/runtime coordinator owns subsequent verification receipt"
+  ],
+  "verificationEvidence": "daily_apps/qa/v2-build-verification.json",
+  "independentReview": "daily_apps/qa/v2-independent-review.json"
+}
