@@ -241,8 +241,8 @@ def preflight_send(db, qid, account, run_id=None, cap=GLOBAL_DAILY_CAP):
             raise ValueError('An exact active scheduler reservation is required')
         if cadence['last_completed_at'] and datetime.now(timezone.utc)<datetime.fromisoformat(cadence['last_completed_at'])+timedelta(minutes=15):
             raise ValueError('Minimum 15-minute global completion interval has not elapsed')
-    if db.execute('SELECT COUNT(*) FROM questions WHERE send_day=?',(day,)).fetchone()[0]>=cap:raise ValueError('Global daily submission cap')
-    if db.execute('SELECT COUNT(*) FROM questions WHERE send_day=? AND account=?',(day,account)).fetchone()[0]>=ACCOUNT_DAILY_CAP:raise ValueError('Account daily submission cap')
+    if db.execute("SELECT COUNT(*) FROM questions WHERE send_day=? AND state='published_verified'",(day,)).fetchone()[0]>=cap:raise ValueError('Global daily submission cap')
+    if db.execute("SELECT COUNT(*) FROM questions WHERE send_day=? AND account=? AND state='published_verified'",(day,account)).fetchone()[0]>=ACCOUNT_DAILY_CAP:raise ValueError('Account daily submission cap')
     return document
 
 
@@ -261,10 +261,10 @@ def begin_send(db, qid, account, cap=GLOBAL_DAILY_CAP, run_id=None):
         document = json.loads(row['document']); validate_document(document, reviewed=True)
         if document['attribution']['publicationDate'] != day:
             raise ValueError('Attribution date is stale; prepare and review for today')
-        count = db.execute('SELECT COUNT(*) FROM questions WHERE send_day=?', (day,)).fetchone()[0]
+        count = db.execute("SELECT COUNT(*) FROM questions WHERE send_day=? AND state='published_verified'", (day,)).fetchone()[0]
         if count >= cap:
             raise ValueError('Global pilot daily send cap reached')
-        account_count = db.execute('SELECT COUNT(*) FROM questions WHERE send_day=? AND account=?',
+        account_count = db.execute("SELECT COUNT(*) FROM questions WHERE send_day=? AND account=? AND state='published_verified'",
                                    (day,account)).fetchone()[0]
         if account_count >= ACCOUNT_DAILY_CAP:
             raise ValueError('Account daily send cap reached (' + str(ACCOUNT_DAILY_CAP) + ')')
@@ -342,11 +342,16 @@ def snapshot(db, output=PUBLIC):
     for account in ACCOUNTS:
         by_account[account]['discovered'] = sum(r['account']==account for r in pending)
     daily_rows=db.execute("SELECT account,state FROM questions WHERE send_day=? AND state != 'skipped'",(today_kst(),)).fetchall()
-    daily={'date':today_kst(),'attempted':len(daily_rows),
-           'publishedVerified':sum(r['state']=='published_verified' for r in daily_rows),
+    published_today = sum(r['state']=='published_verified' for r in daily_rows)
+    attempted_today = len(daily_rows)
+    daily={'date':today_kst(),'attempted':attempted_today,
+           'publishedVerified':published_today,
+           'remainingScheduled':max(0, GLOBAL_DAILY_CAP - published_today),
+           'retryAttemptsToday':max(0, attempted_today - published_today),
            'globalCap':GLOBAL_DAILY_CAP,'accountCap':ACCOUNT_DAILY_CAP,
            'byAccount':{account:{'attempted':sum(r['account']==account for r in daily_rows),
-                                'publishedVerified':sum(r['account']==account and r['state']=='published_verified' for r in daily_rows)} for account in ACCOUNTS}}
+                                'publishedVerified':sum(r['account']==account and r['state']=='published_verified' for r in daily_rows),
+                                'remainingScheduled':max(0, ACCOUNT_DAILY_CAP - sum(r['account']==account and r['state']=='published_verified' for r in daily_rows))} for account in ACCOUNTS}}
     value = {'schema': 'naver-kin-pilot-v1', 'checkedAt': stamp(), 'accounts': list(ACCOUNTS),
              'counts': counts, 'recent': rows, 'trackCounts': track_counts,
              'inboundSessions': None, 'attributedRevenue': None,
@@ -362,8 +367,15 @@ def snapshot(db, output=PUBLIC):
         value['automation']['scheduleDescription']='작업 종료 후 18~22분 지터(평균 20분) 계정 교대 · 개별 계정 40~45분 안전 텀 · 하루 20건(계정당 10건)'
         value['automation']['lastRun']=value.get('schedule')
         value['automation']['lastRunAt']=value.get('schedule',{}).get('lastRunAt')
-        for key in ('nextEligibleAt','nextAccount','activeRunId','activeAccount','activeStartedAt','cadenceState','globalRemainingRuns','byAccountRemainingRuns','operationCounts','submissionCounts'):
+        for key in ('nextEligibleAt','nextAccount','activeRunId','activeAccount','activeStartedAt','cadenceState','globalRemainingRuns','byAccountRemainingRuns','operationCounts','submissionCounts','retryAttemptsToday'):
             value['automation'][key]=value.get('schedule',{}).get(key)
+        # Always enforce remaining = 20 - publishedVerified so failed/interrupted runs never deduct daily quota
+        value['automation']['globalRemainingRuns'] = max(0, int(config.get('globalDailyCap', GLOBAL_DAILY_CAP)) - published_today)
+        value['automation']['byAccountRemainingRuns'] = {
+            acc: max(0, int(config.get('accountDailyCap', ACCOUNT_DAILY_CAP)) - daily['byAccount'][acc]['publishedVerified'])
+            for acc in ACCOUNTS
+        }
+        value['automation']['retryAttemptsToday'] = daily['retryAttemptsToday']
         value['automation']['checkedAt']=value.get('schedule',{}).get('checkedAt')
         value['automation']['state']=value.get('schedule',{}).get('state','not_run')
         if db.execute("SELECT 1 FROM sqlite_master WHERE name='automation_slots'").fetchone():

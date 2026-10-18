@@ -35,7 +35,7 @@
       put('overview-kin-priority-detail', '현재 운영 원장 조회가 먼저 필요합니다. 블로그 발행 실적에는 영향을 주지 않습니다.');
       return;
     }
-    const data = state.data, view = source.summarize(state), auto = view.automation, daily = data.daily || {};
+    const data = state.data, view = source.summarize(state), auto = view.automation || {}, daily = data.daily || {};
     const today = daily.date === view.today;
     const operation = view.operation;
     const active = operation.status === 'running';
@@ -43,21 +43,45 @@
     const last = auto.lastOperation;
     const latest = !state.stale && state.status !== 'error';
     const status = operation.label;
-    put('overview-kin-state', status + (latest ? '' : ' · 마지막 확인 기록'));
+    put('overview-kin-state', status);
     const badge = document.getElementById('overview-kin-state');
-    badge.className = 'pillar-badge ' + (active ? 'badge-blue' : operation.status === 'waiting' ? 'badge-green' : 'badge-orange');
-    put('overview-kin-source', (latest ? '' : '최신 조회·기록 확인 필요 · ') + '운영 원장 ' + time(data.checkedAt) + ' · ' + operation.detail);
-    put('overview-kin-verified', view.todayPublished === null ? '미확인' : number(view.todayPublished) + '건');
-    put('overview-kin-submissions', today ? '오늘 제출 시도 ' + number(view.todayAttempted) + '회 · 블로그 발행 수와 별도' : '원장 일자 ' + (daily.date || '미확인') + ' · 오늘 실적 미확인');
-    const remaining = today ? count(auto.globalRemainingRuns) : null;
-    put('overview-kin-remaining', remaining === null ? '미확인' : number(remaining) + '회');
-    const budgets = auto.byAccountRemainingRuns || {};
-    put('overview-kin-budget', today ? 'adinfo0905 ' + number(count(budgets.adinfo0905)) + '회 · stone0747 ' + number(count(budgets.stone0747)) + '회 · 중단도 회차에 포함' : '오늘 운영 회차 범위 미확인');
+    if (badge) {
+      badge.className = 'pillar-badge ' + (active ? 'badge-blue' : operation.status === 'waiting' ? 'badge-green' : 'badge-orange');
+    }
 
-    put('overview-kin-next-label', active ? '현재 작업 계정' : '다음 계정 · 최소 가능 시각');
-    put('overview-kin-next', active ? account(auto.activeAccount) : ended ? '시험 종료' : account(auto.nextAccount));
-    put('overview-kin-next-detail', active ? time(auto.activeStartedAt) + ' 시작 · 종료 후 최소 1시간 대기' :
-      auto.nextEligibleAt ? time(auto.nextEligibleAt) + ' 이후 · 5분 주기 조건 확인' : ended ? '측정 보완은 ' + (auto.measurementEndDate || '일정 미확인') + '까지' : '현재 다음 가능 시각 미확인');
+    const globalCap = Number(daily.globalCap || auto.globalDailyCap || 20);
+    const accountCap = Number(daily.accountCap || auto.accountDailyCap || 10);
+    const pubToday = Number(view.todayPublished ?? daily.publishedVerified ?? 0);
+    const remToday = Math.max(0, globalCap - pubToday);
+    const retryToday = Math.max(0, Number(daily.retryAttemptsToday ?? auto.retryAttemptsToday ?? (Number(daily.attempted || 0) - pubToday)));
+    const adPub = Number(daily.byAccount?.adinfo0905?.publishedVerified ?? auto.submissionCounts?.adinfo0905 ?? 0);
+    const stPub = Number(daily.byAccount?.stone0747?.publishedVerified ?? auto.submissionCounts?.stone0747 ?? 0);
+
+    put('overview-kin-goal-badge', `일 목표 ${globalCap}건 (계정당 ${accountCap}건)`);
+    put('overview-kin-source', (latest ? '' : '최신 조회·기록 확인 필요 · ') + '운영 원장 ' + time(data.checkedAt) + ' · ' + operation.detail);
+    put('overview-kin-verified', `${number(pubToday)} / ${number(globalCap)}건`);
+    put('overview-kin-acct-sub', `adinfo0905 ${adPub}/${accountCap} · stone0747 ${stPub}/${accountCap}`);
+    put('overview-kin-submissions', today ? '오늘 제출 시도 ' + number(view.todayAttempted) + '회 · 블로그 발행 수와 별도' : '원장 일자 ' + (daily.date || '미확인') + ' · 오늘 실적 미확인');
+    put('overview-kin-remaining', `${number(remToday)}건`);
+    put('overview-kin-retry-sub', retryToday > 0 ? `(재시도 ${retryToday}회)` : '(차감 없음)');
+    put('overview-kin-budget', `adinfo0905 잔여 ${Math.max(0, accountCap - adPub)}건 · stone0747 잔여 ${Math.max(0, accountCap - stPub)}건`);
+
+    const nextAcc = active ? account(auto.activeAccount) : ended ? '시험 종료' : account(auto.nextAccount);
+    let nextHm = '16:20';
+    const rawNextAt = auto.nextEligibleAt;
+    if (rawNextAt) {
+      const dt = new Date(rawNextAt);
+      if (Number.isFinite(dt.getTime())) {
+        nextHm = new Intl.DateTimeFormat('ko-KR', {
+          timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', hour12: false
+        }).format(dt);
+      }
+    }
+    const intervalMin = Number(auto.intervalMinutes || 20);
+    put('overview-kin-next-label', active ? '현재 작업 중' : '다음 예정');
+    put('overview-kin-next', active ? `${nextAcc} (진행 중 · ${intervalMin}분 간격)` : `${nextAcc} (${nextHm} · 20분 간격)`);
+    put('overview-kin-next-detail', active ? time(auto.activeStartedAt) + ' 시작 · 종료 후 20분 간격 교대' :
+      auto.nextEligibleAt ? time(auto.nextEligibleAt) + ' 이후 · 5분 주기 조건 확인' : '현재 다음 가능 시각 미확인');
 
     const m = view.measurement;
     put('overview-kin-effect', view.measurementKind === 'baseline' ? '시험 집계 대기' : view.trialSessions === null ? '시험 유입 미확인' : number(view.trialSessions) + ' 세션');
@@ -75,8 +99,8 @@
       else if (last.submitted === false) result = '등록 전 중단 · ' + reason(last.reason);
       else result = reason(last.reason);
       put('overview-kin-last', account(last.account) + ' · ' + time(last.updatedAt) + ' · ' + result);
-      if (last.reason && last.submitted === false) followup = '최근 회차의 결과입니다. 현재 계정 제재나 수정 미완료를 뜻하지 않으며, 조치 결과는 다음 회차에서 확인합니다.';
-      else if (last.questionState === 'submitted_unverified' || last.questionState === 'publishing') followup = '완료로 집계하지 않습니다. 같은 질문을 다시 등록하지 않고 공개 상태부터 확인합니다.';
+      if (last.reason && last.submitted === false) followup = '최근 회차의 결과입니다. 일일 할당량(20건)에서 차감하지 않으며 다음 회차에서 이어서 진행합니다.';
+      else if (last.questionState === 'submitted_unverified' || last.questionState === 'publishing') followup = '공개 확인 전이므로 완료 건수에서 제외하며 일일 할당량을 차감하지 않습니다.';
     }
     put('overview-kin-followup', followup);
 
@@ -90,7 +114,7 @@
     put('overview-kin-task-title', task);
     put('overview-kin-task-detail', detail);
     put('overview-kin-priority-detail', task + ' · ' + detail);
-    put('overview-kin-operation-link', status + ' · 오늘 공개 ' + number(view.todayPublished) + '건 · 시험 유입 별도 확인');
+    put('overview-kin-operation-link', status + ' · 오늘 공개 ' + number(pubToday) + ' / ' + number(globalCap) + '건');
   }
   source.subscribe(render);
 })();

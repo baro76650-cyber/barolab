@@ -197,7 +197,7 @@ def session(account):
     with account_lock(account), sync_playwright() as playwright, awake_browser(playwright, config) as browser:
         ctx = browser.contexts[0]
         pages = ctx.pages
-        kin = [p for p in pages if urlsplit(p.url).hostname == "kin.naver.com"]
+        kin = [p for p in pages if urlsplit(p.url).hostname == "kin.naver.com" and not _has_editor_draft(p)]
         if kin:
             page = kin[0]
         else:
@@ -206,7 +206,7 @@ def session(account):
                 None,
             )
             if page is None:
-                # Open a dedicated KnowledgeIn tab while preserving all existing user tabs untouched
+                # Open a dedicated KnowledgeIn tab while preserving all existing user tabs (including any open editor drafts) untouched
                 page = ctx.new_page()
         page.bring_to_front()
         page.set_default_timeout(12000)
@@ -220,9 +220,16 @@ def session(account):
         # Only disconnect Playwright. browser.close() would close the user's browser.
 
 
+def _has_editor_draft(page):
+    try:
+        return any(text.strip() for text in page.locator('.se-canvas .__se-node').all_inner_texts())
+    except Exception:
+        return False
+
+
 def preserve_editor(page):
     """Check before navigating, so another author's unsaved Kin draft survives."""
-    if any(text.strip() for text in page.locator('.se-canvas .__se-node').all_inner_texts()):
+    if _has_editor_draft(page):
         raise RuntimeError('Existing KnowledgeIn editor draft requires manual review')
 
 

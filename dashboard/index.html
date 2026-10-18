@@ -9,11 +9,11 @@
   <link rel="stylesheet" href="projects.css">
   <link rel="stylesheet" href="growth-actions.css?v=20261014-growth-1">
   <link rel="stylesheet" href="sidebar.css?v=20261017-unified-2">
-  <link rel="stylesheet" href="overview-kin.css?v=20261015-1">
-  <script src="kin-summary.js?v=20261015-2" defer></script>
-  <script src="overview-kin.js?v=20261015-2" defer></script>
-  <link rel="stylesheet" href="threads.css?v=20261015-2">
-  <script src="threads-summary.js?v=20261015-5" defer></script>
+  <link rel="stylesheet" href="overview-kin.css?v=20261018-v2">
+  <script src="kin-summary.js?v=20261018-v2" defer></script>
+  <script src="overview-kin.js?v=20261018-v2" defer></script>
+  <link rel="stylesheet" href="threads.css?v=20261018-v2">
+  <script src="threads-summary.js?v=20261018-v2" defer></script>
 
   <style>
     /* ==========================================================================
@@ -1669,42 +1669,53 @@
         <div class="bento-channel-pair">
 
           <!-- 지식iN 할당량 게이지 카드 -->
-          <section class="bento-box overview-kin-panel" aria-labelledby="overview-kin-title" style="padding:10px 12px;">
-            <div class="bento-box-head">
-              <h2 class="bento-box-title" id="overview-kin-title" style="font-size:12.5px;">💡 지식iN 게이지</h2>
-              <span class="pillar-badge badge-orange" id="overview-kin-state" role="status" style="font-size:9.5px; padding:2px 6px;">확인 중</span>
+          <section class="bento-box overview-kin-panel" aria-labelledby="overview-kin-title" style="padding:10px 11px;">
+            <div class="bento-box-head" style="gap:4px; flex-wrap:nowrap;">
+              <h2 class="bento-box-title" id="overview-kin-title" style="font-size:12px; white-space:nowrap; letter-spacing:-0.3px;">💡 지식iN 게이지</h2>
+              <div style="display:flex; align-items:center; gap:4px; margin-left:auto; flex-shrink:0;">
+                <span id="overview-kin-goal-badge" style="font-size:9px; font-weight:700; color:#475569; background:#f8fafc; border:1px solid #cbd5e1; border-radius:5px; padding:1px 5px; white-space:nowrap; letter-spacing:-0.2px;">일 목표 20건 (계정당 10건)</span>
+                <span class="pillar-badge badge-green" id="overview-kin-state" role="status" style="font-size:9px; padding:1px 5px; white-space:nowrap;">대기</span>
+              </div>
             </div>
-            <div class="mini-gauge-row">
+            <div class="mini-gauge-row" style="gap:9px;">
               <!-- Circular Mini Gauge (r=23, C=144.5) -->
               <div class="mini-svg-box">
                 <svg viewBox="0 0 56 56">
                   <circle class="argo-tick-ring" cx="28" cy="28" r="27"></circle>
                   <circle class="argo-ring-bg" cx="28" cy="28" r="23" stroke-width="5.5"></circle>
-                  <circle class="argo-ring-fg" id="ring-kin-quota" cx="28" cy="28" r="23" stroke="url(#argoGradEmerald)" stroke-width="5.5" stroke-dasharray="144.5" stroke-dashoffset="144.5"></circle>
+                  <circle class="argo-ring-fg" id="ring-kin-quota" cx="28" cy="28" r="23" stroke="url(#argoGradEmerald)" stroke-width="5.5" stroke-dasharray="144.5" stroke-dashoffset="130.05"></circle>
                 </svg>
                 <div class="mini-svg-label">
-                  <span id="gauge-kin-pct">0%</span>
+                  <span id="gauge-kin-pct">10%</span>
                   <small>달성</small>
                 </div>
               </div>
-              <div class="argo-bars-col">
+              <div class="argo-bars-col" style="gap:5px;">
                 <div class="argo-bar-row">
-                  <div class="argo-bar-label-line"><span>공개 확인 답변</span><strong id="overview-kin-verified">0건</strong></div>
-                  <div class="argo-hbar-track"><div class="argo-hbar-fill fill-emerald" id="bar-kin-verified" style="width:0%;"></div></div>
+                  <div class="argo-bar-label-line" style="display:flex; justify-content:space-between; align-items:baseline;">
+                    <span style="white-space:nowrap;">오늘 답변 완료</span>
+                    <strong id="overview-kin-verified" style="white-space:nowrap;">2 / 20건</strong>
+                  </div>
+                  <div class="argo-hbar-track" title="일일 목표 20건 (계정당 10건)"><div class="argo-hbar-fill fill-emerald" id="bar-kin-verified" style="width:10%;"></div></div>
+                  <div id="overview-kin-acct-sub" style="font-size:9.5px; color:#64748b; font-weight:600; line-height:1.15; margin-top:2px; white-space:nowrap;">adinfo0905 1/10 · stone0747 1/10</div>
                 </div>
                 <div class="argo-bar-row">
-                  <div class="argo-bar-label-line"><span>남은 회차</span><strong id="overview-kin-remaining">-회</strong></div>
-                  <div class="argo-hbar-track"><div class="argo-hbar-fill fill-blue" id="bar-kin-runs" style="width:50%;"></div></div>
+                  <div class="argo-bar-label-line" style="display:flex; justify-content:space-between; align-items:baseline;">
+                    <span style="white-space:nowrap;">남은 예정 답변</span>
+                    <span style="display:inline-flex; align-items:baseline; gap:3px; white-space:nowrap;"><strong id="overview-kin-remaining">18건</strong><small id="overview-kin-retry-sub" style="font-size:9.5px; color:#64748b; font-weight:600;">(재시도 1회)</small></span>
+                  </div>
+                  <div class="argo-hbar-track"><div class="argo-hbar-fill fill-blue" id="bar-kin-runs" style="width:90%;"></div></div>
                 </div>
               </div>
             </div>
-            <div class="argo-card-foot" style="padding-top:4px;">
-              <span style="font-size:10.5px;"><span id="overview-kin-next-label">다음</span>: <strong id="overview-kin-next">-</strong> · <span id="overview-kin-effect">-</span></span>
-              <a class="bento-go-btn" href="kin.html">지식iN →</a>
+            <div class="argo-card-foot" style="padding-top:4px; gap:4px;">
+              <span style="font-size:10px; color:#334155; font-weight:600; white-space:nowrap; letter-spacing:-0.25px;"><span id="overview-kin-next-label">다음 예정</span>: <strong id="overview-kin-next" style="color:#0f172a;">stone0747 (16:20 · 20분 간격)</strong></span>
+              <a class="bento-go-btn" href="kin.html" style="padding:2px 6px; font-size:9.5px; flex-shrink:0;">지식iN →</a>
             </div>
             <!-- Preserved hidden bindings for overview-kin.js -->
             <div class="bento-hidden-meta">
               <span id="overview-kin-source"></span>
+              <span id="overview-kin-effect"></span>
               <small id="overview-kin-submissions"></small>
               <small id="overview-kin-budget"></small>
               <small id="overview-kin-next-detail"></small>
@@ -1715,38 +1726,48 @@
           </section>
 
           <!-- @ Threads 할당량 게이지 카드 -->
-          <section class="bento-box" aria-label="Threads 할당량 게이지" style="padding:10px 12px;">
-            <div class="bento-box-head">
-              <h2 class="bento-box-title" style="font-size:12.5px;">🧵 Threads 게이지</h2>
-              <span class="pillar-badge badge-orange" id="bento-threads-badge" style="font-size:9.5px; padding:2px 6px;">대기</span>
+          <section class="bento-box" aria-label="Threads 할당량 게이지" style="padding:10px 11px;">
+            <div class="bento-box-head" style="gap:4px; flex-wrap:nowrap;">
+              <h2 class="bento-box-title" style="font-size:12px; white-space:nowrap; letter-spacing:-0.3px;">🧵 Threads 게이지</h2>
+              <div style="display:flex; align-items:center; gap:4px; margin-left:auto; flex-shrink:0;">
+                <span id="bento-threads-goal-badge" style="font-size:9px; font-weight:700; color:#475569; background:#f8fafc; border:1px solid #cbd5e1; border-radius:5px; padding:1px 5px; white-space:nowrap; letter-spacing:-0.2px;">일 목표 4건 (@mustpickinfo)</span>
+                <span class="pillar-badge badge-green" id="bento-threads-badge" style="font-size:9px; padding:1px 5px; white-space:nowrap;">대기</span>
+              </div>
             </div>
-            <div class="mini-gauge-row">
+            <div class="mini-gauge-row" style="gap:9px;">
               <!-- Circular Mini Gauge (r=23, C=144.5) -->
               <div class="mini-svg-box">
                 <svg viewBox="0 0 56 56">
                   <circle class="argo-tick-ring" cx="28" cy="28" r="27"></circle>
                   <circle class="argo-ring-bg" cx="28" cy="28" r="23" stroke-width="5.5"></circle>
-                  <circle class="argo-ring-fg" id="ring-threads-quota" cx="28" cy="28" r="23" stroke="url(#argoGradBlue)" stroke-width="5.5" stroke-dasharray="144.5" stroke-dashoffset="100"></circle>
+                  <circle class="argo-ring-fg" id="ring-threads-quota" cx="28" cy="28" r="23" stroke="url(#argoGradBlue)" stroke-width="5.5" stroke-dasharray="144.5" stroke-dashoffset="72.25"></circle>
                 </svg>
                 <div class="mini-svg-label">
-                  <span id="gauge-threads-pct">0%</span>
-                  <small>일 할당</small>
+                  <span id="gauge-threads-pct">50%</span>
+                  <small>달성</small>
                 </div>
               </div>
-              <div class="argo-bars-col">
+              <div class="argo-bars-col" style="gap:5px;">
                 <div class="argo-bar-row">
-                  <div class="argo-bar-label-line"><span>오늘 본문/후속</span><strong id="bento-threads-today">0/0건</strong></div>
-                  <div class="argo-hbar-track"><div class="argo-hbar-fill fill-blue" id="bar-threads-today" style="width:10%;"></div></div>
+                  <div class="argo-bar-label-line" style="display:flex; justify-content:space-between; align-items:baseline;">
+                    <span style="white-space:nowrap;">오늘 발행 완료</span>
+                    <strong id="bento-threads-today" style="white-space:nowrap;">2 / 4건</strong>
+                  </div>
+                  <div class="argo-hbar-track" title="일일 슬롯 4칸 (08:00 · 12:30 · 18:10 · 21:30)"><div class="argo-hbar-fill fill-blue" id="bar-threads-today" style="width:50%;"></div></div>
+                  <div id="bento-threads-today-sub" style="font-size:9.5px; color:#2563eb; font-weight:600; line-height:1.15; margin-top:2px; white-space:nowrap;">본문 2건 · 후속댓글 0건</div>
                 </div>
                 <div class="argo-bar-row">
-                  <div class="argo-bar-label-line"><span>누적 공개 확인</span><strong id="bento-threads-published">0건</strong></div>
-                  <div class="argo-hbar-track"><div class="argo-hbar-fill fill-purple" id="bar-threads-total" style="width:25%;"></div></div>
+                  <div class="argo-bar-label-line" style="display:flex; justify-content:space-between; align-items:baseline;">
+                    <span style="white-space:nowrap;">남은 예정 발행</span>
+                    <span style="display:inline-flex; align-items:baseline; gap:4px; white-space:nowrap;"><strong id="bento-threads-published">2건</strong><small id="bento-threads-remaining-sub" style="font-size:9.5px; color:#64748b; font-weight:600;">(18:10 · 21:30 대기)</small></span>
+                  </div>
+                  <div class="argo-hbar-track"><div class="argo-hbar-fill fill-purple" id="bar-threads-total" style="width:50%;"></div></div>
                 </div>
               </div>
             </div>
-            <div class="argo-card-foot" style="padding-top:4px;">
-              <span id="bento-threads-meta" style="font-size:10.5px;">@mustpickinfo</span>
-              <a class="bento-go-btn" href="threads.html">Threads →</a>
+            <div class="argo-card-foot" style="padding-top:4px; gap:4px;">
+              <span id="bento-threads-meta" style="font-size:10px; color:#334155; font-weight:600; white-space:nowrap; letter-spacing:-0.25px;">@mustpickinfo · 다음 발행 18:10 예정 (누적 4건)</span>
+              <a class="bento-go-btn" href="threads.html" style="padding:2px 6px; font-size:9.5px; flex-shrink:0;">Threads →</a>
             </div>
             <div data-threads-summary="overview" id="overview-threads" class="bento-hidden-meta"></div>
           </section>
@@ -2847,20 +2868,36 @@
       window.BaroLabKinSummary.subscribe(state => {
         if (!state || !state.data) return;
         const view = window.BaroLabKinSummary.summarize(state);
+        const daily = state.data.daily || {};
         const auto = view.automation || {};
-        const pub = Number(view.todayPublished || 0);
-        const rem = Number(auto.globalRemainingRuns ?? 4);
-        const targetRuns = Math.max(4, pub + rem);
-        const usedRuns = Math.max(0, targetRuns - rem);
-        const pct = Math.min(100, Math.round(((pub > 0 ? pub : usedRuns * 0.5) / 4) * 100));
+        const targetRuns = Number(daily.globalCap || auto.globalDailyCap || 20);
+        const accountCap = Number(daily.accountCap || auto.accountDailyCap || 10);
+        const todayPublished = Number(view.todayPublished ?? daily.publishedVerified ?? 0);
+        const remainingRuns = Math.max(0, targetRuns - todayPublished);
+        const retryCnt = Math.max(0, Number(daily.retryAttemptsToday ?? auto.retryAttemptsToday ?? (Number(daily.attempted || 0) - todayPublished)));
+        const adPub = Number(daily.byAccount?.adinfo0905?.publishedVerified ?? auto.submissionCounts?.adinfo0905 ?? 0);
+        const stPub = Number(daily.byAccount?.stone0747?.publishedVerified ?? auto.submissionCounts?.stone0747 ?? 0);
+
+        const pct = Math.min(100, Math.round((todayPublished / targetRuns) * 100));
+        const remPct = Math.min(100, Math.round((remainingRuns / targetRuns) * 100));
 
         setRingGauge('ring-kin-quota', 144.5, pct);
         const pctEl = document.getElementById('gauge-kin-pct');
         if (pctEl) pctEl.textContent = `${pct}%`;
+
+        const verifiedEl = document.getElementById('overview-kin-verified');
+        const acctSubEl = document.getElementById('overview-kin-acct-sub');
+        const remEl = document.getElementById('overview-kin-remaining');
+        const retrySubEl = document.getElementById('overview-kin-retry-sub');
+        if (verifiedEl) verifiedEl.textContent = `${todayPublished} / ${targetRuns}건`;
+        if (acctSubEl) acctSubEl.textContent = `adinfo0905 ${adPub}/${accountCap} · stone0747 ${stPub}/${accountCap}`;
+        if (remEl) remEl.textContent = `${remainingRuns}건`;
+        if (retrySubEl) retrySubEl.textContent = retryCnt > 0 ? `(재시도 ${retryCnt}회)` : '';
+
         const barV = document.getElementById('bar-kin-verified');
         const barR = document.getElementById('bar-kin-runs');
-        if (barV) barV.style.width = `${Math.min(100, (pub / 4) * 100)}%`;
-        if (barR) barR.style.width = `${Math.min(100, (rem / targetRuns) * 100)}%`;
+        if (barV) barV.style.width = `${pct}%`;
+        if (barR) barR.style.width = `${remPct}%`;
       });
     } else {
       setTimeout(bindChannelMiniGauges, 300);
@@ -2871,32 +2908,55 @@
       window.BaroLabThreadsSummary.subscribe(s => {
         const v = window.BaroLabThreadsSummary.summarize(s);
         const op = v.operation || {};
-        const num = window.BaroLabThreadsSummary.number;
-        const mainCnt = Number(v.todayMain || 0);
-        const followCnt = Number(v.todayFollowup || 0);
-        const cap = Number(v.configuration?.mainDailyCap || 3);
-        const pct = Math.min(100, Math.round(((mainCnt + followCnt * 0.5) / cap) * 100));
+        const todayMainCompleted = Number(v.todayMain || 0);
+        const todayFollowupCompleted = Number(v.todayFollowup || 0);
+        const dailyTarget = Number(v.configuration?.mainDailyCap || 4);
+        const remainingToday = Math.max(0, dailyTarget - todayMainCompleted);
+        const totalCumulative = Number(v.published || 0);
 
-        setRingGauge('ring-threads-quota', 144.5, Math.max(8, pct));
+        const pct = Math.min(100, Math.round((todayMainCompleted / dailyTarget) * 100));
+        const remPct = Math.min(100, Math.round((remainingToday / dailyTarget) * 100));
+
+        setRingGauge('ring-threads-quota', 144.5, pct);
         const pctEl = document.getElementById('gauge-threads-pct');
         if (pctEl) pctEl.textContent = `${pct}%`;
 
+        const allSlots = Array.isArray(v.configuration?.preferredTimes) && v.configuration.preferredTimes.length
+          ? v.configuration.preferredTimes
+          : ['08:00', '12:30', '18:10', '21:30'];
+        const pendingSlots = allSlots.slice(todayMainCompleted);
+        const nextSlot = pendingSlots[0] || allSlots[0] || '08:00';
+
+        const goalBadge = document.getElementById('bento-threads-goal-badge');
         const badge = document.getElementById('bento-threads-badge');
         const todayEl = document.getElementById('bento-threads-today');
+        const todaySubEl = document.getElementById('bento-threads-today-sub');
         const pubEl = document.getElementById('bento-threads-published');
+        const remSubEl = document.getElementById('bento-threads-remaining-sub');
         const metaEl = document.getElementById('bento-threads-meta');
         const barToday = document.getElementById('bar-threads-today');
         const barTotal = document.getElementById('bar-threads-total');
 
+        if (goalBadge) goalBadge.textContent = `일 목표 ${dailyTarget}건 (@mustpickinfo)`;
         if (badge) {
           badge.textContent = op.label || '대기';
           badge.className = 'pillar-badge ' + (op.kind === 'active' ? 'badge-blue' : op.kind === 'waiting' ? 'badge-green' : 'badge-orange');
         }
-        if (todayEl) todayEl.textContent = `${num(v.todayMain)} / ${num(v.todayFollowup)}건`;
-        if (pubEl) pubEl.textContent = `${num(v.published)}건`;
-        if (metaEl) metaEl.textContent = `@mustpickinfo · ${op.label || '대기'}`;
-        if (barToday) barToday.style.width = `${Math.max(8, pct)}%`;
-        if (barTotal) barTotal.style.width = `${Math.max(12, Math.min(100, (Number(v.published || 0) / 20) * 100))}%`;
+        if (todayEl) todayEl.textContent = `${todayMainCompleted} / ${dailyTarget}건`;
+        if (todaySubEl) todaySubEl.textContent = `본문 ${todayMainCompleted}건 · 후속댓글 ${todayFollowupCompleted}건`;
+        if (pubEl) pubEl.textContent = `${remainingToday}건`;
+        if (remSubEl) {
+          remSubEl.textContent = pendingSlots.length > 0
+            ? `${pendingSlots.join(' · ')} 슬롯 대기`
+            : '오늘 슬롯 완료';
+        }
+        if (metaEl) {
+          metaEl.textContent = pendingSlots.length > 0
+            ? `@mustpickinfo · 다음 발행 ${nextSlot} 예정 (누적 ${totalCumulative}건)`
+            : `@mustpickinfo · 오늘 4건 완료 (누적 ${totalCumulative}건)`;
+        }
+        if (barToday) barToday.style.width = `${pct}%`;
+        if (barTotal) barTotal.style.width = `${remPct}%`;
       });
     }
   }
